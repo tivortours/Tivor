@@ -9,7 +9,7 @@ export default async function DestinationsPage() {
     <main className="flex w-full flex-col overflow-x-hidden">
 
       {/* ── Hero ─────────────────────────────────────────────────────────── */}
-      <section className="relative h-[658px] overflow-hidden bg-[#c0bebe]">
+      <section className="relative h-[320px] overflow-hidden bg-[#c0bebe] sm:h-[450px] lg:h-[658px]">
         <Image src={page.heroImage} alt="" fill priority className="object-cover" sizes="100vw" />
         <div className="absolute inset-0 bg-black/20" />
         <SiteHeader light active="Destinations" />
@@ -20,7 +20,7 @@ export default async function DestinationsPage() {
         <div className="flex flex-col items-center gap-[72px]">
 
           <h1
-            className="text-[48px] font-medium leading-none text-[#151515]"
+            className="text-[28px] font-medium leading-none text-[#151515] sm:text-[36px] lg:text-[48px]"
             style={{ fontFamily: "var(--font-primary)" }}
           >
             {page.title}

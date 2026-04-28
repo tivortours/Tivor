@@ -76,7 +76,7 @@ export default async function JourneysPage() {
 
           <div className="flex flex-col items-center gap-5 text-center">
             <h1
-              className="w-full max-w-[766px] px-4 text-[48px] leading-tight text-[#151515]"
+              className="w-full max-w-[766px] px-4 text-[32px] leading-tight text-[#151515] sm:text-[40px] lg:text-[48px]"
               style={{ fontFamily: "var(--font-primary)" }}
             >
               {page.title}
@@ -134,9 +134,9 @@ export default async function JourneysPage() {
 
       {/* ── Can't Find section ────────────────────────────────────────────── */}
       <section className="w-full flex justify-center py-[80px]">
-        <div className="flex w-full max-w-[1520px] items-center gap-[72px] px-5 xl:px-[80px]" style={{ minHeight: 470 }}>
+        <div className="flex w-full max-w-[1520px] flex-col items-start gap-[60px] px-5 xl:flex-row xl:items-center xl:gap-[72px] xl:px-[80px]">
 
-          <div className="flex shrink-0 flex-col gap-[60px] xl:max-w-[460px]">
+          <div className="flex w-full flex-col gap-[60px] xl:w-auto xl:max-w-[460px] xl:shrink-0">
             <h2
               className="text-[42px] font-medium leading-tight text-[#151515] lg:text-[52px]"
               style={{ fontFamily: "var(--font-primary)" }}

@@ -172,11 +172,11 @@ export default async function HomePage() {
             centered
           />
 
-          <div className="grid w-full max-w-[1038px] gap-5 sm:gap-7">
+          <div className="grid w-full max-w-[1038px] grid-cols-1 gap-5 sm:grid-cols-2 sm:gap-7 xl:grid-cols-1">
             {home.experiences.map((experience) => (
               <div
                 key={experience.label}
-                className="group relative aspect-[1038/249] min-h-[165px] overflow-hidden rounded-[2px]"
+                className="group relative h-[200px] overflow-hidden rounded-[2px] sm:h-[260px] xl:h-auto xl:aspect-[1038/249]"
               >
                 <Image
                   src={experience.img}

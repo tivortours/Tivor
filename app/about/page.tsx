@@ -49,9 +49,9 @@ export default async function AboutPage() {
 
       {/* ── Pillars banner ───────────────────────────────────────────────── */}
       <section className="w-full bg-[#6a5546] py-[25px]">
-        <div className="flex items-center justify-center gap-10 px-5 sm:gap-16 xl:gap-20">
+        <div className="flex flex-wrap items-center justify-center gap-6 px-5 sm:gap-12 xl:gap-20">
           {page.pillars.map((pillar, index) => (
-            <div key={pillar} className="flex items-center gap-10 sm:gap-16 xl:gap-20">
+            <div key={pillar} className="flex items-center gap-6 sm:gap-12 xl:gap-20">
               {index > 0 ? <div className="h-[59px] w-px bg-white/40" /> : null}
               <span className="text-[28px] font-semibold text-white xl:text-[36px]" style={{ fontFamily: "var(--font-primary)" }}>
                 {pillar}

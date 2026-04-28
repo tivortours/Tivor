@@ -1,6 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { getSiteSettings, shell } from "./site-data";
+import { MobileMenu } from "../components/MobileMenu";
 
 export function Label({ text, light = false }: { text: string; light?: boolean }) {
   return (
@@ -97,27 +98,39 @@ export async function SiteHeader({
   const solidAction =
     settings.headerActions.find((action) => action.variant === "solid") || settings.headerActions[1] || outlineAction;
 
+  const logoSrc = light ? settings.logos.light : settings.logos.onLight;
+
   return (
     <header className={overlay ? "absolute inset-x-0 top-0 z-20" : "relative w-full"}>
-      <div className={`${shell} flex flex-col gap-6 py-6 sm:py-8 xl:py-[50px]`}>
-        <div className="flex flex-col gap-6 xl:flex-row xl:items-center xl:justify-between">
+      <div className={`${shell} py-5 sm:py-8 xl:py-[50px]`}>
+
+        {/* Mobile: logo + hamburger */}
+        <div className="flex items-center justify-between xl:hidden">
           <Link href="/" className="relative block h-[23px] w-[152px] shrink-0">
-            <Image
-              src={light ? settings.logos.light : settings.logos.onLight}
-              alt="TIVOR"
-              fill
-              className="object-contain"
-            />
+            <Image src={logoSrc} alt="TIVOR" fill className="object-contain" />
+          </Link>
+          <MobileMenu
+            navItems={settings.navItems}
+            outlineAction={{ label: outlineAction?.label || "Plan Your Journey", href: outlineAction?.href || "#" }}
+            solidAction={{ label: solidAction?.label || "Contact Us", href: solidAction?.href || "#" }}
+            active={active}
+            logoSrc={logoSrc}
+            light={light}
+          />
+        </div>
+
+        {/* Desktop: logo + nav + CTAs */}
+        <div className="hidden xl:flex xl:items-center xl:justify-between">
+          <Link href="/" className="relative block h-[23px] w-[152px] shrink-0">
+            <Image src={logoSrc} alt="TIVOR" fill className="object-contain" />
           </Link>
 
-          <nav className="flex flex-wrap items-center gap-x-6 gap-y-3 xl:justify-center">
+          <nav className="flex items-center gap-x-6">
             {settings.navItems.map(({ label, href }) => (
               <Link
                 key={label}
                 href={href}
-                className={`flex h-[45px] items-center text-base sm:text-lg ${linkColor} ${
-                  label === active ? activeBorder : ""
-                }`}
+                className={`flex h-[45px] items-center text-lg ${linkColor} ${label === active ? activeBorder : ""}`}
                 style={{ fontFamily: "var(--font-secondary)" }}
               >
                 {label}
@@ -125,23 +138,24 @@ export async function SiteHeader({
             ))}
           </nav>
 
-          <div className="flex flex-wrap items-center gap-2 xl:justify-end">
+          <div className="flex items-center gap-2">
             <Link
               href={outlineAction?.href || "#"}
-              className={`flex h-[45px] items-center rounded-[2px] border px-5 text-base sm:px-6 sm:text-lg ${buttonBorder}`}
+              className={`flex h-[45px] items-center rounded-[2px] border px-6 text-lg ${buttonBorder}`}
               style={{ fontFamily: "var(--font-secondary)" }}
             >
               {outlineAction?.label || "Plan Your Journey"}
             </Link>
             <Link
               href={solidAction?.href || "#"}
-              className={`flex h-[45px] items-center rounded-[2px] px-5 text-base sm:px-6 sm:text-lg ${buttonSolid}`}
+              className={`flex h-[45px] items-center rounded-[2px] px-6 text-lg ${buttonSolid}`}
               style={{ fontFamily: "var(--font-secondary)" }}
             >
               {solidAction?.label || "Contact Us"}
             </Link>
           </div>
         </div>
+
       </div>
     </header>
   );
