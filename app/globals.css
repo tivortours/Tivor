@@ -1,26 +1,106 @@
 @import "tailwindcss";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
-
 @theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  /* Brand Colors */
+  --color-beige-200: #f2ebe2;
+  --color-brown-300: #cfbcad;
+  --color-brown-500: #ad8c72;
+  --color-brown-700: #714128;
+  --color-fern-300: #b5bfab;
+  --color-fern-600: #5e6c51;
+  --color-dark-400: #3d3d3d;
+  --color-dark-500: #151515;
+  --color-grey-200: #acb1b4;
+  --color-grey-300: #899195;
+  --color-grey-400: #576168;
+  --color-grey-500: #344149;
+  --color-grey-700: #20282d;
+  --color-chalk-200: #fbfaf7;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+* {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  margin: 0;
+  padding: 0;
+}
+
+img {
+  display: block;
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  background-color: #f2ebe2;
+  color: #151515;
 }
+
+/* ── Form primitives ────────────────────────────────────────────────────────
+   Defined here (not as Tailwind utilities) so they are always compiled and
+   never subject to JIT content-scanner cache misses during hot reload.
+   ───────────────────────────────────────────────────────────────────────── */
+
+.form-input {
+  height: 56px;
+  width: 100%;
+  border-radius: 2px;
+  background-color: #f1f1f1;
+  padding-left: 20px;
+  padding-right: 20px;
+  font-size: 14px;
+  color: #151515;
+  outline: none;
+}
+.form-input::placeholder { color: #999; }
+.form-input:focus { box-shadow: 0 0 0 1px #cfbcad; }
+@media (min-width: 640px) { .form-input { height: 64px; } }
+
+.form-select {
+  height: 56px;
+  width: 100%;
+  appearance: none;
+  -webkit-appearance: none;
+  border-radius: 2px;
+  background-color: #f1f1f1;
+  padding-left: 20px;
+  padding-right: 20px;
+  font-size: 14px;
+  outline: none;
+}
+.form-select:focus { box-shadow: 0 0 0 1px #cfbcad; }
+@media (min-width: 640px) { .form-select { height: 64px; } }
+
+.form-textarea {
+  width: 100%;
+  resize: none;
+  border-radius: 2px;
+  background-color: #f1f1f1;
+  padding: 16px 20px;
+  font-size: 14px;
+  color: #151515;
+  outline: none;
+  min-height: 155px;
+}
+.form-textarea::placeholder { color: #999; }
+.form-textarea:focus { box-shadow: 0 0 0 1px #cfbcad; }
+
+.form-phone-wrap {
+  display: flex;
+  height: 56px;
+  width: 100%;
+  overflow: hidden;
+  border-radius: 2px;
+  background-color: #f1f1f1;
+}
+.form-phone-wrap:focus-within { box-shadow: 0 0 0 1px #cfbcad; }
+@media (min-width: 640px) { .form-phone-wrap { height: 64px; } }
+
+/* Hide native number-input spinners */
+input[type="number"]::-webkit-inner-spin-button,
+input[type="number"]::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+input[type="number"] { -moz-appearance: textfield; }
