@@ -516,7 +516,8 @@ const aboutPage = defineType({
   title: "About Page",
   type: "document",
   fields: [
-    imageField("heroImage", "Hero Image", "Best ratio: tall cinematic crop. Minimum 1920px wide recommended."),
+    imageField("heroImage", "Hero Image", "Fallback image if no video is set. Best ratio: tall cinematic crop. Minimum 1920px wide recommended."),
+    defineField({ name: "heroVideo", title: "Hero Video URL", type: "url", description: "Direct URL to a hosted MP4 video (e.g. from Cloudinary or your CDN). If set, the video plays instead of the hero image." }),
     defineField({ name: "heroTagline", title: "Hero Tagline", type: "string" }),
     defineField({ name: "introTitle", title: "Intro Title", type: "string" }),
     defineField({
@@ -529,7 +530,15 @@ const aboutPage = defineType({
       name: "pillars",
       title: "Pillars",
       type: "array",
-      of: [defineArrayMember({ type: "string" })],
+      of: [
+        defineArrayMember({
+          type: "object",
+          fields: [
+            defineField({ name: "label", title: "Label", type: "string", validation: (Rule) => Rule.required() }),
+            imageField("icon", "Icon", "Leaf or branch icon. Transparent PNG recommended, ~100×100px."),
+          ],
+        }),
+      ],
       validation: (Rule) => Rule.max(3),
     }),
     imageField("visionImage", "Vision Image", "Best ratio: 795:485. Use a wide editorial crop."),

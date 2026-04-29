@@ -5,6 +5,7 @@ import {
   shell,
 } from "./site-data";
 import { Diamond, LinkBtn, SectionHeading, SiteFooter, SiteHeader } from "./site-ui";
+import { TestimonialCarousel } from "../components/TestimonialCarousel";
 
 export default async function HomePage() {
   const home = await getHomePageData();
@@ -295,42 +296,7 @@ export default async function HomePage() {
             }
           />
 
-          <div className="grid gap-6 xl:grid-cols-3 xl:gap-0">
-            {home.testimonials.map((testimonial, index) => (
-              <article
-                key={testimonial.author}
-                className={`flex h-full flex-col gap-6 rounded-[4px] px-0 py-2 xl:px-7 xl:py-7 ${
-                  index < home.testimonials.length - 1 ? "xl:border-r xl:border-[#cfbcad]" : ""
-                }`}
-              >
-                <Image
-                  src="https://www.figma.com/api/mcp/asset/ad23b2b3-f774-4b1f-8acc-9e8f6f310ae3"
-                  alt="5 stars"
-                  width={92}
-                  height={16}
-                  className="object-contain object-left"
-                />
-                <p
-                  className="text-[22px] font-semibold leading-snug text-[#151515]"
-                  style={{ fontFamily: "var(--font-secondary)" }}
-                >
-                  {testimonial.quote}
-                </p>
-                <p
-                  className="flex-1 text-base leading-relaxed text-[#3d3d3d]"
-                  style={{ fontFamily: "var(--font-secondary)" }}
-                >
-                  {testimonial.body}
-                </p>
-                <p
-                  className="text-sm font-medium text-[#151515]"
-                  style={{ fontFamily: "var(--font-secondary)" }}
-                >
-                  {testimonial.author}
-                </p>
-              </article>
-            ))}
-          </div>
+          <TestimonialCarousel testimonials={home.testimonials} />
         </div>
       </section>
 

@@ -3,8 +3,21 @@
 import Image from "next/image";
 import { useRef, useState } from "react";
 
-const ARROW_ICON =
-  "https://www.figma.com/api/mcp/asset/4440d9cb-9f45-495f-884b-e206474abac4";
+function ChevronLeft() {
+  return (
+    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+      <path d="M15 18l-6-6 6-6" />
+    </svg>
+  );
+}
+
+function ChevronRight() {
+  return (
+    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+      <path d="M9 18l6-6-6-6" />
+    </svg>
+  );
+}
 
 export function GalleryCarousel({ images }: { images: [string, string] }) {
   const [current, setCurrent] = useState(0);
@@ -53,29 +66,22 @@ export function GalleryCarousel({ images }: { images: [string, string] }) {
       <button
         onClick={() => goTo(Math.max(0, current - 1))}
         aria-label="Previous image"
-        className={`absolute left-2 top-1/2 flex h-[52px] w-[52px] -translate-y-1/2 items-center justify-center transition-opacity duration-300 xl:left-[124px] ${
+        className={`absolute left-2 top-1/2 flex h-11 w-11 -translate-y-1/2 items-center justify-center rounded-full border border-[#cfbcad] bg-white text-[#151515] transition-all duration-300 hover:bg-[#151515] hover:text-white xl:left-[100px] ${
           current === 0 ? "pointer-events-none opacity-0" : "opacity-100"
         }`}
       >
-        <Image src={ARROW_ICON} alt="" width={28} height={28} />
+        <ChevronLeft />
       </button>
 
       {/* Right arrow — visible only when not at end */}
       <button
         onClick={() => goTo(Math.min(images.length - 1, current + 1))}
         aria-label="Next image"
-        className={`absolute right-2 top-1/2 flex h-[52px] w-[52px] -translate-y-1/2 items-center justify-center transition-opacity duration-300 ${
+        className={`absolute right-2 top-1/2 flex h-11 w-11 -translate-y-1/2 items-center justify-center rounded-full border border-[#cfbcad] bg-white text-[#151515] transition-all duration-300 hover:bg-[#151515] hover:text-white ${
           current >= images.length - 1 ? "pointer-events-none opacity-0" : "opacity-100"
         }`}
       >
-        {/* Mirror the left-arrow icon horizontally to make a right arrow */}
-        <Image
-          src={ARROW_ICON}
-          alt=""
-          width={28}
-          height={28}
-          className="scale-x-[-1]"
-        />
+        <ChevronRight />
       </button>
     </div>
   );

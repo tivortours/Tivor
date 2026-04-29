@@ -3,8 +3,6 @@
 import Image from "next/image";
 import { useCallback, useEffect, useRef, useState } from "react";
 
-const CALENDAR_ICON = "https://www.figma.com/api/mcp/asset/56e3af8a-c17d-4436-9de7-244d1026cb6f";
-
 type ItineraryDay = {
   day: string;
   title: string;
@@ -26,8 +24,14 @@ export function JourneyHighlights({
   const updateActiveDay = useCallback(() => {
     const container = scrollRef.current;
     if (!container) return;
+
+    // When scrolled to the bottom, always activate the last day
+    if (container.scrollTop + container.clientHeight >= container.scrollHeight - 5) {
+      setActiveDay(itinerary.length - 1);
+      return;
+    }
+
     const containerRect = container.getBoundingClientRect();
-    // The day whose top edge is closest to — but not past — 40% down the container
     const threshold = containerRect.top + containerRect.height * 0.4;
     let active = 0;
     dayRefs.current.forEach((ref, i) => {
@@ -35,7 +39,7 @@ export function JourneyHighlights({
       if (ref.getBoundingClientRect().top <= threshold) active = i;
     });
     setActiveDay(active);
-  }, []);
+  }, [itinerary.length]);
 
   useEffect(() => {
     const container = scrollRef.current;
@@ -90,18 +94,33 @@ export function JourneyHighlights({
         {itinerary.map((entry, i) => (
           <div
             key={entry.day}
-            ref={(el) => {
-              dayRefs.current[i] = el;
-            }}
-            className="flex flex-col gap-3"
+            ref={(el) => { dayRefs.current[i] = el; }}
+            className={`flex flex-col gap-3 transition-opacity duration-300 ${
+              i === activeDay ? "opacity-100" : "opacity-30"
+            }`}
           >
             {/* Day header */}
             <div className="flex items-center gap-2">
-              <div className="relative h-5 w-5 shrink-0">
-                <Image src={CALENDAR_ICON} alt="" fill className="object-contain" />
-              </div>
+              <svg
+                width="18"
+                height="18"
+                viewBox="0 0 24 24"
+                fill="none"
+                className={`shrink-0 transition-colors duration-300 ${i === activeDay ? "text-[#151515]" : "text-[#999]"}`}
+                stroke="currentColor"
+                strokeWidth="1.8"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+              >
+                <rect x="3" y="4" width="18" height="18" rx="2" ry="2" />
+                <line x1="16" y1="2" x2="16" y2="6" />
+                <line x1="8" y1="2" x2="8" y2="6" />
+                <line x1="3" y1="10" x2="21" y2="10" />
+              </svg>
               <p
-                className="text-[18px] font-medium text-[#151515]"
+                className={`text-[18px] font-medium transition-colors duration-300 ${
+                  i === activeDay ? "text-[#151515]" : "text-[#999]"
+                }`}
                 style={{ fontFamily: "var(--font-secondary)" }}
               >
                 {entry.day}
@@ -110,7 +129,9 @@ export function JourneyHighlights({
 
             {/* Day title */}
             <p
-              className="text-[18px] font-medium text-[#151515]"
+              className={`text-[18px] font-medium transition-colors duration-300 ${
+                i === activeDay ? "text-[#151515]" : "text-[#999]"
+              }`}
               style={{ fontFamily: "var(--font-secondary)" }}
             >
               {entry.title}
@@ -121,7 +142,9 @@ export function JourneyHighlights({
               {entry.activities.map((act, j) => (
                 <p
                   key={j}
-                  className="border-b border-[#cfbcad]/50 py-2 text-base leading-normal text-[#3d3d3d] last:border-0"
+                  className={`border-b border-[#cfbcad]/50 py-2 text-base leading-normal last:border-0 transition-colors duration-300 ${
+                    i === activeDay ? "text-[#3d3d3d]" : "text-[#bbb]"
+                  }`}
                   style={{ fontFamily: "var(--font-secondary)" }}
                 >
                   {act}

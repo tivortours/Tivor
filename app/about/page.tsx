@@ -10,7 +10,18 @@ export default async function AboutPage() {
 
       {/* ── Hero ─────────────────────────────────────────────────────────── */}
       <section className="relative flex min-h-[600px] items-end overflow-hidden bg-[#7a5c48] lg:min-h-[800px] xl:min-h-[900px]">
-        <Image src={page.heroImage} alt="" fill priority className="object-cover" sizes="100vw" />
+        {page.heroVideo ? (
+          <video
+            src={page.heroVideo}
+            autoPlay
+            muted
+            loop
+            playsInline
+            className="absolute inset-0 h-full w-full object-cover"
+          />
+        ) : (
+          <Image src={page.heroImage} alt="" fill priority className="object-cover" sizes="100vw" />
+        )}
         <div className="absolute inset-0 bg-black/30" />
         <SiteHeader light active="About" />
         <div className={`${shell} relative z-10 pb-14 pt-48`}>
@@ -48,14 +59,24 @@ export default async function AboutPage() {
       </section>
 
       {/* ── Pillars banner ───────────────────────────────────────────────── */}
-      <section className="w-full bg-[#6a5546] py-[25px]">
-        <div className="flex flex-wrap items-center justify-center gap-6 px-5 sm:gap-12 xl:gap-20">
+      <section className="w-full bg-[#f2ebe2] py-10">
+        <div className="flex flex-wrap items-center justify-center gap-0">
           {page.pillars.map((pillar, index) => (
-            <div key={pillar} className="flex items-center gap-6 sm:gap-12 xl:gap-20">
-              {index > 0 ? <div className="h-[59px] w-px bg-white/40" /> : null}
-              <span className="text-[28px] font-semibold text-white xl:text-[36px]" style={{ fontFamily: "var(--font-primary)" }}>
-                {pillar}
-              </span>
+            <div key={pillar.label} className="flex items-center">
+              {index > 0 ? <div className="mx-8 h-[80px] w-px bg-[#cfbcad] sm:mx-12 xl:mx-16" /> : null}
+              <div className="flex flex-col items-center gap-3">
+                {pillar.icon ? (
+                  <div className="relative h-12 w-12">
+                    <Image src={pillar.icon} alt="" fill className="object-contain" sizes="48px" />
+                  </div>
+                ) : null}
+                <span
+                  className="text-[24px] font-semibold text-[#151515] xl:text-[30px]"
+                  style={{ fontFamily: "var(--font-primary)" }}
+                >
+                  {pillar.label}
+                </span>
+              </div>
             </div>
           ))}
         </div>
@@ -64,9 +85,10 @@ export default async function AboutPage() {
       {/* ── Vision & Mission ─────────────────────────────────────────────── */}
       <section className="w-full pt-[80px]">
         <div className={shell}>
-          <div className="flex flex-col gap-12 overflow-hidden rounded-[2px] bg-[#f7f4f1] p-8 xl:flex-row xl:items-center xl:gap-[88px] xl:p-[80px]">
+          <div className="overflow-hidden rounded-[2px] bg-[#f7f4f1] p-8 xl:p-16">
+            <div className="grid grid-cols-1 items-center gap-10 xl:grid-cols-[minmax(0,1.2fr)_minmax(0,1fr)] xl:gap-16">
 
-            <div className="relative aspect-[795/485] shrink-0 overflow-hidden rounded-[2px] xl:w-[795px]">
+            <div className="relative aspect-[795/485] overflow-hidden rounded-[2px]">
               <Image
                 src={page.visionImage}
                 alt="Vision"
@@ -76,7 +98,7 @@ export default async function AboutPage() {
               />
             </div>
 
-            <div className="flex flex-1 flex-col divide-y divide-[#cfbcad]">
+            <div className="flex flex-col divide-y divide-[#cfbcad]">
               <div className="flex flex-col gap-8 pb-8 xl:py-8">
                 <h2 className="text-[28px] font-semibold text-[#151515] xl:text-[36px]" style={{ fontFamily: "var(--font-primary)" }}>
                   {page.visionTitle}
@@ -93,6 +115,7 @@ export default async function AboutPage() {
                   {page.missionBody}
                 </p>
               </div>
+            </div>
             </div>
           </div>
         </div>

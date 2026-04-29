@@ -223,10 +223,11 @@ type InspirationPageData = {
 
 type AboutPageData = {
   heroImage: string;
+  heroVideo: string;
   heroTagline: string;
   introTitle: string;
   introParagraphs: string[];
-  pillars: string[];
+  pillars: { label: string; icon: string }[];
   visionImage: string;
   visionTitle: string;
   visionBody: string;
@@ -417,13 +418,18 @@ const fallbackInspirationPage: InspirationPageData = {
 
 const fallbackAboutPage: AboutPageData = {
   heroImage: "/about-hero.jpg",
+  heroVideo: "",
   heroTagline: "Imagine crafting your unique travel",
   introTitle: "A World of New Horizons",
   introParagraphs: [
     "At the heart of everything we do lies a simple belief—travel should be as unique as the individual experiencing it. We go beyond conventional itineraries to design journeys that reflect your passions, pace, and sense of discovery. Every detail is thoughtfully considered, from handpicked stays and seamless transfers to immersive experiences that connect you deeply with each destination.",
     "Our approach is rooted in understanding what truly matters to you. Whether it's the quiet luxury of a secluded retreat, the thrill of exploring untouched landscapes, or meaningful cultural encounters, we curate each journey with care and intention. With a commitment to elegance, authenticity, and effortless service, we transform travel into something far more than a trip—it becomes a story that is entirely your own.",
   ],
-  pillars: ["Sustainable", "Immersive", "Luxurious"],
+  pillars: [
+    { label: "Sustainable", icon: "" },
+    { label: "Immersive", icon: "" },
+    { label: "Luxurious", icon: "" },
+  ],
   visionImage: "https://www.figma.com/api/mcp/asset/592f3717-6353-441d-bf2a-faecc206e492",
   visionTitle: "The Vision",
   visionBody:
@@ -814,10 +820,17 @@ export const getAboutPageData = cache(async (): Promise<AboutPageData> => {
 
   return {
     heroImage: imageUrl(data.heroImage, 2200, 1600, fallbackAboutPage.heroImage),
+    heroVideo: data.heroVideo || "",
     heroTagline: data.heroTagline || fallbackAboutPage.heroTagline,
     introTitle: data.introTitle || fallbackAboutPage.introTitle,
     introParagraphs: data.introParagraphs?.length ? data.introParagraphs : fallbackAboutPage.introParagraphs,
-    pillars: data.pillars?.length ? data.pillars : fallbackAboutPage.pillars,
+    pillars: data.pillars?.length
+      ? data.pillars.map((p: any) =>
+          p != null && typeof p === "object"
+            ? { label: p.label || "", icon: imageUrl(p.icon, 100, undefined, "") }
+            : { label: String(p || ""), icon: "" }
+        )
+      : fallbackAboutPage.pillars,
     visionImage: imageUrl(data.visionImage, 1600, 980, fallbackAboutPage.visionImage),
     visionTitle: data.visionTitle || fallbackAboutPage.visionTitle,
     visionBody: data.visionBody || fallbackAboutPage.visionBody,
