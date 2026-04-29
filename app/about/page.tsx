@@ -59,19 +59,21 @@ export default async function AboutPage() {
       </section>
 
       {/* ── Pillars banner ───────────────────────────────────────────────── */}
-      <section className="w-full bg-[#f2ebe2] py-10">
-        <div className="flex flex-wrap items-center justify-center gap-0">
+      <section className="w-full bg-[#f2ebe2] py-5 sm:py-7 xl:py-10">
+        <div className="flex items-center justify-center">
           {page.pillars.map((pillar, index) => (
             <div key={index} className="flex items-center">
-              {index > 0 ? <div className="mx-8 h-[80px] w-px bg-[#cfbcad] sm:mx-12 xl:mx-16" /> : null}
-              <div className="flex flex-col items-center gap-3">
+              {index > 0 ? (
+                <div className="mx-3 h-7 w-px bg-[#cfbcad] sm:mx-6 sm:h-10 lg:mx-10 lg:h-12 xl:mx-14 xl:h-14" />
+              ) : null}
+              <div className="flex items-center gap-1.5 sm:gap-2.5 lg:gap-3 xl:gap-4">
                 {pillar.icon ? (
-                  <div className="relative h-12 w-12">
-                    <Image src={pillar.icon} alt="" fill className="object-contain" sizes="48px" />
+                  <div className="relative h-4 w-4 shrink-0 sm:h-5 sm:w-5 lg:h-7 lg:w-7 xl:h-8 xl:w-8">
+                    <Image src={pillar.icon} alt="" fill className="object-contain" sizes="32px" />
                   </div>
                 ) : null}
                 <span
-                  className="text-[24px] font-semibold text-[#151515] xl:text-[30px]"
+                  className="text-[11px] font-semibold text-[#151515] sm:text-[15px] lg:text-[20px] xl:text-[26px]"
                   style={{ fontFamily: "var(--font-primary)" }}
                 >
                   {pillar.label}
