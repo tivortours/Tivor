@@ -9,7 +9,7 @@ export const client = createClient({
   apiVersion,
   dataset: fallbackDataset,
   projectId: fallbackProjectId,
-  useCdn: true,
+ useCdn: false,
   stega: {
     studioUrl: studioBasePath,
   },

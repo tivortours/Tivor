@@ -1,6 +1,7 @@
 import ExcelJS from "exceljs";
 import { NextRequest, NextResponse } from "next/server";
 import path from "path";
+import { sendLeadEmails } from "../../../lib/email";
 
 const FILE = path.join(process.cwd(), "data", "leads.xlsx");
 
@@ -124,6 +125,12 @@ export async function POST(req: NextRequest) {
     });
 
     await wb.xlsx.writeFile(FILE);
+
+    // Send emails non-blocking — lead is already saved even if email fails
+    sendLeadEmails(type, fields).catch((err) =>
+      console.error("Email send error:", err)
+    );
+
     return NextResponse.json({ ok: true });
   } catch (err) {
     console.error("leads API error:", err);

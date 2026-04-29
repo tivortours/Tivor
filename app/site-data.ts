@@ -580,11 +580,11 @@ export const getSiteSettings = cache(async (): Promise<SiteSettings> => {
       ? data.headerActions.map((action: any) => ({ label: action.label, href: toAbsoluteHref(action.href), variant: action.variant }))
       : fallbackSiteSettings.headerActions,
     logos: {
-      light: imageUrl(data.logos?.light, 500, 120, fallbackSiteSettings.logos.light),
-      dark: imageUrl(data.logos?.dark, 500, 120, fallbackSiteSettings.logos.dark),
-      onLight: imageUrl(data.logos?.onLight, 500, 120, fallbackSiteSettings.logos.onLight),
-      footerIcon: imageUrl(data.logos?.footerIcon, 120, 120, fallbackSiteSettings.logos.footerIcon),
-      copyright: imageUrl(data.logos?.copyright, 80, 80, fallbackSiteSettings.logos.copyright),
+      light: imageUrl(data.logos?.light, 500, undefined, fallbackSiteSettings.logos.light),
+      dark: imageUrl(data.logos?.dark, 500, undefined, fallbackSiteSettings.logos.dark),
+      onLight: imageUrl(data.logos?.onLight, 500, undefined, fallbackSiteSettings.logos.onLight),
+      footerIcon: imageUrl(data.logos?.footerIcon, 200, undefined, fallbackSiteSettings.logos.footerIcon),
+      copyright: imageUrl(data.logos?.copyright, 80, undefined, fallbackSiteSettings.logos.copyright),
     },
     newsletter: {
       title: data.newsletter?.title || fallbackSiteSettings.newsletter.title,
@@ -609,7 +609,7 @@ export const getSiteSettings = cache(async (): Promise<SiteSettings> => {
         ? data.footer.socialLinks.map((item: any, index: number) => ({
             platform: item.platform,
             href: item.href || "#",
-            icon: imageUrl(item.icon, 64, 64, fallbackSiteSettings.footer.socialLinks[index]?.icon || ""),
+            icon: imageUrl(item.icon, 64, undefined, fallbackSiteSettings.footer.socialLinks[index]?.icon || ""),
           }))
         : fallbackSiteSettings.footer.socialLinks,
     },
@@ -617,7 +617,7 @@ export const getSiteSettings = cache(async (): Promise<SiteSettings> => {
       ? data.destinationFeatures.map((item: any, index: number) => ({
           title: item.title,
           desc: item.desc,
-          img: imageUrl(item.image, 110, 110, fallbackSiteSettings.destinationFeatures[index]?.img || ""),
+          img: imageUrl(item.image, 110, undefined, fallbackSiteSettings.destinationFeatures[index]?.img || ""),
         }))
       : fallbackSiteSettings.destinationFeatures,
     recommendedExperiences: data.recommendedExperiences?.length
