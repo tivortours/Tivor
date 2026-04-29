@@ -165,7 +165,7 @@ export default async function HomePage() {
         </div>
       </section>
 
-      <section className="bg-white">
+      <section className="bg-[#f2ebe2]">
         <div className={`${shell} ${section} flex flex-col items-center gap-12 lg:gap-[72px]`}>
           <SectionHeading
             label={home.experiencesLabel}
