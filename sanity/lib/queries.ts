@@ -354,7 +354,7 @@ export const INSPIRATION_ARTICLE_QUERY = defineQuery(`
 export const ABOUT_PAGE_QUERY = defineQuery(`
   *[_type == "aboutPage"][0]{
     heroImage,
-    heroVideo,
+    "heroVideo": heroVideo.asset->url,
     heroTagline,
     introTitle,
     introParagraphs,
