@@ -287,6 +287,8 @@ const inspirationArticle = defineType({
     defineField({ name: "closingText", title: "Closing Text", type: "text", rows: 4 }),
     defineField({ name: "ctaTitle", title: "CTA Title", type: "string" }),
     defineField({ name: "ctaBody", title: "CTA Body", type: "text", rows: 3 }),
+    defineField({ name: "ctaButtonLabel", title: "CTA Button Label", type: "string" }),
+    defineField({ ...linkField, name: "ctaButtonHref", title: "CTA Button Link" }),
     imageField("ctaImage", "CTA Image", "Best ratio: tall landscape crop for the right-hand CTA image."),
   ],
 });

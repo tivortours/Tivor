@@ -222,12 +222,13 @@ export default async function InspirationDetailPage({
                 >
                   {art.ctaBody}
                 </p>
-                <button
-                  className="h-[45px] w-fit rounded-[2px] bg-white px-6 text-base text-[#151515] xl:text-[18px]"
+                <a
+                  href={art.ctaButtonHref}
+                  className="inline-flex h-[45px] w-fit items-center rounded-[2px] bg-white px-6 text-base text-[#151515] xl:text-[18px]"
                   style={{ fontFamily: "var(--font-secondary)" }}
                 >
-                  Plan Your Journey
-                </button>
+                  {art.ctaButtonLabel}
+                </a>
               </div>
             </div>
 

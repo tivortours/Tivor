@@ -673,6 +673,8 @@ export const inspirations = [
       "And perhaps that's what makes Slovenia so unforgettable. It doesn't overwhelm you—it invites you. To slow down, to look closer, and to discover a kind of beauty that stays with you long after the journey ends.",
     ctaTitle: "Excited For Your Slovenian Trip?",
     ctaBody: "Tell us how you envision your journey, and we'll shape it into something truly exceptional.",
+    ctaButtonLabel: "Plan Your Journey",
+    ctaButtonHref: "/plan",
     ctaImg: "https://www.figma.com/api/mcp/asset/aaf2e59d-98bf-423b-a163-41dc165a16b9",
   },
   {
@@ -716,6 +718,8 @@ export const inspirations = [
       "Norway doesn't need to perform. It simply is—wild, generous, and quietly magnificent. And long after you've left its shores, you'll find its landscapes have taken up permanent residence in your memory.",
     ctaTitle: "Ready For Your Norwegian Adventure?",
     ctaBody: "Tell us how you envision your journey, and we'll shape it into something truly exceptional.",
+    ctaButtonLabel: "Plan Your Journey",
+    ctaButtonHref: "/plan",
     ctaImg: "https://www.figma.com/api/mcp/asset/935b70c3-9c58-45f8-bfe4-9bcdf083e82e",
   },
   {
@@ -759,6 +763,8 @@ export const inspirations = [
       "Iceland leaves a mark. Its scale humbles you, its beauty moves you, and its people welcome you. It is a destination that invites you not just to visit, but to return.",
     ctaTitle: "Ready to Experience Iceland?",
     ctaBody: "Tell us how you envision your journey, and we'll shape it into something truly exceptional.",
+    ctaButtonLabel: "Plan Your Journey",
+    ctaButtonHref: "/plan",
     ctaImg: "https://www.figma.com/api/mcp/asset/4dbeeef5-4051-4391-8738-597e8ebd6516",
   },
   {
@@ -802,6 +808,8 @@ export const inspirations = [
       "The Slovenian highlands ask nothing of you except your presence. Come with open eyes and willing legs, and they will give you far more than you expect.",
     ctaTitle: "Discover Slovenia's Highland Magic",
     ctaBody: "Tell us how you envision your journey, and we'll shape it into something truly exceptional.",
+    ctaButtonLabel: "Plan Your Journey",
+    ctaButtonHref: "/plan",
     ctaImg: "https://www.figma.com/api/mcp/asset/762b430a-40d1-486b-b4a2-4b14e436a5ce",
   },
   {
@@ -845,6 +853,8 @@ export const inspirations = [
       "The Northern Lights cannot be booked or scheduled, only sought. Norway gives you the best possible conditions for that search—and the results, when they come, are worth every cold, patient minute.",
     ctaTitle: "Chase the Aurora in Norway",
     ctaBody: "Tell us how you envision your journey, and we'll shape it into something truly exceptional.",
+    ctaButtonLabel: "Plan Your Journey",
+    ctaButtonHref: "/plan",
     ctaImg: "https://www.figma.com/api/mcp/asset/32a88857-92ff-4015-83d1-157bf06bdcaa",
   },
   {
@@ -888,6 +898,8 @@ export const inspirations = [
       "Iceland is not a comfortable destination—it is a challenging, exhilarating, humbling one. And those who come prepared for that challenge leave with something that lasts a lifetime.",
     ctaTitle: "Explore Iceland's Wild Edge",
     ctaBody: "Tell us how you envision your journey, and we'll shape it into something truly exceptional.",
+    ctaButtonLabel: "Plan Your Journey",
+    ctaButtonHref: "/plan",
     ctaImg: "https://www.figma.com/api/mcp/asset/11a74b9a-69fa-406d-a3f9-e3f5ffab46bc",
   },
   {
@@ -931,6 +943,8 @@ export const inspirations = [
       "Slovenia's wine trails offer something increasingly rare: genuine discovery. These are wines and places that haven't been packaged for mass consumption. They reward the curious traveller with experiences that feel entirely, wonderfully personal.",
     ctaTitle: "Explore Slovenia's Wine Country",
     ctaBody: "Tell us how you envision your journey, and we'll shape it into something truly exceptional.",
+    ctaButtonLabel: "Plan Your Journey",
+    ctaButtonHref: "/plan",
     ctaImg: "https://www.figma.com/api/mcp/asset/8b36ea26-7f69-48f1-851d-bb92d38ba156",
   },
 ];

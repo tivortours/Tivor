@@ -100,6 +100,8 @@ export type Inspiration = {
   closingText: string;
   ctaTitle: string;
   ctaBody: string;
+  ctaButtonLabel: string;
+  ctaButtonHref: string;
   ctaImg: string;
 };
 
@@ -570,6 +572,8 @@ function mapInspiration(item: any, fallbackItem?: Inspiration): Inspiration {
     closingText: item.closingText,
     ctaTitle: item.ctaTitle,
     ctaBody: item.ctaBody,
+    ctaButtonLabel: item.ctaButtonLabel || fallbackItem?.ctaButtonLabel || "Plan Your Journey",
+    ctaButtonHref: item.ctaButtonHref || fallbackItem?.ctaButtonHref || "/plan",
     ctaImg: imageUrl(item.ctaImage, 1200, 1000, fallbackItem?.ctaImg || ""),
   };
 }
