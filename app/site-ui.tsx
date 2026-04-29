@@ -247,10 +247,10 @@ export async function SiteFooter() {
 
           <div className="flex flex-col gap-6 border-t border-[#576168] pt-5 lg:flex-row lg:items-center lg:justify-between">
             <div className="flex items-center gap-1">
-              <Image src={settings.logos.copyright} alt="©" width={20} height={20} className="object-contain" />
+              {/* <Image src={settings.logos.copyright} alt="©" width={20} height={20} className="object-contain" />
               <span className="text-sm text-[#899195]" style={{ fontFamily: "var(--font-secondary)" }}>
                 {settings.footer.year}
-              </span>
+              </span> */}
               <span className="text-sm text-white" style={{ fontFamily: "var(--font-secondary)" }}>
                 {" "}
                 {settings.footer.copyrightText}
