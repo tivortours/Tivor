@@ -62,7 +62,7 @@ export default async function AboutPage() {
       <section className="w-full bg-[#f2ebe2] py-10">
         <div className="flex flex-wrap items-center justify-center gap-0">
           {page.pillars.map((pillar, index) => (
-            <div key={pillar.label} className="flex items-center">
+            <div key={index} className="flex items-center">
               {index > 0 ? <div className="mx-8 h-[80px] w-px bg-[#cfbcad] sm:mx-12 xl:mx-16" /> : null}
               <div className="flex flex-col items-center gap-3">
                 {pillar.icon ? (
