@@ -39,7 +39,7 @@ export async function POST(req: NextRequest) {
     return NextResponse.json({ message: `Unknown type: ${docType}` }, { status: 400 });
   }
 
-  tags.forEach(revalidateTag);
+  tags.forEach((tag) => revalidateTag(tag, "max"));
 
   return NextResponse.json({ revalidated: true, tags });
 }
