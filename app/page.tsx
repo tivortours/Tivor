@@ -163,7 +163,7 @@ export default async function HomePage() {
                 </div>
 
                 <div className="mt-auto space-y-6">
-                  {index === 0 ? <div className="h-px w-full bg-[#cfbcad]" /> : null}
+                  {/* {index === 0 ? <div className="h-px w-full bg-[#cfbcad]" /> : null} */}
                   <div className="rounded-[2px] px-5 py-4 sm:px-6" style={{ backgroundColor: journey.accent.replace("bg-[", "").replace("]", "") }}>
                     <div className="space-y-3">
                       {journey.details.map(([label, value]) => (
