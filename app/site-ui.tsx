@@ -161,6 +161,30 @@ export async function SiteHeader({
   );
 }
 
+function SocialIcon({ platform }: { platform: string }) {
+  const p = platform.toLowerCase();
+  if (p === "instagram") return (
+    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <rect x="2" y="2" width="20" height="20" rx="5" stroke="currentColor" strokeWidth="1.8"/>
+      <circle cx="12" cy="12" r="4.5" stroke="currentColor" strokeWidth="1.8"/>
+      <circle cx="17.5" cy="6.5" r="1" fill="currentColor"/>
+    </svg>
+  );
+  if (p === "facebook") return (
+    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round"/>
+    </svg>
+  );
+  if (p === "linkedin") return (
+    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round"/>
+      <rect x="2" y="9" width="4" height="13" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round"/>
+      <circle cx="4" cy="4" r="2" stroke="currentColor" strokeWidth="1.8"/>
+    </svg>
+  );
+  return <img src="" alt={platform} width={24} height={24} />;
+}
+
 export async function SiteFooter() {
   const settings = await getSiteSettings();
 
@@ -264,10 +288,10 @@ export async function SiteFooter() {
               >
                 {settings.footer.followLabel}
               </span>
-              <div className="flex items-center gap-8">
+              <div className="flex items-center gap-2">
                 {settings.footer.socialLinks.map((social) => (
-                  <Link key={social.platform} href={social.href} aria-label={social.platform}>
-                    <Image src={social.icon} alt={social.platform} width={24} height={24} className="object-contain" />
+                  <Link key={social.platform} href={social.href} aria-label={social.platform} className="text-white transition-colors hover:text-[#899195]">
+                    <SocialIcon platform={social.platform} />
                   </Link>
                 ))}
               </div>
