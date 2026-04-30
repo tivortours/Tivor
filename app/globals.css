@@ -37,6 +37,12 @@ body {
   color: #151515;
 }
 
+@media (min-width: 1024px) and (max-width: 1440px) {
+  html {
+    zoom: 0.9;
+  }
+}
+
 /* ── Form primitives ────────────────────────────────────────────────────────
    Defined here (not as Tailwind utilities) so they are always compiled and
    never subject to JIT content-scanner cache misses during hot reload.
