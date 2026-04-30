@@ -178,10 +178,10 @@ export default async function JourneyDetailPage({
                     From
                   </span>
                   <span className="text-[18px] text-[#151515]" style={{ fontFamily: "var(--font-secondary)" }}>
-                    {journey.priceFrom}
+                  USD {journey.priceFrom}
                   </span>
                   <span className="text-[18px] text-[#3d3d3d]" style={{ fontFamily: "var(--font-secondary)" }}>
-                    USD / Guest
+                     per Guest
                   </span>
                 </div>
                 <p className="text-xs text-[#3d3d3d]" style={{ fontFamily: "var(--font-secondary)" }}>
@@ -212,7 +212,7 @@ export default async function JourneyDetailPage({
           <div className="grid grid-cols-1 gap-7 sm:grid-cols-2 xl:grid-cols-3">
             {settings.recommendedExperiences.map((exp) => (
               <div key={exp.title} className="flex flex-col overflow-hidden rounded-[2px]">
-                <div className="relative h-[320px] w-full overflow-hidden sm:h-[380px] xl:h-[422px]">
+                <div className="relative h-[320px] w-full overflow-hidden sm:h-[360px] xl:h-[400px]">
                   <Image
                     src={exp.img}
                     alt={exp.title}
@@ -236,12 +236,12 @@ export default async function JourneyDetailPage({
                       {exp.title}
                     </p>
                   </div>
-                  <span
+                  {/* <span
                     className="border-b border-[#714128] pb-[2px] text-[18px] text-[#714128]"
                     style={{ fontFamily: "var(--font-secondary)" }}
                   >
                     Experience This Journey
-                  </span>
+                  </span> */}
                 </div>
               </div>
             ))}

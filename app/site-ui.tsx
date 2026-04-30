@@ -10,7 +10,7 @@ export function Label({ text, light = false }: { text: string; light?: boolean }
         light ? "border-[#b5bfab] text-[#b5bfab]" : "border-[#576168] text-[#576168]"
       }`}
     >
-      <span className="text-[10px] tracking-[0.28em]" style={{ fontFamily: "var(--font-secondary)" }}>
+      <span className="text-[10px] " style={{ fontFamily: "var(--font-secondary)" }}>
         {text}
       </span>
     </div>

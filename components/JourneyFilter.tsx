@@ -35,7 +35,7 @@ function JourneyCard({ journey }: { journey: Journey }) {
       </div>
 
       <div className="mt-6 flex flex-col gap-6">
-        {journey.hasDivider && <div className="h-px w-full bg-[#cfbcad]" />}
+        {/* {journey.hasDivider && <div className="h-px w-full bg-[#cfbcad]" />} */}
         <div
           className="rounded-[2px] px-6 py-4"
           style={{ backgroundColor: journey.accent.replace("bg-[", "").replace("]", "") }}
@@ -53,12 +53,6 @@ function JourneyCard({ journey }: { journey: Journey }) {
             ))}
           </div>
         </div>
-        <span
-          className="inline-flex w-fit items-center border-b border-[#714128] pb-[3px] text-[16px] text-[#714128]"
-          style={{ fontFamily: "var(--font-secondary)" }}
-        >
-          Explore Journey
-        </span>
       </div>
     </Link>
   );
@@ -167,10 +161,9 @@ export function JourneyFilter({ journeys, destNames, filterPlaceholder, seeMoreL
         )}
       </div>
 
-      <div className="h-px w-full bg-[#cfbcad]" />
-
       {/* Grid */}
       <div className={`${shell} flex flex-col gap-7`}>
+        <div className="h-px w-full bg-[#cfbcad] opacity-50" />
         <div className="grid grid-cols-1 gap-7 sm:grid-cols-2 xl:grid-cols-3">
           {visible.map((card) => (
             <JourneyCard key={card.slug} journey={card} />

@@ -127,12 +127,7 @@ export function SiteFooter() {
                   <img src={ASSETS.instagram} alt="Instagram" className="h-6 w-6 object-contain" />
                 </a>
                 <a href="#" aria-label="LinkedIn">
-                  <img
-                    src={ASSETS.linkedin}
-                    alt="LinkedIn"
-                    style={{ height: 27.259, width: 15.535 }}
-                    className="object-contain"
-                  />
+                  <img src={ASSETS.linkedin} alt="LinkedIn" className="h-9 w-9 object-contain" />
                 </a>
               </div>
             </div>

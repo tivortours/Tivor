@@ -1,4 +1,5 @@
 import Image from "next/image";
+import Link from "next/link";
 import {
   getHomePageData,
   section,
@@ -62,7 +63,14 @@ export default async function HomePage() {
         </div>
       </section>
 
-      <section className="bg-[#f2ebe2]">
+      <section className="relative overflow-hidden bg-[#f2ebe2]">
+        <Image
+          src="/heart.png"
+          alt=""
+          width={700}
+          height={300}
+          className="pointer-events-none absolute left-0 top-0 select-none"
+        />
         <div className={`${shell} ${section} flex flex-col gap-12 lg:gap-[72px]`}>
           <SectionHeading
             label={home.featuredDestinationsLabel}
@@ -114,14 +122,14 @@ export default async function HomePage() {
 
           <div className="grid gap-8 xl:grid-cols-2 xl:gap-7">
             {home.featuredJourneys.map((journey, index) => (
-              <article key={journey.title} className="flex h-full flex-col gap-6">
+              <Link key={journey.title} href={`/journeys/${journey.slug}`} className="group flex h-full flex-col gap-6">
                 <div className="space-y-8">
                   <div className="relative aspect-[1.22] overflow-hidden rounded-[2px]">
                     <Image
                       src={journey.img}
                       alt={journey.alt}
                       fill
-                      className="object-cover"
+                      className="object-cover transition-transform duration-500 group-hover:scale-105"
                       sizes="(max-width: 1280px) 100vw, 50vw"
                     />
                   </div>
@@ -157,9 +165,8 @@ export default async function HomePage() {
                       ))}
                     </div>
                   </div>
-                  <LinkBtn label="Explore Journey" href={`/journeys/${journey.slug}`} />
                 </div>
-              </article>
+              </Link>
             ))}
           </div>
         </div>
