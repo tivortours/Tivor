@@ -58,6 +58,8 @@ export const HOME_PAGE_QUERY = defineQuery(`
   *[_type == "homePage"][0]{
     heroTitle,
     heroSubtitle,
+    "heroVideo": heroVideo.asset->{ url },
+    heroPosterImage,
     heroImage,
     introTitle,
     introParagraphs,

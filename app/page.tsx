@@ -14,7 +14,20 @@ export default async function HomePage() {
   return (
     <main className="flex w-full flex-col overflow-x-hidden">
       <section className="relative min-h-screen overflow-hidden bg-[#c0bebe]">
-        <Image src={home.heroImage} alt="" fill priority className="object-cover" sizes="100vw" />
+        {home.heroVideo ? (
+          <video
+            autoPlay
+            muted
+            loop
+            playsInline
+            poster={home.heroPosterImage || home.heroImage}
+            className="absolute inset-0 h-full w-full object-cover"
+          >
+            <source src={home.heroVideo} type="video/mp4" />
+          </video>
+        ) : (
+          <Image src={home.heroImage} alt="" fill priority className="object-cover" sizes="100vw" />
+        )}
         {/* <div className="absolute inset-0 bg-black/20" /> */}
         <div
           className="pointer-events-none absolute inset-x-0 bottom-0 bg-gradient-to-b from-transparent to-black/70"

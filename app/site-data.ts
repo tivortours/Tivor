@@ -147,6 +147,8 @@ type SiteSettings = {
 };
 
 type HomePageData = {
+  heroVideo: string;
+  heroPosterImage: string;
   heroImage: string;
   heroTitle: string;
   heroSubtitle: string;
@@ -308,6 +310,8 @@ const fallbackSiteSettings: SiteSettings = {
 };
 
 const fallbackHomePage: HomePageData = {
+  heroVideo: "",
+  heroPosterImage: "",
   heroImage: fallback.IMG.hero,
   heroTitle: "Discover Extraordinary Journeys Crafted Exclusively For You",
   heroSubtitle:
@@ -646,6 +650,8 @@ export const getHomePageData = cache(async (): Promise<HomePageData> => {
   if (!data) return fallbackHomePage;
 
   return {
+    heroVideo: data.heroVideo?.asset?.url || "",
+    heroPosterImage: imageUrl(data.heroPosterImage, 2200, 1300, ""),
     heroImage: imageUrl(data.heroImage, 2200, 1300, fallbackHomePage.heroImage),
     heroTitle: data.heroTitle || fallbackHomePage.heroTitle,
     heroSubtitle: data.heroSubtitle || fallbackHomePage.heroSubtitle,

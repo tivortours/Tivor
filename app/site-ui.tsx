@@ -279,7 +279,7 @@ export async function SiteFooter() {
             </p>
           </div>
         </div>
-      </div>
+      </div>  
     </footer>
   );
 }

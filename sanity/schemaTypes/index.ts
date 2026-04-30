@@ -389,7 +389,15 @@ const homePage = defineType({
   fields: [
     defineField({ name: "heroTitle", title: "Hero Title", type: "string" }),
     defineField({ name: "heroSubtitle", title: "Hero Subtitle", type: "text", rows: 3 }),
-    imageField("heroImage", "Hero Image", "Best ratio: full-bleed landscape. Minimum 1920x1080 recommended."),
+    defineField({
+      name: "heroVideo",
+      title: "Hero Video",
+      type: "file",
+      options: { accept: "video/*" },
+      description: "Upload an MP4 video. If set, plays instead of the hero image.",
+    }),
+    imageField("heroPosterImage", "Hero Poster Image", "Shown while the video loads. Use the same crop as the hero image."),
+    imageField("heroImage", "Hero Image (Fallback)", "Shown if no video is uploaded. Best ratio: full-bleed landscape. Minimum 1920x1080 recommended."),
     defineField({ name: "introTitle", title: "Intro Title", type: "string" }),
     defineField({
       name: "introParagraphs",
