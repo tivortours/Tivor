@@ -42,3 +42,6 @@ next-env.d.ts
 
 # leads data — never delete this
 /data
+
+AGENTS.md
+CLAUDE.md 
