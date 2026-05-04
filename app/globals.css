@@ -115,3 +115,48 @@ input[type="number"]::-webkit-outer-spin-button {
   margin: 0;
 }
 input[type="number"] { -moz-appearance: textfield; }
+
+/* ── Luxury Motion System ──────────────────────────────────────────────── */
+
+/* Page entrance — every <main> fades + rises on load */
+@keyframes luxury-page-in {
+  from { opacity: 0; transform: translateY(12px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+main {
+  animation: luxury-page-in 0.9s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+/* Scroll reveal — elements start hidden, animate in when scrolled into view */
+[data-reveal] {
+  opacity: 0;
+  transition:
+    opacity  0.95s cubic-bezier(0.16, 1, 0.3, 1),
+    transform 0.95s cubic-bezier(0.16, 1, 0.3, 1);
+}
+[data-reveal="up"]    { transform: translateY(40px); }
+[data-reveal="left"]  { transform: translateX(-40px); }
+[data-reveal="right"] { transform: translateX(40px); }
+[data-reveal="scale"] { transform: scale(0.96); }
+[data-reveal="fade"]  { transform: none; }
+
+[data-reveal].in-view {
+  opacity: 1 !important;
+  transform: none !important;
+}
+
+/* Fallback: show everything if JS never runs or reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  [data-reveal] { opacity: 1 !important; transform: none !important; }
+}
+
+/* Stagger delay helpers */
+[data-delay="100"] { transition-delay: 100ms; }
+[data-delay="150"] { transition-delay: 150ms; }
+[data-delay="200"] { transition-delay: 200ms; }
+[data-delay="250"] { transition-delay: 250ms; }
+[data-delay="300"] { transition-delay: 300ms; }
+[data-delay="400"] { transition-delay: 400ms; }
+[data-delay="500"] { transition-delay: 500ms; }
+[data-delay="600"] { transition-delay: 600ms; }
+

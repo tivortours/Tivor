@@ -13,6 +13,8 @@ export default async function HomePage() {
 
   return (
     <main className="flex w-full flex-col overflow-x-hidden">
+
+      {/* ── Hero ──────────────────────────────────────────────────────────── */}
       <section className="relative min-h-screen overflow-hidden bg-[#c0bebe]">
         {home.heroVideo ? (
           <video
@@ -28,7 +30,6 @@ export default async function HomePage() {
         ) : (
           <Image src={home.heroImage} alt="" fill priority className="object-cover" sizes="100vw" />
         )}
-        {/* <div className="absolute inset-0 bg-black/20" /> */}
         <div
           className="pointer-events-none absolute inset-x-0 bottom-0 bg-gradient-to-b from-transparent to-black/70"
           style={{ height: "41.3%" }}
@@ -56,15 +57,19 @@ export default async function HomePage() {
         </div>
       </section>
 
+      {/* ── Intro ─────────────────────────────────────────────────────────── */}
       <section className="bg-white">
         <div className={`${shell} flex flex-col items-center gap-10 py-20 text-center sm:gap-14 lg:py-[120px]`}>
           <h2
+            data-reveal="up"
             className="text-[38px] leading-none text-[#151515] sm:text-[46px] lg:text-[52px]"
             style={{ fontFamily: "var(--font-primary)" }}
           >
             {home.introTitle}
           </h2>
           <div
+            data-reveal="up"
+            data-delay="150"
             className="max-w-[984px] space-y-5 text-base leading-relaxed text-[#3d3d3d] sm:text-lg"
             style={{ fontFamily: "var(--font-secondary)" }}
           >
@@ -72,10 +77,13 @@ export default async function HomePage() {
               <p key={paragraph}>{paragraph}</p>
             ))}
           </div>
-          <Diamond />
+          <div data-reveal="fade" data-delay="300">
+            <Diamond />
+          </div>
         </div>
       </section>
 
+      {/* ── Featured Destinations ─────────────────────────────────────────── */}
       <section className="relative overflow-hidden bg-[#f2ebe2]">
         <Image
           src="/heart.png"
@@ -85,21 +93,28 @@ export default async function HomePage() {
           className="pointer-events-none absolute left-0 top-0 select-none"
         />
         <div className={`${shell} ${section} flex flex-col gap-12 lg:gap-[72px]`}>
-          <SectionHeading
-            label={home.featuredDestinationsLabel}
-            title={home.featuredDestinationsTitle}
-            centered
-          />
+          <div data-reveal="up">
+            <SectionHeading
+              label={home.featuredDestinationsLabel}
+              title={home.featuredDestinationsTitle}
+              centered
+            />
+          </div>
 
           <div className="grid gap-10 lg:grid-cols-3 lg:gap-7">
-            {home.featuredDestinations.map((destination) => (
-              <article key={destination.name} className="flex h-full flex-col">
+            {home.featuredDestinations.map((destination, index) => (
+              <article
+                key={destination.name}
+                className="flex h-full flex-col"
+                data-reveal="up"
+                data-delay={String(index * 150)}
+              >
                 <div className="relative aspect-[0.85] overflow-hidden rounded-[2px]">
                   <Image
                     src={destination.img}
                     alt={destination.name}
                     fill
-                    className="object-cover"
+                    className="object-cover transition-transform duration-700 hover:scale-105"
                     sizes="(max-width: 1024px) 100vw, 33vw"
                   />
                 </div>
@@ -126,23 +141,33 @@ export default async function HomePage() {
         </div>
       </section>
 
+      {/* ── Curated Journeys ──────────────────────────────────────────────── */}
       <section className="bg-white">
         <div className={`${shell} ${section} flex flex-col gap-12 lg:gap-[72px]`}>
-          <div className="flex flex-col gap-8 lg:flex-row lg:items-end lg:justify-between">
+          <div
+            data-reveal="up"
+            className="flex flex-col gap-8 lg:flex-row lg:items-end lg:justify-between"
+          >
             <SectionHeading label={home.curatedJourneysLabel} title={home.curatedJourneysTitle} />
             <LinkBtn label={home.curatedJourneysLinkLabel} href={home.curatedJourneysLinkHref} />
           </div>
 
           <div className="grid gap-8 xl:grid-cols-2 xl:gap-7">
             {home.featuredJourneys.map((journey, index) => (
-              <Link key={journey.title} href={`/journeys/${journey.slug}`} className="group flex h-full flex-col gap-6">
+              <Link
+                key={journey.title}
+                href={`/journeys/${journey.slug}`}
+                className="group flex h-full flex-col gap-6"
+                data-reveal="up"
+                data-delay={String(index * 200)}
+              >
                 <div className="space-y-8">
                   <div className="relative aspect-[1.22] overflow-hidden rounded-[2px]">
                     <Image
                       src={journey.img}
                       alt={journey.alt}
                       fill
-                      className="object-cover transition-transform duration-500 group-hover:scale-105"
+                      className="object-cover transition-transform duration-700 group-hover:scale-105"
                       sizes="(max-width: 1280px) 100vw, 50vw"
                     />
                   </div>
@@ -163,7 +188,6 @@ export default async function HomePage() {
                 </div>
 
                 <div className="mt-auto space-y-6">
-                  {/* {index === 0 ? <div className="h-px w-full bg-[#cfbcad]" /> : null} */}
                   <div className="rounded-[2px] px-5 py-4 sm:px-6" style={{ backgroundColor: journey.accent.replace("bg-[", "").replace("]", "") }}>
                     <div className="space-y-3">
                       {journey.details.map(([label, value]) => (
@@ -185,25 +209,30 @@ export default async function HomePage() {
         </div>
       </section>
 
+      {/* ── Experiences ───────────────────────────────────────────────────── */}
       <section className="bg-[#f2ebe2]">
         <div className={`${shell} ${section} flex flex-col items-center gap-12 lg:gap-[72px]`}>
-          <SectionHeading
-            label={home.experiencesLabel}
-            title={home.experiencesTitle}
-            centered
-          />
+          <div data-reveal="up">
+            <SectionHeading
+              label={home.experiencesLabel}
+              title={home.experiencesTitle}
+              centered
+            />
+          </div>
 
           <div className="grid w-full max-w-[1038px] grid-cols-1 gap-5 sm:grid-cols-2 sm:gap-7 xl:grid-cols-1">
-            {home.experiences.map((experience) => (
+            {home.experiences.map((experience, index) => (
               <div
                 key={experience.label}
                 className="group relative h-[200px] overflow-hidden rounded-[2px] sm:h-[260px] xl:h-auto xl:aspect-[1038/249]"
+                data-reveal="scale"
+                data-delay={String(index * 120)}
               >
                 <Image
                   src={experience.img}
                   alt={experience.label}
                   fill
-                  className="object-cover transition-transform duration-500 group-hover:scale-105"
+                  className="object-cover transition-transform duration-700 group-hover:scale-105"
                   sizes="(max-width: 1280px) 100vw, 1038px"
                 />
                 <div className="absolute inset-0 bg-black/25" />
@@ -217,15 +246,24 @@ export default async function HomePage() {
             ))}
           </div>
 
-          <LinkBtn label={home.experiencesButtonLabel} href={home.experiencesButtonHref} />
+          <div data-reveal="up" data-delay="150">
+            <LinkBtn label={home.experiencesButtonLabel} href={home.experiencesButtonHref} />
+          </div>
         </div>
       </section>
 
+      {/* ── About ─────────────────────────────────────────────────────────── */}
       <section className="bg-[#5e6c51]">
         <div className={`${shell} ${section} flex flex-col gap-12 lg:gap-[72px]`}>
-          <SectionHeading label={home.aboutLabel} title={<>{home.aboutTitleLineOne}<br />{home.aboutTitleLineTwo}</>} light />
+          <div data-reveal="up">
+            <SectionHeading label={home.aboutLabel} title={<>{home.aboutTitleLineOne}<br />{home.aboutTitleLineTwo}</>} light />
+          </div>
 
-          <div className="relative aspect-[1280/554] overflow-hidden rounded-[2px]">
+          <div
+            className="relative aspect-[1280/554] overflow-hidden rounded-[2px]"
+            data-reveal="scale"
+            data-delay="150"
+          >
             <Image
               src={home.aboutImage}
               alt="Luxury travel"
@@ -235,7 +273,11 @@ export default async function HomePage() {
             />
           </div>
 
-          <div className="flex flex-col gap-6 lg:flex-row lg:items-end lg:justify-between">
+          <div
+            data-reveal="up"
+            data-delay="200"
+            className="flex flex-col gap-6 lg:flex-row lg:items-end lg:justify-between"
+          >
             <p
               className="max-w-[744px] text-base leading-relaxed text-white"
               style={{ fontFamily: "var(--font-secondary)" }}
@@ -249,9 +291,13 @@ export default async function HomePage() {
 
       <div className="mx-auto h-px w-full max-w-[1520px] bg-[#cfbcad]" />
 
+      {/* ── Why TIVOR ─────────────────────────────────────────────────────── */}
       <section className="bg-[#f2ebe2]">
         <div className={`${shell} ${section} flex flex-col gap-12 lg:gap-[72px]`}>
-          <div className="flex flex-col gap-8 lg:flex-row lg:items-end lg:justify-between">
+          <div
+            data-reveal="up"
+            className="flex flex-col gap-8 lg:flex-row lg:items-end lg:justify-between"
+          >
             <SectionHeading
               label={home.whyTravelLabel}
               title={
@@ -266,7 +312,7 @@ export default async function HomePage() {
           </div>
 
           <div className="grid gap-10 lg:grid-cols-[minmax(0,477px)_minmax(0,1fr)] lg:gap-[72px]">
-            <div className="flex flex-col">
+            <div data-reveal="up" data-delay="150" className="flex flex-col">
               {home.reasons.map((reason, index) => (
                 <div
                   key={reason.title}
@@ -290,7 +336,11 @@ export default async function HomePage() {
               ))}
             </div>
 
-            <div className="relative min-h-[320px] overflow-hidden rounded-[2px] lg:min-h-full">
+            <div
+              className="relative min-h-[320px] overflow-hidden rounded-[2px] lg:min-h-full"
+              data-reveal="scale"
+              data-delay="250"
+            >
               <Image
                 src={home.whyTravelImage}
                 alt="Why travel with TIVOR"
@@ -303,26 +353,35 @@ export default async function HomePage() {
         </div>
       </section>
 
+      {/* ── Testimonials ──────────────────────────────────────────────────── */}
       <section className="bg-[#f2ebe2]">
         <div className={`${shell} flex flex-col gap-12 py-20 lg:gap-[72px] lg:py-[80px]`}>
-          <SectionHeading
-            label={home.testimonialsLabel}
-            title={
-              <>
-                {home.testimonialsTitleLineOne}
-                <br />
-                {home.testimonialsTitleLineTwo}
-              </>
-            }
-          />
+          <div data-reveal="up">
+            <SectionHeading
+              label={home.testimonialsLabel}
+              title={
+                <>
+                  {home.testimonialsTitleLineOne}
+                  <br />
+                  {home.testimonialsTitleLineTwo}
+                </>
+              }
+            />
+          </div>
 
-          <TestimonialCarousel testimonials={home.testimonials} />
+          <div data-reveal="up" data-delay="200">
+            <TestimonialCarousel testimonials={home.testimonials} />
+          </div>
         </div>
       </section>
 
+      {/* ── Final CTA ─────────────────────────────────────────────────────── */}
       <section className="bg-[#f2ebe2]">
         <div className={`${shell} pb-20`}>
-          <div className="flex min-h-[289px] flex-col items-center justify-center gap-6 rounded-[2px] bg-[#fbfaf7] px-6 py-10 text-center">
+          <div
+            data-reveal="scale"
+            className="flex min-h-[289px] flex-col items-center justify-center gap-6 rounded-[2px] bg-[#fbfaf7] px-6 py-10 text-center"
+          >
             <div>
               <p
                 className="text-[40px] font-medium leading-none text-[#ad8c72] sm:text-[48px] lg:text-[52px]"

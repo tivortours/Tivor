@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Cormorant_Garamond, Proza_Libre } from "next/font/google";
 import "./globals.css";
+import { LuxuryAnimations } from "../components/LuxuryAnimations";
 
 const cormorant = Cormorant_Garamond({
   variable: "--font-primary",
@@ -30,7 +31,10 @@ export default function RootLayout({
       lang="en"
       className={`${cormorant.variable} ${prozaLibre.variable} antialiased`}
     >
-      <body className="overflow-x-hidden">{children}</body>
+      <body className="overflow-x-hidden">
+        <LuxuryAnimations />
+        {children}
+      </body>
     </html>
   );
 }
