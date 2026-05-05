@@ -56,7 +56,7 @@ export default async function JourneyDetailPage({
       <section className="bg-[#f2ebe2] pt-[60px]">
         <div className={`${shell} flex flex-col items-center gap-10`}>
           <h1
-            className="max-w-[766px] text-center text-[36px] leading-tight text-[#151515] sm:text-[42px] xl:text-[48px]"
+            className="max-w-[766px] text-center text-[26px] leading-tight text-[#151515] sm:text-[32px] xl:text-[48px]"
             style={{ fontFamily: "var(--font-primary)" }}
           >
             {journey.title}
@@ -151,7 +151,7 @@ export default async function JourneyDetailPage({
       <section className="bg-[#ece2d6]">
         <div className={`${shell} flex flex-col gap-[60px] py-[80px]`}>
           <h2
-            className="text-[28px] leading-tight text-[#151515] xl:text-[36px]"
+            className="text-[20px] leading-tight text-[#151515] xl:text-[36px]"
             style={{ fontFamily: "var(--font-primary)" }}
           >
             Complete Journey Details Made For You
@@ -203,7 +203,7 @@ export default async function JourneyDetailPage({
       <section className="bg-[#f2ebe2] py-[80px] xl:py-[100px]">
         <div className={`${shell} flex flex-col gap-[60px]`}>
           <h2
-            className="text-[32px] leading-tight text-[#151515] xl:text-[52px]"
+            className="text-[22px] leading-tight text-[#151515] sm:text-[28px] xl:text-[52px]"
             style={{ fontFamily: "var(--font-primary)" }}
           >
             Highly Recommended Experiences

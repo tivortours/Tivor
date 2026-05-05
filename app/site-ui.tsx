@@ -68,7 +68,7 @@ export function SectionHeading({
     <div className={`flex flex-col gap-4 ${centered ? "items-center text-center" : "items-start"}`}>
       <Label text={label} light={light} />
       <h2
-        className={`max-w-[32rem] text-[38px] leading-[1.05] sm:text-[44px] lg:text-[52px] ${
+        className={`max-w-[32rem] text-[24px] leading-[1.05] sm:text-[32px] lg:text-[52px] ${
           light ? "text-white" : "text-[#151515]"
         }`}
         style={{ fontFamily: "var(--font-primary)" }}
@@ -197,7 +197,7 @@ export async function SiteFooter() {
           <div className="flex flex-col gap-8 lg:flex-row lg:items-end lg:justify-between">
             <div className="max-w-[520px] space-y-5 text-white">
               <p
-                className="max-w-[313px] text-[34px] leading-tight sm:text-[36px]"
+                className="max-w-[313px] text-[22px] leading-tight sm:text-[28px]"
                 style={{ fontFamily: "var(--font-primary)" }}
               >
                 {settings.newsletter.title}

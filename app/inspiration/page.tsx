@@ -58,7 +58,7 @@ export default async function InspirationPage() {
       <section className="w-full py-[60px] pb-[100px]">
         <div className={`${shell} flex justify-center`}>
           <h1
-            className="max-w-[1270px] text-center text-[36px] leading-tight text-[#151515] sm:text-[42px] xl:text-[48px]"
+            className="max-w-[1270px] text-center text-[22px] leading-tight text-[#151515] sm:text-[28px] xl:text-[48px]"
             style={{ fontFamily: "var(--font-primary)" }}
           >
             {page.heroQuote}
@@ -117,7 +117,7 @@ export default async function InspirationPage() {
       <section className="w-full py-[80px]">
         <div className={`${shell} flex flex-col gap-[72px]`}>
           <h2
-            className="text-[28px] font-medium leading-tight text-[#151515] xl:text-[36px]"
+            className="text-[20px] font-medium leading-tight text-[#151515] xl:text-[36px]"
             style={{ fontFamily: "var(--font-primary)" }}
           >
             {page.gridTitle}
@@ -138,13 +138,13 @@ export default async function InspirationPage() {
         <div className="flex w-full max-w-[1520px] flex-col items-start gap-[60px] px-5 xl:flex-row xl:items-center xl:gap-[72px] xl:px-[80px]">
           <div className="flex w-full flex-col gap-[60px] xl:w-auto xl:max-w-[460px] xl:shrink-0">
             <h2
-              className="text-[42px] font-medium leading-tight text-[#151515] lg:text-[52px]"
+              className="text-[26px] font-medium leading-tight text-[#151515] sm:text-[32px] lg:text-[52px]"
               style={{ fontFamily: "var(--font-primary)" }}
             >
               {page.supportTitle}
             </h2>
             <div className="flex flex-col gap-5">
-              <h3 className="text-[28px] font-medium leading-tight text-[#151515]" style={{ fontFamily: "var(--font-primary)" }}>
+              <h3 className="text-[20px] font-medium leading-tight text-[#151515]" style={{ fontFamily: "var(--font-primary)" }}>
                 {page.supportHeading}
               </h3>
               <p className="text-[16px] leading-normal text-[#3d3d3d]" style={{ fontFamily: "var(--font-secondary)" }}>

@@ -9,7 +9,7 @@ export default async function AboutPage() {
     <main className="flex w-full flex-col overflow-x-hidden bg-[#f2ebe2]">
 
       {/* ── Hero ─────────────────────────────────────────────────────────── */}
-      <section className="relative flex min-h-[600px] items-end overflow-hidden bg-[#7a5c48] lg:min-h-[800px] xl:min-h-[900px]">
+      <section className="relative flex min-h-screen items-end overflow-hidden bg-[#7a5c48] lg:min-h-[800px] xl:min-h-[900px]">
         {page.heroVideo ? (
           <video
             src={page.heroVideo}
@@ -24,14 +24,14 @@ export default async function AboutPage() {
         )}
         <div className="absolute inset-0 bg-black/30" />
         <SiteHeader light active="About" />
-        <div className={`${shell} relative z-10 pb-14 pt-48`}>
+        {/* <div className={`${shell} relative z-10 pb-14 pt-48`}>
           <p
-            className="text-[28px] italic text-white/90 sm:text-[34px] xl:text-[40px]"
+            className="text-[20px] italic text-white/90 sm:text-[26px] xl:text-[40px]"
             style={{ fontFamily: "var(--font-primary)" }}
           >
             {page.heroTagline}
           </p>
-        </div>
+        </div> */}
       </section>
 
       {/* ── Intro: A World of New Horizons ───────────────────────────────── */}
@@ -40,7 +40,7 @@ export default async function AboutPage() {
           <div className="flex flex-col gap-12 xl:flex-row xl:items-start xl:justify-between xl:gap-[72px]">
 
             <h1
-              className="shrink-0 text-[40px] leading-tight text-[#151515] xl:w-[326px] xl:text-[48px]"
+              className="shrink-0 text-[26px] leading-tight text-[#151515] sm:text-[32px] xl:w-[326px] xl:text-[48px]"
               style={{ fontFamily: "var(--font-primary)" }}
             >
               {page.introTitle}
@@ -102,7 +102,7 @@ export default async function AboutPage() {
 
             <div className="flex flex-col divide-y divide-[#cfbcad]">
               <div className="flex flex-col gap-8 pb-8 xl:py-8">
-                <h2 className="text-[28px] font-semibold text-[#151515] xl:text-[36px]" style={{ fontFamily: "var(--font-primary)" }}>
+                <h2 className="text-[20px] font-semibold text-[#151515] xl:text-[36px]" style={{ fontFamily: "var(--font-primary)" }}>
                   {page.visionTitle}
                 </h2>
                 <p className="text-[16px] leading-relaxed text-[#3d3d3d]" style={{ fontFamily: "var(--font-secondary)" }}>
@@ -110,7 +110,7 @@ export default async function AboutPage() {
                 </p>
               </div>
               <div className="flex flex-col gap-8 pt-8">
-                <h2 className="text-[28px] font-semibold text-[#151515] xl:text-[36px]" style={{ fontFamily: "var(--font-primary)" }}>
+                <h2 className="text-[20px] font-semibold text-[#151515] xl:text-[36px]" style={{ fontFamily: "var(--font-primary)" }}>
                   {page.missionTitle}
                 </h2>
                 <p className="text-[16px] leading-relaxed text-[#3d3d3d]" style={{ fontFamily: "var(--font-secondary)" }}>
@@ -126,13 +126,13 @@ export default async function AboutPage() {
       {/* ── Our Values ───────────────────────────────────────────────────── */}
       <section className="w-full py-[80px] pb-[60px]">
         <div className="flex flex-col items-center gap-12">
-          <h2 className="text-[28px] font-semibold text-[#151515] xl:text-[36px]" style={{ fontFamily: "var(--font-primary)" }}>
+          <h2 className="text-[20px] font-semibold text-[#151515] xl:text-[36px]" style={{ fontFamily: "var(--font-primary)" }}>
             {page.valuesTitle}
           </h2>
           <div className={`${shell} grid grid-cols-1 divide-y divide-[#cfbcad] sm:grid-cols-3 sm:divide-x sm:divide-y-0`}>
             {page.values.map((value) => (
               <div key={value.title} className="flex flex-col items-center gap-10 px-8 py-12 text-center xl:px-[72px] xl:py-[48px]">
-                <h3 className="text-[26px] font-bold leading-tight text-[#151515] xl:text-[28px]" style={{ fontFamily: "var(--font-primary)" }}>
+                <h3 className="text-[18px] font-bold leading-tight text-[#151515] xl:text-[28px]" style={{ fontFamily: "var(--font-primary)" }}>
                   {value.title}
                 </h3>
                 <p className="text-[16px] leading-relaxed text-[#3d3d3d] xl:text-[18px]" style={{ fontFamily: "var(--font-secondary)" }}>
@@ -147,7 +147,7 @@ export default async function AboutPage() {
       {/* ── Meet The Founders ────────────────────────────────────────────── */}
       <section className="w-full py-[80px]">
         <div className="flex flex-col items-center gap-[72px]">
-          <h2 className="text-[28px] font-semibold text-[#151515] xl:text-[36px]" style={{ fontFamily: "var(--font-primary)" }}>
+          <h2 className="text-[20px] font-semibold text-[#151515] xl:text-[36px]" style={{ fontFamily: "var(--font-primary)" }}>
             {page.foundersTitle}
           </h2>
           <div className={`${shell} grid grid-cols-1 gap-12 sm:grid-cols-2 xl:max-w-[1048px] xl:gap-[48px]`}>
@@ -179,7 +179,7 @@ export default async function AboutPage() {
         <div className={`${shell} pb-[80px]`}>
           <div className="flex min-h-[289px] flex-col items-center justify-center gap-6 rounded-[2px] bg-[#fbfaf7] px-6 py-10 text-center">
             <div>
-              <p className="text-[40px] font-medium leading-none text-[#ad8c72] sm:text-[48px] lg:text-[52px]" style={{ fontFamily: "var(--font-primary)" }}>
+              <p className="text-[26px] font-medium leading-none text-[#ad8c72] sm:text-[34px] lg:text-[52px]" style={{ fontFamily: "var(--font-primary)" }}>
                 {page.ctaEyebrow}
               </p>
               <p className="text-[36px] leading-none text-[#151515] sm:text-[42px] lg:text-[48px]" style={{ fontFamily: "var(--font-primary)" }}>

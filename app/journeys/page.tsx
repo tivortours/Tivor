@@ -24,7 +24,7 @@ export default async function JourneysPage() {
 
           <div className="flex flex-col items-center gap-5 text-center">
             <h1
-              className="w-full max-w-[766px] px-4 text-[32px] leading-tight text-[#151515] sm:text-[40px] lg:text-[48px]"
+              className="w-full max-w-[766px] px-4 text-[24px] leading-tight text-[#151515] sm:text-[30px] lg:text-[48px]"
               style={{ fontFamily: "var(--font-primary)" }}
             >
               {page.title}
@@ -52,14 +52,14 @@ export default async function JourneysPage() {
 
           <div className="flex w-full flex-col gap-[60px] xl:w-auto xl:max-w-[460px] xl:shrink-0">
             <h2
-              className="text-[42px] font-medium leading-tight text-[#151515] lg:text-[52px]"
+              className="text-[26px] font-medium leading-tight text-[#151515] sm:text-[32px] lg:text-[52px]"
               style={{ fontFamily: "var(--font-primary)" }}
             >
               {page.supportTitle}
             </h2>
             <div className="flex flex-col gap-5">
               <h3
-                className="text-[28px] font-medium leading-tight text-[#151515]"
+                className="text-[20px] font-medium leading-tight text-[#151515]"
                 style={{ fontFamily: "var(--font-primary)" }}
               >
                 {page.supportHeading}

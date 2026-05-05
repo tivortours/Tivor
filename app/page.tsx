@@ -41,7 +41,7 @@ export default async function HomePage() {
           <div className={`${shell} flex w-full justify-center pb-16 pt-40 sm:pb-20 lg:pb-24`}>
             <div className="max-w-[766px] text-center text-white">
               <h1
-                className="text-[42px] leading-[1.02] sm:text-[52px] xl:text-[56px]"
+                className="text-[28px] leading-[1.02] sm:text-[38px] xl:text-[56px]"
                 style={{ fontFamily: "var(--font-primary)" }}
               >
                 {home.heroTitle}
@@ -62,7 +62,7 @@ export default async function HomePage() {
         <div className={`${shell} flex flex-col items-center gap-10 py-20 text-center sm:gap-14 lg:py-[120px]`}>
           <h2
             data-reveal="up"
-            className="text-[38px] leading-none text-[#151515] sm:text-[46px] lg:text-[52px]"
+            className="text-[26px] leading-none text-[#151515] sm:text-[34px] lg:text-[52px]"
             style={{ fontFamily: "var(--font-primary)" }}
           >
             {home.introTitle}
@@ -121,7 +121,7 @@ export default async function HomePage() {
                 <div className="flex flex-1 flex-col gap-5 pt-5">
                   <div className="space-y-3">
                     <h3
-                      className="text-[28px] leading-none text-black"
+                      className="text-[20px] leading-none text-black"
                       style={{ fontFamily: "var(--font-primary)" }}
                     >
                       {destination.name}
@@ -173,7 +173,7 @@ export default async function HomePage() {
                   </div>
                   <div className="space-y-4">
                     <h3
-                      className="text-[28px] leading-tight text-[#151515]"
+                      className="text-[20px] leading-tight text-[#151515]"
                       style={{ fontFamily: "var(--font-primary)" }}
                     >
                       {journey.title}
@@ -237,7 +237,7 @@ export default async function HomePage() {
                 />
                 <div className="absolute inset-0 bg-black/25" />
                 <span
-                  className="absolute inset-0 flex items-center justify-center px-4 text-center text-[22px] text-white sm:text-[24px]"
+                  className="absolute inset-0 flex items-center justify-center px-4 text-center text-[16px] text-white sm:text-[20px]"
                   style={{ fontFamily: "var(--font-primary)" }}
                 >
                   {experience.label}
@@ -321,7 +321,7 @@ export default async function HomePage() {
                   }`}
                 >
                   <h3
-                    className="text-[28px] leading-tight text-[#151515]"
+                    className="text-[20px] leading-tight text-[#151515]"
                     style={{ fontFamily: "var(--font-primary)" }}
                   >
                     {reason.title}
@@ -384,13 +384,13 @@ export default async function HomePage() {
           >
             <div>
               <p
-                className="text-[40px] font-medium leading-none text-[#ad8c72] sm:text-[48px] lg:text-[52px]"
+                className="text-[26px] font-medium leading-none text-[#ad8c72] sm:text-[34px] lg:text-[52px]"
                 style={{ fontFamily: "var(--font-primary)" }}
               >
                 {home.finalCtaEyebrow}
               </p>
               <p
-                className="text-[36px] leading-none text-[#151515] sm:text-[42px] lg:text-[48px]"
+                className="text-[22px] leading-none text-[#151515] sm:text-[30px] lg:text-[48px]"
                 style={{ fontFamily: "var(--font-primary)" }}
               >
                 {home.finalCtaTitle}

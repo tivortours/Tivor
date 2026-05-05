@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import { Portal } from "./Portal";
 import Link from "next/link";
 import Image from "next/image";
 
@@ -37,6 +38,7 @@ export function MobileMenu({
       </button>
 
       {open && (
+        <Portal>
         <div className="fixed inset-0 z-50 flex flex-col bg-[#f2ebe2]">
           <div className="flex items-center justify-between px-5 py-5 sm:px-8">
             <Link href="/" onClick={() => setOpen(false)} className="relative block h-[23px] w-[152px] shrink-0">
@@ -86,6 +88,7 @@ export function MobileMenu({
             </Link>
           </div>
         </div>
+        </Portal>
       )}
     </>
   );

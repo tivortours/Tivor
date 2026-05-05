@@ -38,13 +38,45 @@ body {
 }
 
 @media (min-width: 1024px) {
-  html {
+  :root {
+    --desktop-browser-scale: 0.8;
+  }
+
+  html:not([data-browser-scale="transform"]) {
     zoom: 0.8;
   }
 
   /* 100vh / 0.8 = 125vh — compensates so full-height sections still fill the screen */
-  .min-h-screen {
+  html:not([data-browser-scale="transform"]) .min-h-screen {
     min-height: 125vh;
+  }
+
+  html[data-browser-scale="transform"] {
+    zoom: 1;
+    overflow-x: hidden;
+  }
+
+  html[data-browser-scale="transform"] body {
+    overflow-x: hidden;
+  }
+
+  html[data-browser-scale="transform"] .browser-scale-viewport {
+    position: relative;
+    min-height: 100vh;
+    height: var(--browser-scale-height);
+  }
+
+  html[data-browser-scale="transform"] .browser-scale-shell {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: calc(100% / var(--desktop-browser-scale));
+    transform: scale(var(--desktop-browser-scale));
+    transform-origin: top left;
+  }
+
+  html[data-browser-scale="transform"] .browser-scale-shell .min-h-screen {
+    min-height: calc(100vh / var(--desktop-browser-scale));
   }
 }
 

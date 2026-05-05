@@ -1,6 +1,7 @@
 "use client";
 
 import { useCallback, useEffect, useState } from "react";
+import { Portal } from "./Portal";
 
 // ── Modal ─────────────────────────────────────────────────────────────────────
 function Modal({ journeyTitle, inclusions, onClose }: {
@@ -30,6 +31,7 @@ function Modal({ journeyTitle, inclusions, onClose }: {
   }
 
   return (
+    <Portal>
     <div
       className="fixed inset-0 z-[200] flex flex-col"
       style={{ opacity: visible ? 1 : 0, transition: "opacity 280ms ease" }}
@@ -105,6 +107,7 @@ function Modal({ journeyTitle, inclusions, onClose }: {
         </div>
       </div>
     </div>
+    </Portal>
   );
 }
 

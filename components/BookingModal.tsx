@@ -1,6 +1,7 @@
 "use client";
 
 import { useCallback, useEffect, useRef, useState } from "react";
+import { Portal } from "./Portal";
 
 // ── Country list ──────────────────────────────────────────────────────────────
 const COUNTRIES = [
@@ -303,7 +304,8 @@ function Modal({ journeyTitle, onClose }: { journeyTitle: string; onClose: () =>
   const stepLabel = step === 1 ? "1 / 2" : step === 2 ? "2 / 2" : null;
 
   return (
-    /* Full-screen overlay */
+    <Portal>
+    {/* Full-screen overlay */}
     <div
       className="fixed inset-0 z-[200] flex flex-col"
       style={{ transition: "opacity 280ms ease", opacity: visible ? 1 : 0 }}
@@ -414,6 +416,7 @@ function Modal({ journeyTitle, onClose }: { journeyTitle: string; onClose: () =>
         </div>
       </div>
     </div>
+    </Portal>
   );
 }
 

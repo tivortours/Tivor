@@ -51,7 +51,7 @@ export default async function InspirationDetailPage({
       <section className="pt-[60px]">
         <div className={`${shell} flex flex-col items-center gap-[48px] xl:gap-[72px]`}>
           <h1
-            className="max-w-[766px] text-center text-[28px] leading-tight text-[#151515] sm:text-[32px] xl:text-[36px]"
+            className="max-w-[766px] text-center text-[22px] leading-tight text-[#151515] sm:text-[26px] xl:text-[36px]"
             style={{ fontFamily: "var(--font-primary)" }}
           >
             {art.title}
@@ -85,7 +85,7 @@ export default async function InspirationDetailPage({
             {/* Left — text */}
             <div className="flex flex-1 flex-col gap-[32px] xl:gap-[40px]">
               <h2
-                className="text-[28px] leading-tight text-[#151515] xl:text-[36px]"
+                className="text-[20px] leading-tight text-[#151515] xl:text-[36px]"
                 style={{ fontFamily: "var(--font-primary)" }}
               >
                 {art.section1.title}
@@ -172,7 +172,7 @@ export default async function InspirationDetailPage({
             {/* Right — text */}
             <div className="flex flex-1 flex-col gap-[32px] xl:gap-[40px]">
               <h2
-                className="text-[28px] leading-tight text-[#151515] xl:text-[36px]"
+                className="text-[20px] leading-tight text-[#151515] xl:text-[36px]"
                 style={{ fontFamily: "var(--font-primary)" }}
               >
                 {art.section2.title}
@@ -210,7 +210,7 @@ export default async function InspirationDetailPage({
             {/* Text content */}
             <div className="relative z-10 flex flex-col gap-[40px] p-8 xl:w-[55%] xl:gap-[60px] xl:px-[100px] xl:py-[30px]">
               <h2
-                className="text-[32px] leading-tight text-white xl:text-[52px] xl:w-[362px]"
+                className="text-[22px] leading-tight text-white sm:text-[28px] xl:text-[52px] xl:w-[362px]"
                 style={{ fontFamily: "var(--font-primary)" }}
               >
                 {art.ctaTitle}

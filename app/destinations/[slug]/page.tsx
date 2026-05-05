@@ -81,10 +81,10 @@ export default async function DestinationDetailPage({
             className="flex flex-col items-center gap-3 text-center text-[#151515]"
             style={{ fontFamily: "var(--font-primary)" }}
           >
-            <h1 className="text-[36px] leading-none sm:text-[44px] xl:text-[52px]">
+            <h1 className="text-[26px] leading-none sm:text-[34px] xl:text-[52px]">
               {dest.detail.heroTitle}
             </h1>
-            <p className="text-[20px] leading-none sm:text-[24px] xl:text-[28px]">
+            <p className="text-[16px] leading-none sm:text-[20px] xl:text-[28px]">
               {dest.detail.heroSubtitle}
             </p>
           </div>
@@ -126,7 +126,7 @@ export default async function DestinationDetailPage({
       <section className="bg-[#f2ebe2] pb-[80px] pt-[100px]">
         <div className={`${shell} flex flex-col gap-[88px]`}>
           <h2
-            className="text-[28px] leading-none text-[#151515] xl:text-[36px]"
+            className="text-[20px] leading-none text-[#151515] xl:text-[36px]"
             style={{ fontFamily: "var(--font-primary)" }}
           >
             Crafted Journeys, Felt for a Lifetime
@@ -185,12 +185,13 @@ export default async function DestinationDetailPage({
                   </div>
 
                   <div className="border-t border-[#9f9f9f]/50 p-5">
-                    <button
-                      className="h-[45px] w-full rounded-[2px] bg-[#824b2e] text-base text-white xl:text-[18px]"
+                    <Link
+                      href={`/journeys/${j.slug}`}
+                      className="flex h-[45px] w-full items-center justify-center rounded-[2px] bg-[#824b2e] text-base text-white xl:text-[18px]"
                       style={{ fontFamily: "var(--font-secondary)" }}
                     >
                       Explore Journey
-                    </button>
+                    </Link>
                   </div>
                 </div>
               </div>
@@ -243,7 +244,7 @@ export default async function DestinationDetailPage({
             {/* Text content */}
             <div className="relative z-10 flex flex-col gap-10 p-8 xl:w-[55%] xl:gap-[60px] xl:px-[100px] xl:py-[30px]">
               <h2
-                className="text-[32px] leading-tight text-white xl:text-[52px] xl:w-[362px]"
+                className="text-[22px] leading-tight text-white sm:text-[28px] xl:text-[52px] xl:w-[362px]"
                 style={{ fontFamily: "var(--font-primary)" }}
               >
                 Craft Your Perfect Escape
@@ -291,7 +292,7 @@ export default async function DestinationDetailPage({
               </span>
             </div>
             <h2
-              className="max-w-[514px] text-[36px] leading-tight text-[#151515] xl:text-[52px]"
+              className="max-w-[514px] text-[24px] leading-tight text-[#151515] sm:text-[30px] xl:text-[52px]"
               style={{ fontFamily: "var(--font-primary)" }}
             >
               Shared Moments From Our Guests

@@ -294,7 +294,7 @@ const fallbackSiteSettings: SiteSettings = {
   },
   footer: {
     ctaLabel: "Plan Your Journey",
-    ctaHref: "#",
+    ctaHref: "/plan",
     year: 2026,
     copyrightText: "TIVOR . All Rights Reserved",
     followLabel: "Follow Us On",

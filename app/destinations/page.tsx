@@ -20,7 +20,7 @@ export default async function DestinationsPage() {
         <div className="flex flex-col items-center gap-[72px]">
 
           <h1
-            className="text-[28px] font-medium leading-none text-[#151515] sm:text-[36px] lg:text-[48px]"
+            className="text-[22px] font-medium leading-none text-[#151515] sm:text-[28px] lg:text-[48px]"
             style={{ fontFamily: "var(--font-primary)" }}
           >
             {page.title}
@@ -91,13 +91,13 @@ export default async function DestinationsPage() {
           <div className="flex min-h-[289px] flex-col items-center justify-center gap-6 rounded-[2px] bg-[#fbfaf7] px-6 py-10 text-center">
             <div>
               <p
-                className="text-[40px] font-medium leading-none text-[#ad8c72] sm:text-[48px] lg:text-[52px]"
+                className="text-[26px] font-medium leading-none text-[#ad8c72] sm:text-[34px] lg:text-[52px]"
                 style={{ fontFamily: "var(--font-primary)" }}
               >
                 {page.ctaEyebrow}
               </p>
               <p
-                className="text-[36px] leading-none text-[#151515] sm:text-[42px] lg:text-[48px]"
+                className="text-[22px] leading-none text-[#151515] sm:text-[30px] lg:text-[48px]"
                 style={{ fontFamily: "var(--font-primary)" }}
               >
                 {page.ctaTitle}
