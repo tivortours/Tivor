@@ -1,6 +1,7 @@
 "use client";
 
 import { useLayoutEffect, useRef } from "react";
+import { usePathname } from "next/navigation";
 
 const DESKTOP_SCALE = 0.8;
 const DESKTOP_BREAKPOINT = 1024;
@@ -17,10 +18,21 @@ function shouldUseTransformScale() {
 export function BrowserScaleShell({
   children,
 }: Readonly<{ children: React.ReactNode }>) {
+  const pathname = usePathname();
   const shellRef = useRef<HTMLDivElement>(null);
+  const isStudio = pathname.startsWith("/studio");
 
   useLayoutEffect(() => {
     const root = document.documentElement;
+
+    if (isStudio) {
+      delete root.dataset.browserScale;
+      root.style.removeProperty("--browser-scale-height");
+      root.dataset.noScale = "true";
+      return () => { delete root.dataset.noScale; };
+    }
+
+    delete root.dataset.noScale;
     const shell = shellRef.current;
     if (!shell) return;
 
@@ -51,7 +63,11 @@ export function BrowserScaleShell({
       window.removeEventListener("resize", applyScaleMode);
       clearScaleMode();
     };
-  }, []);
+  }, [isStudio]);
+
+  if (isStudio) {
+    return <>{children}</>;
+  }
 
   return (
     <div className="browser-scale-viewport">

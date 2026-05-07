@@ -311,7 +311,7 @@ export default async function DestinationDetailPage({
               >
                 <div className="h-[16px] w-[91px] shrink-0">
                   <Image
-                    src="https://www.figma.com/api/mcp/asset/ad23b2b3-f774-4b1f-8acc-9e8f6f310ae3"
+                    src="/Vector.svg"
                     alt="5 stars"
                     width={91}
                     height={16}

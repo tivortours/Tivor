@@ -42,12 +42,12 @@ body {
     --desktop-browser-scale: 0.8;
   }
 
-  html:not([data-browser-scale="transform"]) {
+  html:not([data-browser-scale="transform"]):not([data-no-scale]) {
     zoom: 0.8;
   }
 
   /* 100vh / 0.8 = 125vh — compensates so full-height sections still fill the screen */
-  html:not([data-browser-scale="transform"]) .min-h-screen {
+  html:not([data-browser-scale="transform"]):not([data-no-scale]) .min-h-screen {
     min-height: 125vh;
   }
 
