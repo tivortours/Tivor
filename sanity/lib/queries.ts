@@ -158,7 +158,8 @@ export const DESTINATIONS_QUERY = defineQuery(`
     detailScriptImage,
     detailDescription1,
     detailDescription2,
-    detailGallery
+    detailGallery,
+    ctaImage
   }
 `);
 
@@ -187,7 +188,8 @@ export const DESTINATION_QUERY = defineQuery(`
     detailScriptImage,
     detailDescription1,
     detailDescription2,
-    detailGallery
+    detailGallery,
+    ctaImage
   }
 `);
 
