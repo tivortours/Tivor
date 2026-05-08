@@ -190,6 +190,7 @@ const destination = defineType({
       of: [defineArrayMember({ type: "image", options: { hotspot: true } })],
       description: "Best with two landscape images. Minimum 1600px wide recommended.",
     }),
+    imageField("ctaImage", "CTA Image", "Right-hand image in the 'Craft Your Perfect Escape' banner. Best ratio: tall portrait or landscape crop."),
   ],
 });
 

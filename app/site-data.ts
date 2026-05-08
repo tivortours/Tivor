@@ -498,7 +498,7 @@ function mapDestination(item: any, fallbackItem?: Destination): Destination {
         imageUrl(item.detailGallery?.[0], 1600, 1100, fallbackItem?.detail.gallery[0] || ""),
         imageUrl(item.detailGallery?.[1], 1600, 1100, fallbackItem?.detail.gallery[1] || ""),
       ] as [string, string],
-      ctaImg: fallbackItem?.detail.ctaImg || imageUrl(item.detailHeroImage, 1600, 900),
+      ctaImg: imageUrl(item.ctaImage, 1200, 1000, fallbackItem?.detail.ctaImg || imageUrl(item.detailHeroImage, 1600, 900)),
     },
   };
 }
