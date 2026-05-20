@@ -413,7 +413,7 @@ export default function PlanForm({ destinations }: { destinations: string[] }) {
       </div>
 
       {/* Divider + submit */}
-      <div className="mt-8 flex flex-col gap-6">
+      <div className="mt-8 flex flex-col items-center gap-6">
         <div className="h-px w-full bg-[#ddd0c5]" />
         <button
           onClick={handleSubmit}

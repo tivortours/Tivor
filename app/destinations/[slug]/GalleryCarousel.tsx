@@ -5,16 +5,16 @@ import { useRef, useState } from "react";
 
 function ChevronLeft() {
   return (
-    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-      <path d="M15 18l-6-6 6-6" />
+    <svg width="38" height="38" viewBox="0 0 28 28" fill="none" aria-hidden="true">
+      <path d="M17 21L10 14L17 7" stroke="#151515" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
     </svg>
   );
 }
 
 function ChevronRight() {
   return (
-    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-      <path d="M9 18l6-6-6-6" />
+    <svg width="38" height="38" viewBox="0 0 28 28" fill="none" aria-hidden="true">
+      <path d="M11 7L18 14L11 21" stroke="#151515" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
     </svg>
   );
 }
@@ -66,7 +66,7 @@ export function GalleryCarousel({ images }: { images: [string, string] }) {
       <button
         onClick={() => goTo(Math.max(0, current - 1))}
         aria-label="Previous image"
-        className={`absolute left-2 top-1/2 flex h-11 w-11 -translate-y-1/2 items-center justify-center rounded-full border border-[#cfbcad] bg-white text-[#151515] transition-all duration-300 hover:bg-[#151515] hover:text-white xl:left-[100px] ${
+        className={`absolute left-0 top-1/2 z-10 -translate-x-5 sm:-translate-x-7 lg:-translate-x-10 xl:-translate-x-12 -translate-y-1/2 transition-opacity duration-300 ${
           current === 0 ? "pointer-events-none opacity-0" : "opacity-100"
         }`}
       >
@@ -77,7 +77,7 @@ export function GalleryCarousel({ images }: { images: [string, string] }) {
       <button
         onClick={() => goTo(Math.min(images.length - 1, current + 1))}
         aria-label="Next image"
-        className={`absolute right-2 top-1/2 flex h-11 w-11 -translate-y-1/2 items-center justify-center rounded-full border border-[#cfbcad] bg-white text-[#151515] transition-all duration-300 hover:bg-[#151515] hover:text-white ${
+        className={`absolute right-0 top-1/2 z-10 translate-x-5 sm:translate-x-7 lg:translate-x-10 xl:translate-x-12 -translate-y-1/2 transition-opacity duration-300 ${
           current >= images.length - 1 ? "pointer-events-none opacity-0" : "opacity-100"
         }`}
       >

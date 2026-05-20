@@ -37,7 +37,7 @@ export default async function AboutPage() {
       {/* ── Intro: A World of New Horizons ───────────────────────────────── */}
       <section className="w-full py-[120px]">
         <div className={`${shell}`}>
-          <div className="flex flex-col gap-12 xl:flex-row xl:items-start xl:justify-between xl:gap-[72px]">
+          <div className="flex flex-col gap-12 xl:flex-row xl:items-start xl:justify-between xl:gap-[72px] px-16 xl:px-28">
 
             <h1
               className="shrink-0 text-[26px] leading-tight text-[#151515] sm:text-[32px] xl:w-[326px] xl:text-[48px]"

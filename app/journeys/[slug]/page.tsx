@@ -76,8 +76,9 @@ export default async function JourneyDetailPage({
 
       {/* ── Details section ──────────────────────────────────────────────── */}
       <section className="bg-[#f2ebe2] py-[80px] xl:py-[150px]">
-        <div className={shell}>
-          <div className="flex flex-col gap-12 xl:flex-row xl:gap-[88px]">
+        <div className={`${shell} `}>
+
+          <div className="flex flex-col gap-12 xl:flex-row xl:gap-[88px] lg:px-16 xl:px-28">
 
             {/* Left — quick facts */}
             <div className="flex flex-col gap-8 xl:w-[360px] xl:shrink-0 xl:justify-between xl:gap-0 xl:self-stretch">
@@ -148,17 +149,20 @@ export default async function JourneyDetailPage({
       </section>
 
       {/* ── Journey Highlights ───────────────────────────────────────────── */}
-      <section className="bg-[#ece2d6]">
-        <div className={`${shell} flex flex-col gap-[60px] py-[80px]`}>
+      <div className="mx-20 lg:mx-44">
+    <section className="bg-[#ece2d6] px-16 lg:px-16 py-10 lg:py-20 gap-20">
+        <div className={`${shell} flex flex-col gap-[60px]`}>
           <h2
-            className="text-[20px] leading-tight text-[#151515] xl:text-[36px]"
+            className="text-[20px] font-medium leading-tight text-[#151515] xl:text-[36px]"
             style={{ fontFamily: "var(--font-primary)" }}
           >
-            Complete Journey Details Made For You
+           Journey Highlights
           </h2>
 
           <JourneyHighlights itinerary={journey.itinerary} journeyTitle={journey.title} />
         </div>
+
+        <div className="h-px w-full bg-[#dfcdb9] my-11" />
 
         {/* ── Pricing CTA bar ─────────────────────────────────────────────── */}
         <div className="bg-[#dfcdb9]">
@@ -166,7 +170,7 @@ export default async function JourneyDetailPage({
             className={`${shell} flex flex-col gap-6 py-[60px] xl:flex-row xl:items-center xl:justify-between xl:gap-[88px] xl:py-[80px]`}
           >
             <h2
-              className="text-[26px] leading-tight text-[#151515] xl:text-[36px] xl:whitespace-nowrap"
+              className="text-[26px] font-semibold leading-tight text-[#151515] xl:text-[36px] xl:whitespace-nowrap"
               style={{ fontFamily: "var(--font-primary)" }}
             >
               {journey.priceCtaTitle}
@@ -198,12 +202,15 @@ export default async function JourneyDetailPage({
           </div>
         </div>
       </section>
+      </div>
+  
 
       {/* ── Highly Recommended Experiences ───────────────────────────────── */}
       <section className="bg-[#f2ebe2] py-[80px] xl:py-[100px]">
-        <div className={`${shell} flex flex-col gap-[60px]`}>
+        <div className={shell}>
+          <div className="flex flex-col gap-[60px] lg:px-10 xl:px-16">
           <h2
-            className="text-[22px] leading-tight text-[#151515] sm:text-[28px] xl:text-[52px]"
+            className="text-[22px] leading-tight text-[#151515] sm:text-[28px] xl:text-[32px]"
             style={{ fontFamily: "var(--font-primary)" }}
           >
             Highly Recommended Experiences
@@ -212,7 +219,7 @@ export default async function JourneyDetailPage({
           <div className="grid grid-cols-1 gap-7 sm:grid-cols-2 xl:grid-cols-3">
             {settings.recommendedExperiences.map((exp) => (
               <div key={exp.title} className="flex flex-col overflow-hidden rounded-[2px]">
-                <div className="relative h-[320px] w-full overflow-hidden sm:h-[360px] xl:h-[400px]">
+                <div className="relative h-[320px] w-full overflow-hidden sm:h-[300px] xl:h-[300px]">
                   <Image
                     src={exp.img}
                     alt={exp.title}
@@ -245,6 +252,7 @@ export default async function JourneyDetailPage({
                 </div>
               </div>
             ))}
+          </div>
           </div>
         </div>
       </section>

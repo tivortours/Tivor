@@ -191,13 +191,14 @@ export async function SiteFooter() {
   return (
     <footer className="w-full">
       <div className="relative overflow-hidden">
-        <Image src={settings.newsletter.backgroundImage} alt="" fill className="object-cover" sizes="100vw" />
+     
+ <Image src={settings.newsletter.backgroundImage} alt="" fill className="object-cover" sizes="100vw" />
         <div className="absolute inset-0 bg-[#20282d]/30" />
         <div className={`${shell} relative py-16 lg:py-[60px]`}>
-          <div className="flex flex-col gap-8 lg:flex-row lg:items-end lg:justify-between">
+          <div className="flex flex-col gap-8 lg:flex-row lg:items-end lg:justify-between lg:px-16 xl:px-20">
             <div className="max-w-[520px] space-y-5 text-white">
               <p
-                className="max-w-[313px] text-[22px] leading-tight sm:text-[28px]"
+                className="max-w-full text-[28px] leading-tight sm:text-[32px]"
                 style={{ fontFamily: "var(--font-primary)" }}
               >
                 {settings.newsletter.title}
@@ -223,6 +224,8 @@ export async function SiteFooter() {
             </div>
           </div>
         </div>
+       
+       
       </div>
 
       <div className="bg-[#20282d]">

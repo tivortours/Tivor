@@ -26,7 +26,7 @@ export default async function DestinationsPage() {
             {page.title}
           </h1>
 
-          <div className="mx-auto flex w-full max-w-[1275px] flex-col gap-5 px-5 xl:px-0">
+          <div className="mx-auto flex w-full max-w-[1275px] flex-col gap-5 px-5 xl:px-7">
             {destinations.map((dest) => (
               <a
                 key={dest.name}
@@ -87,7 +87,7 @@ export default async function DestinationsPage() {
 
       {/* ── CTA ──────────────────────────────────────────────────────────── */}
       <section className="bg-[#f2ebe2]">
-        <div className="mx-auto w-full max-w-[1520px] px-5 pb-20 sm:px-8 lg:px-12 xl:px-[130px]">
+        <div className="mx-auto w-full max-w-[1520px] px-5 pb-20 sm:px-8 lg:px-12 xl:px-[56px]">
           <div className="flex min-h-[289px] flex-col items-center justify-center gap-6 rounded-[2px] bg-[#fbfaf7] px-6 py-10 text-center">
             <div>
               <p

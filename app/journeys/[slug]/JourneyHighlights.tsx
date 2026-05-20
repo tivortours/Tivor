@@ -95,7 +95,7 @@ export function JourneyHighlights({
           <div
             key={entry.day}
             ref={(el) => { dayRefs.current[i] = el; }}
-            className={`flex flex-col gap-3 transition-opacity duration-300 ${
+            className={`flex flex-col items-center justify-center gap-3 transition-opacity duration-300 ${
               i === activeDay ? "opacity-100" : "opacity-30"
             }`}
           >
@@ -118,7 +118,7 @@ export function JourneyHighlights({
                 <line x1="3" y1="10" x2="21" y2="10" />
               </svg>
               <p
-                className={`text-[18px] font-medium transition-colors duration-300 ${
+                className={`text-[22px]  font-semibold transition-colors duration-300 ${
                   i === activeDay ? "text-[#151515]" : "text-[#999]"
                 }`}
                 style={{ fontFamily: "var(--font-secondary)" }}
@@ -138,11 +138,11 @@ export function JourneyHighlights({
             </p>
 
             {/* Activities */}
-            <div className="flex flex-col">
+            <div className="flex flex-col items-center justify-center">
               {entry.activities.map((act, j) => (
                 <p
                   key={j}
-                  className={`border-b border-[#cfbcad]/50 py-2 text-base leading-normal last:border-0 transition-colors duration-300 ${
+                  className={` py-2 text-base leading-normal last:border-0 transition-colors duration-300 ${
                     i === activeDay ? "text-[#3d3d3d]" : "text-[#bbb]"
                   }`}
                   style={{ fontFamily: "var(--font-secondary)" }}

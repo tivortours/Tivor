@@ -73,7 +73,7 @@ export default async function DestinationDetailPage({
       </div>
 
       {/* ── About / Intro ────────────────────────────────────────────────── */}
-      <section className="bg-[#f2ebe2] py-[100px]">
+      <section className="bg-[#f2ebe2] py-[100px] px-10 lg:px-16">
         <div className="flex flex-col items-center gap-[88px]">
 
           {/* Title block */}
@@ -107,7 +107,7 @@ export default async function DestinationDetailPage({
               </p>
             )}
             <div
-              className="w-full max-w-[957px] text-center text-base leading-normal text-[#3d3d3d]"
+              className="w-full max-w-[957px] text-center text-base leading-normal text-[#3d3d3d] pt-5"
               style={{ fontFamily: "var(--font-secondary)" }}
             >
               <p>{dest.detail.desc1}</p>
@@ -124,7 +124,8 @@ export default async function DestinationDetailPage({
 
       {/* ── Crafted Journeys ─────────────────────────────────────────────── */}
       <section className="bg-[#f2ebe2] pb-[80px] pt-[100px]">
-        <div className={`${shell} flex flex-col gap-[88px]`}>
+        <div className={shell}>
+          <div className="flex flex-col gap-[88px] lg:px-10 xl:px-16">
           <h2
             className="text-[20px] leading-none text-[#151515] xl:text-[36px]"
             style={{ fontFamily: "var(--font-primary)" }}
@@ -132,14 +133,14 @@ export default async function DestinationDetailPage({
             Crafted Journeys, Felt for a Lifetime
           </h2>
 
-          <div className="grid grid-cols-1 gap-7 lg:grid-cols-2">
+          <div className="grid grid-cols-1 gap-7 lg:grid-cols-3">
             {shownJourneys.map((j) => (
               <div
                 key={j.title}
                 className="flex flex-col justify-between rounded-[2px] border border-[#9f9f9f]/50"
               >
-                <div className="flex flex-col gap-8">
-                  <div className="relative h-[260px] w-full overflow-hidden rounded-t-[2px] xl:h-[300px]">
+                <div className="flex flex-col gap-2">
+                  <div className="relative h-[260px] w-full overflow-hidden rounded-t-[2px] xl:h-[260px]">
                     <Image
                       src={j.img}
                       alt={j.alt}
@@ -148,9 +149,9 @@ export default async function DestinationDetailPage({
                       sizes="(max-width: 1024px) 100vw, 50vw"
                     />
                   </div>
-                  <div className="flex flex-col gap-5 px-6">
+                  <div className="flex flex-col gap-2 px-6">
                     <h3
-                      className="text-[22px] font-semibold leading-snug text-[#151515] xl:text-[28px]"
+                      className="text-[22px] font-semibold  text-[#151515] xl:text-[26px]"
                       style={{ fontFamily: "var(--font-primary)" }}
                     >
                       {j.title}
@@ -197,12 +198,14 @@ export default async function DestinationDetailPage({
               </div>
             ))}
           </div>
+          </div>
         </div>
       </section>
 
       {/* ── Our Curated Journeys Includes ────────────────────────────────── */}
       <section className="bg-[#f7f4f1] py-10">
-        <div className={`${shell} flex flex-col items-center gap-[60px]`}>
+        <div className={shell}>
+          <div className="flex flex-col items-center gap-[60px] lg:px-10 xl:px-16">
           <h2
             className="text-center text-[28px] leading-none text-[#151515] xl:text-[36px]"
             style={{ fontFamily: "var(--font-primary)" }}
@@ -220,7 +223,7 @@ export default async function DestinationDetailPage({
                   <Image src={f.img} alt="" fill className="object-contain" />
                 </div>
                 <h3
-                  className="text-[20px] leading-snug text-[#151515] xl:text-[28px]"
+                  className="text-[20px] font-medium leading-snug text-[#151515] xl:text-[27px]"
                   style={{ fontFamily: "var(--font-primary)" }}
                 >
                   {f.title}
@@ -233,6 +236,7 @@ export default async function DestinationDetailPage({
                 </p>
               </div>
             ))}
+          </div>
           </div>
         </div>
       </section>
@@ -281,8 +285,9 @@ export default async function DestinationDetailPage({
 
       {/* ── Guest Stories / Testimonials ─────────────────────────────────── */}
       <section className="py-[80px] xl:py-[100px]">
-        <div className={`${shell} flex flex-col gap-[72px]`}>
-          <div className="flex flex-col gap-4">
+        <div className={shell}>
+          <div className="flex flex-col gap-[72px] lg:px-16 xl:px-28">
+          <div className="flex flex-col gap-4 ">
             <div className="inline-flex w-fit items-center border border-[#576168] px-1 py-1">
               <span
                 className="text-[10px] tracking-[0.28em] text-[#576168]"
@@ -338,6 +343,7 @@ export default async function DestinationDetailPage({
                 </p>
               </div>
             ))}
+          </div>
           </div>
         </div>
       </section>

@@ -85,7 +85,7 @@ export default async function InspirationDetailPage({
             {/* Left — text */}
             <div className="flex flex-1 flex-col gap-[32px] xl:gap-[40px]">
               <h2
-                className="text-[20px] leading-tight text-[#151515] xl:text-[36px]"
+                className="text-[20px] max-w-[300px] font-medium leading-tight text-[#151515] xl:text-[36px]"
                 style={{ fontFamily: "var(--font-primary)" }}
               >
                 {art.section1.title}
@@ -172,7 +172,7 @@ export default async function InspirationDetailPage({
             {/* Right — text */}
             <div className="flex flex-1 flex-col gap-[32px] xl:gap-[40px]">
               <h2
-                className="text-[20px] leading-tight text-[#151515] xl:text-[36px]"
+                className="text-[20px] font-medium max-w-[300px] leading-tight text-[#151515] xl:text-[36px]"
                 style={{ fontFamily: "var(--font-primary)" }}
               >
                 {art.section2.title}

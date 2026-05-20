@@ -173,13 +173,15 @@ export function JourneyFilter({ journeys, destNames, filterPlaceholder, seeMoreL
 
       {/* See more */}
       {filtered.length > 6 && !showAll && (
-        <button
-          onClick={() => setShowAll(true)}
-          className="h-[45px] rounded-[2px] bg-[#151515] px-6 text-[18px] text-white"
-          style={{ fontFamily: "var(--font-secondary)" }}
-        >
-          {seeMoreLabel}
-        </button>
+        <div className="flex justify-center">
+          <button
+            onClick={() => setShowAll(true)}
+            className="h-[45px] rounded-[2px] bg-[#151515] px-6 text-[18px] text-white"
+            style={{ fontFamily: "var(--font-secondary)" }}
+          >
+            {seeMoreLabel}
+          </button>
+        </div>
       )}
     </>
   );
