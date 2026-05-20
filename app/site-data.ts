@@ -22,8 +22,8 @@ import {
   SITE_SETTINGS_QUERY,
 } from "../sanity/lib/queries";
 
-export const shell = "mx-auto w-full max-w-[1520px] px-5 sm:px-8 lg:px-12 xl:px-[130px]";
-export const section = "py-20 lg:py-28 xl:py-[150px]";
+export const shell = "mx-auto w-full max-w-[1520px] px-5 sm:px-8 lg:px-[40px] xl:px-[40px]";
+export const section = "py-20 lg:py-28 xl:py-[130px]";
 
 export type Destination = {
   slug: string;

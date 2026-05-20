@@ -1,5 +1,4 @@
 import Image from "next/image";
-import Link from "next/link";
 import {
   getHomePageData,
   section,
@@ -7,6 +6,8 @@ import {
 } from "./site-data";
 import { Diamond, LinkBtn, SectionHeading, SiteFooter, SiteHeader } from "./site-ui";
 import { TestimonialCarousel } from "../components/TestimonialCarousel";
+import { DestinationsCarousel } from "../components/DestinationsCarousel";
+import { JourneysCarousel } from "../components/JourneysCarousel";
 
 export default async function HomePage() {
   const home = await getHomePageData();
@@ -89,7 +90,7 @@ export default async function HomePage() {
           src="/heart.png"
           alt=""
           width={700}
-          height={300}
+          height={400}
           className="pointer-events-none absolute left-0 top-0 select-none"
         />
         <div className={`${shell} ${section} flex flex-col gap-12 lg:gap-[72px]`}>
@@ -101,43 +102,7 @@ export default async function HomePage() {
             />
           </div>
 
-          <div className="grid gap-10 lg:grid-cols-3 lg:gap-7">
-            {home.featuredDestinations.map((destination, index) => (
-              <article
-                key={destination.name}
-                className="flex h-full flex-col"
-                data-reveal="up"
-                data-delay={String(index * 150)}
-              >
-                <div className="relative aspect-[0.85] overflow-hidden rounded-[2px]">
-                  <Image
-                    src={destination.img}
-                    alt={destination.name}
-                    fill
-                    className="object-cover transition-transform duration-700 hover:scale-105"
-                    sizes="(max-width: 1024px) 100vw, 33vw"
-                  />
-                </div>
-                <div className="flex flex-1 flex-col gap-5 pt-5">
-                  <div className="space-y-3">
-                    <h3
-                      className="text-[20px] leading-none text-black"
-                      style={{ fontFamily: "var(--font-primary)" }}
-                    >
-                      {destination.name}
-                    </h3>
-                    <p
-                      className="text-sm leading-relaxed text-[#3d3d3d]"
-                      style={{ fontFamily: "var(--font-secondary)" }}
-                    >
-                      {destination.blurb}
-                    </p>
-                  </div>
-                  <LinkBtn label="Inspire Me" href={`/destinations/${destination.slug}`} />
-                </div>
-              </article>
-            ))}
-          </div>
+          <DestinationsCarousel destinations={home.featuredDestinations} />
         </div>
       </section>
 
@@ -152,60 +117,7 @@ export default async function HomePage() {
             <LinkBtn label={home.curatedJourneysLinkLabel} href={home.curatedJourneysLinkHref} />
           </div>
 
-          <div className="grid gap-8 xl:grid-cols-2 xl:gap-7">
-            {home.featuredJourneys.map((journey, index) => (
-              <Link
-                key={journey.title}
-                href={`/journeys/${journey.slug}`}
-                className="group flex h-full flex-col gap-6"
-                data-reveal="up"
-                data-delay={String(index * 200)}
-              >
-                <div className="space-y-8">
-                  <div className="relative aspect-[1.22] overflow-hidden rounded-[2px]">
-                    <Image
-                      src={journey.img}
-                      alt={journey.alt}
-                      fill
-                      className="object-cover transition-transform duration-700 group-hover:scale-105"
-                      sizes="(max-width: 1280px) 100vw, 50vw"
-                    />
-                  </div>
-                  <div className="space-y-4">
-                    <h3
-                      className="text-[20px] leading-tight text-[#151515]"
-                      style={{ fontFamily: "var(--font-primary)" }}
-                    >
-                      {journey.title}
-                    </h3>
-                    <p
-                      className="text-base leading-relaxed text-[#3d3d3d]"
-                      style={{ fontFamily: "var(--font-secondary)" }}
-                    >
-                      {journey.desc}
-                    </p>
-                  </div>
-                </div>
-
-                <div className="mt-auto space-y-6">
-                  <div className="rounded-[2px] px-5 py-4 sm:px-6" style={{ backgroundColor: journey.accent.replace("bg-[", "").replace("]", "") }}>
-                    <div className="space-y-3">
-                      {journey.details.map(([label, value]) => (
-                        <div key={label} className="flex flex-col gap-1 sm:flex-row sm:items-center sm:justify-between">
-                          <span className="text-base text-[#3d3d3d]" style={{ fontFamily: "var(--font-secondary)" }}>
-                            {label}
-                          </span>
-                          <span className="text-base text-[#151515]" style={{ fontFamily: "var(--font-secondary)" }}>
-                            {value}
-                          </span>
-                        </div>
-                      ))}
-                    </div>
-                  </div>
-                </div>
-              </Link>
-            ))}
-          </div>
+          <JourneysCarousel journeys={home.featuredJourneys} />
         </div>
       </section>
 
@@ -260,7 +172,7 @@ export default async function HomePage() {
           </div>
 
           <div
-            className="relative aspect-[1280/554] overflow-hidden rounded-[2px]"
+            className="relative aspect-[1280/500] overflow-hidden rounded-[2px]"
             data-reveal="scale"
             data-delay="150"
           >
@@ -293,61 +205,63 @@ export default async function HomePage() {
 
       {/* ── Why TIVOR ─────────────────────────────────────────────────────── */}
       <section className="bg-[#f2ebe2]">
-        <div className={`${shell} ${section} flex flex-col gap-12 lg:gap-[72px]`}>
-          <div
-            data-reveal="up"
-            className="flex flex-col gap-8 lg:flex-row lg:items-end lg:justify-between"
-          >
-            <SectionHeading
-              label={home.whyTravelLabel}
-              title={
-                <>
-                  {home.whyTravelTitleLineOne}
-                  <br />
-                  {home.whyTravelTitleLineTwo}
-                </>
-              }
-            />
-            <LinkBtn label={home.whyTravelLinkLabel} href={home.whyTravelLinkHref} />
-          </div>
-
-          <div className="grid gap-10 lg:grid-cols-[minmax(0,477px)_minmax(0,1fr)] lg:gap-[72px]">
-            <div data-reveal="up" data-delay="150" className="flex flex-col">
-              {home.reasons.map((reason, index) => (
-                <div
-                  key={reason.title}
-                  className={`flex flex-1 flex-col justify-center gap-6 py-8 ${
-                    index < home.reasons.length - 1 ? "border-b border-[#cfbcad]" : ""
-                  }`}
-                >
-                  <h3
-                    className="text-[20px] leading-tight text-[#151515]"
-                    style={{ fontFamily: "var(--font-primary)" }}
-                  >
-                    {reason.title}
-                  </h3>
-                  <p
-                    className="text-base leading-relaxed text-[#3d3d3d]"
-                    style={{ fontFamily: "var(--font-secondary)" }}
-                  >
-                    {reason.desc}
-                  </p>
-                </div>
-              ))}
+        <div className={`${shell} ${section}`}>
+          <div className="flex flex-col gap-12 lg:gap-18 lg:px-20 xl:px-28">
+            <div
+              data-reveal="up"
+              className="flex flex-col gap-8 lg:flex-row lg:items-end lg:justify-between"
+            >
+              <SectionHeading
+                label={home.whyTravelLabel}
+                title={
+                  <>
+                    {home.whyTravelTitleLineOne}
+                    <br />
+                    {home.whyTravelTitleLineTwo}
+                  </>
+                }
+              />
+              <LinkBtn label={home.whyTravelLinkLabel} href={home.whyTravelLinkHref} />
             </div>
 
-            <div
-              className="relative min-h-[320px] overflow-hidden rounded-[2px] lg:min-h-full"
-              data-reveal="scale"
-              data-delay="250"
-            >
-              <Image
-                src={home.whyTravelImage}
-                alt="Why travel with TIVOR"
-                fill
-                className="object-cover"
-                sizes="(max-width: 1024px) 100vw, 50vw"
-              />
+            <div className="grid gap-10 lg:grid-cols-[minmax(0,477px)_minmax(0,1fr)] lg:gap-18">
+              <div data-reveal="up" data-delay="150" className="flex flex-col">
+                {home.reasons.map((reason, index) => (
+                  <div
+                    key={reason.title}
+                    className={`flex flex-1 flex-col justify-center gap-6 py-8 ${
+                      index < home.reasons.length - 1 ? "border-b border-brown-300" : ""
+                    }`}
+                  >
+                    <h3
+                      className="text-[28px] font-semibold leading-tight text-dark-500"
+                      style={{ fontFamily: "var(--font-primary)" }}
+                    >
+                      {reason.title}
+                    </h3>
+                    <p
+                      className="text-base leading-relaxed text-dark-400"
+                      style={{ fontFamily: "var(--font-secondary)" }}
+                    >
+                      {reason.desc}
+                    </p>
+                  </div>
+                ))}
+              </div>
+
+              <div
+                className="relative min-h-96 overflow-hidden rounded-xs lg:min-h-full"
+                data-reveal="scale"
+                data-delay="250"
+              >
+                <Image
+                  src={home.whyTravelImage}
+                  alt="Why travel with TIVOR"
+                  fill
+                  className="object-cover"
+                  sizes="(max-width: 1024px) 100vw, 50vw"
+                />
+              </div>
             </div>
           </div>
         </div>
@@ -355,22 +269,24 @@ export default async function HomePage() {
 
       {/* ── Testimonials ──────────────────────────────────────────────────── */}
       <section className="bg-[#f2ebe2]">
-        <div className={`${shell} flex flex-col gap-12 py-20 lg:gap-[72px] lg:py-[80px]`}>
-          <div data-reveal="up">
-            <SectionHeading
-              label={home.testimonialsLabel}
-              title={
-                <>
-                  {home.testimonialsTitleLineOne}
-                  <br />
-                  {home.testimonialsTitleLineTwo}
-                </>
-              }
-            />
-          </div>
+        <div className={`${shell} py-20 lg:py-[80px]`}>
+          <div className="flex flex-col gap-12 lg:gap-[72px] lg:px-20 xl:px-28">
+            <div data-reveal="up">
+              <SectionHeading
+                label={home.testimonialsLabel}
+                title={
+                  <>
+                    {home.testimonialsTitleLineOne}
+                    <br />
+                    {home.testimonialsTitleLineTwo}
+                  </>
+                }
+              />
+            </div>
 
-          <div data-reveal="up" data-delay="200">
-            <TestimonialCarousel testimonials={home.testimonials} />
+            <div data-reveal="up" data-delay="200">
+              <TestimonialCarousel testimonials={home.testimonials} />
+            </div>
           </div>
         </div>
       </section>
@@ -378,6 +294,7 @@ export default async function HomePage() {
       {/* ── Final CTA ─────────────────────────────────────────────────────── */}
       <section className="bg-[#f2ebe2]">
         <div className={`${shell} pb-20`}>
+ 
           <div
             data-reveal="scale"
             className="flex min-h-[289px] flex-col items-center justify-center gap-6 rounded-[2px] bg-[#fbfaf7] px-6 py-10 text-center"
@@ -404,6 +321,7 @@ export default async function HomePage() {
               {home.finalCtaButtonLabel}
             </a>
           </div>
+      
         </div>
       </section>
 
