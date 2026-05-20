@@ -49,7 +49,7 @@ export default async function HomePage() {
                 {home.heroTitle}
               </h1>
               <p
-                className="mx-auto mt-4 max-w-[620px] text-base sm:text-lg"
+                className="mx-auto mt-4 max-w-full text-base sm:text-md"
                 style={{ fontFamily: "var(--font-secondary)" }}
               >
                 {home.heroSubtitle}
