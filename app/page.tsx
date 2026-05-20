@@ -191,7 +191,7 @@ export default async function HomePage() {
             className="flex flex-col gap-6 lg:flex-row lg:items-end lg:justify-between"
           >
             <p
-              className="max-w-[744px] text-base leading-relaxed text-white"
+              className="max-w-[744px] font-light text-white"
               style={{ fontFamily: "var(--font-secondary)" }}
             >
               {home.aboutBody}

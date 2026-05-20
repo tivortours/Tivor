@@ -259,7 +259,7 @@ export async function SiteFooter() {
                   <Link
                     key={link}
                     href="#"
-                    className="whitespace-pre-line text-base leading-relaxed text-white sm:text-[18px]"
+                    className="whitespace-pre-line text-light  text-white sm:text-[18px]"
                     style={{ fontFamily: "var(--font-secondary)" }}
                   >
                     {link}
