@@ -8,6 +8,7 @@ import { Diamond, LinkBtn, SectionHeading, SiteFooter, SiteHeader } from "./site
 import { TestimonialCarousel } from "../components/TestimonialCarousel";
 import { DestinationsCarousel } from "../components/DestinationsCarousel";
 import { JourneysCarousel } from "../components/JourneysCarousel";
+import Link from "next/link";
 
 export default async function HomePage() {
   const home = await getHomePageData();
@@ -192,7 +193,7 @@ export default async function HomePage() {
           >
             <p
               className="max-w-[744px] font-light text-white"
-              style={{ fontFamily: "var(--font-secondary)" }}
+              // style={{ fontFamily: "var(--font-secondary)" }}
             >
               {home.aboutBody}
             </p>
@@ -221,7 +222,16 @@ export default async function HomePage() {
                   </>
                 }
               />
-              <LinkBtn label={home.whyTravelLinkLabel} href={home.whyTravelLinkHref} />
+               <Link
+      href={home.whyTravelLinkHref}
+      className={`inline-flex w-fit items-center border pb-1 px-2 py-2 text-base sm:text-lg ${
+        "bg-[#824b2e] text-white"
+      }`}
+      style={{ fontFamily: "var(--font-secondary)" }}
+    >
+   {home.whyTravelLinkLabel} 
+    </Link>
+              {/* <LinkBtn label={home.whyTravelLinkLabel} href={home.whyTravelLinkHref} /> */}
             </div>
 
             <div className="grid gap-10 lg:grid-cols-[minmax(0,477px)_minmax(0,1fr)] lg:gap-18">
