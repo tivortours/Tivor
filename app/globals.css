@@ -53,17 +53,18 @@ body {
 
   html[data-browser-scale="transform"] {
     zoom: 1;
-    overflow-x: hidden;
   }
 
+  /* Prevent overflow-x:hidden on body from breaking position:fixed in Safari */
   html[data-browser-scale="transform"] body {
-    overflow-x: hidden;
+    overflow-x: visible;
   }
 
   html[data-browser-scale="transform"] .browser-scale-viewport {
     position: relative;
     min-height: 100vh;
     height: var(--browser-scale-height);
+    overflow-x: hidden;
   }
 
   html[data-browser-scale="transform"] .browser-scale-shell {
@@ -77,6 +78,11 @@ body {
 
   html[data-browser-scale="transform"] .browser-scale-shell .min-h-screen {
     min-height: calc(100vh / var(--desktop-browser-scale));
+  }
+
+  /* Scale modal panels to match the page's transform scale in Safari */
+  html[data-browser-scale="transform"] .modal-panel {
+    zoom: var(--desktop-browser-scale);
   }
 }
 

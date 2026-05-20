@@ -40,10 +40,10 @@ function Modal({ journeyTitle, inclusions, onClose }: {
       <div className="absolute inset-0 bg-black/60" onClick={handleClose} />
 
       {/* Centering wrapper */}
-      <div className="relative flex min-h-full items-end justify-center sm:items-center sm:p-6">
+      <div className="relative flex min-h-full items-center justify-center p-4">
         {/* Panel */}
         <div
-          className="relative flex max-h-[92dvh] w-full flex-col overflow-hidden rounded-t-[4px] border border-[#ddd0c5] bg-[#f7f4f1] sm:max-h-[88dvh] sm:max-w-[760px] sm:rounded-[2px]"
+          className="modal-panel relative flex max-h-[90vh] w-full flex-col overflow-hidden rounded-[4px] border border-[#ddd0c5] bg-[#f7f4f1] sm:max-w-[760px]"
           style={{
             transition: "transform 280ms cubic-bezier(0.4,0,0.2,1)",
             transform: visible ? "translateY(0)" : "translateY(40px)",

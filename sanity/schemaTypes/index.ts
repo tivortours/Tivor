@@ -380,6 +380,7 @@ const siteSettings = defineType({
         }),
       ],
     }),
+    imageField("contactImage", "Contact Page Image", "Right-hand image on the Contact Us page. Best ratio: portrait or 4:3 crop."),
   ],
 });
 
