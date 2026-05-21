@@ -144,7 +144,7 @@ export default async function InspirationPage() {
               {page.supportTitle}
             </h2>
             <div className="flex flex-col gap-5">
-              <h3 className="text-[20px] font-medium leading-tight text-[#151515]" style={{ fontFamily: "var(--font-primary)" }}>
+              <h3 className="text-[26px] font-medium leading-tight text-[#151515]" style={{ fontFamily: "var(--font-primary)" }}>
                 {page.supportHeading}
               </h3>
               <p className="text-[16px] leading-normal text-[#3d3d3d]" style={{ fontFamily: "var(--font-secondary)" }}>

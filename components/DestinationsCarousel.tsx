@@ -75,7 +75,7 @@ export function DestinationsCarousel({ destinations }: { destinations: Destinati
                   {dest.name}
                 </h3>
                 <p
-                  className="text-sm leading-relaxed text-[#3d3d3d] text-justify hyphens-auto"
+                  className="text-sm  text-[#3d3d3d] "
                   style={{ fontFamily: "var(--font-secondary)" }}
                 >
                   {dest.blurb}

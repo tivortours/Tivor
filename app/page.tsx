@@ -61,10 +61,10 @@ export default async function HomePage() {
 
       {/* ── Intro ─────────────────────────────────────────────────────────── */}
       <section className="bg-white">
-        <div className={`${shell} flex flex-col items-center gap-10 py-20 text-center sm:gap-14 lg:py-[120px]`}>
+        <div className={`${shell} flex flex-col items-center gap-10 py-20 text-center sm:gap-14 lg:py-[160px]`}>
           <h2
             data-reveal="up"
-            className="text-[26px] leading-none text-[#151515] sm:text-[34px] lg:text-[52px]"
+            className="text-[26px] font-semibold leading-none text-[#151515] sm:text-[34px] lg:text-[52px]"
             style={{ fontFamily: "var(--font-primary)" }}
           >
             {home.introTitle}
@@ -90,7 +90,7 @@ export default async function HomePage() {
         <Image
           src="/heart.png"
           alt=""
-          width={700}
+          width={1050}
           height={400}
           className="pointer-events-none absolute left-0 top-0 select-none"
         />
@@ -148,9 +148,9 @@ export default async function HomePage() {
                   className="object-cover transition-transform duration-700 group-hover:scale-105"
                   sizes="(max-width: 1280px) 100vw, 1038px"
                 />
-                <div className="absolute inset-0 bg-black/25" />
+                {/* <div className="absolute inset-0 bg-black/25" /> */}
                 <span
-                  className="absolute inset-0 flex items-center justify-center px-4 text-center text-[16px] text-white sm:text-[20px]"
+                  className="absolute inset-0 flex items-end justify-center px-4 text-center text-[16px] text-white sm:text-[20px] pb-8"
                   style={{ fontFamily: "var(--font-primary)" }}
                 >
                   {experience.label}
@@ -317,7 +317,7 @@ export default async function HomePage() {
                 {home.finalCtaEyebrow}
               </p>
               <p
-                className="text-[22px] leading-none text-[#151515] sm:text-[30px] lg:text-[48px]"
+                className="text-[22px] leading-none text-[#151515] sm:text-[30px] lg:text-[48px] pt-2"
                 style={{ fontFamily: "var(--font-primary)" }}
               >
                 {home.finalCtaTitle}

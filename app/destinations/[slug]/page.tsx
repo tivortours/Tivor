@@ -82,7 +82,7 @@ export default async function DestinationDetailPage({
             className="flex flex-col items-center gap-3 text-center text-[#151515]"
             style={{ fontFamily: "var(--font-primary)" }}
           >
-            <h1 className="text-[26px] leading-none sm:text-[34px] xl:text-[52px]">
+            <h1 className="text-[26px] font-medium leading-none sm:text-[34px] xl:text-[52px]">
               {dest.detail.heroTitle}
             </h1>
             <p className="text-[16px] leading-none sm:text-[20px] xl:text-[28px]">
@@ -128,7 +128,7 @@ export default async function DestinationDetailPage({
         <div className={shell}>
           <div className="flex flex-col gap-[88px] lg:px-10 xl:px-16">
           <h2
-            className="text-[20px] leading-none text-[#151515] xl:text-[36px]"
+            className="text-[20px] font-medium leading-none text-[#151515] xl:text-[36px]"
             style={{ fontFamily: "var(--font-primary)" }}
           >
             Crafted Journeys, Felt for a Lifetime

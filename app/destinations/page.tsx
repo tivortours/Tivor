@@ -86,7 +86,7 @@ export default async function DestinationsPage() {
       </section>
 
       {/* ── CTA ──────────────────────────────────────────────────────────── */}
-      <section className="bg-[#f2ebe2]">
+      <section className="bg-[#f2ebe2] pt-10 pb-10">
         <div className="mx-auto w-full max-w-[1520px] px-5 pb-20 sm:px-8 lg:px-12 xl:px-[56px]">
           <div className="flex min-h-[289px] flex-col items-center justify-center gap-6 rounded-[2px] bg-[#fbfaf7] px-6 py-10 text-center">
             <div>

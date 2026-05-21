@@ -162,9 +162,9 @@ export function JourneyFilter({ journeys, destNames, filterPlaceholder, seeMoreL
       </div>
 
       {/* Grid */}
-      <div className={`${shell} flex flex-col gap-7`}>
+      <div className={`${shell} flex flex-col gap-10`}>
         <div className="h-px w-full bg-[#cfbcad] opacity-50" />
-        <div className="grid grid-cols-1 gap-7 sm:grid-cols-2 xl:grid-cols-3">
+        <div className="grid grid-cols-1 gap-7 gap-y-20 sm:grid-cols-2 xl:grid-cols-3">
           {visible.map((card) => (
             <JourneyCard key={card.slug} journey={card} />
           ))}

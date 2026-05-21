@@ -68,12 +68,12 @@ export default async function AboutPage() {
               ) : null}
               <div className="flex items-center gap-1.5 sm:gap-2.5 lg:gap-3 xl:gap-4">
                 {pillar.icon ? (
-                  <div className="relative h-4 w-4 shrink-0 sm:h-5 sm:w-5 lg:h-7 lg:w-7 xl:h-8 xl:w-8">
-                    <Image src={pillar.icon} alt="" fill className="object-contain" sizes="32px" />
+                  <div className="relative h-4 w-4 shrink-0 sm:h-5 sm:w-5 lg:h-10 lg:w-10 xl:h-12 xl:w-12">
+                    <Image src={pillar.icon} alt="" fill className="object-contain" sizes="62px" />
                   </div>
                 ) : null}
                 <span
-                  className="text-[11px] font-semibold text-[#151515] sm:text-[15px] lg:text-[20px] xl:text-[26px]"
+                  className="text-[28px] font-semibold text-[#151515] sm:text-[15px] lg:text-[26px] xl:text-[32px]"
                   style={{ fontFamily: "var(--font-primary)" }}
                 >
                   {pillar.label}
@@ -87,10 +87,10 @@ export default async function AboutPage() {
       {/* ── Vision & Mission ─────────────────────────────────────────────── */}
       <section className="w-full pt-[80px]">
         <div className={shell}>
-          <div className="overflow-hidden rounded-[2px] bg-[#f7f4f1] p-8 xl:p-16">
-            <div className="grid grid-cols-1 items-center gap-10 xl:grid-cols-[minmax(0,1.2fr)_minmax(0,1fr)] xl:gap-16">
+          <div className="overflow-hidden rounded-[2px] bg-[#f7f4f1] p-8 xl:p-20">
+            <div className="grid grid-cols-1 items-center gap-16 xl:grid-cols-[minmax(0,1.2fr)_minmax(0,1fr)] xl:gap-24">
 
-            <div className="relative aspect-[795/485] overflow-hidden rounded-[2px]">
+            <div className="relative aspect-[895/585] overflow-hidden rounded-[2px]">
               <Image
                 src={page.visionImage}
                 alt="Vision"
@@ -182,7 +182,7 @@ export default async function AboutPage() {
               <p className="text-[26px] font-medium leading-none text-[#ad8c72] sm:text-[34px] lg:text-[52px]" style={{ fontFamily: "var(--font-primary)" }}>
                 {page.ctaEyebrow}
               </p>
-              <p className="text-[36px] leading-none text-[#151515] sm:text-[42px] lg:text-[48px]" style={{ fontFamily: "var(--font-primary)" }}>
+              <p className="text-[36px] leading-none text-[#151515] sm:text-[42px] lg:text-[48px] pt-2" style={{ fontFamily: "var(--font-primary)" }}>
                 {page.ctaTitle}
               </p>
             </div>
