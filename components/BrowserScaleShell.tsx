@@ -3,8 +3,15 @@
 import { useLayoutEffect, useRef } from "react";
 import { usePathname } from "next/navigation";
 
-const DESKTOP_SCALE = 0.8;
 const DESKTOP_BREAKPOINT = 1024;
+// Lock the effective canvas to 1800px on every screen.
+// Formula: zoom = viewport_width / REFERENCE_CANVAS
+// Examples: 1440px → 0.80, 1728px → 0.96, 1920px → 1.00 (capped)
+const REFERENCE_CANVAS = 1800;
+
+function getScale(width: number): number {
+  return Math.round((width / REFERENCE_CANVAS) * 1000) / 1000;
+}
 
 function shouldUseTransformScale() {
   if (typeof window === "undefined") return false;
@@ -39,17 +46,33 @@ export function BrowserScaleShell({
     const clearScaleMode = () => {
       delete root.dataset.browserScale;
       root.style.removeProperty("--browser-scale-height");
+      root.style.removeProperty("--desktop-browser-scale");
+      root.style.removeProperty("zoom");
     };
 
     const applyScaleMode = () => {
-      if (!shouldUseTransformScale()) {
+      const width = window.innerWidth;
+
+      if (width < DESKTOP_BREAKPOINT) {
         clearScaleMode();
         return;
       }
+
+      const scale = getScale(width);
+      root.style.setProperty("--desktop-browser-scale", String(scale));
+
+      if (!shouldUseTransformScale()) {
+        // Chrome / Firefox: CSS zoom, set as inline style to override the
+        // static fallback value in globals.css
+        root.style.zoom = String(scale);
+        return;
+      }
+
+      // Safari: transform path
       root.dataset.browserScale = "transform";
       root.style.setProperty(
         "--browser-scale-height",
-        `${Math.ceil(shell.scrollHeight * DESKTOP_SCALE)}px`
+        `${Math.ceil(shell.scrollHeight * scale)}px`
       );
     };
 

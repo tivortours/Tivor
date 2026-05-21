@@ -258,7 +258,16 @@ function imageUrl(source: unknown, width: number, height?: number, fallbackUrl =
 async function fetchSanity<T>(query: string, params?: Record<string, unknown>, tags?: string[]) {
   if (!isSanityConfigured) return null;
 
-  return readClient.fetch<T>(query, params ?? {}, tags?.length ? { next: { tags } } : undefined);
+  // In development, skip the data cache so Sanity edits are visible immediately on refresh.
+  // In production, use tag-based caching invalidated by the /api/revalidate webhook.
+  const fetchOptions =
+    process.env.NODE_ENV === "development"
+      ? { cache: "no-store" as const }
+      : tags?.length
+      ? { next: { tags } }
+      : undefined;
+
+  return readClient.fetch<T>(query, params ?? {}, fetchOptions);
 }
 
 function toAbsoluteHref(href: string | undefined | null): string {
