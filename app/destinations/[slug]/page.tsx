@@ -11,6 +11,7 @@ import {
 } from "../../site-data";
 import { SiteHeader, SiteFooter } from "../../site-ui";
 import { GalleryCarousel } from "./GalleryCarousel";
+import { TestimonialCarousel } from "../../../components/TestimonialCarousel";
 
 export async function generateStaticParams() {
   return (await getDestinationSlugs()).map((slug) => ({ slug }));
@@ -304,46 +305,7 @@ export default async function DestinationDetailPage({
             </h2>
           </div>
 
-          <div className="grid grid-cols-1 gap-4 lg:grid-cols-3">
-            {home.testimonials.map((t, i) => (
-              <div
-                key={t.author}
-                className={`flex flex-col justify-between gap-6 p-7 ${
-                  i < home.testimonials.length - 1
-                    ? "lg:border-r lg:border-[#e0e0e0]"
-                    : ""
-                }`}
-              >
-                <div className="h-[16px] w-[91px] shrink-0">
-                  <Image
-                    src="/Vector.svg"
-                    alt="5 stars"
-                    width={91}
-                    height={16}
-                    className="object-contain"
-                  />
-                </div>
-                <p
-                  className="text-[18px] font-semibold leading-snug text-[#151515] xl:text-[22px]"
-                  style={{ fontFamily: "var(--font-secondary)" }}
-                >
-                  {t.quote}
-                </p>
-                <p
-                  className="text-base leading-normal text-[#3d3d3d]"
-                  style={{ fontFamily: "var(--font-secondary)" }}
-                >
-                  {t.body}
-                </p>
-                <p
-                  className="text-sm font-medium text-[#151515]"
-                  style={{ fontFamily: "var(--font-secondary)" }}
-                >
-                  {t.author}
-                </p>
-              </div>
-            ))}
-          </div>
+          <TestimonialCarousel testimonials={home.testimonials} />
           </div>
         </div>
       </section>

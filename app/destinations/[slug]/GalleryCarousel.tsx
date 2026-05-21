@@ -1,7 +1,7 @@
 "use client";
 
 import Image from "next/image";
-import { useRef, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 
 function ChevronLeft() {
   return (
@@ -22,6 +22,23 @@ function ChevronRight() {
 export function GalleryCarousel({ images }: { images: [string, string] }) {
   const [current, setCurrent] = useState(0);
   const trackRef = useRef<HTMLDivElement>(null);
+
+  const updateCurrent = useCallback(() => {
+    const track = trackRef.current;
+    if (!track) return;
+    const slide = track.firstElementChild as HTMLElement | null;
+    if (!slide) return;
+    const offset = slide.offsetWidth + 20;
+    const index = Math.round(track.scrollLeft / offset);
+    setCurrent(Math.max(0, Math.min(index, images.length - 1)));
+  }, [images.length]);
+
+  useEffect(() => {
+    const track = trackRef.current;
+    if (!track) return;
+    track.addEventListener("scroll", updateCurrent, { passive: true });
+    return () => track.removeEventListener("scroll", updateCurrent);
+  }, [updateCurrent]);
 
   const goTo = (index: number) => {
     const track = trackRef.current;

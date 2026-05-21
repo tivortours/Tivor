@@ -1,6 +1,7 @@
 "use client";
 import { useRef, useState, useEffect, useCallback } from "react";
 import Image from "next/image";
+import Link from "next/link";
 import { LinkBtn } from "../app/site-ui";
 import type { Destination } from "../app/site-data";
 
@@ -48,9 +49,10 @@ export function DestinationsCarousel({ destinations }: { destinations: Destinati
         className="flex gap-7 overflow-x-auto scroll-smooth [scrollbar-width:none] [-ms-overflow-style:none] [&::-webkit-scrollbar]:hidden"
       >
         {destinations.map((dest, i) => (
-          <article
+          <Link
             key={dest.name}
-            className="flex w-full flex-none flex-col md:w-[calc((100%-1.75rem)/2)] lg:w-[calc((100%-3.5rem)/3)]"
+            href={`/destinations/${dest.slug}`}
+            className="group flex w-full flex-none flex-col md:w-[calc((100%-1.75rem)/2)] lg:w-[calc((100%-3.5rem)/3)]"
           >
             <div
               className="relative aspect-[0.92] overflow-hidden rounded-[2px]"
@@ -81,7 +83,7 @@ export function DestinationsCarousel({ destinations }: { destinations: Destinati
               </div>
               <LinkBtn label="Inspire Me" href={`/destinations/${dest.slug}`} />
             </div>
-          </article>
+          </Link>
         ))}
       </div>
 
