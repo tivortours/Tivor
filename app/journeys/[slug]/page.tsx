@@ -178,13 +178,13 @@ export default async function JourneyDetailPage({
             <div className="flex flex-col gap-5 sm:flex-row sm:items-center sm:gap-[40px]">
               <div className="flex flex-col">
                 <div className="flex items-baseline gap-1.5">
-                  <span className="text-[18px] text-[#3d3d3d]" style={{ fontFamily: "var(--font-secondary)" }}>
+                  <span className="text-[18px] font-semibold text-[#3d3d3d]" style={{ fontFamily: "var(--font-secondary)" }}>
                     From
                   </span>
-                  <span className="text-[18px] text-[#151515]" style={{ fontFamily: "var(--font-secondary)" }}>
+                  <span className="text-[18px] font-semibold text-[#151515]" style={{ fontFamily: "var(--font-secondary)" }}>
                   USD {journey.priceFrom}
                   </span>
-                  <span className="text-[18px] text-[#3d3d3d]" style={{ fontFamily: "var(--font-secondary)" }}>
+                  <span className="text-[18px] font-semibold text-[#3d3d3d]" style={{ fontFamily: "var(--font-secondary)" }}>
                      per Guest
                   </span>
                 </div>
