@@ -62,7 +62,7 @@ export function GalleryCarousel({ images }: { images: [string, string] }) {
         {images.map((src, i) => (
           <div
             key={i}
-            className={`relative h-[280px] w-[82vw] flex-none shrink-0 rounded-[2px] transition-opacity duration-500 sm:h-[380px] xl:h-[500px] xl:w-[1200px] ${
+            className={`relative h-[250px] w-[82vw] flex-none shrink-0 rounded-[2px] transition-opacity duration-500 sm:h-[380px] xl:h-[500px] xl:w-[1200px] ${
               i === current ? "opacity-100" : "opacity-30"
             }`}
           >
