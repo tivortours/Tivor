@@ -51,7 +51,7 @@ export default async function InspirationDetailPage({
       <section className="pt-[60px]">
         <div className={`${shell} flex flex-col items-center gap-[48px] xl:gap-[72px]`}>
           <h1
-            className="max-w-[766px] text-center text-[22px] font-semibold leading-tight text-[#151515] sm:text-[26px] xl:text-[36px]"
+            className="max-w-[766px] text-center text-[22px] font-semibold lg:font-medium leading-tight text-[#151515] sm:text-[26px] xl:text-[36px]"
             style={{ fontFamily: "var(--font-primary)" }}
           >
             {art.title}

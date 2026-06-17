@@ -8,30 +8,31 @@ export default async function AboutPage() {
   return (
     <main className="flex w-full flex-col overflow-x-hidden bg-[#f2ebe2]">
 
-      {/* ── Hero ─────────────────────────────────────────────────────────── */}
-      <section className="relative flex h-[350px] lg:min-h-screen items-end overflow-hidden bg-[#7a5c48] lg:min-h-[800px] xl:min-h-[900px]">
+      {/* ── Hero — mobile: full-bleed with overlaid header ───────────────── */}
+      <section className="relative flex h-87.5 items-end overflow-hidden bg-[#7a5c48] xl:hidden">
         {page.heroVideo ? (
-          <video
-            src={page.heroVideo}
-            autoPlay
-            muted
-            loop
-            playsInline
-            className="absolute inset-0 h-full w-full object-cover"
-          />
+          <video src={page.heroVideo} autoPlay muted loop playsInline className="absolute inset-0 h-full w-full object-cover" />
         ) : (
           <Image src={page.heroImage} alt="" fill priority className="object-cover" sizes="100vw" />
         )}
         <div className="absolute inset-0 bg-black/30" />
         <SiteHeader light active="About" />
-        {/* <div className={`${shell} relative z-10 pb-14 pt-48`}>
-          <p
-            className="text-[20px] italic text-white/90 sm:text-[26px] xl:text-[40px]"
-            style={{ fontFamily: "var(--font-primary)" }}
-          >
-            {page.heroTagline}
-          </p>
-        </div> */}
+      </section>
+
+      {/* ── Hero — desktop: header above, image in shell ─────────────────── */}
+      <div className="hidden bg-beige-200 xl:block">
+        <SiteHeader active="About" overlay={false} />
+      </div>
+      <section className="hidden bg-beige-200 pb-10 xl:block">
+        <div className={shell}>
+          <div className="relative aspect-video overflow-hidden">
+            {page.heroVideo ? (
+              <video src={page.heroVideo} autoPlay muted loop playsInline className="h-full w-full object-cover" />
+            ) : (
+              <Image src={page.heroImage} alt="" fill priority className="object-cover" sizes="1520px" />
+            )}
+          </div>
+        </div>
       </section>
 
       {/* ── Intro: A World of New Horizons ───────────────────────────────── */}

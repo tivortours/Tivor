@@ -56,7 +56,7 @@ export default async function JourneyDetailPage({
       <section className="bg-[#f2ebe2] pt-[60px]">
         <div className={`${shell} flex flex-col items-center gap-10`}>
           <h1
-            className="max-w-[766px] text-center text-[22px] font-semibold lg:text-[26px] leading-tight text-[#151515] sm:text-[32px] xl:text-[48px]"
+            className="max-w-[766px] text-center text-[22px] font-semibold lg:font-medium lg:text-[26px] leading-tight text-[#151515] sm:text-[32px] xl:text-[48px]"
             style={{ fontFamily: "var(--font-primary)" }}
           >
             {journey.title}

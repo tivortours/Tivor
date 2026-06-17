@@ -11,28 +11,23 @@ type ItineraryDay = {
 };
 
 const CalendarIcon = ({ className }: { className?: string }) => (
-  <svg
-    width="18"
-    height="18"
-    viewBox="0 0 24 24"
-    fill="none"
-    stroke="currentColor"
-    strokeWidth="1.8"
-    strokeLinecap="round"
-    strokeLinejoin="round"
-    className={className}
-  >
-    <rect x="3" y="4" width="18" height="18" rx="2" ry="2" />
-    <line x1="16" y1="2" x2="16" y2="6" />
-    <line x1="8" y1="2" x2="8" y2="6" />
-    <line x1="3" y1="10" x2="21" y2="10" />
-  </svg>
+  <svg width="26" height="27" viewBox="0 0 26 27" fill="none" xmlns="http://www.w3.org/2000/svg">
+<path d="M16.75 3.41667V0.75M16.75 3.41667V6.08333M16.75 3.41667H10.75M0.75 11.4167V23.4167C0.75 24.1239 1.03095 24.8022 1.53105 25.3023C2.03115 25.8024 2.70942 26.0833 3.41667 26.0833H22.0833C22.7906 26.0833 23.4689 25.8024 23.969 25.3023C24.469 24.8022 24.75 24.1239 24.75 23.4167V11.4167M0.75 11.4167H24.75M0.75 11.4167V6.08333C0.75 5.37609 1.03095 4.69781 1.53105 4.19772C2.03115 3.69762 2.70942 3.41667 3.41667 3.41667H6.08333M24.75 11.4167V6.08333C24.75 5.37609 24.469 4.69781 23.969 4.19772C23.4689 3.69762 22.7906 3.41667 22.0833 3.41667H21.4167M6.08333 0.75V6.08333" stroke="#6A5546" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+</svg>
+
 );
 
 const ChevronLeft = () => (
   <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
     <polyline points="15 18 9 12 15 6" />
   </svg>
+);
+
+const DottedCurve = () => (
+  <svg width="33" height="160" viewBox="0 0 33 160" fill="none" xmlns="http://www.w3.org/2000/svg">
+<path d="M1 0.828125C1 0.828125 31.9315 21.6851 31.9163 46.4115C31.8958 79.8281 1.02038 83.3281 1 117.357C0.985193 142.084 31.9163 158.828 31.9163 158.828" stroke="#BBA08A" strokeWidth="2" strokeDasharray="4 5"/>
+</svg>
+
 );
 
 const ChevronRight = () => (
@@ -233,9 +228,7 @@ export function JourneyHighlights({
                 ))}
               </div>
 
-              {i < itinerary.length - 1 && (
-                <div className="mt-2 h-px w-full bg-[#cfbcad]/40" />
-              )}
+              {i < itinerary.length - 1 && <DottedCurve />}
             </div>
           ))}
         </div>

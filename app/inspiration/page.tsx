@@ -58,7 +58,7 @@ export default async function InspirationPage() {
       <section className="w-full py-[60px] pb-[100px]">
         <div className={`${shell} flex justify-center`}>
           <h1
-            className="max-w-[1270px] text-center text-[22px] font-semibold leading-tight text-[#151515] sm:text-[28px] xl:text-[48px]"
+            className="max-w-[1270px] text-center text-[22px] font-semibold lg:font-medium leading-tight text-[#151515] sm:text-[28px] xl:text-[48px]"
             style={{ fontFamily: "var(--font-primary)" }}
           >
             {page.heroQuote}

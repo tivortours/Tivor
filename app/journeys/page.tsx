@@ -24,7 +24,7 @@ export default async function JourneysPage() {
 
           <div className="flex flex-col items-center gap-5 text-center">
             <h1
-              className="w-full max-w-[766px] px-4 text-[24px] font-semibold leading-tight text-[#151515] sm:text-[30px] lg:text-[48px]"
+              className="w-full max-w-[766px] px-4 text-[24px] font-semibold lg:font-medium leading-tight text-[#151515] sm:text-[30px] lg:text-[48px]"
               style={{ fontFamily: "var(--font-primary)" }}
             >
               {page.title}
