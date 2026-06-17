@@ -56,12 +56,12 @@ export default async function JourneyDetailPage({
       <section className="bg-[#f2ebe2] pt-[60px]">
         <div className={`${shell} flex flex-col items-center gap-10`}>
           <h1
-            className="max-w-[766px] text-center text-[26px] leading-tight text-[#151515] sm:text-[32px] xl:text-[48px]"
+            className="max-w-[766px] text-center text-[22px] font-semibold lg:text-[26px] leading-tight text-[#151515] sm:text-[32px] xl:text-[48px]"
             style={{ fontFamily: "var(--font-primary)" }}
           >
             {journey.title}
           </h1>
-          <div className="relative h-[300px] w-full overflow-hidden rounded-[2px] sm:h-[420px] xl:h-[567px]">
+          <div className="relative h-[200px] lg:h-[300px] w-full overflow-hidden rounded-[2px] sm:h-[420px] xl:h-[567px]">
             <Image
               src={journey.img}
               alt={journey.title}
@@ -81,39 +81,39 @@ export default async function JourneyDetailPage({
           <div className="flex flex-col gap-12 xl:flex-row xl:gap-[88px] lg:px-16 xl:px-28">
 
             {/* Left — quick facts */}
-            <div className="flex flex-col gap-8 xl:w-[360px] xl:shrink-0 xl:justify-between xl:gap-0 xl:self-stretch">
+            <div className="order-2 xl:order-1 flex flex-col gap-8 xl:w-90 xl:shrink-0 xl:justify-between xl:gap-0 xl:self-stretch">
               {duration && (
                 <div className="flex flex-col gap-1">
-                  <p className="text-base font-medium text-[#151515]" style={{ fontFamily: "var(--font-secondary)" }}>
+                  <p className="text-[13px] lg:text-base font-medium text-[#151515]" style={{ fontFamily: "var(--font-secondary)" }}>
                     Duration:
                   </p>
-                  <p className="text-base leading-normal text-[#3d3d3d]" style={{ fontFamily: "var(--font-secondary)" }}>
+                  <p className="text-[13px] lg:text-base leading-normal text-[#3d3d3d]" style={{ fontFamily: "var(--font-secondary)" }}>
                     {duration}
                   </p>
                 </div>
               )}
               {bestSeason && (
                 <div className="flex flex-col gap-1">
-                  <p className="text-base font-medium text-[#151515]" style={{ fontFamily: "var(--font-secondary)" }}>
+                  <p className="text-[13px] lg:text-base font-medium text-[#151515]" style={{ fontFamily: "var(--font-secondary)" }}>
                     Best Season:
                   </p>
-                  <p className="text-base leading-normal text-[#3d3d3d]" style={{ fontFamily: "var(--font-secondary)" }}>
+                  <p className="text-[13px] lg:text-base leading-normal text-[#3d3d3d]" style={{ fontFamily: "var(--font-secondary)" }}>
                     {bestSeason}
                   </p>
                 </div>
               )}
               {suitedFor && (
                 <div className="flex flex-col gap-1">
-                  <p className="text-base font-medium text-[#151515]" style={{ fontFamily: "var(--font-secondary)" }}>
+                  <p className="text-[13px] lg:text-base font-medium text-[#151515]" style={{ fontFamily: "var(--font-secondary)" }}>
                     Suited For:
                   </p>
-                  <p className="text-base leading-normal text-[#3d3d3d]" style={{ fontFamily: "var(--font-secondary)" }}>
+                  <p className="text-[13px] lg:text-base leading-normal text-[#3d3d3d]" style={{ fontFamily: "var(--font-secondary)" }}>
                     {suitedFor}
                   </p>
                 </div>
               )}
               <div className="flex flex-col gap-1">
-                <p className="text-base font-medium text-[#151515]" style={{ fontFamily: "var(--font-secondary)" }}>
+                <p className="text-[13px] lg:text-base font-medium text-[#151515]" style={{ fontFamily: "var(--font-secondary)" }}>
                   Inclusions:
                 </p>
                 <InclusionsButton
@@ -130,7 +130,7 @@ export default async function JourneyDetailPage({
             {/* Right — full description + CTA */}
             <div className="flex flex-1 flex-col gap-12">
               <div
-                className="flex flex-col gap-5 text-base leading-relaxed text-[#3d3d3d]"
+                className="flex flex-col gap-5 text-[13px] lg:text-base leading-relaxed text-[#3d3d3d]"
                 style={{ fontFamily: "var(--font-secondary)" }}
               >
                 {journey.fullDesc.map((para, i) => (
@@ -140,7 +140,7 @@ export default async function JourneyDetailPage({
               <EnquireButton
                 journeyTitle={journey.title}
                 label="Enquire Now"
-                className="h-[45px] w-fit rounded-[2px] bg-[#824b2e] px-8 text-[18px] text-white"
+                className="h-[45px] w-fit rounded-[2px] bg-[#824b2e] px-8 text-[16px] lg:text-[18px] text-white"
                 style={{ fontFamily: "var(--font-secondary)" }}
               />
             </div>
@@ -149,8 +149,8 @@ export default async function JourneyDetailPage({
       </section>
 
       {/* ── Journey Highlights ───────────────────────────────────────────── */}
-      <div className="mx-20 lg:mx-44">
-    <section className="bg-[#ece2d6] px-16 lg:px-16 py-10 lg:py-20 gap-20">
+      <div className="lg:mx-44">
+    <section className="bg-[#ece2d6] lg:px-16 py-10 lg:py-20">
         <div className={`${shell} flex flex-col gap-[60px]`}>
           <h2
             className="text-[20px] font-medium leading-tight text-[#151515] xl:text-[36px]"
@@ -162,12 +162,13 @@ export default async function JourneyDetailPage({
           <JourneyHighlights itinerary={journey.itinerary} journeyTitle={journey.title} />
         </div>
 
-        <div className="h-px w-full bg-[#dfcdb9] my-11" />
+        <div className="hidden h-px w-full bg-[#dfcdb9] my-11 xl:block" />
 
         {/* ── Pricing CTA bar ─────────────────────────────────────────────── */}
-        <div className="bg-[#dfcdb9]">
+        <div className="xl:bg-[#dfcdb9]">
+          <div className={shell}>
           <div
-            className={`${shell} flex flex-col gap-6 py-[60px] xl:flex-row xl:items-center xl:justify-between xl:gap-[88px] xl:py-[80px]`}
+            className="bg-[#dfcdb9] flex flex-col items-center gap-8 p-8 text-center xl:bg-transparent xl:flex-row xl:items-center xl:justify-between xl:gap-22 xl:py-20 xl:px-0 xl:text-left"
           >
             <h2
               className="text-[26px] font-semibold leading-tight text-[#151515] xl:text-[36px] xl:whitespace-nowrap"
@@ -175,17 +176,17 @@ export default async function JourneyDetailPage({
             >
               {journey.priceCtaTitle}
             </h2>
-            <div className="flex flex-col gap-5 sm:flex-row sm:items-center sm:gap-[40px]">
-              <div className="flex flex-col">
+            <div className="flex w-full flex-col items-center gap-5 xl:w-auto xl:flex-row xl:items-center xl:gap-10">
+              <div className="flex flex-col items-center xl:items-start">
                 <div className="flex items-baseline gap-1.5">
                   <span className="text-[18px] font-semibold text-[#3d3d3d]" style={{ fontFamily: "var(--font-secondary)" }}>
-                    From
+                    from
                   </span>
                   <span className="text-[18px] font-semibold text-[#151515]" style={{ fontFamily: "var(--font-secondary)" }}>
-                  USD {journey.priceFrom}
+                    USD {journey.priceFrom}
                   </span>
                   <span className="text-[18px] font-semibold text-[#3d3d3d]" style={{ fontFamily: "var(--font-secondary)" }}>
-                     per Guest
+                    per guest
                   </span>
                 </div>
                 <p className="text-xs text-[#3d3d3d]" style={{ fontFamily: "var(--font-secondary)" }}>
@@ -195,15 +196,16 @@ export default async function JourneyDetailPage({
               <EnquireButton
                 journeyTitle={journey.title}
                 label="Send an Enquiry"
-                className="h-[45px] w-fit rounded-[2px] bg-[#824b2e] px-6 text-[18px] text-white"
+                className="h-[45px] w-full rounded-xs bg-[#824b2e] px-6 text-[14px] lg:text-[18px] text-white xl:w-fit"
                 style={{ fontFamily: "var(--font-secondary)" }}
               />
             </div>
           </div>
+          </div>
         </div>
       </section>
       </div>
-  
+
 
       {/* ── Highly Recommended Experiences ───────────────────────────────── */}
       <section className="bg-[#f2ebe2] py-[80px] xl:py-[100px]">
@@ -216,10 +218,11 @@ export default async function JourneyDetailPage({
             Highly Recommended Experiences
           </h2>
 
-          <div className="grid grid-cols-1 gap-7 sm:grid-cols-2 xl:grid-cols-3">
+          <div className="-mx-5 sm:mx-0">
+            <div className="flex gap-5 overflow-x-auto px-5 pb-3 sm:grid sm:grid-cols-2 sm:gap-7 sm:overflow-visible sm:px-0 sm:pb-0 xl:grid-cols-3">
             {settings.recommendedExperiences.map((exp) => (
-              <div key={exp.title} className="flex flex-col overflow-hidden rounded-[2px]">
-                <div className="relative h-[320px] w-full overflow-hidden sm:h-[300px] xl:h-[300px]">
+              <div key={exp.title} className="w-[78vw] shrink-0 flex flex-col overflow-hidden rounded-[2px] sm:w-auto">
+                <div className="relative h-[200px] lg:h-[320px] w-full overflow-hidden sm:h-[300px] xl:h-[300px]">
                   <Image
                     src={exp.img}
                     alt={exp.title}
@@ -231,13 +234,13 @@ export default async function JourneyDetailPage({
                 <div className="flex flex-1 flex-col items-start justify-between gap-4 bg-white p-6">
                   <div className="flex flex-col gap-4">
                     <p
-                      className="text-sm text-[#3d3d3d]"
+                      className="text-[13px] lg:text-sm text-[#3d3d3d]"
                       style={{ fontFamily: "var(--font-secondary)" }}
                     >
                       {exp.country}
                     </p>
                     <p
-                      className="text-[22px] leading-snug text-[#151515] xl:text-[24px]"
+                      className="text-[20px] lg:text-[22px] leading-snug text-[#151515] xl:text-[24px]"
                       style={{ fontFamily: "var(--font-primary)" }}
                     >
                       {exp.title}
@@ -252,6 +255,7 @@ export default async function JourneyDetailPage({
                 </div>
               </div>
             ))}
+            </div>
           </div>
           </div>
         </div>
