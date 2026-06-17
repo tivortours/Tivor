@@ -40,12 +40,19 @@ export default async function AboutPage() {
         <div className={`${shell}`}>
           <div className="flex flex-col gap-12 xl:flex-row xl:items-start xl:justify-between xl:gap-[72px] px-0 xl:px-28">
 
-            <h1
-              className="shrink-0 text-[26px] leading-tight text-[#151515] sm:text-[32px] xl:w-[326px] xl:text-[48px] text-center"
+           <div className="flex flex-col gap-12 xl:flex-col xl:items-start">
+  <h1
+              className="shrink-0 text-[26px] leading-tight text-[#151515] sm:text-[32px] xl:w-[326px] xl:text-[48px]  text-start"
               style={{ fontFamily: "var(--font-primary)" }}
             >
               {page.introTitle}
             </h1>
+             <h3>
+              CREATORS OF <br />
+              <span className="font-semibold">Remarkable  Travel Experiences</span>
+             </h3>
+           </div>
+          
 
             <div
               className="flex flex-col gap-10 text-[13px] lg:text-[16px] leading-relaxed text-dark-400 xl:max-w-131.75"
