@@ -2,7 +2,6 @@
 import { useRef, useState, useEffect, useCallback } from "react";
 import Image from "next/image";
 import Link from "next/link";
-import { LinkBtn } from "../app/site-ui";
 import type { Destination } from "../app/site-data";
 
 export function DestinationsCarousel({ destinations }: { destinations: Destination[] }) {
@@ -83,7 +82,12 @@ export function DestinationsCarousel({ destinations }: { destinations: Destinati
               </div>
               <div className="pt-2">
 
-              <LinkBtn label="Inspire Me" href={`/destinations/${dest.slug}`} />
+              <span
+                className="inline-flex w-fit items-center border-b border-brown-700 pb-1 text-[12px] text-brown-700 sm:text-lg"
+                style={{ fontFamily: "var(--font-secondary)" }}
+              >
+                Inspire Me
+              </span>
               </div>
             </div>
           </Link>
