@@ -60,13 +60,13 @@ export function TestimonialCarousel({ testimonials }: { testimonials: Testimonia
               className="object-contain object-left"
             />
             <p
-              className="text-[22px] font-semibold leading-snug text-[#151515]"
+              className="text-[18px] font-medium lg:text-[22px] lg:font-semibold leading-snug text-[#151515]"
               style={{ fontFamily: "var(--font-secondary)" }}
             >
               {testimonial.quote}
             </p>
             <p
-              className="flex-1 text-base leading-relaxed text-[#3d3d3d]"
+              className="flex-1 text-[13px] lg:text-base leading-relaxed text-[#3d3d3d]"
               style={{ fontFamily: "var(--font-secondary)" }}
             >
               {testimonial.body}

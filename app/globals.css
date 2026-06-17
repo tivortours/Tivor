@@ -16,6 +16,14 @@
   --color-grey-500: #344149;
   --color-grey-700: #20282d;
   --color-chalk-200: #fbfaf7;
+
+  /* Mobile font scale — use text-{name} in components */
+    --font-size-mainheading: 20px;
+  --font-size-display: 28px;     /* text-display    — hero / large headings */
+  --font-size-heading: 26px;     /* text-heading     — section headings */
+  --font-size-subheading: 22px;  /* text-subheading  — sub-headings */
+  --font-size-body: 16px;        /* text-body        — body / button text */
+  --font-size-caption: 14px;     /* text-caption     — small / form text */
 }
 
 * {

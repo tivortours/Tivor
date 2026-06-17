@@ -43,7 +43,7 @@ export function LinkBtn({
   return (
     <Link
       href={href}
-      className={`inline-flex w-fit items-center border-b pb-1 text-base sm:text-lg ${
+      className={`inline-flex w-fit items-center border-b pb-1 text-[12px] sm:text-lg ${
         light ? "border-white text-white" : "border-[#714128] text-[#714128]"
       }`}
       style={{ fontFamily: "var(--font-secondary)" }}

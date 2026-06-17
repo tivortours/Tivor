@@ -17,7 +17,7 @@ export default async function HomePage() {
     <main className="flex w-full flex-col overflow-x-hidden">
 
       {/* ── Hero ──────────────────────────────────────────────────────────── */}
-      <section className="relative min-h-screen overflow-hidden bg-[#c0bebe]">
+      <section className="relative min-h-[384px] h-[384px] lg:min-h-screen overflow-hidden bg-[#c0bebe]">
         {home.heroVideo ? (
           <video
             autoPlay
@@ -39,17 +39,17 @@ export default async function HomePage() {
 
         <SiteHeader light />
 
-        <div className="relative z-10 flex min-h-screen items-end">
-          <div className={`${shell} flex w-full justify-center pb-16 pt-40 sm:pb-20 lg:pb-24`}>
+        <div className="relative z-10 flex min-h-[384px] lg:min-h-screen items-end justify-end">
+          <div className={`${shell} flex w-full justify-center pb-8 pt-40 sm:pb-20 lg:pb-24`}>
             <div className="max-w-[766px] text-center text-white">
               <h1
-                className="text-[28px] leading-[1.02] sm:text-[38px] xl:text-[56px]"
+                className=" leading-[1.02] text-[24px] xl:text-[56px]"
                 style={{ fontFamily: "var(--font-primary)" }}
               >
                 {home.heroTitle}
               </h1>
               <p
-                className="mx-auto mt-4 max-w-full text-base sm:text-md"
+                className="mx-auto mt-4 max-w-full text-[12px] xl:text-[22px]"
                 style={{ fontFamily: "var(--font-secondary)" }}
               >
                 {home.heroSubtitle}
@@ -64,7 +64,7 @@ export default async function HomePage() {
         <div className={`${shell} flex flex-col items-center gap-10 py-20 text-center sm:gap-14 lg:py-[160px]`}>
           <h2
             data-reveal="up"
-            className="text-[26px] font-semibold leading-none text-[#151515] sm:text-[34px] lg:text-[52px]"
+            className="text-[24px] font-semibold leading-none text-[#151515] sm:text-[34px] lg:text-[52px]"
             style={{ fontFamily: "var(--font-primary)" }}
           >
             {home.introTitle}
@@ -72,7 +72,7 @@ export default async function HomePage() {
           <div
             data-reveal="up"
             data-delay="150"
-            className="max-w-[984px] space-y-5 text-base leading-relaxed text-[#3d3d3d] sm:text-lg"
+            className="max-w-[984px] space-y-5 text-[14px] leading-relaxed text-[#3d3d3d] sm:text-lg"
             style={{ fontFamily: "var(--font-secondary)" }}
           >
             {home.introParagraphs.map((paragraph) => (
@@ -137,7 +137,7 @@ export default async function HomePage() {
             {home.experiences.map((experience, index) => (
               <div
                 key={experience.label}
-                className="group relative h-[200px] overflow-hidden rounded-[2px] sm:h-[260px] xl:h-auto xl:aspect-[1038/249]"
+                className="group relative h-[150px] overflow-hidden rounded-[2px] sm:h-[260px] xl:h-auto xl:aspect-[1038/249]"
                 data-reveal="scale"
                 data-delay={String(index * 120)}
               >
@@ -192,8 +192,8 @@ export default async function HomePage() {
             className="flex flex-col gap-6 lg:flex-row lg:items-end lg:justify-between"
           >
             <p
-              className="max-w-[744px] font-light text-white"
-              // style={{ fontFamily: "var(--font-secondary)" }}
+              className="max-w-[744px] font-light text-[12px] lg:text-base text-white"
+            // style={{ fontFamily: "var(--font-secondary)" }}
             >
               {home.aboutBody}
             </p>
@@ -222,15 +222,10 @@ export default async function HomePage() {
                   </>
                 }
               />
-               <Link
-      href={home.whyTravelLinkHref}
-      className={`inline-flex w-fit items-center border pb-1 px-2 py-2 text-base sm:text-lg ${
-        "bg-[#824b2e] text-white"
-      }`}
-      style={{ fontFamily: "var(--font-secondary)" }}
-    >
-   {home.whyTravelLinkLabel} 
-    </Link>
+              <div className="hidden lg:block">
+
+            <LinkBtn label={home.whyTravelLinkLabel} href={home.whyTravelLinkHref}   />
+              </div>
               {/* <LinkBtn label={home.whyTravelLinkLabel} href={home.whyTravelLinkHref} /> */}
             </div>
 
@@ -239,18 +234,17 @@ export default async function HomePage() {
                 {home.reasons.map((reason, index) => (
                   <div
                     key={reason.title}
-                    className={`flex flex-1 flex-col justify-center gap-6 py-8 ${
-                      index < home.reasons.length - 1 ? "border-b border-brown-300" : ""
-                    }`}
+                    className={`flex flex-1 flex-col justify-center gap-6 py-8 ${index < home.reasons.length - 1 ? "border-b border-brown-300" : ""
+                      }`}
                   >
                     <h3
-                      className="text-[28px] font-semibold leading-tight text-dark-500"
+                      className="text-[21px] lg:text-[28px] font-semibold leading-tight text-dark-500"
                       style={{ fontFamily: "var(--font-primary)" }}
                     >
                       {reason.title}
                     </h3>
                     <p
-                      className="text-base leading-relaxed text-dark-400"
+                      className="text-[13px] lg:text-base leading-relaxed text-dark-400"
                       style={{ fontFamily: "var(--font-secondary)" }}
                     >
                       {reason.desc}
@@ -260,7 +254,7 @@ export default async function HomePage() {
               </div>
 
               <div
-                className="relative min-h-96 overflow-hidden rounded-xs lg:min-h-full"
+                className="relative min-h-48 overflow-hidden rounded-xs lg:min-h-full"
                 data-reveal="scale"
                 data-delay="250"
               >
@@ -271,6 +265,10 @@ export default async function HomePage() {
                   className="object-cover"
                   sizes="(max-width: 1024px) 100vw, 50vw"
                 />
+              </div>
+              <div className="lg:hidden">
+
+             <LinkBtn label={home.whyTravelLinkLabel} href={home.whyTravelLinkHref}  />
               </div>
             </div>
           </div>
@@ -304,7 +302,7 @@ export default async function HomePage() {
       {/* ── Final CTA ─────────────────────────────────────────────────────── */}
       <section className="bg-[#f2ebe2]">
         <div className={`${shell} pb-20`}>
- 
+
           <div
             data-reveal="scale"
             className="flex min-h-[289px] flex-col items-center justify-center gap-6 rounded-[2px] bg-[#fbfaf7] px-6 py-10 text-center"
@@ -331,7 +329,7 @@ export default async function HomePage() {
               {home.finalCtaButtonLabel}
             </a>
           </div>
-      
+
         </div>
       </section>
 

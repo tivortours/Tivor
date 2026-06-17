@@ -55,7 +55,7 @@ export function DestinationsCarousel({ destinations }: { destinations: Destinati
             className="group flex w-full flex-none flex-col md:w-[calc((100%-1.75rem)/2)] lg:w-[calc((100%-3.5rem)/3)]"
           >
             <div
-              className="relative aspect-[0.92] overflow-hidden rounded-[2px]"
+              className="relative aspect-[1.2] lg:aspect-[0.92] overflow-hidden rounded-[2px]"
               {...(i === 0 ? { "data-img": "" } : {})}
             >
               <Image
@@ -69,19 +69,22 @@ export function DestinationsCarousel({ destinations }: { destinations: Destinati
             <div className="flex flex-1 flex-col justify-between pt-5">
               <div className="space-y-3">
                 <h3
-                  className="text-[27px] font-semibold leading-none text-black"
+                  className="text-[18px] lg:text-[27px] font-semibold leading-none text-black"
                   style={{ fontFamily: "var(--font-primary)" }}
                 >
                   {dest.name}
                 </h3>
                 <p
-                  className="text-sm  text-[#3d3d3d] "
+                  className="text-[12px] sm:text-sm  text-[#3d3d3d] "
                   style={{ fontFamily: "var(--font-secondary)" }}
                 >
                   {dest.blurb}
                 </p>
               </div>
+              <div className="pt-2">
+
               <LinkBtn label="Inspire Me" href={`/destinations/${dest.slug}`} />
+              </div>
             </div>
           </Link>
         ))}

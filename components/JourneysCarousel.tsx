@@ -55,7 +55,7 @@ export function JourneysCarousel({ journeys }: { journeys: Journey[] }) {
           >
             <div className="space-y-8">
               <div
-                className="relative aspect-[1.7] overflow-hidden rounded-[2px]"
+                className="relative aspect-[1.2] lg:aspect-[1.7] overflow-hidden rounded-[2px]"
                 {...(i === 0 ? { "data-img": "" } : {})}
               >
                 <Image
@@ -68,13 +68,13 @@ export function JourneysCarousel({ journeys }: { journeys: Journey[] }) {
               </div>
               <div className="space-y-4">
                 <h3
-                  className="text-[27px] font-semibold  leading-tight text-[#151515]"
+                  className="text-[18px] lg:text-[27px] font-semibold  leading-tight text-[#151515]"
                   style={{ fontFamily: "var(--font-primary)" }}
                 >
                   {journey.title}
                 </h3>
                 <p
-                  className="text-base leading-relaxed text-[#3d3d3d]"
+                  className="text-[12px] lg:text-base leading-relaxed text-[#3d3d3d]"
                   style={{ fontFamily: "var(--font-secondary)" }}
                 >
                   {journey.desc}
@@ -91,16 +91,16 @@ export function JourneysCarousel({ journeys }: { journeys: Journey[] }) {
                   {journey.details.map(([label, value]) => (
                     <div
                       key={label}
-                      className="flex flex-col gap-1 sm:flex-row sm:items-center sm:justify-between"
+                      className="flex flex-row gap-1 sm:flex-row items-center justify-between"
                     >
                       <span
-                        className="text-base text-[#3d3d3d]"
+                        className="text-[12px] lg:text-base text-[#3d3d3d]"
                         style={{ fontFamily: "var(--font-secondary)" }}
                       >
                         {label}
                       </span>
                       <span
-                        className="text-base text-[#151515]"
+                        className="text-[12px] lg:text-base text-[#151515]"
                         style={{ fontFamily: "var(--font-secondary)" }}
                       >
                         {value}
