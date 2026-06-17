@@ -20,9 +20,6 @@ export default async function JourneyDetailPage({
   const [journey, settings] = await Promise.all([getJourneyBySlug(slug), getSiteSettings()]);
   if (!journey) notFound();
 
-  const [duration] = journey.details.filter(([k]) => k === "Duration").map(([, v]) => v);
-  const [bestSeason] = journey.details.filter(([k]) => k === "Best season").map(([, v]) => v);
-  const [suitedFor] = journey.details.filter(([k]) => k === "Suited for").map(([, v]) => v);
 
   return (
     <main className="flex w-full flex-col overflow-x-hidden bg-[#f2ebe2]">
@@ -82,36 +79,16 @@ export default async function JourneyDetailPage({
 
             {/* Left — quick facts */}
             <div className="order-2 lg:order-1 flex flex-col gap-8 xl:w-90 xl:shrink-0 xl:justify-between xl:gap-0 xl:self-stretch">
-              {duration && (
-                <div className="flex flex-col gap-1">
+              {journey.details.map(([label, value]) => (
+                <div key={label} className="flex flex-col gap-1">
                   <p className="text-[13px] lg:text-base font-medium text-[#151515]" style={{ fontFamily: "var(--font-secondary)" }}>
-                    Duration:
+                    {label}:
                   </p>
                   <p className="text-[13px] lg:text-base leading-normal text-[#3d3d3d]" style={{ fontFamily: "var(--font-secondary)" }}>
-                    {duration}
+                    {value}
                   </p>
                 </div>
-              )}
-              {bestSeason && (
-                <div className="flex flex-col gap-1">
-                  <p className="text-[13px] lg:text-base font-medium text-[#151515]" style={{ fontFamily: "var(--font-secondary)" }}>
-                    Best Season:
-                  </p>
-                  <p className="text-[13px] lg:text-base leading-normal text-[#3d3d3d]" style={{ fontFamily: "var(--font-secondary)" }}>
-                    {bestSeason}
-                  </p>
-                </div>
-              )}
-              {suitedFor && (
-                <div className="flex flex-col gap-1">
-                  <p className="text-[13px] lg:text-base font-medium text-[#151515]" style={{ fontFamily: "var(--font-secondary)" }}>
-                    Suited For:
-                  </p>
-                  <p className="text-[13px] lg:text-base leading-normal text-[#3d3d3d]" style={{ fontFamily: "var(--font-secondary)" }}>
-                    {suitedFor}
-                  </p>
-                </div>
-              )}
+              ))}
               <div className="flex flex-col gap-1">
                 <p className="text-[13px] lg:text-base font-medium text-[#151515]" style={{ fontFamily: "var(--font-secondary)" }}>
                   Inclusions:
