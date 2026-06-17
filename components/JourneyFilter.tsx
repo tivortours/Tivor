@@ -12,7 +12,7 @@ function JourneyCard({ journey }: { journey: Journey }) {
   return (
     <Link href={`/journeys/${journey.slug}`} className="group flex min-w-0 flex-1 flex-col justify-between">
       <div className="flex flex-col gap-8">
-        <div className="relative h-[422px] w-full overflow-hidden rounded-[2px]">
+        <div className="relative h-[250px] lg:h-[422px] w-full overflow-hidden rounded-[2px]">
           <Image
             src={journey.img}
             alt={journey.alt}
@@ -23,12 +23,12 @@ function JourneyCard({ journey }: { journey: Journey }) {
         </div>
         <div className="flex flex-col gap-4">
           <h3
-            className="text-[28px] font-semibold leading-tight text-[#151515]"
+            className="text-[20px] lg:text-[28px] font-semibold leading-tight text-[#151515]"
             style={{ fontFamily: "var(--font-primary)" }}
           >
             {journey.title}
           </h3>
-          <p className="text-[16px] leading-normal text-[#3d3d3d]" style={{ fontFamily: "var(--font-secondary)" }}>
+          <p className="text-[13px] lg:text-[16px] leading-normal text-[#3d3d3d]" style={{ fontFamily: "var(--font-secondary)" }}>
             {journey.desc}
           </p>
         </div>
@@ -43,10 +43,10 @@ function JourneyCard({ journey }: { journey: Journey }) {
           <div className="flex flex-col gap-2">
             {journey.details.map(([label, value]) => (
               <div key={label} className="flex items-center justify-between">
-                <span className={`text-[16px] ${labelColor}`} style={{ fontFamily: "var(--font-secondary)" }}>
+                <span className={`text-[13px] lg:text-[16px] ${labelColor}`} style={{ fontFamily: "var(--font-secondary)" }}>
                   {label}
                 </span>
-                <span className={`text-[16px] ${valueColor}`} style={{ fontFamily: "var(--font-secondary)" }}>
+                <span className={`text-[13px] lg:text-[16px] ${valueColor}`} style={{ fontFamily: "var(--font-secondary)" }}>
                   {value}
                 </span>
               </div>
@@ -176,7 +176,7 @@ export function JourneyFilter({ journeys, destNames, filterPlaceholder, seeMoreL
         <div className="flex justify-center">
           <button
             onClick={() => setShowAll(true)}
-            className="h-[45px] rounded-[2px] bg-[#151515] px-6 text-[18px] text-white"
+            className="h-[45px] rounded-[2px] bg-[#151515] px-6 text-[14px] lg:text-[18px] text-white"
             style={{ fontFamily: "var(--font-secondary)" }}
           >
             {seeMoreLabel}

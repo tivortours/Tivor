@@ -19,18 +19,18 @@ export default async function JourneysPage() {
       <SiteHeader overlay={false} active="Journeys" />
 
       {/* ── Hero / Intro ─────────────────────────────────────────────────── */}
-      <section className="w-full py-[60px]">
+      <section className="w-full py-[30px]">
         <div className="flex flex-col items-center gap-[72px]">
 
           <div className="flex flex-col items-center gap-5 text-center">
             <h1
-              className="w-full max-w-[766px] px-4 text-[24px] leading-tight text-[#151515] sm:text-[30px] lg:text-[48px]"
+              className="w-full max-w-[766px] px-4 text-[24px] font-semibold leading-tight text-[#151515] sm:text-[30px] lg:text-[48px]"
               style={{ fontFamily: "var(--font-primary)" }}
             >
               {page.title}
             </h1>
             <p
-              className="w-full max-w-[918px] px-4 text-[16px] leading-normal text-[#3d3d3d]"
+              className="w-full max-w-[918px] px-4 text-[12px] lg:text-[16px] leading-normal text-[#3d3d3d]"
               style={{ fontFamily: "var(--font-secondary)" }}
             >
               {page.body}
@@ -57,22 +57,31 @@ export default async function JourneysPage() {
             >
               {page.supportTitle}
             </h2>
+             <div className="relative lg:hidden flex-1 overflow-hidden rounded-r-[2px] xl:block" style={{ minHeight: 200 }}>
+            <Image
+              src={page.supportImage}
+              alt="Bespoke journey"
+              fill
+              className="object-cover"
+              sizes="(max-width: 1280px) 0vw, 30vw"
+            />
+          </div>
             <div className="flex flex-col gap-5">
               <h3
-                className="text-[26px] font-medium leading-tight text-[#151515]"
+                className="text-[20px] lg:text-[26px] font-medium leading-tight text-[#151515]"
                 style={{ fontFamily: "var(--font-primary)" }}
               >
                 {page.supportHeading}
               </h3>
               <p
-                className="text-[16px] leading-normal text-[#3d3d3d]"
+                className="text-[13px] lg:text-[16px] leading-normal text-[#3d3d3d]"
                 style={{ fontFamily: "var(--font-secondary)" }}
               >
                 {page.supportBody}
               </p>
               <a
                 href={page.supportButtonHref}
-                className="mt-1 inline-flex h-[45px] w-fit items-center rounded-[2px] bg-[#824b2e] px-6 text-[18px] text-white"
+                className="mt-1 inline-flex h-[45px] w-fit items-center rounded-[2px] bg-[#824b2e] px-6 text-[14px] lg:text-[18px] text-white"
                 style={{ fontFamily: "var(--font-secondary)" }}
               >
                 {page.supportButtonLabel}
