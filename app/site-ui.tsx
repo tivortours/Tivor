@@ -7,7 +7,7 @@ export function Label({ text, light = false }: { text: string; light?: boolean }
   return (
     <div
       className={`inline-flex items-center justify-center border px-2 py-1 ${
-        light ? "border-[#b5bfab] text-[#b5bfab]" : "border-[#576168] text-[#576168]"
+        light ? "border-[#b5bfab] text-[#b5bfab]" : "border-grey-400 text-grey-400"
       }`}
     >
       <span className="text-[10px] " style={{ fontFamily: "var(--font-secondary)" }}>
@@ -106,7 +106,7 @@ export async function SiteHeader({
 
         {/* Mobile: logo + hamburger */}
         <div className="flex items-center justify-between xl:hidden">
-          <Link href="/" className="relative block h-[23px] w-[152px] shrink-0">
+          <Link href="/" className="relative block h-[23px] w-[90px] lg:w-[152px] shrink-0">
             <Image src={logoSrc} alt="TIVOR" fill className="object-contain" />
           </Link>
           <MobileMenu
@@ -212,11 +212,11 @@ export async function SiteFooter() {
               <input
                 type="email"
                 placeholder={settings.newsletter.inputPlaceholder}
-                className="h-[45px] flex-1 rounded-[2px] bg-[#f1f1f1] px-5 text-sm text-[#899195] outline-none sm:rounded-r-none"
+                className="h-11.25 w-full shrink-0 rounded-xs bg-[#f1f1f1] px-5 text-sm text-grey-300 outline-none sm:w-auto sm:flex-1 sm:rounded-r-none"
                 style={{ fontFamily: "var(--font-secondary)" }}
               />
               <button
-                className="h-[45px] rounded-[2px] bg-[#344149] px-6 text-base text-white sm:rounded-l-none sm:text-lg"
+                className="h-11.25 shrink-0 rounded-xs bg-grey-500 px-6 text-base text-white sm:rounded-l-none sm:text-lg"
                 style={{ fontFamily: "var(--font-secondary)" }}
               >
                 {settings.newsletter.buttonLabel}
@@ -230,30 +230,60 @@ export async function SiteFooter() {
 
       <div className="bg-[#20282d]">
         <div className={`${shell} flex flex-col gap-10 py-12 sm:py-[60px]`}>
-          <div className="flex flex-col gap-6 border-b border-[#576168] pb-5 lg:flex-row lg:items-center lg:justify-between">
-            <div className="flex items-center gap-4">
-              <div className="relative h-[37px] w-[48px] shrink-0">
+          {/* Logo + CTA */}
+          <div className="flex flex-col items-center gap-6 border-b border-grey-400 pb-5 lg:flex-row lg:items-center lg:justify-between">
+            <div className="flex items-center gap-2">
+              <div className="relative h-[24px] w-[48px] shrink-0">
                 <Image src={settings.logos.footerIcon} alt="" fill className="object-contain" />
               </div>
-              <Link href="/" className="relative block h-[25px] w-[165px] shrink-0">
+              <Link href="/" className="relative block h-[22px] w-[165px] shrink-0">
                 <Image src={'/tivor.svg'} alt="TIVOR" fill className="object-contain" />
               </Link>
             </div>
 
             <Link
               href={settings.footer.ctaHref}
-              className="h-[45px] w-fit rounded-[2px] bg-white px-6 py-[10px] text-base text-[#151515] sm:text-lg"
+              className="flex h-11.25 w-fit px-2 items-center justify-center rounded-xs bg-white text-base text-dark-500 lg:w-fit lg:px-6 lg:text-lg"
               style={{ fontFamily: "var(--font-secondary)" }}
             >
               {settings.footer.ctaLabel}
             </Link>
           </div>
 
-          <div className="grid gap-8 sm:grid-cols-2 xl:grid-cols-6">
+          {/* Link columns — accordion on mobile, grid on desktop */}
+          <div className="flex flex-col divide-y divide-grey-400 lg:hidden">
+            {settings.footer.columns.map((column) => (
+              <details key={column.head} className="group">
+                <summary
+                  className="flex cursor-pointer list-none items-center justify-between py-4 [&::-webkit-details-marker]:hidden"
+                  style={{ fontFamily: "var(--font-secondary)" }}
+                >
+                  <span className="text-[14px] font-semibold text-grey-300">{column.head}</span>
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="shrink-0 text-grey-300 transition-transform duration-200 group-open:rotate-180">
+                    <polyline points="6 9 12 15 18 9" />
+                  </svg>
+                </summary>
+                <div className="flex flex-col gap-3 pb-4">
+                  {column.links.map((link) => (
+                    <Link
+                      key={link}
+                      href="#"
+                      className="whitespace-pre-line text-[14px] leading-relaxed text-white"
+                      style={{ fontFamily: "var(--font-secondary)" }}
+                    >
+                      {link}
+                    </Link>
+                  ))}
+                </div>
+              </details>
+            ))}
+          </div>
+
+          <div className="hidden lg:grid lg:gap-8 xl:grid-cols-6">
             {settings.footer.columns.map((column) => (
               <div key={column.head} className="flex flex-col gap-3">
                 <span
-                  className="text-base font-semibold text-[#899195]"
+                  className="text-base font-semibold text-grey-300"
                   style={{ fontFamily: "var(--font-secondary)" }}
                 >
                   {column.head}
@@ -262,7 +292,7 @@ export async function SiteFooter() {
                   <Link
                     key={link}
                     href="#"
-                    className="whitespace-pre-line text-light  text-white sm:text-[18px]"
+                    className="whitespace-pre-line text-white lg:text-base xl:text-[18px]"
                     style={{ fontFamily: "var(--font-secondary)" }}
                   >
                     {link}
@@ -272,38 +302,36 @@ export async function SiteFooter() {
             ))}
           </div>
 
-          <div className="flex flex-col gap-6 border-t border-[#576168] pt-5 lg:flex-row lg:items-center lg:justify-between">
-            <div className="flex items-center gap-1">
-              {/* <Image src={settings.logos.copyright} alt="©" width={20} height={20} className="object-contain" />
-              <span className="text-sm text-[#899195]" style={{ fontFamily: "var(--font-secondary)" }}>
-                {settings.footer.year}
-              </span> */}
-              <span className="text-sm text-white" style={{ fontFamily: "var(--font-secondary)" }}>
-                {" "}
-                {settings.footer.copyrightText}
-              </span>
-            </div>
+          {/* Bottom bar */}
+          <div className="flex flex-col items-center gap-5 border-t border-grey-400 pt-5 lg:flex-row lg:items-center lg:justify-between">
 
-            <div className="flex flex-wrap items-center gap-5 lg:gap-8">
+            {/* Social row */}
+            <div className="flex items-center gap-5 lg:order-2 lg:gap-8">
               <span
-                className="text-base font-semibold text-[#899195]"
+                className="text-[13px] font-semibold text-grey-300 lg:text-base"
                 style={{ fontFamily: "var(--font-secondary)" }}
               >
                 {settings.footer.followLabel}
               </span>
-              <div className="flex items-center gap-2">
+              <div className="flex items-center gap-6">
                 {settings.footer.socialLinks.map((social) => (
-                  <Link key={social.platform} href={social.href} aria-label={social.platform} className="text-white transition-colors hover:text-[#899195]">
+                  <Link key={social.platform} href={social.href} aria-label={social.platform} className="text-white transition-colors hover:text-grey-300">
                     <SocialIcon platform={social.platform} />
                   </Link>
                 ))}
               </div>
             </div>
 
-            <p className="text-sm" style={{ fontFamily: "var(--font-secondary)" }}>
-              <span className="text-[#899195]">Designed &amp; Developed By</span>
-              <span className="text-white"> mits</span>
-            </p>
+            <div className="flex flex-col gap-1.5 lg:order-1">
+              <span className="text-[12px] text-white lg:text-sm" style={{ fontFamily: "var(--font-secondary)" }}>
+                {settings.footer.copyrightText}
+              </span>
+              <p className="text-[12px] text-center lg:text-sm" style={{ fontFamily: "var(--font-secondary)" }}>
+                <span className="text-grey-300">Designed &amp; Developed By</span>
+                <span className="text-white"> mits</span>
+              </p>
+            </div>
+
           </div>
         </div>
       </div>  

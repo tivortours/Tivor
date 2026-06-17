@@ -6,7 +6,7 @@ import { type Inspiration, getInspirationPageData, getInspirations, shell } from
 function ArticleCard({ art }: { art: Inspiration }) {
   return (
     <Link href={`/inspiration/${art.slug}`} className="flex flex-col rounded-[2px] bg-[#f7f4f1] overflow-hidden group">
-      <div className="relative aspect-[488/394] w-full overflow-hidden">
+      <div className="relative aspect-[488/300] lg:aspect-[488/394] w-full overflow-hidden">
         <Image
           src={art.img}
           alt={art.title}
@@ -58,7 +58,7 @@ export default async function InspirationPage() {
       <section className="w-full py-[60px] pb-[100px]">
         <div className={`${shell} flex justify-center`}>
           <h1
-            className="max-w-[1270px] text-center text-[22px] leading-tight text-[#151515] sm:text-[28px] xl:text-[48px]"
+            className="max-w-[1270px] text-center text-[22px] font-semibold leading-tight text-[#151515] sm:text-[28px] xl:text-[48px]"
             style={{ fontFamily: "var(--font-primary)" }}
           >
             {page.heroQuote}
@@ -85,13 +85,13 @@ export default async function InspirationPage() {
             </div>
             <div className="flex flex-col justify-between p-8 xl:w-[835px] xl:shrink-0 xl:p-[40px]">
               <div className="flex flex-col gap-3">
-                <div className="flex gap-2 text-[15px] text-[#3d3d3d] xl:text-[16px]" style={{ fontFamily: "var(--font-secondary)" }}>
+                <div className="flex gap-2 text-[11px] lg:text-[15px] text-[#3d3d3d] xl:text-[16px]" style={{ fontFamily: "var(--font-secondary)" }}>
                   <span>{featured.date}</span>
                   <span>|</span>
                   <span>{featured.destination}</span>
                 </div>
                 <h2
-                  className="text-[28px] font-medium leading-snug text-[#151515] xl:text-[36px]"
+                  className="text-[18px] lg:text-[28px] font-medium leading-snug text-[#151515] xl:text-[36px]"
                   style={{ fontFamily: "var(--font-primary)" }}
                 >
                   {featured.title}
@@ -100,7 +100,7 @@ export default async function InspirationPage() {
               <div className="mt-6 flex items-center gap-5 xl:mt-0">
                 <Image src={featured.avatar} alt={featured.author} width={60} height={60} className="shrink-0 rounded-full object-cover" />
                 <div className="flex flex-col gap-0.5">
-                  <span className="text-[17px] font-medium text-[#151515] xl:text-[18px]" style={{ fontFamily: "var(--font-secondary)" }}>
+                  <span className="text-[14px] lg:text-[17px] font-medium text-[#151515] xl:text-[18px]" style={{ fontFamily: "var(--font-secondary)" }}>
                     {featured.author}
                   </span>
                   <span className="text-[13px] text-[#3d3d3d] xl:text-[14px]" style={{ fontFamily: "var(--font-secondary)" }}>
@@ -135,27 +135,39 @@ export default async function InspirationPage() {
 
       {/* ── Can't Find section ───────────────────────────────────────────── */}
       <section className="w-full flex justify-center py-[80px]">
-        <div className="flex w-full max-w-[1520px] flex-col items-start gap-[60px] px-5 xl:flex-row xl:items-center xl:gap-[72px] xl:px-[80px]">
-          <div className="flex w-full flex-col gap-[60px] xl:w-auto xl:max-w-[460px] xl:shrink-0">
+        <div className="flex w-full max-w-[1520px] flex-col items-start gap-8 px-5 xl:flex-row xl:items-center xl:gap-18 xl:px-20">
+          <div className="flex w-full flex-col gap-8 xl:w-auto xl:max-w-115 xl:shrink-0 xl:gap-15">
             <h2
               className="text-[26px] font-medium leading-tight text-[#151515] sm:text-[32px] lg:text-[52px]"
               style={{ fontFamily: "var(--font-primary)" }}
             >
               {page.supportTitle}
             </h2>
+
+            {/* Mobile-only image — shown between title and body */}
+            <div className="relative aspect-video w-full overflow-hidden rounded-xs xl:hidden">
+              <Image src={page.supportImage} alt="Bespoke journey" fill className="object-cover" sizes="100vw" />
+            </div>
+
             <div className="flex flex-col gap-5">
-              <h3 className="text-[26px] font-medium leading-tight text-[#151515]" style={{ fontFamily: "var(--font-primary)" }}>
+              <h3 className="text-[22px] font-medium leading-tight text-[#151515]" style={{ fontFamily: "var(--font-primary)" }}>
                 {page.supportHeading}
               </h3>
-              <p className="text-[16px] leading-normal text-[#3d3d3d]" style={{ fontFamily: "var(--font-secondary)" }}>
+              <p className="text-[14px] lg:text-[16px] leading-normal text-dark-400" style={{ fontFamily: "var(--font-secondary)" }}>
                 {page.supportBody}
               </p>
-              <a href={page.supportButtonHref} className="mt-1 inline-flex h-[45px] w-fit items-center rounded-[2px] bg-[#824b2e] px-6 text-[18px] text-white" style={{ fontFamily: "var(--font-secondary)" }}>
+              <a
+                href={page.supportButtonHref}
+                className="mt-1 inline-flex h-11.25 w-fit items-center rounded-xs bg-[#824b2e] px-4 text-[14px] text-white xl:text-[18px]"
+                style={{ fontFamily: "var(--font-secondary)" }}
+              >
                 {page.supportButtonLabel}
               </a>
             </div>
           </div>
-          <div className="relative hidden flex-1 overflow-hidden rounded-r-[2px] xl:block" style={{ minHeight: 470 }}>
+
+          {/* Desktop-only image */}
+          <div className="relative hidden flex-1 overflow-hidden rounded-r-xs xl:block" style={{ minHeight: 470 }}>
             <Image src={page.supportImage} alt="Bespoke journey" fill className="object-cover" sizes="(max-width: 1280px) 0vw, 50vw" />
           </div>
         </div>

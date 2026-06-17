@@ -41,7 +41,7 @@ export function MobileMenu({
         <Portal>
         <div className="fixed inset-0 z-50 flex flex-col bg-[#f2ebe2]">
           <div className="flex items-center justify-between px-5 py-5 sm:px-8">
-            <Link href="/" onClick={() => setOpen(false)} className="relative block h-[23px] w-[152px] shrink-0">
+            <Link href="/" onClick={() => setOpen(false)} className="relative block h-[23px] w-[90px] lg:w-[152px] shrink-0">
               <Image src={logoSrc} alt="TIVOR" fill className="object-contain" />
             </Link>
             <button
@@ -61,7 +61,7 @@ export function MobileMenu({
                 key={label}
                 href={href}
                 onClick={() => setOpen(false)}
-                className={`py-4 text-[22px] text-[#151515] ${label === active ? "font-semibold" : ""}`}
+                className={`py-4 text-[15px] lg:text-[22px] text-[#151515] ${label === active ? "font-semibold" : ""}`}
                 style={{ fontFamily: "var(--font-primary)" }}
               >
                 {label}
@@ -81,7 +81,7 @@ export function MobileMenu({
             <Link
               href={solidAction.href}
               onClick={() => setOpen(false)}
-              className="flex h-[45px] items-center justify-center rounded-[2px] bg-[#151515] text-base text-white"
+              className="flex h-[45px] items-center justify-center rounded-[2px] bg-[#824B2E] text-base text-white"
               style={{ fontFamily: "var(--font-secondary)" }}
             >
               {solidAction.label}
