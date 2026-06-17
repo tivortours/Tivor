@@ -52,19 +52,19 @@ export default async function DestinationsPage() {
                 <div className="flex h-full flex-col justify-between p-6 xl:w-[493px] xl:shrink-0 xl:p-[40px]">
                   <div className="flex flex-col gap-5">
                     <h2
-                      className="text-[28px] font-semibold leading-none text-black"
+                      className="text-[20px] lg:text-[28px] font-semibold leading-none text-black"
                       style={{ fontFamily: "var(--font-primary)" }}
                     >
                       {dest.name}
                     </h2>
                     <p
-                      className="text-[14px] leading-normal text-[#3d3d3d]"
+                      className="text-[13px] lg:text-[14px] leading-normal text-[#3d3d3d]"
                       style={{ fontFamily: "var(--font-secondary)" }}
                     >
                       {dest.p1}
                     </p>
                     <p
-                      className="text-[14px] leading-normal text-[#3d3d3d]"
+                      className="text-[13px] lg:text-[14px] leading-normal text-[#3d3d3d]"
                       style={{ fontFamily: "var(--font-secondary)" }}
                     >
                       {dest.p2}
@@ -72,7 +72,7 @@ export default async function DestinationsPage() {
                   </div>
                   <div className="mt-6 xl:mt-0">
                     <span
-                      className="inline-flex items-center border-b border-[#714128] pb-[3px] text-[18px] text-[#714128]"
+                      className="inline-flex items-center border-b border-[#714128] pb-[3px] text-[15px] lg:text-[18px] text-[#714128]"
                       style={{ fontFamily: "var(--font-secondary)" }}
                     >
                       Discover More

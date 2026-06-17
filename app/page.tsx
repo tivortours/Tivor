@@ -43,13 +43,13 @@ export default async function HomePage() {
           <div className={`${shell} flex w-full justify-center pb-8 pt-40 sm:pb-20 lg:pb-24`}>
             <div className="max-w-[766px] text-center text-white">
               <h1
-                className=" leading-[1.02] text-[24px] xl:text-[56px]"
+                className=" leading-[1.02] text-[24px] xl:text-[48px]"
                 style={{ fontFamily: "var(--font-primary)" }}
               >
                 {home.heroTitle}
               </h1>
               <p
-                className="mx-auto mt-4 max-w-full text-[12px] xl:text-[22px]"
+                className="mx-auto mt-4 max-w-full text-[12px] xl:text-[16  px]"
                 style={{ fontFamily: "var(--font-secondary)" }}
               >
                 {home.heroSubtitle}
@@ -87,14 +87,15 @@ export default async function HomePage() {
 
       {/* ── Featured Destinations ─────────────────────────────────────────── */}
       <section className="relative overflow-hidden bg-[#f2ebe2]">
-        <Image
-          src="/heart.png"
-          alt=""
-          width={1050}
-          height={400}
-          className="pointer-events-none absolute left-0 top-0 select-none"
-        />
-        <div className={`${shell} ${section} flex flex-col gap-12 lg:gap-[72px]`}>
+        {/* Mobile heart */}
+        <div className="pointer-events-none absolute left-0 top-0 block sm:hidden">
+          <Image src="/heartvector.png" alt="" width={400} height={100} className="select-none" />
+        </div>
+        {/* Desktop heart */}
+        <div className="pointer-events-none absolute left-0 top-0 hidden sm:block">
+          <Image src="/heart.png" alt="" width={1050} height={400} className="select-none" />
+        </div>
+        <div className={`${shell} ${section} flex flex-col gap-12 pt-28 lg:pt-0 lg:gap-[72px]`}>
           <div data-reveal="up">
             <SectionHeading
               label={home.featuredDestinationsLabel}
