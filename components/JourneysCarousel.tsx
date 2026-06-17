@@ -51,7 +51,7 @@ export function JourneysCarousel({ journeys }: { journeys: Journey[] }) {
           <Link
             key={journey.title}
             href={`/journeys/${journey.slug}`}
-            className="group flex w-full flex-none flex-col gap-6 lg:w-[calc((100%-1.75rem)/2)]"
+            className="group flex w-[78vw] flex-none flex-col gap-6 sm:w-[calc((100%-1.75rem)/2)] lg:w-[calc((100%-1.75rem)/2)]"
           >
             <div className="space-y-8">
               <div

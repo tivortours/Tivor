@@ -76,7 +76,7 @@ export const HOME_PAGE_QUERY = defineQuery(`
     curatedJourneysTitle,
     curatedJourneysLinkLabel,
     curatedJourneysLinkHref,
-    featuredJourneys[]->{
+    "featuredJourneys": *[_type == "journey" && featuredOnHome == true]{
       "slug": slug.current,
       title,
       alt,
