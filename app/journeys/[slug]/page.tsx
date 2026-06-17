@@ -81,7 +81,7 @@ export default async function JourneyDetailPage({
           <div className="flex flex-col gap-12 xl:flex-row xl:gap-[88px] lg:px-16 xl:px-28">
 
             {/* Left — quick facts */}
-            <div className="order-2 xl:order-1 flex flex-col gap-8 xl:w-90 xl:shrink-0 xl:justify-between xl:gap-0 xl:self-stretch">
+            <div className="order-2 lg:order-1 flex flex-col gap-8 xl:w-90 xl:shrink-0 xl:justify-between xl:gap-0 xl:self-stretch">
               {duration && (
                 <div className="flex flex-col gap-1">
                   <p className="text-[13px] lg:text-base font-medium text-[#151515]" style={{ fontFamily: "var(--font-secondary)" }}>
@@ -128,7 +128,7 @@ export default async function JourneyDetailPage({
             </div>
 
             {/* Right — full description + CTA */}
-            <div className="flex flex-1 flex-col gap-12">
+            <div className="order-1 xl:order-2 flex flex-1 flex-col gap-12">
               <div
                 className="flex flex-col gap-5 text-[13px] lg:text-base leading-relaxed text-[#3d3d3d]"
                 style={{ fontFamily: "var(--font-secondary)" }}
