@@ -88,7 +88,7 @@ export function JourneysCarousel({ journeys }: { journeys: Journey[] }) {
                 style={{ backgroundColor: journey.accent.replace("bg-[", "").replace("]", "") }}
               >
                 <div className="space-y-3">
-                  {journey.details.map(([label, value]) => (
+                  {journey.details.filter(([label]) => /duration|best season|suited for/i.test(label)).map(([label, value]) => (
                     <div
                       key={label}
                       className="flex flex-row gap-1 sm:flex-row items-center justify-between"
