@@ -34,7 +34,7 @@ export default async function DestinationsPage() {
                 className={`flex overflow-hidden rounded-[2px] bg-[#fefefd] xl:h-[378px] ${
                   dest.imageFirst
                     ? "flex-col xl:flex-row"
-                    : "flex-col-reverse xl:flex-row-reverse"
+                    : "flex-col xl:flex-row-reverse"
                 }`}
               >
                 {/* Image */}

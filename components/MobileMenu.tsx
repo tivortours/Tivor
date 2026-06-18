@@ -61,7 +61,7 @@ export function MobileMenu({
                 key={label}
                 href={href}
                 onClick={() => setOpen(false)}
-                className={`py-4 text-[15px] lg:text-[22px] text-[#151515] ${label === active ? "font-semibold" : ""}`}
+                className={`py-4 text-[20px] lg:text-[22px] text-[#151515] ${label === active ? "font-semibold" : ""}`}
                 style={{ fontFamily: "var(--font-primary)" }}
               >
                 {label}

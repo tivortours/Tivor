@@ -49,7 +49,7 @@ export function TestimonialCarousel({ testimonials }: { testimonials: Testimonia
           <article
             key={testimonial.author}
             className={`flex w-full flex-shrink-0 snap-start flex-col gap-6 py-2 sm:w-1/2 sm:px-6 sm:py-6 xl:w-1/3 xl:px-7 xl:py-7 ${
-              index < testimonials.length - 1 ? "border-r border-[#cfbcad]" : ""
+              index < testimonials.length - 1 ? "sm:border-r sm:border-brown-300" : ""
             }`}
           >
             <Image

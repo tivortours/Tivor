@@ -159,11 +159,17 @@ export default async function DestinationDetailPage({
                       {j.title}
                     </h3>
                     <p
-                      className="text-[13px] lg:text-base leading-normal text-[#3d3d3d]"
+                      className="text-[13px] lg:text-base leading-normal text-[#3d3d3d] line-clamp-3"
                       style={{ fontFamily: "var(--font-secondary)" }}
                     >
                       {j.desc}
                     </p>
+                    <span
+                  className=" inline-flex w-fit items-center border-b border-brown-700 pb-0.5 text-[12px] text-brown-700"
+                  style={{ fontFamily: "var(--font-secondary)" }}
+                >
+                  Read More
+                </span>
                   </div>
                 </div>
 
@@ -174,7 +180,7 @@ export default async function DestinationDetailPage({
                       .map(([label, value]) => (
                         <div key={label} className="grid grid-cols-[auto_1fr] items-start gap-4">
                           <span
-                            className="text-[13px] lg:text-base text-dark-400"
+                            className="whitespace-nowrap text-[13px] lg:text-base text-dark-400"
                             style={{ fontFamily: "var(--font-secondary)" }}
                           >
                             {label}
@@ -229,7 +235,7 @@ export default async function DestinationDetailPage({
                 </div>
                 <div className="flex flex-col gap-1 lg:gap-4 lg:items-center">
                   <h3
-                    className="text-[18px] font-semibold leading-snug text-dark-500 lg:font-medium lg:text-[20px] xl:text-[27px]"
+                    className="text-[18px] font-semibold leading-snug text-dark-500 lg:font-medium lg:text-[20px] xl:text-[27px] "
                     style={{ fontFamily: "var(--font-primary)" }}
                   >
                     {f.title}

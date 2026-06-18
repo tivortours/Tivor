@@ -74,11 +74,17 @@ export function JourneysCarousel({ journeys }: { journeys: Journey[] }) {
                   {journey.title}
                 </h3>
                 <p
-                  className="text-[12px] lg:text-base leading-relaxed text-[#3d3d3d]"
+                  className="text-[12px] lg:text-base leading-relaxed text-[#3d3d3d] line-clamp-2 "
                   style={{ fontFamily: "var(--font-secondary)" }}
                 >
                   {journey.desc}
                 </p>
+                <span
+                  className=" inline-flex w-fit items-center border-b border-brown-700 pb-0.5 text-[12px] text-brown-700"
+                  style={{ fontFamily: "var(--font-secondary)" }}
+                >
+                  Read More
+                </span>
               </div>
             </div>
 

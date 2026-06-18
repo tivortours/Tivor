@@ -8,7 +8,6 @@ import { Diamond, LinkBtn, SectionHeading, SiteFooter, SiteHeader } from "./site
 import { TestimonialCarousel } from "../components/TestimonialCarousel";
 import { DestinationsCarousel } from "../components/DestinationsCarousel";
 import { JourneysCarousel } from "../components/JourneysCarousel";
-import Link from "next/link";
 
 export default async function HomePage() {
   const home = await getHomePageData();
@@ -116,10 +115,16 @@ export default async function HomePage() {
             className="flex flex-col gap-8 lg:flex-row lg:items-end lg:justify-between"
           >
             <SectionHeading label={home.curatedJourneysLabel} title={home.curatedJourneysTitle} />
-            <LinkBtn label={home.curatedJourneysLinkLabel} href={home.curatedJourneysLinkHref} />
+            <div className="hidden lg:block">
+              <LinkBtn label={home.curatedJourneysLinkLabel} href={home.curatedJourneysLinkHref} />
+            </div>
           </div>
 
           <JourneysCarousel journeys={home.featuredJourneys} />
+
+          <div className="lg:hidden">
+            <LinkBtn label={home.curatedJourneysLinkLabel} href={home.curatedJourneysLinkHref} />
+          </div>
         </div>
       </section>
 
@@ -224,10 +229,19 @@ export default async function HomePage() {
                 }
               />
               <div className="hidden lg:block">
-
-            <LinkBtn label={home.whyTravelLinkLabel} href={home.whyTravelLinkHref}   />
+                <LinkBtn label={home.whyTravelLinkLabel} href={home.whyTravelLinkHref} />
               </div>
-              {/* <LinkBtn label={home.whyTravelLinkLabel} href={home.whyTravelLinkHref} /> */}
+            </div>
+
+            {/* Mobile-only image after title */}
+            <div className="relative h-56 overflow-hidden rounded-xs lg:hidden">
+              <Image
+                src={home.whyTravelImage}
+                alt="Why travel with TIVOR"
+                fill
+                className="object-cover"
+                sizes="100vw"
+              />
             </div>
 
             <div className="grid gap-10 lg:grid-cols-[minmax(0,477px)_minmax(0,1fr)] lg:gap-18">
@@ -255,7 +269,7 @@ export default async function HomePage() {
               </div>
 
               <div
-                className="relative min-h-48 overflow-hidden rounded-xs lg:min-h-full"
+                className="relative hidden min-h-48 overflow-hidden rounded-xs lg:block lg:min-h-full"
                 data-reveal="scale"
                 data-delay="250"
               >

@@ -224,8 +224,7 @@ export async function SiteFooter() {
             </div>
           </div>
         </div>
-       
-       
+
       </div>
 
       <div className="bg-[#20282d]">
