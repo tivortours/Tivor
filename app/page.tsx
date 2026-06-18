@@ -17,7 +17,7 @@ export default async function HomePage() {
     <main className="flex w-full flex-col overflow-x-hidden">
 
       {/* ── Hero ──────────────────────────────────────────────────────────── */}
-      <section className="relative min-h-[384px] h-[384px] lg:min-h-screen lg:h-screen overflow-hidden bg-[#c0bebe]">
+      <section className="relative h-96 min-h-96 lg:h-[calc(100vh+2px)] overflow-hidden bg-[#c0bebe]">
         {home.heroVideo ? (
           <video
             autoPlay
@@ -39,7 +39,7 @@ export default async function HomePage() {
 
         <SiteHeader light />
 
-        <div className="relative z-10 flex min-h-[384px] lg:min-h-screen items-end justify-end">
+        <div className="relative z-10 flex min-h-96 lg:min-h-screen items-end justify-end">
           <div className={`${shell} flex w-full justify-center pb-8 pt-40 sm:pb-20 lg:pb-24`}>
             <div className="max-w-[766px] text-center text-white">
               <h1

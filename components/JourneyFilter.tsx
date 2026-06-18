@@ -44,11 +44,11 @@ function JourneyCard({ journey }: { journey: Journey }) {
             {journey.details
               .filter(([label]) => /duration|best season|suited for/i.test(label))
               .map(([label, value]) => (
-                <div key={label} className="flex items-center justify-between">
+                <div key={label} className="flex items-start justify-between">
                   <span className={`text-[13px] lg:text-[16px] ${labelColor}`} style={{ fontFamily: "var(--font-secondary)" }}>
                     {label}
                   </span>
-                  <span className={`text-[13px] lg:text-[16px] ${valueColor}`} style={{ fontFamily: "var(--font-secondary)" }}>
+                  <span className={`text-right text-[13px] lg:text-[16px] ${valueColor}`} style={{ fontFamily: "var(--font-secondary)" }}>
                     {value}
                   </span>
                 </div>

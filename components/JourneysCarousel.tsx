@@ -91,7 +91,7 @@ export function JourneysCarousel({ journeys }: { journeys: Journey[] }) {
                   {journey.details.filter(([label]) => /duration|best season|suited for/i.test(label)).map(([label, value]) => (
                     <div
                       key={label}
-                      className="flex flex-row gap-1 sm:flex-row items-center justify-between"
+                      className="flex items-start justify-between"
                     >
                       <span
                         className="text-[12px] lg:text-base text-[#3d3d3d]"
@@ -100,7 +100,7 @@ export function JourneysCarousel({ journeys }: { journeys: Journey[] }) {
                         {label}
                       </span>
                       <span
-                        className="text-[12px] lg:text-base text-[#151515]"
+                        className="text-right text-[12px] lg:text-base text-dark-500"
                         style={{ fontFamily: "var(--font-secondary)" }}
                       >
                         {value}

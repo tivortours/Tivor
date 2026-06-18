@@ -169,22 +169,24 @@ export default async function DestinationDetailPage({
 
                 <div>
                   <div className="flex flex-col gap-2 px-6 py-5">
-                    {j.details.map(([label, value]) => (
-                      <div key={label} className="flex items-center justify-between">
-                        <span
-                          className="text-[13px] lg:text-base text-[#3d3d3d]"
-                          style={{ fontFamily: "var(--font-secondary)" }}
-                        >
-                          {label}
-                        </span>
-                        <span
-                          className="text-[13px] lg:text-base text-[#151515]"
-                          style={{ fontFamily: "var(--font-secondary)" }}
-                        >
-                          {value}
-                        </span>
-                      </div>
-                    ))}
+                    {j.details
+                      .filter(([label]) => /duration|best season|suited for/i.test(label))
+                      .map(([label, value]) => (
+                        <div key={label} className="grid grid-cols-[auto_1fr] items-start gap-4">
+                          <span
+                            className="text-[13px] lg:text-base text-dark-400"
+                            style={{ fontFamily: "var(--font-secondary)" }}
+                          >
+                            {label}
+                          </span>
+                          <span
+                            className="text-right text-[13px] lg:text-base text-dark-500"
+                            style={{ fontFamily: "var(--font-secondary)" }}
+                          >
+                            {value}
+                          </span>
+                        </div>
+                      ))}
                   </div>
 
                   <div className="border-t border-[#9f9f9f]/50 p-5">
