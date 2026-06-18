@@ -170,9 +170,16 @@ export default async function AboutPage() {
                     sizes="(max-width: 640px) 100vw, 50vw"
                   />
                 </div>
-                <h3 className="text-[22px] font-semibold text-[#151515] xl:text-[24px]" style={{ fontFamily: "var(--font-primary)" }}>
-                  {founder.name}
-                </h3>
+                <div className="flex flex-col items-center gap-1">
+                  <h3 className="text-[22px] font-semibold text-dark-500 xl:text-[24px]" style={{ fontFamily: "var(--font-primary)" }}>
+                    {founder.name}
+                  </h3>
+                  {founder.role && (
+                    <p className="text-center text-[14px] text-dark-400" style={{ fontFamily: "var(--font-secondary)" }}>
+                      {founder.role}
+                    </p>
+                  )}
+                </div>
                 <p className="text-center text-[15px] leading-relaxed text-dark-400 xl:text-[16px]" style={{ fontFamily: "var(--font-secondary)" }}>
                   {founder.bio}
                 </p>

@@ -589,6 +589,19 @@ const aboutPage = defineType({
           type: "object",
           fields: [
             defineField({ name: "name", title: "Name", type: "string" }),
+            defineField({
+              name: "role",
+              title: "Role / Title",
+              type: "string",
+              options: {
+                list: [
+                  { title: "Founder", value: "Founder" },
+                  { title: "Co-Founder", value: "Co-Founder" },
+                  { title: "Managing Director", value: "Managing Director" },
+                  { title: "Director", value: "Director" },
+                ],
+              },
+            }),
             defineField({ name: "bio", title: "Bio", type: "text", rows: 4 }),
             imageField("image", "Image", "Best ratio: 451:370. Use a clean portrait or half-body crop."),
           ],

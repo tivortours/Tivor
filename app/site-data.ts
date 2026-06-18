@@ -240,7 +240,7 @@ type AboutPageData = {
   valuesTitle: string;
   values: { title: string; desc: string }[];
   foundersTitle: string;
-  founders: { img: string; name: string; bio: string }[];
+  founders: { img: string; name: string; role?: string; bio: string }[];
   ctaEyebrow: string;
   ctaTitle: string;
   ctaSubtitle: string;
@@ -861,6 +861,7 @@ export const getAboutPageData = cache(async (): Promise<AboutPageData> => {
     founders: data.founders?.length
       ? data.founders.map((item: any, index: number) => ({
           name: item.name,
+          role: item.role || undefined,
           bio: item.bio,
           img: imageUrl(item.image, 1000, 820, fallbackAboutPage.founders[index]?.img || ""),
         }))

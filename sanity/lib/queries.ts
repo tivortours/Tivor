@@ -384,6 +384,7 @@ export const ABOUT_PAGE_QUERY = defineQuery(`
     foundersTitle,
     founders[]{
       name,
+      role,
       bio,
       image
     },
