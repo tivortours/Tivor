@@ -303,14 +303,16 @@ export async function SiteFooter() {
           </div>
 
           {/* Bottom bar */}
-          <div className="flex flex-col items-center gap-5 border-t border-grey-400 pt-5 lg:flex-row lg:items-center lg:justify-between">
+          <div className="flex flex-col items-center gap-4 border-t border-grey-400 pt-5 lg:flex-row lg:items-center lg:justify-between">
 
-            {/* Social row */}
+            {/* Copyright — left on desktop */}
+            <span className="text-[12px] text-white lg:order-1 lg:text-sm" style={{ fontFamily: "var(--font-secondary)" }}>
+              {settings.footer.copyrightText}
+            </span>
+
+            {/* Social — center on desktop */}
             <div className="flex items-center gap-5 lg:order-2 lg:gap-8">
-              <span
-                className="text-[13px] font-semibold text-grey-300 lg:text-base"
-                style={{ fontFamily: "var(--font-secondary)" }}
-              >
+              <span className="text-[13px] font-semibold text-grey-300 lg:text-base" style={{ fontFamily: "var(--font-secondary)" }}>
                 {settings.footer.followLabel}
               </span>
               <div className="flex items-center gap-6">
@@ -322,15 +324,11 @@ export async function SiteFooter() {
               </div>
             </div>
 
-            <div className="flex flex-col gap-1.5 lg:order-1">
-              <span className="text-[12px] text-white lg:text-sm" style={{ fontFamily: "var(--font-secondary)" }}>
-                {settings.footer.copyrightText}
-              </span>
-              <p className="text-[12px] text-center lg:text-sm" style={{ fontFamily: "var(--font-secondary)" }}>
-                <span className="text-grey-300">Designed &amp; Developed By</span>
-                <span className="text-white"> mits</span>
-              </p>
-            </div>
+            {/* Designed & Developed — right on desktop */}
+            <p className="text-[12px] lg:order-3 lg:text-sm" style={{ fontFamily: "var(--font-secondary)" }}>
+              <span className="text-grey-300">Designed &amp; Developed By</span>
+              <span className="text-white"> mits</span>
+            </p>
 
           </div>
         </div>
