@@ -17,7 +17,7 @@ export default async function HomePage() {
     <main className="flex w-full flex-col overflow-x-hidden">
 
       {/* ── Hero ──────────────────────────────────────────────────────────── */}
-      <section className="relative min-h-[384px] h-[384px] lg:min-h-screen overflow-hidden bg-[#c0bebe]">
+      <section className="relative min-h-[384px] h-[384px] lg:min-h-screen lg:h-screen overflow-hidden bg-[#c0bebe]">
         {home.heroVideo ? (
           <video
             autoPlay
