@@ -57,7 +57,7 @@ export default async function JourneysPage() {
             >
               {page.supportTitle}
             </h2>
-             <div className="relative lg:hidden flex-1 overflow-hidden rounded-r-[2px] xl:block" style={{ minHeight: 200 }}>
+             <div className="relative lg:hidden flex-1 overflow-hidden rounded-r-[2px] lg:block" style={{ minHeight: 200 }}>
             <Image
               src={page.supportImage}
               alt="Bespoke journey"
