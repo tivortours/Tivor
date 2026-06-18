@@ -54,7 +54,8 @@ body {
     zoom: 0.8;
   }
 
-  html:not([data-browser-scale="transform"]):not([data-no-scale]) .min-h-screen {
+  html:not([data-browser-scale="transform"]):not([data-no-scale]) .min-h-screen,
+  html:not([data-browser-scale="transform"]):not([data-no-scale]) .lg\:min-h-screen {
     min-height: calc(100vh / var(--desktop-browser-scale));
   }
 
