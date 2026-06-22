@@ -24,7 +24,7 @@ function TestimonialModal({ testimonial, onClose }: { testimonial: Testimonial; 
     />
     {/* card */}
     <div
-      style={{ position: "fixed", top: "50%", left: "50%", transform: "translate(-50%, -50%)", zIndex: 9999, width: "calc(100% - 2rem)", maxWidth: "766px", maxHeight: "88vh", overflowY: "auto", borderRadius: "2px", backgroundColor: "#faf7f4", padding: "2.5rem" }}
+      style={{ position: "fixed", top: "50%", left: "50%", transform: "translate(-50%, -50%)", zIndex: 9999, width: "calc(100% - 2rem)", maxWidth: "766px", maxHeight: "88vh", overflowY: "auto", overscrollBehavior: "contain", borderRadius: "2px", backgroundColor: "#faf7f4", padding: "2.5rem" }}
       onClick={(e) => e.stopPropagation()}
     >
         <button
