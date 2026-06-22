@@ -74,8 +74,8 @@ export default async function HomePage() {
             className="max-w-[984px] space-y-5 text-[14px] leading-relaxed text-[#3d3d3d] sm:text-lg"
             style={{ fontFamily: "var(--font-secondary)" }}
           >
-            {home.introParagraphs.map((paragraph) => (
-              <p key={paragraph}>{paragraph}</p>
+            {home.introParagraphs.map((paragraph, i) => (
+              <p key={paragraph} style={i === 1 ? { maxWidth: "640px", margin: "0 auto" } : undefined}>{paragraph}</p>
             ))}
           </div>
           <div data-reveal="fade" data-delay="300">
