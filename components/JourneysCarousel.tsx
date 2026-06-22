@@ -48,7 +48,7 @@ export function JourneysCarousel({ journeys }: { journeys: Journey[] }) {
         className="flex gap-7 snap-x snap-mandatory overflow-x-auto scroll-smooth [scrollbar-width:none] [-ms-overflow-style:none] [&::-webkit-scrollbar]:hidden"
       >
         {journeys.map((journey, i) => {
-          const LIMIT = 120;
+          const LIMIT = 180;
           const preview = journey.desc.length > LIMIT
             ? journey.desc.slice(0, LIMIT).trimEnd() + "…"
             : journey.desc;
