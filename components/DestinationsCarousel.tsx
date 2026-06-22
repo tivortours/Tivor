@@ -36,22 +36,28 @@ export function DestinationsCarousel({ destinations }: { destinations: Destinati
   const scroll = (dir: "left" | "right") => {
     const el = scrollRef.current;
     if (!el) return;
-    const card = el.querySelector<HTMLElement>("article");
-    const amount = (card?.offsetWidth ?? 340) + 28;
-    el.scrollBy({ left: dir === "left" ? -amount : amount, behavior: "smooth" });
+    const cards = Array.from(el.querySelectorAll<HTMLElement>("a"));
+    if (!cards.length) return;
+    const scrollLeft = Math.round(el.scrollLeft);
+    const currentIdx = cards.findIndex(c => c.offsetLeft >= scrollLeft - 4);
+    const safeIdx = currentIdx < 0 ? cards.length - 1 : currentIdx;
+    const targetIdx = dir === "left"
+      ? Math.max(0, safeIdx - 1)
+      : Math.min(cards.length - 1, safeIdx + 1);
+    el.scrollTo({ left: cards[targetIdx].offsetLeft, behavior: "smooth" });
   };
 
   return (
     <div className="relative">
       <div
         ref={scrollRef}
-        className="flex gap-7 overflow-x-auto scroll-smooth [scrollbar-width:none] [-ms-overflow-style:none] [&::-webkit-scrollbar]:hidden"
+        className="flex gap-7 snap-x snap-mandatory overflow-x-auto scroll-smooth [scrollbar-width:none] [-ms-overflow-style:none] [&::-webkit-scrollbar]:hidden"
       >
         {destinations.map((dest, i) => (
           <Link
             key={dest.name}
             href={`/destinations/${dest.slug}`}
-            className="group flex w-full flex-none flex-col md:w-[calc((100%-1.75rem)/2)] lg:w-[calc((100%-3.5rem)/3)]"
+            className="group flex w-full flex-none snap-start flex-col md:w-[calc((100%-1.75rem)/2)] lg:w-[calc((100%-3.5rem)/3)]"
           >
             <div
               className="relative aspect-[1.2] lg:aspect-[0.92] overflow-hidden rounded-[2px]"
