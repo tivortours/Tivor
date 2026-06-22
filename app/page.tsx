@@ -276,6 +276,7 @@ export default async function HomePage() {
                     </p>
                   </div>
                 ))}
+                  <LinkBtn label={home.whyTravelLinkLabel} href={home.whyTravelLinkHref}  />
               </div>
 
               <div
@@ -293,7 +294,7 @@ export default async function HomePage() {
               </div>
               <div className="">
 
-             <LinkBtn label={home.whyTravelLinkLabel} href={home.whyTravelLinkHref}  />
+           
               </div>
             </div>
           </div>
