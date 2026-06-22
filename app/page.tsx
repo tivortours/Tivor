@@ -303,7 +303,7 @@ export default async function HomePage() {
 
       {/* ── Testimonials ──────────────────────────────────────────────────── */}
       <section className="bg-[#f2ebe2]">
-        <div className={`${shell} py-20 lg:py-[80px]`}>
+        <div className={`${shell} pb-20 pt-4 lg:py-[80px]`}>
           <div className="flex flex-col gap-12 lg:gap-[72px] lg:px-20 xl:px-28">
             <div data-reveal="up">
               <SectionHeading
