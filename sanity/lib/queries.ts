@@ -101,6 +101,7 @@ export const HOME_PAGE_QUERY = defineQuery(`
     aboutTitleLineTwo,
     aboutImage,
     aboutBody,
+    aboutTagline,
     aboutLinkLabel,
     aboutLinkHref,
     whyTravelLabel,
@@ -119,7 +120,8 @@ export const HOME_PAGE_QUERY = defineQuery(`
     testimonials[]{
       quote,
       body,
-      author
+      author,
+      location
     },
     finalCtaEyebrow,
     finalCtaTitle,

@@ -106,7 +106,7 @@ export type Inspiration = {
 };
 
 export type Experience = { img: string; label: string };
-export type Testimonial = { quote: string; body: string; author: string };
+export type Testimonial = { quote: string; body: string; author: string; location?: string };
 export type FooterColumn = { head: string; links: string[] };
 export type DestinationFeature = { img: string; title: string; desc: string };
 export type RecommendedExperience = { img: string; country: string; title: string };
@@ -172,6 +172,7 @@ type HomePageData = {
   aboutTitleLineTwo: string;
   aboutImage: string;
   aboutBody: string;
+  aboutTagline?: string;
   aboutLinkLabel: string;
   aboutLinkHref: string;
   whyTravelLabel: string;
@@ -693,6 +694,7 @@ export const getHomePageData = cache(async (): Promise<HomePageData> => {
     aboutTitleLineTwo: data.aboutTitleLineTwo || fallbackHomePage.aboutTitleLineTwo,
     aboutImage: imageUrl(data.aboutImage, 1800, 780, fallbackHomePage.aboutImage),
     aboutBody: data.aboutBody || fallbackHomePage.aboutBody,
+    aboutTagline: data.aboutTagline || undefined,
     aboutLinkLabel: data.aboutLinkLabel || fallbackHomePage.aboutLinkLabel,
     aboutLinkHref: data.aboutLinkHref || fallbackHomePage.aboutLinkHref,
     whyTravelLabel: data.whyTravelLabel || fallbackHomePage.whyTravelLabel,

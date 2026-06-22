@@ -48,7 +48,7 @@ export default async function HomePage() {
                 {home.heroTitle}
               </h1>
               <p
-                className="mx-auto mt-4 max-w-full text-[12px] xl:text-[16  px]"
+                className="mx-auto mt-4 max-w-full text-[12px] xl:text-[16px]"
                 style={{ fontFamily: "var(--font-secondary)" }}
               >
                 {home.heroSubtitle}
@@ -197,12 +197,22 @@ export default async function HomePage() {
             data-delay="200"
             className="flex flex-col gap-6 lg:flex-row lg:items-end lg:justify-between"
           >
-            <p
-              className="max-w-[744px] font-light text-[12px] lg:text-base text-white"
-            // style={{ fontFamily: "var(--font-secondary)" }}
-            >
-              {home.aboutBody}
-            </p>
+            <div className="flex flex-col gap-4 max-w-3/4">
+              <p
+                className="font-light text-[12px] lg:text-base text-white"
+                style={{ fontFamily: "var(--font-secondary)" }}
+              >
+                {home.aboutBody}
+              </p>
+              {home.aboutTagline && (
+                <p
+                   className=" text-[12px] lg:text-base text-white font-medium"
+                style={{ fontFamily: "var(--font-secondary)" }}
+                >
+                  {home.aboutTagline}
+                </p>
+              )}
+            </div>
             <LinkBtn label={home.aboutLinkLabel} href={home.aboutLinkHref} light />
           </div>
         </div>
@@ -228,9 +238,9 @@ export default async function HomePage() {
                   </>
                 }
               />
-              <div className="hidden lg:block">
+              {/* <div className="hidden lg:block">
                 <LinkBtn label={home.whyTravelLinkLabel} href={home.whyTravelLinkHref} />
-              </div>
+              </div> */}
             </div>
 
             {/* Mobile-only image after title */}
@@ -281,7 +291,7 @@ export default async function HomePage() {
                   sizes="(max-width: 1024px) 100vw, 50vw"
                 />
               </div>
-              <div className="lg:hidden">
+              <div className="">
 
              <LinkBtn label={home.whyTravelLinkLabel} href={home.whyTravelLinkHref}  />
               </div>

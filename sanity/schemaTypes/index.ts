@@ -118,6 +118,7 @@ const testimonial = defineType({
     defineField({ name: "quote", title: "Quote", type: "string", validation: (Rule) => Rule.required() }),
     defineField({ name: "body", title: "Body", type: "text", rows: 4, validation: (Rule) => Rule.required() }),
     defineField({ name: "author", title: "Author", type: "string", validation: (Rule) => Rule.required() }),
+    defineField({ name: "location", title: "Location (City, Country)", type: "string" }),
   ],
 });
 
@@ -440,6 +441,7 @@ const homePage = defineType({
     defineField({ name: "aboutTitleLineTwo", title: "About Title Line 2", type: "string" }),
     imageField("aboutImage", "About Image", "Best ratio: 1280:554. Use a wide editorial crop."),
     defineField({ name: "aboutBody", title: "About Body", type: "text", rows: 4 }),
+    defineField({ name: "aboutTagline", title: "About Tagline (line after body)", type: "string" }),
     defineField({ name: "aboutLinkLabel", title: "About Link Label", type: "string" }),
     defineField({ name: "aboutLinkHref", title: "About Link Link", type: "string" }),
     defineField({ name: "whyTravelLabel", title: "Why Travel Label", type: "string" }),
