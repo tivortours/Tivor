@@ -40,7 +40,7 @@ function TestimonialModal({ testimonial, onClose }: { testimonial: Testimonial; 
         <div style={{ display: "flex", flexDirection: "column", gap: "1.5rem" }}>
           <Image src="/Vector.svg" alt="5 stars" width={92} height={16} className="object-contain object-left" />
 
-          <p style={{ fontFamily: "var(--font-secondary)", fontSize: "22px", fontWeight: 600, lineHeight: 1.3, color: "#151515" }}>
+          <p className="text-[16px] lg:text-[22px]" style={{ fontFamily: "var(--font-secondary)", fontWeight: 600, lineHeight: 1.3, color: "#151515" }}>
             {testimonial.quote}
           </p>
 
@@ -140,7 +140,7 @@ export function TestimonialCarousel({ testimonials }: { testimonials: Testimonia
                   {hasMore && (
                     <button
                       onClick={() => setActive(testimonial)}
-                      className="ml-1 font-semibold text-dark-500"
+                      className="ml-1 font-semibold text-dark-500 cursor-pointer"
                       style={{ fontFamily: "var(--font-secondary)" }}
                     >
                       Read More

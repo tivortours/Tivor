@@ -197,7 +197,7 @@ export default async function HomePage() {
             data-delay="200"
             className="flex flex-col gap-6 lg:flex-row lg:items-end lg:justify-between"
           >
-            <div className="flex flex-col gap-4 max-w-3/4">
+            <div className="flex flex-col gap-4 lg:max-w-3/4">
               <p
                 className="font-light text-[12px] lg:text-base text-white"
                 style={{ fontFamily: "var(--font-secondary)" }}

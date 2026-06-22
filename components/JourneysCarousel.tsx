@@ -45,17 +45,24 @@ export function JourneysCarousel({ journeys }: { journeys: Journey[] }) {
     <div className="relative">
       <div
         ref={scrollRef}
-        className="flex gap-7 overflow-x-auto scroll-smooth [scrollbar-width:none] [-ms-overflow-style:none] [&::-webkit-scrollbar]:hidden"
+        className="flex gap-7 snap-x snap-mandatory overflow-x-auto scroll-smooth [scrollbar-width:none] [-ms-overflow-style:none] [&::-webkit-scrollbar]:hidden"
       >
-        {journeys.map((journey, i) => (
+        {journeys.map((journey, i) => {
+          const LIMIT = 120;
+          const preview = journey.desc.length > LIMIT
+            ? journey.desc.slice(0, LIMIT).trimEnd() + "…"
+            : journey.desc;
+          const hasMore = journey.desc.length > LIMIT;
+
+          return (
           <Link
             key={journey.title}
             href={`/journeys/${journey.slug}`}
-            className="group flex w-[78vw] flex-none flex-col gap-6 sm:w-[calc((100%-1.75rem)/2)] lg:w-[calc((100%-1.75rem)/2)]"
+            className="group flex w-full flex-none snap-start flex-col gap-6 sm:w-[calc((100%-1.75rem)/2)] lg:w-[calc((100%-1.75rem)/2)]"
           >
             <div className="space-y-8">
               <div
-                className="relative aspect-[1.2] lg:aspect-[1.7] overflow-hidden rounded-[2px]"
+                className="relative aspect-[1.2] lg:aspect-[1.7] overflow-hidden rounded-xs"
                 {...(i === 0 ? { "data-img": "" } : {})}
               >
                 <Image
@@ -68,29 +75,28 @@ export function JourneysCarousel({ journeys }: { journeys: Journey[] }) {
               </div>
               <div className="space-y-4">
                 <h3
-                  className="text-[18px] lg:text-[27px] font-semibold  leading-tight text-[#151515]"
+                  className="text-[18px] lg:text-[27px] font-semibold leading-tight text-dark-500"
                   style={{ fontFamily: "var(--font-primary)" }}
                 >
                   {journey.title}
                 </h3>
                 <p
-                  className="text-[12px] lg:text-base leading-relaxed text-[#3d3d3d] line-clamp-2 "
+                  className="text-[12px] lg:text-base leading-relaxed text-dark-400"
                   style={{ fontFamily: "var(--font-secondary)" }}
                 >
-                  {journey.desc}
+                  {preview}
+                  {hasMore && (
+                    <span className="ml-1 font-semibold text-dark-500" style={{ fontFamily: "var(--font-secondary)" }}>
+                      Read More
+                    </span>
+                  )}
                 </p>
-                <span
-                  className=" inline-flex w-fit items-center border-b border-brown-700 pb-0.5 text-[12px] text-brown-700"
-                  style={{ fontFamily: "var(--font-secondary)" }}
-                >
-                  Read More
-                </span>
               </div>
             </div>
 
             <div className="mt-auto space-y-6">
               <div
-                className="rounded-[2px] px-5 py-4 sm:px-6"
+                className="rounded-xs px-5 py-4 sm:px-6"
                 style={{ backgroundColor: journey.accent.replace("bg-[", "").replace("]", "") }}
               >
                 <div className="space-y-3">
@@ -100,7 +106,7 @@ export function JourneysCarousel({ journeys }: { journeys: Journey[] }) {
                       className="flex items-start justify-between"
                     >
                       <span
-                        className="text-[12px] lg:text-base text-[#3d3d3d]"
+                        className="text-[12px] lg:text-base text-dark-400"
                         style={{ fontFamily: "var(--font-secondary)" }}
                       >
                         {label}
@@ -117,7 +123,8 @@ export function JourneysCarousel({ journeys }: { journeys: Journey[] }) {
               </div>
             </div>
           </Link>
-        ))}
+          );
+        })}
       </div>
 
       {canScrollLeft && arrowTop > 0 && (

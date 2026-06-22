@@ -216,7 +216,7 @@ export async function SiteFooter() {
                 style={{ fontFamily: "var(--font-secondary)" }}
               />
               <button
-                className="h-11.25 shrink-0 rounded-xs bg-grey-500 px-6 text-base text-white sm:rounded-l-none sm:text-lg"
+                className="h-11.25 cursor-pointer shrink-0 rounded-xs bg-grey-500 px-6 text-base text-white sm:rounded-l-none sm:text-lg"
                 style={{ fontFamily: "var(--font-secondary)" }}
               >
                 {settings.newsletter.buttonLabel}
