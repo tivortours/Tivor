@@ -291,7 +291,7 @@ export async function SiteFooter() {
                   <Link
                     key={link}
                     href="#"
-                    className="whitespace-pre-line text-white lg:text-base xl:text-[18px]"
+                    className="w-fit whitespace-pre-line text-white lg:text-base xl:text-[18px]"
                     style={{ fontFamily: "var(--font-secondary)" }}
                   >
                     {link}
