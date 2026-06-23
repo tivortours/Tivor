@@ -197,7 +197,8 @@ export default async function HomePage() {
             data-delay="200"
             className="flex flex-col gap-6 lg:flex-row lg:items-end lg:justify-between"
           >
-            <div className="flex flex-col gap-4 lg:max-w-2/4">
+            <div className="flex flex-col">
+ <div className="flex flex-col gap-4 lg:max-w-[55%]">
               {home.aboutBody.map((para, i) => (
                 <p
                   key={i}
@@ -207,7 +208,9 @@ export default async function HomePage() {
                   {para}
                 </p>
               ))}
-              {home.aboutTagline?.map((line, i) => (
+               </div>
+               <div className="flex flex-col py-4 gap-1 lg:max-w-[55%]">
+ {home.aboutTagline?.map((line, i) => (
                 <p
                   key={i}
                   className="text-[12px] lg:text-base text-white font-medium"
@@ -216,7 +219,11 @@ export default async function HomePage() {
                   {line}
                 </p>
               ))}
+              
+             
             </div>
+            </div>
+           
             <LinkBtn label={home.aboutLinkLabel} href={home.aboutLinkHref} light />
           </div>
         </div>
