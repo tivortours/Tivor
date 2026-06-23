@@ -74,7 +74,7 @@ export function DestinationsCarousel({ destinations }: { destinations: Destinati
             <div className="flex flex-1 flex-col justify-between pt-5">
               <div className="space-y-3">
                 <h3
-                  className="text-[18px] lg:text-[27px] font-semibold leading-none text-black"
+                  className="text-[20px] lg:text-[27px] font-semibold leading-none text-black"
                   style={{ fontFamily: "var(--font-primary)" }}
                 >
                   {dest.name}
@@ -87,7 +87,7 @@ export function DestinationsCarousel({ destinations }: { destinations: Destinati
                 </p>
               </div>
               <div className="pt-2">
-
+          
               <span
                 className="inline-flex w-fit items-center border-b border-brown-700 pb-1 text-[12px] text-brown-700 sm:text-lg"
                 style={{ fontFamily: "var(--font-secondary)" }}
@@ -108,7 +108,7 @@ export function DestinationsCarousel({ destinations }: { destinations: Destinati
           style={{ top: arrowTop }}
         >
           <svg width="28" height="28" viewBox="0 0 28 28" fill="none" aria-hidden="true">
-            <path d="M17 21L10 14L17 7" stroke="#151515" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+            <path d="M17 21L10 14L17 7" stroke="#151515" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
           </svg>
         </button>
       )}
@@ -121,7 +121,7 @@ export function DestinationsCarousel({ destinations }: { destinations: Destinati
           style={{ top: arrowTop }}
         >
           <svg width="28" height="28" viewBox="0 0 28 28" fill="none" aria-hidden="true">
-            <path d="M11 7L18 14L11 21" stroke="#151515" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+            <path d="M11 7L18 14L11 21" stroke="#151515" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
           </svg>
         </button>
       )}
