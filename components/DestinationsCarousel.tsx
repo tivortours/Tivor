@@ -104,7 +104,7 @@ export function DestinationsCarousel({ destinations }: { destinations: Destinati
         <button
           onClick={() => scroll("left")}
           aria-label="Previous destinations"
-          className="absolute cursor-pointer left-0 z-10 -translate-x-5 sm:-translate-x-7 lg:-translate-x-10 xl:-translate-x-12 -translate-y-1/2"
+          className="absolute cursor-pointer left-0 z-10 -translate-x-6 sm:-translate-x-7 lg:-translate-x-10 xl:-translate-x-12 -translate-y-1/2"
           style={{ top: arrowTop }}
         >
           <svg width="28" height="28" viewBox="0 0 28 28" fill="none" aria-hidden="true">
@@ -117,7 +117,7 @@ export function DestinationsCarousel({ destinations }: { destinations: Destinati
         <button
           onClick={() => scroll("right")}
           aria-label="Next destinations"
-          className="absolute cursor-pointer right-0 z-10 translate-x-5 sm:translate-x-7 lg:translate-x-10 xl:translate-x-12 -translate-y-1/2"
+          className="absolute cursor-pointer right-0 z-10 translate-x-6 sm:translate-x-7 lg:translate-x-10 xl:translate-x-12 -translate-y-1/2"
           style={{ top: arrowTop }}
         >
           <svg width="28" height="28" viewBox="0 0 28 28" fill="none" aria-hidden="true">
