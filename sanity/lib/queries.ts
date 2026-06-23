@@ -369,9 +369,9 @@ export const ABOUT_PAGE_QUERY = defineQuery(`
     heroTagline,
     introTitle,
     introParagraphs,
+    "creatorsImage": creatorsImage.asset->url,
     pillars[]{
-      label,
-      icon
+      label
     },
     visionImage,
     visionTitle,

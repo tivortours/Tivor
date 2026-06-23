@@ -58,17 +58,19 @@ export default async function DestinationsPage() {
                       {dest.name}
                     </h2>
                     <p
-                      className="text-[13px] lg:text-[14px] leading-normal text-[#3d3d3d]"
+                      className="text-[13px] lg:text-[14px] leading-normal text-dark-400"
                       style={{ fontFamily: "var(--font-secondary)" }}
                     >
                       {dest.p1}
                     </p>
-                    <p
-                      className="text-[13px] lg:text-[14px] leading-normal text-[#3d3d3d]"
-                      style={{ fontFamily: "var(--font-secondary)" }}
-                    >
-                      {dest.p2}
-                    </p>
+                    {dest.p2 && (
+                      <p
+                        className="text-[13px] lg:text-[14px] leading-normal text-dark-400"
+                        style={{ fontFamily: "var(--font-secondary)" }}
+                      >
+                        {dest.p2}
+                      </p>
+                    )}
                   </div>
                   <div className="mt-6 xl:mt-0">
                     <span

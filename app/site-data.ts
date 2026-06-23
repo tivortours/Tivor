@@ -232,7 +232,8 @@ type AboutPageData = {
   heroTagline: string;
   introTitle: string;
   introParagraphs: string[];
-  pillars: { label: string; icon: string }[];
+  creatorsImage?: string;
+  pillars: { label: string }[];
   visionImage: string;
   visionTitle: string;
   visionBody: string;
@@ -386,7 +387,7 @@ const fallbackDestinationListings = [
     img: "https://www.figma.com/api/mcp/asset/8a9e4dc7-06c1-4851-9f2e-6266ed8074b4",
     imageFirst: true,
     p1: "From the iconic beauty of Lake Bled to the vibrant streets of Ljubljana, it offers a perfect blend of nature, culture, and tranquility.",
-    p2: "Explore medieval castles, serene alpine lakes, and lush meadows in one of Europe's most captivating hidden gems.",
+    p2: "",
   },
   {
     slug: "iceland",
@@ -394,7 +395,7 @@ const fallbackDestinationListings = [
     img: "https://www.figma.com/api/mcp/asset/ef73bc48-e2ea-42d2-9bd5-bbc50802d8b3",
     imageFirst: false,
     p1: "From the magical Northern Lights to its rugged natural beauty, every corner feels like a once-in-a-lifetime experience.",
-    p2: "Discover geothermal hot springs, dramatic waterfalls, and vast volcanic landscapes that stretch endlessly to the horizon.",
+    p2: "",
   },
   {
     slug: "norway",
@@ -402,7 +403,7 @@ const fallbackDestinationListings = [
     img: "https://www.figma.com/api/mcp/asset/d2a7b9fe-5534-42ba-9e3f-1d9f742ab879",
     imageFirst: true,
     p1: "From the Northern Lights in the Arctic to scenic train journeys through dramatic valleys, it offers unforgettable natural beauty at every turn.",
-    p2: "Sail through majestic fjords, trek across ancient glaciers, and witness the midnight sun over some of the world's most breathtaking coastlines.",
+    p2: "",
   },
 ];
 
@@ -442,9 +443,9 @@ const fallbackAboutPage: AboutPageData = {
     "Our approach is rooted in understanding what truly matters to you. Whether it's the quiet luxury of a secluded retreat, the thrill of exploring untouched landscapes, or meaningful cultural encounters, we curate each journey with care and intention. With a commitment to elegance, authenticity, and effortless service, we transform travel into something far more than a trip—it becomes a story that is entirely your own.",
   ],
   pillars: [
-    { label: "Sustainable", icon: "" },
-    { label: "Immersive", icon: "" },
-    { label: "Luxurious", icon: "" },
+    { label: "Sustainable" },
+    { label: "Immersive" },
+    { label: "Luxurious" },
   ],
   visionImage: "https://www.figma.com/api/mcp/asset/592f3717-6353-441d-bf2a-faecc206e492",
   visionTitle: "The Vision",
@@ -759,7 +760,7 @@ export const getDestinationListings = cache(async () => {
     img: imageUrl(item.listingImage, 1200, 900, fallbackDestinationListings[index]?.img || ""),
     imageFirst: item.listingImageFirst ?? fallbackDestinationListings[index]?.imageFirst ?? true,
     p1: item.listingBody1 || fallbackDestinationListings[index]?.p1 || item.blurb,
-    p2: item.listingBody2 || fallbackDestinationListings[index]?.p2 || item.tone,
+    p2: item.listingBody2 || fallbackDestinationListings[index]?.p2 || "",
   }));
 });
 
@@ -845,11 +846,12 @@ export const getAboutPageData = cache(async (): Promise<AboutPageData> => {
     heroTagline: data.heroTagline || fallbackAboutPage.heroTagline,
     introTitle: data.introTitle || fallbackAboutPage.introTitle,
     introParagraphs: data.introParagraphs?.length ? data.introParagraphs : fallbackAboutPage.introParagraphs,
+    creatorsImage: data.creatorsImage || undefined,
     pillars: data.pillars?.length
       ? data.pillars.map((p: any) =>
           p != null && typeof p === "object"
-            ? { label: p.label || "", icon: imageUrl(p.icon, 100, undefined, "") }
-            : { label: String(p || ""), icon: "" }
+            ? { label: p.label || "" }
+            : { label: String(p || "") }
         )
       : fallbackAboutPage.pillars,
     visionImage: imageUrl(data.visionImage, 1600, 980, fallbackAboutPage.visionImage),

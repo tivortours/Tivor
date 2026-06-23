@@ -546,6 +546,7 @@ const aboutPage = defineType({
       type: "array",
       of: [defineArrayMember({ type: "text", rows: 4 })],
     }),
+    imageField("creatorsImage", "Creators Of Image", "Handwritten / decorative image for the 'Creators of Remarkable Travel Experiences' panel. Transparent PNG or SVG recommended."),
     defineField({
       name: "pillars",
       title: "Pillars",
@@ -555,7 +556,6 @@ const aboutPage = defineType({
           type: "object",
           fields: [
             defineField({ name: "label", title: "Label", type: "string", validation: (Rule) => Rule.required() }),
-            imageField("icon", "Icon", "Leaf or branch icon. Transparent PNG recommended, ~100×100px."),
           ],
         }),
       ],

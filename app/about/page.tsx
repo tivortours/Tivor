@@ -39,29 +39,45 @@ export default async function AboutPage() {
       <section className="w-full py-[120px]">
         <div className={`${shell}`}>
           <div className="flex flex-col gap-12 xl:flex-row xl:items-start xl:justify-between xl:gap-[72px] px-0 xl:px-28">
+                   {/* LEFT: title + paragraphs */}
+   {page.creatorsImage && (
+              <div className="flex shrink-0 items-center justify-center xl:w-95">
+                <Image
+                  src={page.creatorsImage}
+                  alt="Creators of Remarkable Travel Experiences"
+                  width={380}
+                  height={420}
+                  className="w-full object-contain"
+                />
+              </div>
+            )}
 
-           <div className="flex flex-col gap-12 xl:flex-col xl:items-start">
-  <h1
-              className="shrink-0 text-[26px] leading-tight text-[#151515] sm:text-[32px] xl:w-[326px] xl:text-[48px]  text-start"
-              style={{ fontFamily: "var(--font-primary)" }}
-            >
-              {page.introTitle}
-            </h1>
-             <h3>
-              CREATORS OF <br />
-              <span className="font-semibold">Remarkable  Travel Experiences</span>
-             </h3>
-           </div>
-          
+     
+                {/* RIGHT: Creators Of image */}
 
-            <div
-              className="flex flex-col gap-10 text-[13px] lg:text-[16px] leading-relaxed text-dark-400 xl:max-w-131.75"
-              style={{ fontFamily: "var(--font-secondary)" }}
-            >
-              {page.introParagraphs.map((paragraph) => (
-                <p key={paragraph}>{paragraph}</p>
-              ))}
+            <div className="flex flex-col gap-10 xl:max-w-140">
+              <h1
+                className="text-[26px] leading-tight text-dark-500 sm:text-[32px] xl:text-[48px]"
+                style={{ fontFamily: "var(--font-primary)" }}
+              >
+                {page.introTitle.includes("&") ? (
+                  <>
+                    {page.introTitle.split("&")[0].trim()} &<br />
+                    {page.introTitle.split("&").slice(1).join("&").trim()}
+                  </>
+                ) : page.introTitle}
+              </h1>
+              <div
+                className="flex flex-col gap-10 text-[13px] lg:text-[16px] leading-relaxed text-dark-400"
+                style={{ fontFamily: "var(--font-secondary)" }}
+              >
+                {page.introParagraphs.map((paragraph) => (
+                  <p key={paragraph}>{paragraph}</p>
+                ))}
+              </div>
             </div>
+        
+         
           </div>
         </div>
       </section>
@@ -75,11 +91,6 @@ export default async function AboutPage() {
                 <div className="mx-3 h-7 w-px bg-[#cfbcad] sm:mx-6 sm:h-10 lg:mx-10 lg:h-12 xl:mx-14 xl:h-14" />
               ) : null}
               <div className="flex flex-col items-center gap-3 sm:flex-row sm:gap-2.5 lg:gap-3 xl:gap-4">
-                {pillar.icon ? (
-                  <div className="relative h-6 w-6 shrink-0 sm:h-5 sm:w-5 lg:h-10 lg:w-10 xl:h-12 xl:w-12">
-                    <Image src={pillar.icon} alt="" fill className="object-contain" sizes="62px" />
-                  </div>
-                ) : null}
                 <span
                   className="text-[20px] text-dark-500 sm:text-[15px] lg:text-[26px] xl:text-[32px]"
                   style={{ fontFamily: "var(--font-primary)" }}
@@ -93,9 +104,9 @@ export default async function AboutPage() {
       </section>
 
       {/* ── Vision & Mission ─────────────────────────────────────────────── */}
-      <section className="w-full pt-[80px]">
+      <section className="w-full pt-[80px] bg-[#F7F4F1] xl:bg-transparent">
         <div className={shell}>
-          <div className="-mx-5 sm:-mx-8 xl:mx-0 overflow-hidden rounded-none xl:rounded-xs bg-[#f7f4f1] xl:p-20">
+          <div className=" sm:-mx-8 xl:mx-0 overflow-hidden rounded-none xl:rounded-xs bg-[#f7f4f1]  xl:p-20">
             <div className="grid grid-cols-1 items-center xl:grid-cols-[minmax(0,1.2fr)_minmax(0,1fr)] xl:gap-24">
 
             <div className="relative aspect-[895/585] w-full  overflow-hidden xl:rounded-xs">

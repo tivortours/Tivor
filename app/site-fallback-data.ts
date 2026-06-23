@@ -31,7 +31,7 @@ export const destinations = [
       "From the iconic beauty of Lake Bled to the vibrant streets of Ljubljana, it offers a perfect blend of nature, culture, and tranquility.",
     region: "Central Europe",
     bestSeason: "April - October",
-    tone: "Emerald lakes, alpine villages, and elegant city breaks.",
+    tone: "",
     detail: {
       heroImg: "https://www.figma.com/api/mcp/asset/891483a7-9e36-4416-a42a-59bc5630effc",
       heroTitle: "Europe's Hidden Gem",
@@ -56,7 +56,7 @@ export const destinations = [
       "From the magical Northern Lights to its rugged natural beauty, every corner feels like a once-in-a-lifetime experience.",
     region: "Nordic Atlantic",
     bestSeason: "September - April",
-    tone: "Volcanic landscapes, glacier adventures, and dramatic winter skies.",
+    tone: "",
     detail: {
       heroImg: IMG.iceland,
       heroTitle: "Land of Fire and Ice",
@@ -78,7 +78,7 @@ export const destinations = [
       "From the Northern Lights in the Arctic to scenic train journeys through dramatic valleys, it offers unforgettable natural beauty at every turn.",
     region: "Scandinavia",
     bestSeason: "May - September",
-    tone: "Fjords, design-led stays, and cinematic road journeys.",
+    tone: "",
     detail: {
       heroImg: IMG.norway,
       heroTitle: "The Land of Fjords",
