@@ -198,20 +198,24 @@ export default async function HomePage() {
             className="flex flex-col gap-6 lg:flex-row lg:items-end lg:justify-between"
           >
             <div className="flex flex-col gap-4 lg:max-w-3/4">
-              <p
-                className="font-light text-[12px] lg:text-base text-white"
-                style={{ fontFamily: "var(--font-secondary)" }}
-              >
-                {home.aboutBody}
-              </p>
-              {home.aboutTagline && (
+              {home.aboutBody.map((para, i) => (
                 <p
-                   className=" text-[12px] lg:text-base text-white font-medium"
-                style={{ fontFamily: "var(--font-secondary)" }}
+                  key={i}
+                  className="font-light text-[12px] lg:text-base text-white"
+                  style={{ fontFamily: "var(--font-secondary)" }}
                 >
-                  {home.aboutTagline}
+                  {para}
                 </p>
-              )}
+              ))}
+              {home.aboutTagline?.map((line, i) => (
+                <p
+                  key={i}
+                  className="text-[12px] lg:text-base text-white font-medium"
+                  style={{ fontFamily: "var(--font-secondary)" }}
+                >
+                  {line}
+                </p>
+              ))}
             </div>
             <LinkBtn label={home.aboutLinkLabel} href={home.aboutLinkHref} light />
           </div>

@@ -171,8 +171,8 @@ type HomePageData = {
   aboutTitleLineOne: string;
   aboutTitleLineTwo: string;
   aboutImage: string;
-  aboutBody: string;
-  aboutTagline?: string;
+  aboutBody: string[];
+  aboutTagline?: string[];
   aboutLinkLabel: string;
   aboutLinkHref: string;
   whyTravelLabel: string;
@@ -349,8 +349,9 @@ const fallbackHomePage: HomePageData = {
   aboutTitleLineOne: "We Are A",
   aboutTitleLineTwo: "Luxury Tour Company",
   aboutImage: fallback.IMG.aboutHero,
-  aboutBody:
+  aboutBody: [
     "We plan to provide our customers with customized, high-end travel plans by listening to our customers' needs and design a travel plan especially for them. By mixing the local identity with our touches of luxury we provide one-of-a-kind experiences.",
+  ],
   aboutLinkLabel: "Read More",
   aboutLinkHref: "/about",
   whyTravelLabel: "WHY TRAVEL WITH US",
@@ -694,8 +695,8 @@ export const getHomePageData = cache(async (): Promise<HomePageData> => {
     aboutTitleLineOne: data.aboutTitleLineOne || fallbackHomePage.aboutTitleLineOne,
     aboutTitleLineTwo: data.aboutTitleLineTwo || fallbackHomePage.aboutTitleLineTwo,
     aboutImage: imageUrl(data.aboutImage, 1800, 780, fallbackHomePage.aboutImage),
-    aboutBody: data.aboutBody || fallbackHomePage.aboutBody,
-    aboutTagline: data.aboutTagline || undefined,
+    aboutBody: Array.isArray(data.aboutBody) && data.aboutBody.length ? data.aboutBody : fallbackHomePage.aboutBody,
+    aboutTagline: Array.isArray(data.aboutTagline) && data.aboutTagline.length ? data.aboutTagline : undefined,
     aboutLinkLabel: data.aboutLinkLabel || fallbackHomePage.aboutLinkLabel,
     aboutLinkHref: data.aboutLinkHref || fallbackHomePage.aboutLinkHref,
     whyTravelLabel: data.whyTravelLabel || fallbackHomePage.whyTravelLabel,
