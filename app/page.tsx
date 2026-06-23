@@ -209,7 +209,7 @@ export default async function HomePage() {
                 </p>
               ))}
                </div>
-               <div className="flex flex-col py-4 gap-1 lg:max-w-[55%]">
+               <div className="flex flex-col py-6 gap-1 lg:max-w-[55%]">
  {home.aboutTagline?.map((line, i) => (
                 <p
                   key={i}
