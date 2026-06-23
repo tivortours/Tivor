@@ -92,7 +92,7 @@ export default async function AboutPage() {
               ) : null}
               <div className="flex flex-col items-center gap-3 sm:flex-row sm:gap-2.5 lg:gap-3 xl:gap-4">
                 <span
-                  className="text-[20px] text-dark-500 sm:text-[15px] lg:text-[26px] xl:text-[32px]"
+                  className="text-[20px] text-dark-500 sm:text-[15px] lg:text-[26px] xl:text-[32px] font-medium"
                   style={{ fontFamily: "var(--font-primary)" }}
                 >
                   {pillar.label}
