@@ -71,7 +71,7 @@ export default async function HomePage() {
           <div
             data-reveal="up"
             data-delay="150"
-            className="max-w-[984px] space-y-5 text-[14px] leading-relaxed text-[#3d3d3d] sm:text-lg"
+            className="max-w-[884px] space-y-5 text-[14px] leading-relaxed text-[#3d3d3d] sm:text-lg"
             style={{ fontFamily: "var(--font-secondary)" }}
           >
             {home.introParagraphs.map((paragraph, i) => (
