@@ -250,10 +250,16 @@ type AboutPageData = {
 };
 
 function imageUrl(source: unknown, width: number, height?: number, fallbackUrl = "") {
-  const builder = urlForImage(source as { asset?: unknown } | null);
+  const src = source as { asset?: unknown } | null;
+  if (!src?.asset) return fallbackUrl;
+  const builder = urlForImage(src);
   if (!builder) return fallbackUrl;
   const sized = height ? builder.width(width).height(height).fit("crop") : builder.width(width).fit("max");
-  return sized.url();
+  try {
+    return sized.url();
+  } catch {
+    return fallbackUrl;
+  }
 }
 
 async function fetchSanity<T>(query: string, params?: Record<string, unknown>, tags?: string[]) {
