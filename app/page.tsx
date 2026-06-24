@@ -40,10 +40,10 @@ export default async function HomePage() {
 
         <div className="relative z-10 flex min-h-96 lg:min-h-screen items-end justify-end">
           <div className={`${shell} flex w-full justify-center pb-8 pt-40 sm:pb-20 lg:pb-24`}>
-            <div className="max-w-[766px] text-center text-white">
+            <div className="max-w-full text-center text-white">
               <h1
-                className=" leading-[1.02] text-[24px] xl:text-[48px]"
-                style={{ fontFamily: "var(--font-primary)" }}
+                className=" leading-[1.02] text-[35px] lg:text-[90px]"
+                style={{ fontFamily: "CoastalFree, var(--font-primary)" }}
               >
                 {home.heroTitle}
               </h1>
@@ -198,32 +198,32 @@ export default async function HomePage() {
             className="flex flex-col gap-6 lg:flex-row lg:items-end lg:justify-between"
           >
             <div className="flex flex-col">
- <div className="flex flex-col gap-4 lg:max-w-[58%]">
-              {home.aboutBody.map((para, i) => (
-                <p
-                  key={i}
-                  className="font-light text-[12px] lg:text-base text-white"
-                  style={{ fontFamily: "var(--font-secondary)" }}
-                >
-                  {para}
-                </p>
-              ))}
-               </div>
-               <div className="flex flex-col py-6 gap-1 lg:max-w-[55%]">
- {home.aboutTagline?.map((line, i) => (
-                <p
-                  key={i}
-                  className="text-[12px] lg:text-base text-white font-medium"
-                  style={{ fontFamily: "var(--font-secondary)" }}
-                >
-                  {line}
-                </p>
-              ))}
-              
-             
+              <div className="flex flex-col gap-4 lg:max-w-[58%]">
+                {home.aboutBody.map((para, i) => (
+                  <p
+                    key={i}
+                    className="font-light text-[12px] lg:text-base text-white"
+                    style={{ fontFamily: "var(--font-secondary)" }}
+                  >
+                    {para}
+                  </p>
+                ))}
+              </div>
+              <div className="flex flex-col py-6 gap-1 lg:max-w-[55%]">
+                {home.aboutTagline?.map((line, i) => (
+                  <p
+                    key={i}
+                    className="text-[12px] lg:text-base text-white font-medium"
+                    style={{ fontFamily: "var(--font-secondary)" }}
+                  >
+                    {line}
+                  </p>
+                ))}
+
+
+              </div>
             </div>
-            </div>
-           
+
             <LinkBtn label={home.aboutLinkLabel} href={home.aboutLinkHref} light />
           </div>
         </div>
@@ -287,7 +287,7 @@ export default async function HomePage() {
                     </p>
                   </div>
                 ))}
-                 
+
               </div>
 
               <div
@@ -304,8 +304,8 @@ export default async function HomePage() {
                 />
               </div>
               <div className="">
- <LinkBtn label={home.whyTravelLinkLabel} href={home.whyTravelLinkHref}  />
-           
+                <LinkBtn label={home.whyTravelLinkLabel} href={home.whyTravelLinkHref} />
+
               </div>
             </div>
           </div>
