@@ -68,7 +68,7 @@ export default async function AboutPage() {
                 ) : page.introTitle}
               </h1>
               <div
-                className="flex flex-col gap-10 text-[13px] lg:text-[16px] leading-relaxed text-dark-400"
+                className="flex flex-col gap-4 text-[13px] lg:text-[16px] leading-relaxed text-dark-400"
                 style={{ fontFamily: "var(--font-secondary)" }}
               >
                 {page.introParagraphs.map((paragraph) => (
