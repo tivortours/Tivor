@@ -42,8 +42,8 @@ export default async function HomePage() {
           <div className={`${shell} flex w-full justify-center pb-8 pt-40 sm:pb-20 lg:pb-24`}>
             <div className="max-w-full text-center text-white">
               <h1
-                className=" leading-[1.02] text-[35px] lg:text-[90px]"
-                style={{ fontFamily: "CoastalFree, var(--font-primary)" }}
+                className=" leading-[1.02] text-[35px] lg:text-[48px]"
+             style={{ fontFamily: "var(--font-primary)" }}
               >
                 {home.heroTitle}
               </h1>
@@ -213,7 +213,7 @@ export default async function HomePage() {
                 {home.aboutTagline?.map((line, i) => (
                   <p
                     key={i}
-                    className="text-[12px] lg:text-base text-white font-medium"
+                    className="text-[14px] lg:text-[18px] text-white font-medium"
                     style={{ fontFamily: "var(--font-secondary)" }}
                   >
                     {line}
@@ -287,7 +287,10 @@ export default async function HomePage() {
                     </p>
                   </div>
                 ))}
+<div className="">
+                <LinkBtn label={home.whyTravelLinkLabel} href={home.whyTravelLinkHref} />
 
+              </div>
               </div>
 
               <div
@@ -303,10 +306,7 @@ export default async function HomePage() {
                   sizes="(max-width: 1024px) 100vw, 50vw"
                 />
               </div>
-              <div className="">
-                <LinkBtn label={home.whyTravelLinkLabel} href={home.whyTravelLinkHref} />
-
-              </div>
+              
             </div>
           </div>
         </div>
