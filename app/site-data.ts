@@ -36,7 +36,6 @@ export type Destination = {
     heroImg: string;
     heroTitle: string;
     heroSubtitle: string;
-    scriptImg: string | null;
     desc1: string;
     desc2: string;
     gallery: [string, string];
@@ -296,7 +295,6 @@ function mapDestination(item: any): Destination {
       heroImg: imageUrl(item.detailHeroImage, 2000, 1200, ""),
       heroTitle: item.detailHeroTitle,
       heroSubtitle: item.detailHeroSubtitle,
-      scriptImg: item.detailScriptImage ? imageUrl(item.detailScriptImage, 500) : null,
       desc1: item.detailDescription1,
       desc2: item.detailDescription2,
       gallery: [

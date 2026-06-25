@@ -181,7 +181,6 @@ const destination = defineType({
     imageField("detailHeroImage", "Detail Hero Image", "Best ratio: 16:9 or wider. Minimum 2000px wide recommended."),
     defineField({ name: "detailHeroTitle", title: "Detail Hero Title", type: "string" }),
     defineField({ name: "detailHeroSubtitle", title: "Detail Hero Subtitle", type: "string" }),
-    imageField("detailScriptImage", "Decorative Script Image", "Optional transparent artwork used beside the destination story."),
     defineField({ name: "detailDescription1", title: "Detail Paragraph 1", type: "text", rows: 5 }),
     defineField({ name: "detailDescription2", title: "Detail Paragraph 2", type: "text", rows: 5 }),
     defineField({

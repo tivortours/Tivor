@@ -11,6 +11,7 @@ import {
 } from "../../site-data";
 import { SiteHeader, SiteFooter } from "../../site-ui";
 import { GalleryCarousel } from "./GalleryCarousel";
+import { DestinationJourneyCarousel } from "./DestinationJourneyCarousel";
 import { TestimonialCarousel } from "../../../components/TestimonialCarousel";
 
 export async function generateStaticParams() {
@@ -91,24 +92,15 @@ export default async function DestinationDetailPage({
           </div>
 
           {/* Script name + description */}
-          <div className="flex flex-col items-start px-0 lg:px-5 py-0 lg:py-5 gap-y-2.5 xl:px-0">
-            {dest.detail.scriptImg ? (
-              // eslint-disable-next-line @next/next/no-img-element
-              <img
-                src={dest.detail.scriptImg}
-                alt={dest.name}
-                className="-mb-3 block max-w-40 xl:max-w-55"
-              />
-            ) : (
-              <p
-                className="mb-2 text-[48px] italic leading-none text-[#3d3d3d] xl:text-[64px]"
-                style={{ fontFamily: "var(--font-primary)" }}
-              >
-                {dest.name}
-              </p>
-            )}
+          <div className="flex flex-col items-start gap-y-2.5">
+            <p
+              className="text-[48px] leading-none text-[#824B2E] xl:text-[137px]"
+              style={{ fontFamily: "CoastalFree, var(--font-primary)" }}
+            >
+              {dest.name}
+            </p>
             <div
-              className="w-full max-w-[957px] text-center text-[13px] lg:text-base leading-normal text-[#3d3d3d] pt-5"
+              className="w-full max-w-[957px] text-center text-[13px] lg:text-base leading-normal text-dark-400 pt-5"
               style={{ fontFamily: "var(--font-secondary)" }}
             >
               <p>{dest.detail.desc1}</p>
@@ -134,80 +126,8 @@ export default async function DestinationDetailPage({
             Crafted Journeys, Felt for a Lifetime
           </h2>
 
-          <div className="-mx-5 sm:-mx-8 lg:mx-0">
-            <div className="flex gap-5 overflow-x-auto px-5 pb-3 sm:px-8 lg:grid lg:grid-cols-3 lg:gap-7 lg:overflow-visible lg:px-0 lg:pb-0">
-            {shownJourneys.map((j) => (
-              <div
-                key={j.title}
-                className="w-[78vw] shrink-0 flex flex-col justify-between rounded-[2px] border border-[#9f9f9f]/50 lg:w-auto"
-              >
-                <div className="flex flex-col gap-2">
-                  <div className="relative h-[260px] w-full overflow-hidden rounded-t-[2px] xl:h-[260px]">
-                    <Image
-                      src={j.img}
-                      alt={j.alt}
-                      fill
-                      className="object-cover"
-                      sizes="(max-width: 1024px) 100vw, 50vw"
-                    />
-                  </div>
-                  <div className="flex flex-col gap-2 px-6">
-                    <h3
-                      className="text-[20px] lg:text-[22px] font-semibold  text-[#151515] xl:text-[26px]"
-                      style={{ fontFamily: "var(--font-primary)" }}
-                    >
-                      {j.title}
-                    </h3>
-                    <p
-                      className="text-[13px] lg:text-base leading-normal text-[#3d3d3d] line-clamp-3"
-                      style={{ fontFamily: "var(--font-secondary)" }}
-                    >
-                      {j.desc}
-                    </p>
-                    <span
-                  className=" inline-flex w-fit items-center border-b border-brown-700 pb-0.5 text-[12px] text-brown-700"
-                  style={{ fontFamily: "var(--font-secondary)" }}
-                >
-                  Read More
-                </span>
-                  </div>
-                </div>
-
-                <div>
-                  <div className="flex flex-col gap-2 px-6 py-5">
-                    {j.details
-                      .filter(([label]) => /duration|best season|suited for/i.test(label))
-                      .map(([label, value]) => (
-                        <div key={label} className="grid grid-cols-[auto_1fr] items-start gap-4">
-                          <span
-                            className="whitespace-nowrap text-[13px] lg:text-base text-dark-400"
-                            style={{ fontFamily: "var(--font-secondary)" }}
-                          >
-                            {label}
-                          </span>
-                          <span
-                            className="text-right text-[13px] lg:text-base text-dark-500"
-                            style={{ fontFamily: "var(--font-secondary)" }}
-                          >
-                            {value}
-                          </span>
-                        </div>
-                      ))}
-                  </div>
-
-                  <div className="border-t border-[#9f9f9f]/50 p-5">
-                    <Link
-                      href={`/journeys/${j.slug}`}
-                      className="flex h-[45px] w-full items-center justify-center rounded-[2px] bg-[#824b2e] text-[15px] lg:text-base text-white xl:text-[18px]"
-                      style={{ fontFamily: "var(--font-secondary)" }}
-                    >
-                      Explore Journey
-                    </Link>
-                  </div>
-                </div>
-              </div>
-            ))}
-            </div>
+          <div className="relative -mx-5 sm:-mx-8 lg:-mx-10 xl:-mx-16 px-5 sm:px-8 lg:px-10 xl:px-16">
+            <DestinationJourneyCarousel journeys={shownJourneys} />
           </div>
           </div>
         </div>
