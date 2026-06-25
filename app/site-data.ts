@@ -38,7 +38,7 @@ export type Destination = {
     heroSubtitle: string;
     desc1: string;
     desc2: string;
-    gallery: [string, string];
+    gallery: string[];
     ctaImg: string;
   };
 };
@@ -297,10 +297,7 @@ function mapDestination(item: any): Destination {
       heroSubtitle: item.detailHeroSubtitle,
       desc1: item.detailDescription1,
       desc2: item.detailDescription2,
-      gallery: [
-        imageUrl(item.detailGallery?.[0], 1600, 1100, ""),
-        imageUrl(item.detailGallery?.[1], 1600, 1100, ""),
-      ] as [string, string],
+      gallery: (item.detailGallery || []).map((img: unknown) => imageUrl(img, 1600, 1100, "")).filter(Boolean),
       ctaImg: imageUrl(item.ctaImage, 1200, 1000, imageUrl(item.detailHeroImage, 1600, 900)),
     },
   };

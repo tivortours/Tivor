@@ -19,7 +19,7 @@ function ChevronRight() {
   );
 }
 
-export function GalleryCarousel({ images }: { images: [string, string] }) {
+export function GalleryCarousel({ images }: { images: string[] }) {
   const [current, setCurrent] = useState(0);
   const trackRef = useRef<HTMLDivElement>(null);
 
@@ -83,7 +83,7 @@ export function GalleryCarousel({ images }: { images: [string, string] }) {
       <button
         onClick={() => goTo(Math.max(0, current - 1))}
         aria-label="Previous image"
-        className={`absolute left-0 top-1/2 z-10 -translate-x-5 sm:-translate-x-7 lg:-translate-x-10 xl:-translate-x-12 -translate-y-1/2 transition-opacity duration-300 ${
+        className={`absolute cursor-pointer left-0 top-1/2 z-10 -translate-x-5 sm:-translate-x-7 lg:-translate-x-10 xl:-translate-x-12 -translate-y-1/2 transition-opacity duration-300 ${
           current === 0 ? "pointer-events-none opacity-0" : "opacity-100"
         }`}
       >
@@ -94,7 +94,7 @@ export function GalleryCarousel({ images }: { images: [string, string] }) {
       <button
         onClick={() => goTo(Math.min(images.length - 1, current + 1))}
         aria-label="Next image"
-        className={`absolute right-0 top-1/2 z-10 translate-x-5 sm:translate-x-7 lg:translate-x-10 xl:translate-x-12 -translate-y-1/2 transition-opacity duration-300 ${
+        className={`absolute cursor-pointer right-0 top-1/2 z-10 translate-x-5 sm:translate-x-7 lg:translate-x-10 xl:translate-x-12 -translate-y-1/2 transition-opacity duration-300 ${
           current >= images.length - 1 ? "pointer-events-none opacity-0" : "opacity-100"
         }`}
       >

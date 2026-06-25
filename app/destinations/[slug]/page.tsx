@@ -206,7 +206,7 @@ export default async function DestinationDetailPage({
                   Tell us how you envision your journey, and we&apos;ll shape it into something truly exceptional.
                 </p>
                 <button
-                  className="h-[45px] w-fit rounded-[2px] bg-white px-6 text-base text-[#151515] text-[14px]  lg:text-[18px]"
+                  className="h-[45px] cursor-pointer w-fit rounded-[2px] bg-white px-6 text-base text-[#151515] text-[14px]  lg:text-[18px]"
                   style={{ fontFamily: "var(--font-secondary)" }}
                 >
                   Begin Your Journey
