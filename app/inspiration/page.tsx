@@ -117,7 +117,7 @@ export default async function InspirationPage() {
       <section className="w-full py-[80px]">
         <div className={`${shell} flex flex-col gap-[72px]`}>
           <h2
-            className="text-[24px] font-medium leading-tight text-[#151515] xl:text-[36px]"
+            className="text-[22px] font-medium leading-tight text-[#151515] xl:text-[36px]"
             style={{ fontFamily: "var(--font-primary)" }}
           >
             {page.gridTitle}
