@@ -263,16 +263,26 @@ export async function SiteFooter() {
                   </svg>
                 </summary>
                 <div className="flex flex-col gap-3 pb-4">
-                  {column.links.map((link) => (
-                    <Link
-                      key={link}
-                      href="#"
-                      className="whitespace-pre-line text-[14px] leading-relaxed text-white"
-                      style={{ fontFamily: "var(--font-secondary)" }}
-                    >
-                      {link}
-                    </Link>
-                  ))}
+                  {column.links.map((link) =>
+                    link.href === "#" ? (
+                      <span
+                        key={link.label}
+                        className="whitespace-pre-line text-[14px] leading-relaxed text-white cursor-default"
+                        style={{ fontFamily: "var(--font-secondary)" }}
+                      >
+                        {link.label}
+                      </span>
+                    ) : (
+                      <Link
+                        key={link.label}
+                        href={link.href}
+                        className="whitespace-pre-line text-[14px] leading-relaxed text-white"
+                        style={{ fontFamily: "var(--font-secondary)" }}
+                      >
+                        {link.label}
+                      </Link>
+                    )
+                  )}
                 </div>
               </details>
             ))}
@@ -287,16 +297,26 @@ export async function SiteFooter() {
                 >
                   {column.head}
                 </span>
-                {column.links.map((link) => (
-                  <Link
-                    key={link}
-                    href="#"
-                    className="w-fit whitespace-pre-line text-white lg:text-base xl:text-[18px]"
-                    style={{ fontFamily: "var(--font-secondary)" }}
-                  >
-                    {link}
-                  </Link>
-                ))}
+                {column.links.map((link) =>
+                  link.href === "#" ? (
+                    <span
+                      key={link.label}
+                      className="w-fit whitespace-pre-line text-white cursor-default lg:text-base xl:text-[18px]"
+                      style={{ fontFamily: "var(--font-secondary)" }}
+                    >
+                      {link.label}
+                    </span>
+                  ) : (
+                    <Link
+                      key={link.label}
+                      href={link.href}
+                      className="w-fit whitespace-pre-line text-white lg:text-base xl:text-[18px]"
+                      style={{ fontFamily: "var(--font-secondary)" }}
+                    >
+                      {link.label}
+                    </Link>
+                  )
+                )}
               </div>
             ))}
           </div>

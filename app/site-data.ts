@@ -105,7 +105,7 @@ export type Inspiration = {
 
 export type Experience = { img: string; label: string };
 export type Testimonial = { quote: string; body: string; author: string; location?: string };
-export type FooterColumn = { head: string; links: string[] };
+export type FooterColumn = { head: string; links: { label: string; href: string }[] };
 export type DestinationFeature = { img: string; title: string; desc: string };
 export type RecommendedExperience = { img: string; country: string; title: string };
 
@@ -452,7 +452,16 @@ export const getSiteSettings = cache(async (): Promise<SiteSettings> => {
       year: data.footer?.year || new Date().getFullYear(),
       copyrightText: data.footer?.copyrightText || "",
       followLabel: data.footer?.followLabel || "",
-      columns: data.footer?.columns?.length ? data.footer.columns : [],
+      columns: (data.footer?.columns || []).map((col: any) => ({
+        head: col.head || "",
+        links: (col.links || [])
+          .filter(Boolean)
+          .map((l: any) => ({
+            label: typeof l === "string" ? l : (l?.label || ""),
+            href: toAbsoluteHref(typeof l === "string" ? undefined : l?.href),
+          }))
+          .filter((l: { label: string; href: string }) => l.label),
+      })),
       socialLinks: data.footer?.socialLinks?.length
         ? data.footer.socialLinks.map((item: any) => ({
             platform: item.platform,

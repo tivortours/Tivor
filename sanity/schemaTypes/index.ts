@@ -72,8 +72,16 @@ const footerColumn = defineType({
       name: "links",
       title: "Links",
       type: "array",
-      of: [defineArrayMember({ type: "string" })],
-      validation: (Rule) => Rule.required().min(1),
+      of: [
+        defineArrayMember({
+          type: "object",
+          fields: [
+            defineField({ name: "label", title: "Label", type: "string", validation: (Rule) => Rule.required() }),
+            defineField({ name: "href", title: "URL", type: "string" }),
+          ],
+          preview: { select: { title: "label", subtitle: "href" } },
+        }),
+      ],
     }),
   ],
 });
