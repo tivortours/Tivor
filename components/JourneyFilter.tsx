@@ -6,6 +6,11 @@ import { useEffect, useMemo, useRef, useState } from "react";
 import { shell, type Journey } from "../app/site-data";
 
 function JourneyCard({ journey }: { journey: Journey }) {
+  const LIMIT = 120;
+  const preview = journey.desc.length > LIMIT
+    ? journey.desc.slice(0, LIMIT).trimEnd() + "…"
+    : journey.desc;
+  const hasMore = journey.desc.length > LIMIT;
   const labelColor = journey.lightText ? "text-white/80" : "text-[#3d3d3d]";
   const valueColor = journey.lightText ? "text-white" : "text-[#151515]";
 
@@ -28,15 +33,14 @@ function JourneyCard({ journey }: { journey: Journey }) {
           >
             {journey.title}
           </h3>
-          <p className="text-[13px] lg:text-[16px] leading-normal text-[#3d3d3d] line-clamp-2 " style={{ fontFamily: "var(--font-secondary)" }}>
-            {journey.desc}
+          <p className="text-[13px] lg:text-[16px] leading-normal text-[#3d3d3d]" style={{ fontFamily: "var(--font-secondary)" }}>
+            {preview}
+            {hasMore && (
+              <span className="ml-1 text-dark-500 font-semibold" style={{ fontFamily: "var(--font-secondary)" }}>
+                Read More
+              </span>
+            )}
           </p>
-          <span
-            className=" inline-flex w-fit items-center border-b border-brown-700 pb-0.5 text-[13px] text-brown-700"
-            style={{ fontFamily: "var(--font-secondary)" }}
-          >
-            Read More
-          </span>
         </div>
       </div>
 
@@ -115,7 +119,7 @@ export function JourneyFilter({ journeys, destNames, filterPlaceholder, seeMoreL
       <div ref={dropdownRef} className="relative w-full max-w-[488px] px-4 xl:px-0">
         <button
           onClick={() => setOpen((o) => !o)}
-          className="flex w-full items-center justify-between rounded-[2px] bg-white px-6 py-5"
+          className="cursor-pointer flex w-full items-center justify-between rounded-[2px] bg-white px-6 py-5"
         >
           <div className="flex items-center gap-4">
             <svg width="24" height="24" viewBox="0 0 24 24" fill="none" className="shrink-0 text-[#151515]">
@@ -146,7 +150,7 @@ export function JourneyFilter({ journeys, destNames, filterPlaceholder, seeMoreL
           <div className="absolute left-4 right-4 top-full z-20 mt-1 overflow-hidden rounded-[2px] bg-white shadow-lg xl:left-0 xl:right-0">
             <button
               onClick={() => select("all")}
-              className={`flex w-full px-6 py-3 text-left text-[16px] hover:bg-[#f7f4f1] ${
+              className={`cursor-pointer flex w-full px-6 py-3 text-left text-[16px] hover:bg-[#f7f4f1] ${
                 selected === "all" ? "font-medium text-[#151515]" : "text-[#777]"
               }`}
               style={{ fontFamily: "var(--font-secondary)" }}
@@ -157,7 +161,7 @@ export function JourneyFilter({ journeys, destNames, filterPlaceholder, seeMoreL
               <button
                 key={opt.slug}
                 onClick={() => select(opt.slug)}
-                className={`flex w-full px-6 py-3 text-left text-[16px] hover:bg-[#f7f4f1] ${
+                className={`cursor-pointer flex w-full px-6 py-3 text-left text-[16px] hover:bg-[#f7f4f1] ${
                   selected === opt.slug ? "font-medium text-[#151515]" : "text-[#777]"
                 }`}
                 style={{ fontFamily: "var(--font-secondary)" }}

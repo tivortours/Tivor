@@ -86,7 +86,7 @@ export function JourneysCarousel({ journeys }: { journeys: Journey[] }) {
                 >
                   {preview}
                   {hasMore && (
-                    <span className="ml-1 font-semibold text-dark-500" style={{ fontFamily: "var(--font-secondary)" }}>
+                    <span className="ml-1 text-dark-500  font-semibold" style={{ fontFamily: "var(--font-secondary)" }}>
                       Read More
                     </span>
                   )}
