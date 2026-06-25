@@ -535,7 +535,7 @@ export const getHomePageData = cache(async (): Promise<HomePageData> => {
   }
 
   return {
-    heroVideo: data.heroVideo?.asset?.url || "",
+    heroVideo: data.heroVideo?.url || "",
     heroPosterImage: imageUrl(data.heroPosterImage, 2200, 1300, ""),
     heroImage: imageUrl(data.heroImage, 2200, 1300, ""),
     heroTitle: data.heroTitle || "",
