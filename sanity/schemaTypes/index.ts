@@ -615,6 +615,7 @@ const aboutPage = defineType({
               },
             }),
             defineField({ name: "bio", title: "Bio", type: "text", rows: 4 }),
+            defineField({ name: "linkedin", title: "LinkedIn URL", type: "url" }),
             imageField("image", "Image", "Best ratio: 451:370. Use a clean portrait or half-body crop."),
           ],
         }),

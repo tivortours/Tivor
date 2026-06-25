@@ -35,49 +35,64 @@ export default async function AboutPage() {
         </div>
       </section>
 
-      {/* ── Intro: A World of New Horizons ───────────────────────────────── */}
-      <section className="w-full py-[120px]">
-        <div className={`${shell}`}>
-          <div className="flex flex-col gap-12 xl:flex-row xl:items-start xl:justify-between xl:gap-[72px] px-0 xl:px-28">
-                   {/* LEFT: title + paragraphs */}
-   {page.creatorsImage && (
-              <div className="flex shrink-0 items-center justify-center xl:w-95">
-                <Image
-                  src={page.creatorsImage}
-                  alt="Creators of Remarkable Travel Experiences"
-                  width={380}
-                  height={420}
-                  className="w-full object-contain"
-                />
-              </div>
-            )}
+      {/* ── Intro ────────────────────────────────────────────────────────── */}
+      <section className="w-full py-20 xl:py-30">
+        <div className={shell}>
+          <div className="flex flex-col gap-10 xl:flex-row xl:items-start xl:justify-between ">
 
-     
-                {/* RIGHT: Creators Of image */}
-
-            <div className="flex flex-col gap-10 xl:max-w-140">
-              <h1
-                className="text-[26px] leading-tight text-dark-500 sm:text-[32px] xl:text-[48px]"
-                style={{ fontFamily: "var(--font-primary)" }}
-              >
+            {/* LEFT: decorative Coastal Free block */}
+            <div className="flex flex-col xl:gap-10  xl:w-1/2 xl:min-h-95">
+              <div>
                 {page.introTitle.includes("&") ? (
                   <>
-                    {page.introTitle.split("&")[0].trim()} &<br />
-                    {page.introTitle.split("&").slice(1).join("&").trim()}
+                    <p
+                      className="text-[22px] leading-tight text-dark-500 xl:text-[30px]"
+                      style={{ fontFamily: "var(--font-primary)" }}
+                    >
+                      {page.introTitle.split("&")[0].trim()}
+                    </p>
+                    <p
+                      className="text-[52px] pt-3 leading-[1.05] text-[#B96B42] xl:text-[88px] px-4 font-medium"
+                      style={{ fontFamily: "CoastalFree, var(--font-primary)" }}
+                    >
+                      {page.introTitle.split("&").slice(1).join("&").trim()}
+                    </p>
                   </>
-                ) : page.introTitle}
-              </h1>
-              <div
-                className="flex flex-col gap-4 text-[13px] lg:text-[16px] leading-relaxed text-dark-400"
-                style={{ fontFamily: "var(--font-secondary)" }}
-              >
-                {page.introParagraphs.map((paragraph) => (
-                  <p key={paragraph}>{paragraph}</p>
-                ))}
+                ) : (
+                  <p
+                    className="text-[52px] leading-[1.05] text-dark-500 xl:text-[68px]"
+                    style={{ fontFamily: "CoastalFree, var(--font-primary)" }}
+                  >
+                    {page.introTitle}
+                  </p>
+                )}
+              </div>
+              <div className="mt-8 flex flex-col gap-1">
+                <p
+                  className="text-[11px] uppercase tracking-widest text-dark-400"
+                  style={{ fontFamily: "var(--font-secondary)" }}
+                >
+                  Creators Of
+                </p>
+                <p
+                  className="text-[14px] font-bold uppercase leading-snug tracking-wide text-dark-500 xl:text-[15px]"
+                  style={{ fontFamily: "var(--font-secondary)" }}
+                >
+                  Remarkable<br />Travel Experiences
+                </p>
               </div>
             </div>
-        
-         
+
+            {/* RIGHT: paragraphs */}
+            <div
+              className="flex flex-col gap-4 text-[13px] leading-relaxed text-dark-400 lg:text-[16px] xl:w-1/2"
+              style={{ fontFamily: "var(--font-secondary)" }}
+            >
+              {page.introParagraphs.map((paragraph) => (
+                <p key={paragraph}>{paragraph}</p>
+              ))}
+            </div>
+
           </div>
         </div>
       </section>
@@ -92,7 +107,7 @@ export default async function AboutPage() {
               ) : null}
               <div className="flex flex-col items-center gap-3 sm:flex-row sm:gap-2.5 lg:gap-3 xl:gap-4">
                 <span
-                  className="text-[20px] text-dark-500 sm:text-[15px] lg:text-[26px] xl:text-[32px] font-medium"
+                  className="text-[20px] text-dark-500 sm:text-[15px] lg:text-[28px] xl:text-[36px] font-medium"
                   style={{ fontFamily: "var(--font-primary)" }}
                 >
                   {pillar.label}
@@ -171,8 +186,8 @@ export default async function AboutPage() {
           </h2>
           <div className={`${shell} grid grid-cols-1 gap-12 sm:grid-cols-2 xl:max-w-[1048px] xl:gap-[48px]`}>
             {page.founders.map((founder) => (
-              <div key={founder.name} className="flex flex-col items-center gap-7">
-                <div className="relative aspect-[451/370] w-full overflow-hidden rounded-[2px]">
+              <div key={founder.name} className="group flex flex-col gap-7">
+                <div className="relative aspect-451/370 w-full overflow-hidden rounded-xs">
                   <Image
                     src={founder.img}
                     alt={founder.name}
@@ -181,17 +196,36 @@ export default async function AboutPage() {
                     sizes="(max-width: 640px) 100vw, 50vw"
                   />
                 </div>
-                <div className="flex flex-col items-center gap-1">
-                  <h3 className="text-[22px] font-semibold text-dark-500 xl:text-[24px]" style={{ fontFamily: "var(--font-primary)" }}>
-                    {founder.name}
-                  </h3>
-                  {founder.role && (
-                    <p className="text-center text-[14px] text-dark-400" style={{ fontFamily: "var(--font-secondary)" }}>
-                      {founder.role}
-                    </p>
-                  )}
+                <div className="flex flex-col gap-1">
+                  <div className="flex items-center justify-between">
+                    <div>
+                      <h3 className="text-[22px] font-semibold text-dark-500 xl:text-[24px]" style={{ fontFamily: "var(--font-primary)" }}>
+                        {founder.name}
+                      </h3>
+                      {founder.role && (
+                        <p className="text-[14px] text-dark-400" style={{ fontFamily: "var(--font-secondary)" }}>
+                          {founder.role}
+                        </p>
+                      )}
+                    </div>
+                    {founder.linkedin && (
+                      <a
+                        href={founder.linkedin}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="flex h-9 w-9 shrink-0 items-center justify-center transition-opacity duration-300 xl:opacity-0 xl:group-hover:opacity-100"
+                        aria-label={`${founder.name} on LinkedIn`}
+                      >
+                       <svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+<path d="M9.08333 8.45833V9.29167M0.75 11.4167C0.75 7.68333 0.75 5.81667 1.47667 4.39C2.11581 3.13564 3.13564 2.11581 4.39 1.47667C5.81667 0.75 7.68333 0.75 11.4167 0.75H20.0833C23.8167 0.75 25.6833 0.75 27.11 1.47667C28.3644 2.11581 29.3842 3.13564 30.0233 4.39C30.75 5.81667 30.75 7.68333 30.75 11.4167V20.0833C30.75 23.8167 30.75 25.6833 30.0233 27.11C29.3842 28.3644 28.3644 29.3842 27.11 30.0233C25.6833 30.75 23.8167 30.75 20.0833 30.75H11.4167C7.68333 30.75 5.81667 30.75 4.39 30.0233C3.13564 29.3842 2.11581 28.3644 1.47667 27.11C0.75 25.6833 0.75 23.8167 0.75 20.0833V11.4167Z" stroke="black" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M9.0835 23.0417V13.6667M15.7502 23.0417V18.2501M15.7502 18.2501V13.6667M15.7502 18.2501C15.7502 16.1034 17.7868 14.9167 19.7502 14.9167C22.4168 14.9167 22.4168 17.2084 22.4168 19.7084V23.0417" stroke="black" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+</svg>
+
+                      </a>
+                    )}
+                  </div>
                 </div>
-                <p className="text-center text-[15px] leading-relaxed text-dark-400 xl:text-[16px]" style={{ fontFamily: "var(--font-secondary)" }}>
+                <p className="text-[15px] leading-relaxed text-dark-400 xl:text-[16px]" style={{ fontFamily: "var(--font-secondary)" }}>
                   {founder.bio}
                 </p>
               </div>

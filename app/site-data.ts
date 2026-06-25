@@ -241,7 +241,7 @@ type AboutPageData = {
   valuesTitle: string;
   values: { title: string; desc: string }[];
   foundersTitle: string;
-  founders: { img: string; name: string; role?: string; bio: string }[];
+  founders: { img: string; name: string; role?: string; bio: string; linkedin?: string }[];
   ctaEyebrow: string;
   ctaTitle: string;
   ctaSubtitle: string;
@@ -794,6 +794,7 @@ export const getAboutPageData = cache(async (): Promise<AboutPageData> => {
           name: item.name,
           role: item.role || undefined,
           bio: item.bio,
+          linkedin: item.linkedin || undefined,
           img: imageUrl(item.image, 1000, 820, ""),
         }))
       : [],

@@ -388,6 +388,7 @@ export const ABOUT_PAGE_QUERY = defineQuery(`
       name,
       role,
       bio,
+      linkedin,
       image
     },
     ctaEyebrow,
