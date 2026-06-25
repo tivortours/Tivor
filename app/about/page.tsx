@@ -11,7 +11,7 @@ export default async function AboutPage() {
       {/* ── Hero — mobile: full-bleed with overlaid header ───────────────── */}
       <section className="relative flex h-87.5 items-end overflow-hidden bg-[#7a5c48] xl:hidden">
         {page.heroVideo ? (
-          <video src={page.heroVideo} autoPlay muted loop playsInline className="absolute inset-0 h-full w-full object-cover" />
+          <video src={page.heroVideo} autoPlay  loop playsInline className="absolute inset-0 h-full w-full object-cover" />
         ) : (
           <Image src={page.heroImage} alt="" fill priority className="object-cover" sizes="100vw" />
         )}
@@ -27,7 +27,7 @@ export default async function AboutPage() {
         <div className={shell}>
           <div className="relative aspect-video overflow-hidden">
             {page.heroVideo ? (
-              <video src={page.heroVideo} autoPlay muted loop playsInline className="h-full w-full object-cover" />
+              <video src={page.heroVideo} autoPlay  loop playsInline className="h-full w-full object-cover" />
             ) : (
               <Image src={page.heroImage} alt="" fill priority className="object-cover" sizes="1520px" />
             )}
