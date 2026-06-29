@@ -149,7 +149,7 @@ export function JourneyFilter({ journeys, destNames, seeMoreLabel }: Props) {
               />
             </svg>
             <span
-              className={`text-[16px] ${selected === "all" ? "text-[#777]" : "text-[#151515]"}`}
+              className={`text-[16px] ${selected === "all" ? "text-[black] font-semibold" : "text-black font-semibold"}`}
               style={{ fontFamily: "var(--font-secondary)" }}
             >
               {selectedLabel}
