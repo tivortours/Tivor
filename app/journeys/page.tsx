@@ -27,7 +27,13 @@ export default async function JourneysPage() {
               className="w-full max-w-full px-4 text-[24px] font-semibold lg:font-medium leading-tight text-[#151515] sm:text-[30px] lg:text-[48px]"
               style={{ fontFamily: "var(--font-primary)" }}
             >
-              {page.title}
+              {page.title.includes(",") ? (
+                <>
+                  {page.title.split(",")[0]},
+                  <br className="lg:hidden" />
+                  {page.title.split(",").slice(1).join(",")}
+                </>
+              ) : page.title}
             </h1>
             <p
               className="w-full max-w-[918px] px-4 text-[12px] lg:text-[16px] leading-normal text-[#3d3d3d]"
