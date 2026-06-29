@@ -53,7 +53,7 @@ export function DestinationJourneyCarousel({ journeys }: { journeys: Journey[] }
             <div
               key={j.title}
               data-card=""
-              className="w-full shrink-0 snap-start flex flex-col justify-between rounded-xs border border-[#9f9f9f]/50 lg:w-90 xl:w-112.5"
+              className="w-full shrink-0 snap-start flex flex-col justify-between rounded-xs border border-[#9f9f9f]/50 lg:w-[calc((100%-40px)/3)]"
             >
               <div className="flex flex-col gap-2">
                 <div className="relative h-[260px] w-full overflow-hidden rounded-t-xs">
@@ -62,7 +62,7 @@ export function DestinationJourneyCarousel({ journeys }: { journeys: Journey[] }
                     alt={j.alt}
                     fill
                     className="object-cover"
-                    sizes="(max-width: 1024px) 80vw, 400px"
+                    sizes="(max-width: 1024px) 80vw, 33vw"
                   />
                 </div>
                 <div className="flex flex-col gap-2 px-6 pt-2">
