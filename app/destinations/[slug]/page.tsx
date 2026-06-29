@@ -92,15 +92,15 @@ export default async function DestinationDetailPage({
           </div>
 
           {/* Script name + description */}
-          <div className="flex flex-col items-start gap-y-2.5">
+          <div className="flex flex-col items-start ">
             <p
-              className="text-[48px] leading-none text-[#824B2E] xl:text-[137px]"
+              className="text-[72px] leading-none text-[#824B2E] xl:text-[137px]"
               style={{ fontFamily: "CoastalFree, var(--font-primary)" }}
             >
               {dest.name}
             </p>
             <div
-              className="w-full max-w-[957px] text-center text-[13px] lg:text-base leading-normal text-dark-400 pt-5"
+              className="w-full max-w-[957px] text-center text-[13px] lg:text-base leading-normal text-dark-400"
               style={{ fontFamily: "var(--font-secondary)" }}
             >
               <p>{dest.detail.desc1}</p>
@@ -109,8 +109,10 @@ export default async function DestinationDetailPage({
             </div>
           </div>
 
-          {/* Gallery — horizontally scrollable with arrow navigation */}
-          <GalleryCarousel images={dest.detail.gallery} />
+          {/* Gallery — break out of section px-5 on mobile so slides fill the viewport */}
+         
+            <GalleryCarousel images={dest.detail.gallery} />
+
 
         </div>
       </section>
@@ -118,12 +120,13 @@ export default async function DestinationDetailPage({
       {/* ── Crafted Journeys ─────────────────────────────────────────────── */}
       <section className="bg-[#f2ebe2] pb-[80px]  lg:pt-[100px]">
         <div className={shell}>
-          <div className="flex flex-col gap-[88px] lg:px-10 xl:px-16">
+          <div className="flex flex-col gap-[88px]">
           <h2
-            className="text-[20px] font-medium leading-none text-[#151515] xl:text-[36px]"
+            className="text-[24px] font-medium leading-none text-[#151515] xl:text-[36px]"
             style={{ fontFamily: "var(--font-primary)" }}
           >
-            Crafted Journeys, Felt for a Lifetime
+            Crafted Journeys, <br className="lg:hidden" />  Creating Lasting Memories
+        
           </h2>
 
           <div className="relative -mx-5 sm:-mx-8 lg:-mx-10 xl:-mx-16 px-5 sm:px-8 lg:px-10 xl:px-16">
@@ -138,7 +141,7 @@ export default async function DestinationDetailPage({
         <div className={shell}>
           <div className="flex flex-col items-center gap-[60px] lg:px-10 xl:px-16">
           <h2
-            className="text-center text-[20px] lg:text-[28px] leading-none text-[#151515] xl:text-[36px]"
+            className="text-center text-[24px] lg:text-[28px] leading-none text-[#151515] xl:text-[36px]"
             style={{ fontFamily: "var(--font-primary)" }}
           >
             Our Curated Journeys Includes
@@ -148,9 +151,9 @@ export default async function DestinationDetailPage({
             {settings.destinationFeatures.map((f) => (
               <div
                 key={f.title}
-                className="flex flex-row items-center gap-5 py-7 lg:flex-col lg:items-center lg:gap-6 lg:py-6 lg:px-6 lg:text-center"
+                className="flex flex-row items-start gap-5 py-7 lg:flex-col lg:items-center lg:gap-6 lg:py-6 lg:px-6 lg:text-center"
               >
-                <div className="relative h-16.25 w-16.25 shrink-0 lg:h-13.75 lg:w-13.75">
+                <div className="relative h-10 w-10 shrink-0 lg:h-13.75 lg:w-13.75">
                   <Image src={f.img} alt="" fill className="object-contain" />
                 </div>
                 <div className="flex flex-col gap-1 lg:gap-4 lg:items-center">
@@ -177,7 +180,7 @@ export default async function DestinationDetailPage({
       {/* ── Craft Your Perfect Escape CTA ────────────────────────────────── */}
       <section className="py-[80px]">
         <div className={shell}>
-          <div className="relative min-h-[289px] overflow-hidden rounded-[2px] bg-[#796250] xl:min-h-[375px]">
+          <div className="relative -mx-5 sm:-mx-8 lg:mx-0 min-h-[289px] overflow-hidden lg:rounded-[2px] bg-[#796250] xl:min-h-[375px]">
             {/* Text content */}
             <div className="relative z-10 flex flex-col gap-6 p-8 xl:w-[55%] xl:gap-15 xl:px-25 xl:py-7.5">
               <h2

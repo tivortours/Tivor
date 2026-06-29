@@ -56,13 +56,13 @@ export function GalleryCarousel({ images }: { images: string[] }) {
       {/* Scrollable track — hidden scrollbar */}
       <div
         ref={trackRef}
-        className="flex gap-5 overflow-x-auto pl-5 sm:pl-8 lg:pl-12 xl:pl-[130px] [&::-webkit-scrollbar]:hidden"
+        className="flex gap-5 overflow-x-auto max-lg:snap-x max-lg:snap-mandatory lg:pl-12 xl:pl-[130px] [&::-webkit-scrollbar]:hidden"
         style={{ scrollbarWidth: "none" }}
       >
         {images.map((src, i) => (
           <div
             key={i}
-            className={`relative h-[250px] w-[82vw] flex-none shrink-0 rounded-[2px] transition-opacity duration-500 sm:h-[380px] xl:h-[500px] xl:w-[1200px] ${
+            className={`relative h-[250px] max-lg:w-[calc(100vw-2.5rem)] lg:w-[82vw] flex-none shrink-0 max-lg:snap-center rounded-[2px] transition-opacity duration-500 sm:h-[380px] xl:h-[500px] xl:w-[1200px] ${
               i === current ? "opacity-100" : "opacity-30"
             }`}
           >
@@ -76,7 +76,7 @@ export function GalleryCarousel({ images }: { images: string[] }) {
           </div>
         ))}
         {/* right-side breathing room so the last slide can scroll fully into view */}
-        <div className="w-5 shrink-0 sm:w-8 lg:w-12 xl:w-[130px]" aria-hidden />
+        <div className="shrink-0 lg:w-12 xl:w-[130px]" aria-hidden />
       </div>
 
       {/* Left arrow — visible only when not at start */}
