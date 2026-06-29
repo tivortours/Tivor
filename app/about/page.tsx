@@ -47,7 +47,7 @@ export default async function AboutPage() {
                 {page.introTitle.includes("&") ? (
                   <>
                     <p
-                      className="text-[22px] leading-tight text-dark-500 xl:text-[30px]"
+                      className="text-[22px] leading-tight text-dark-500 xl:text-[34px] font-medium"
                       style={{ fontFamily: "var(--font-primary)" }}
                     >
                       {page.introTitle.split("&")[0].trim()}
@@ -68,7 +68,7 @@ export default async function AboutPage() {
                   </p>
                 )}
               </div>
-              <div className="mt-8 flex flex-col gap-1">
+              <div className="mt-8 flex flex-col gap-1 lg:pt-6">
                 <p
                   className="text-[11px] lg:text-[18px] uppercase  text-dark-400"
                   style={{ fontFamily: "var(--font-secondary)" }}
