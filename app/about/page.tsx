@@ -39,7 +39,7 @@ export default async function AboutPage() {
       {/* ── Intro ────────────────────────────────────────────────────────── */}
       <section className="w-full py-20 xl:py-30">
         <div className={shell}>
-          <div className="flex flex-col gap-10 xl:flex-row xl:items-start xl:justify-between ">
+          <div className="flex flex-col gap-10 xl:flex-row xl:items-start xl:justify-between lg:px-24">
 
             {/* LEFT: decorative Coastal Free block */}
             <div className="flex flex-col xl:gap-10  xl:w-1/2 xl:min-h-95">
