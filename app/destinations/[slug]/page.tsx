@@ -201,7 +201,7 @@ export default async function DestinationDetailPage({
                 />
               </div>
 
-              <div className="flex flex-col gap-8 xl:gap-10">
+              <div className="flex flex-col gap-8 xl:gap-10 pb-4">
                 <p
                   className="max-w-[460px] text-base leading-normal text-white"
                   style={{ fontFamily: "var(--font-secondary)" }}
