@@ -76,8 +76,8 @@ export default async function DestinationDetailPage({
       </div>
 
       {/* ── About / Intro ────────────────────────────────────────────────── */}
-      <section className="bg-[#f2ebe2] py-[100px] px-5  lg:px-10 lg:px-16">
-        <div className="flex flex-col items-center gap-[88px]">
+      <section className="bg-[#f2ebe2] py-[50px] lg:py-[100px] px-5  lg:px-10 lg:px-16">
+        <div className="flex flex-col items-center gap-[50px] lg:gap-[88px]">
 
           {/* Title block */}
           <div

@@ -350,7 +350,7 @@ const siteSettings = defineType({
       title: "Newsletter",
       type: "object",
       fields: [
-        defineField({ name: "title", title: "Title", type: "string" }),
+        defineField({ name: "title", title: "Title", type: "text", rows: 2 }),
         defineField({ name: "body", title: "Body", type: "text", rows: 3 }),
         imageField("backgroundImage", "Background Image", "Best ratio: very wide landscape. Minimum 1920px wide recommended."),
         defineField({ name: "inputPlaceholder", title: "Input Placeholder", type: "string" }),

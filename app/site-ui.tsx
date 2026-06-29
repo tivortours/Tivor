@@ -197,12 +197,12 @@ export async function SiteFooter() {
         <div className={`${shell} relative py-16 lg:py-[100px]`}>
           <div className="flex flex-col gap-8 lg:flex-row lg:items-end lg:justify-between lg:px-16 xl:px-20">
             <div className="max-w-[520px] space-y-5 text-white">
-              <p
+              <h4
                 className="max-w-full text-[28px] leading-tight sm:text-[32px]"
                 style={{ fontFamily: "var(--font-primary)" }}
               >
                 {settings.newsletter.title}
-              </p>
+              </h4>
               <p className="text-base opacity-90" style={{ fontFamily: "var(--font-secondary)" }}>
                 {settings.newsletter.body}
               </p>
