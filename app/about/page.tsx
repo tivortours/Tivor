@@ -1,6 +1,7 @@
 import Image from "next/image";
 import { SiteFooter, SiteHeader } from "../site-ui";
 import { getAboutPageData, shell } from "../site-data";
+import { AboutHeroVideo } from "./AboutHeroVideo";
 
 export default async function AboutPage() {
   const page = await getAboutPageData();
@@ -11,7 +12,7 @@ export default async function AboutPage() {
       {/* ── Hero — mobile: full-bleed with overlaid header ───────────────── */}
       <section className="relative flex h-87.5 items-end overflow-hidden bg-[#7a5c48] xl:hidden">
         {page.heroVideo ? (
-          <video src={page.heroVideo} autoPlay  loop playsInline className="absolute inset-0 h-full w-full object-cover" />
+          <AboutHeroVideo src={page.heroVideo} className="absolute inset-0 h-full w-full object-cover" />
         ) : (
           <Image src={page.heroImage} alt="" fill priority className="object-cover" sizes="100vw" />
         )}
@@ -27,7 +28,7 @@ export default async function AboutPage() {
         <div className={shell}>
           <div className="relative aspect-video overflow-hidden">
             {page.heroVideo ? (
-              <video src={page.heroVideo} autoPlay  loop playsInline className="h-full w-full object-cover" />
+              <AboutHeroVideo src={page.heroVideo} className="h-full w-full object-cover" />
             ) : (
               <Image src={page.heroImage} alt="" fill priority className="object-cover" sizes="1520px" />
             )}
@@ -69,13 +70,13 @@ export default async function AboutPage() {
               </div>
               <div className="mt-8 flex flex-col gap-1">
                 <p
-                  className="text-[11px] uppercase tracking-widest text-dark-400"
+                  className="text-[11px] lg:text-[18px] uppercase  text-dark-400"
                   style={{ fontFamily: "var(--font-secondary)" }}
                 >
                   Creators Of
                 </p>
                 <p
-                  className="text-[14px] font-bold uppercase leading-snug tracking-wide text-dark-500 xl:text-[15px]"
+                  className="text-[14px] lg:text-[18px] font-bold uppercase leading-snug tracking-wide text-dark-500 xl:text-[18px]"
                   style={{ fontFamily: "var(--font-secondary)" }}
                 >
                   Remarkable<br />Travel Experiences
@@ -216,9 +217,10 @@ export default async function AboutPage() {
                         className="flex h-9 w-9 shrink-0 items-center justify-center transition-opacity duration-300 xl:opacity-0 xl:group-hover:opacity-100"
                         aria-label={`${founder.name} on LinkedIn`}
                       >
-                       <svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
-<path d="M9.08333 8.45833V9.29167M0.75 11.4167C0.75 7.68333 0.75 5.81667 1.47667 4.39C2.11581 3.13564 3.13564 2.11581 4.39 1.47667C5.81667 0.75 7.68333 0.75 11.4167 0.75H20.0833C23.8167 0.75 25.6833 0.75 27.11 1.47667C28.3644 2.11581 29.3842 3.13564 30.0233 4.39C30.75 5.81667 30.75 7.68333 30.75 11.4167V20.0833C30.75 23.8167 30.75 25.6833 30.0233 27.11C29.3842 28.3644 28.3644 29.3842 27.11 30.0233C25.6833 30.75 23.8167 30.75 20.0833 30.75H11.4167C7.68333 30.75 5.81667 30.75 4.39 30.0233C3.13564 29.3842 2.11581 28.3644 1.47667 27.11C0.75 25.6833 0.75 23.8167 0.75 20.0833V11.4167Z" stroke="black" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-<path d="M9.0835 23.0417V13.6667M15.7502 23.0417V18.2501M15.7502 18.2501V13.6667M15.7502 18.2501C15.7502 16.1034 17.7868 14.9167 19.7502 14.9167C22.4168 14.9167 22.4168 17.2084 22.4168 19.7084V23.0417" stroke="black" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                       <svg width="40" height="40" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+<path d="M39.9991 19.9997C39.9991 31.0449 31.0454 39.9981 19.9994 39.9981C8.95367 39.9981 0 31.0449 0 19.9991C0 8.95305 8.95367 0 19.9994 0C31.0454 0 39.9991 8.95305 39.9991 19.9997Z" fill="#D09414"/>
+<path opacity="0.19" d="M21.9036 16.5358L21.3579 17.0814L14.7669 10.4902L11.1945 14.062L14.7358 17.6027L10.7825 30.3691L20.4002 39.9876C28.9401 39.8191 36.1654 34.3027 38.8636 26.6461L29.7373 17.5202L23.7615 18.3943L21.9036 16.5358Z" fill="black"/>
+<path d="M15.4347 12.1787C15.4347 13.5887 14.3007 14.7306 12.9018 14.7306C11.5041 14.7306 10.3701 13.5887 10.3701 12.1794C10.3701 10.7713 11.5042 9.62891 12.9018 9.62891C14.3008 9.62891 15.4347 10.7713 15.4347 12.1787ZM15.0643 16.5416H10.7815L10.7828 30.3694L15.0643 30.3688V16.5416H15.0643ZM21.9087 16.5416H17.8022V30.3688L21.9087 30.3694C21.9087 30.3694 21.9087 25.2402 21.9087 23.1113C21.9093 21.1666 22.8041 20.0095 24.5179 20.0095C26.0925 20.0095 26.85 21.1203 26.85 23.1113C26.85 25.1022 26.85 30.3688 26.85 30.3688H31.1108C31.1108 30.3688 31.1108 25.317 31.1108 21.6146C31.1108 17.9087 29.0112 16.1198 26.0773 16.1198C23.1434 16.1198 21.9087 18.4049 21.9087 18.4049V16.5416Z" fill="#F4F6F9"/>
 </svg>
 
                       </a>
@@ -242,7 +244,10 @@ export default async function AboutPage() {
               <p className="text-[26px] font-medium leading-none text-[#ad8c72] sm:text-[34px] lg:text-[52px]" style={{ fontFamily: "var(--font-primary)" }}>
                 {page.ctaEyebrow}
               </p>
-              <p className="text-[36px] leading-none text-[#151515] sm:text-[42px] lg:text-[48px] pt-2" style={{ fontFamily: "var(--font-primary)" }}>
+             <p
+                className="text-[22px] leading-none text-[#151515] sm:text-[30px] lg:text-[48px] pt-2"
+                style={{ fontFamily: "var(--font-primary)" }}
+              >
                 {page.ctaTitle}
               </p>
             </div>
