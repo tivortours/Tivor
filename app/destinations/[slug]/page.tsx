@@ -95,7 +95,7 @@ export default async function DestinationDetailPage({
           {/* Script name + description */}
           <div className="flex flex-col items-start ">
             <p
-              className="text-[72px] leading-none text-[#824B2E] xl:text-[137px]"
+              className="text-[72px] leading-none text-[#824B2E] xl:text-[137px] -ml-3 lg:-ml-12"
               style={{ fontFamily: "CoastalFree, var(--font-primary)" }}
             >
               {dest.name}
