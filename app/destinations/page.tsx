@@ -99,7 +99,7 @@ export default async function DestinationsPage() {
                 {page.ctaEyebrow}
               </p>
               <p
-                className="text-[22px] leading-none text-[#151515] sm:text-[30px] lg:text-[48px]"
+                className="text-[22px] leading-none text-[#151515] sm:text-[30px] lg:text-[46px]"
                 style={{ fontFamily: "var(--font-primary)" }}
               >
                 {page.ctaTitle}

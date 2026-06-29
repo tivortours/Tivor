@@ -252,7 +252,7 @@ export default async function AboutPage() {
                 {page.ctaEyebrow}
               </p>
               <p
-                className="text-[22px] leading-none text-[#151515] sm:text-[30px] lg:text-[48px] pt-2"
+                className="text-[22px] leading-none text-[#151515] sm:text-[30px] lg:text-[46px] pt-2"
                 style={{ fontFamily: "var(--font-primary)" }}
               >
                 {page.ctaTitle}
