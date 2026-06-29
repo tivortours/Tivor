@@ -67,7 +67,7 @@ export default async function JourneysPage() {
               />
             </div>
             <h3
-              className="text-[20px] lg:text-center lg:text-[28px] font-medium leading-tight text-dark-500"
+              className="text-[20px]  lg:text-[28px] font-medium leading-tight text-dark-500"
               style={{ fontFamily: "var(--font-primary)" }}
             >
               {page.supportHeading}
