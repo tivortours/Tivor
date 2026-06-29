@@ -125,34 +125,34 @@ export default async function AboutPage() {
           <div className=" sm:-mx-8 xl:mx-0 overflow-hidden rounded-none xl:rounded-xs bg-[#f7f4f1]  xl:p-20">
             <div className="grid grid-cols-1 items-center xl:grid-cols-[minmax(0,1.2fr)_minmax(0,1fr)] xl:gap-24">
 
-            <div className="relative aspect-[895/585] w-full  overflow-hidden xl:rounded-xs">
-              <Image
-                src={page.visionImage}
-                alt="Vision"
-                fill
-                className="object-cover"
-                sizes="(max-width: 1280px) 100vw, 55vw"
-              />
-            </div>
+              <div className="relative aspect-[895/585] w-full  overflow-hidden xl:rounded-xs">
+                <Image
+                  src={page.visionImage}
+                  alt="Vision"
+                  fill
+                  className="object-cover"
+                  sizes="(max-width: 1280px) 100vw, 55vw"
+                />
+              </div>
 
-            <div className="flex flex-col divide-y divide-[#cfbcad] px-5 py-10 sm:px-8 xl:px-0 xl:py-0">
-              <div className="flex flex-col gap-6 pb-8 xl:py-8">
-                <h2 className="text-[20px] font-semibold text-[#151515] xl:text-[36px]" style={{ fontFamily: "var(--font-primary)" }}>
-                  {page.visionTitle}
-                </h2>
-                <p className="text-[13px] lg:text-[16px] leading-relaxed text-dark-400" style={{ fontFamily: "var(--font-secondary)" }}>
-                  {page.visionBody}
-                </p>
+              <div className="flex flex-col divide-y divide-[#cfbcad] px-5 py-10 sm:px-8 xl:px-0 xl:py-0">
+                <div className="flex flex-col gap-6 pb-8 xl:py-8">
+                  <h2 className="text-[20px] font-semibold text-[#151515] xl:text-[36px]" style={{ fontFamily: "var(--font-primary)" }}>
+                    {page.visionTitle}
+                  </h2>
+                  <p className="text-[13px] lg:text-[16px] leading-relaxed text-dark-400" style={{ fontFamily: "var(--font-secondary)" }}>
+                    {page.visionBody}
+                  </p>
+                </div>
+                <div className="flex flex-col gap-6 pt-8">
+                  <h2 className="text-[20px] font-semibold text-[#151515] xl:text-[36px]" style={{ fontFamily: "var(--font-primary)" }}>
+                    {page.missionTitle}
+                  </h2>
+                  <p className="text-[13px] lg:text-[16px] leading-relaxed text-dark-400" style={{ fontFamily: "var(--font-secondary)" }}>
+                    {page.missionBody}
+                  </p>
+                </div>
               </div>
-              <div className="flex flex-col gap-6 pt-8">
-                <h2 className="text-[20px] font-semibold text-[#151515] xl:text-[36px]" style={{ fontFamily: "var(--font-primary)" }}>
-                  {page.missionTitle}
-                </h2>
-                <p className="text-[13px] lg:text-[16px] leading-relaxed text-dark-400" style={{ fontFamily: "var(--font-secondary)" }}>
-                  {page.missionBody}
-                </p>
-              </div>
-            </div>
             </div>
           </div>
         </div>
@@ -217,11 +217,18 @@ export default async function AboutPage() {
                         className="flex h-9 w-9 shrink-0 items-center justify-center transition-opacity duration-300 xl:opacity-0 xl:group-hover:opacity-100"
                         aria-label={`${founder.name} on LinkedIn`}
                       >
-                       <svg width="40" height="40" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
-<path d="M39.9991 19.9997C39.9991 31.0449 31.0454 39.9981 19.9994 39.9981C8.95367 39.9981 0 31.0449 0 19.9991C0 8.95305 8.95367 0 19.9994 0C31.0454 0 39.9991 8.95305 39.9991 19.9997Z" fill="#D09414"/>
-<path opacity="0.19" d="M21.9036 16.5358L21.3579 17.0814L14.7669 10.4902L11.1945 14.062L14.7358 17.6027L10.7825 30.3691L20.4002 39.9876C28.9401 39.8191 36.1654 34.3027 38.8636 26.6461L29.7373 17.5202L23.7615 18.3943L21.9036 16.5358Z" fill="black"/>
-<path d="M15.4347 12.1787C15.4347 13.5887 14.3007 14.7306 12.9018 14.7306C11.5041 14.7306 10.3701 13.5887 10.3701 12.1794C10.3701 10.7713 11.5042 9.62891 12.9018 9.62891C14.3008 9.62891 15.4347 10.7713 15.4347 12.1787ZM15.0643 16.5416H10.7815L10.7828 30.3694L15.0643 30.3688V16.5416H15.0643ZM21.9087 16.5416H17.8022V30.3688L21.9087 30.3694C21.9087 30.3694 21.9087 25.2402 21.9087 23.1113C21.9093 21.1666 22.8041 20.0095 24.5179 20.0095C26.0925 20.0095 26.85 21.1203 26.85 23.1113C26.85 25.1022 26.85 30.3688 26.85 30.3688H31.1108C31.1108 30.3688 31.1108 25.317 31.1108 21.6146C31.1108 17.9087 29.0112 16.1198 26.0773 16.1198C23.1434 16.1198 21.9087 18.4049 21.9087 18.4049V16.5416Z" fill="#F4F6F9"/>
-</svg>
+                        <svg width="40" height="40" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+                          <g clipPath="url(#clip0_2653_9229)">
+                            <path d="M39.9995 20.0007C39.9995 31.0459 31.0459 39.9991 19.9999 39.9991C8.95416 39.9991 0.000488281 31.0459 0.000488281 20C0.000488281 8.95402 8.95416 0.000976562 19.9999 0.000976562C31.0459 0.000976562 39.9995 8.95402 39.9995 20.0007Z" fill="#AD8C72" />
+                            <path opacity="0.05" d="M21.9041 16.537L21.3584 17.0826L14.7674 10.4915L11.195 14.0633L14.7362 17.6039L10.783 30.3703L20.4007 39.9888C28.9406 39.8204 36.1659 34.304 38.8641 26.6473L29.7378 17.5215L23.762 18.3955L21.9041 16.537Z" fill="black" />
+                            <path d="M15.4352 12.1795C15.4352 13.5894 14.3012 14.7314 12.9023 14.7314C11.5046 14.7314 10.3706 13.5894 10.3706 12.1801C10.3706 10.7721 11.5047 9.62964 12.9023 9.62964C14.3013 9.62964 15.4352 10.7721 15.4352 12.1795ZM15.0647 16.5423H10.782L10.7833 30.3701L15.0648 30.3695V16.5423H15.0647ZM21.9092 16.5423H17.8027V30.3695L21.9092 30.3701C21.9092 30.3701 21.9092 25.2409 21.9092 23.112C21.9098 21.1674 22.8046 20.0102 24.5184 20.0102C26.093 20.0102 26.8505 21.121 26.8505 23.112C26.8505 25.1029 26.8505 30.3695 26.8505 30.3695H31.1113C31.1113 30.3695 31.1113 25.3178 31.1113 21.6153C31.1113 17.9094 29.0117 16.1205 26.0778 16.1205C23.1439 16.1205 21.9092 18.4057 21.9092 18.4057V16.5423Z" fill="#F4F6F9" />
+                          </g>
+                          <defs>
+                            <clipPath id="clip0_2653_9229">
+                              <rect width="40" height="40" fill="white" />
+                            </clipPath>
+                          </defs>
+                        </svg>
 
                       </a>
                     )}
@@ -244,7 +251,7 @@ export default async function AboutPage() {
               <p className="text-[26px] font-medium leading-none text-[#ad8c72] sm:text-[34px] lg:text-[52px]" style={{ fontFamily: "var(--font-primary)" }}>
                 {page.ctaEyebrow}
               </p>
-             <p
+              <p
                 className="text-[22px] leading-none text-[#151515] sm:text-[30px] lg:text-[48px] pt-2"
                 style={{ fontFamily: "var(--font-primary)" }}
               >

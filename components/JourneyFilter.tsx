@@ -73,11 +73,16 @@ function JourneyCard({ journey }: { journey: Journey }) {
 type Props = {
   journeys: Journey[];
   destNames: Record<string, string>;
-  filterPlaceholder: string;
   seeMoreLabel: string;
 };
 
-export function JourneyFilter({ journeys, destNames, filterPlaceholder, seeMoreLabel }: Props) {
+const DEST_PRIORITY = ["slovenia", "iceland", "norway"];
+const destRank = (name: string) => {
+  const i = DEST_PRIORITY.indexOf(name.toLowerCase());
+  return i === -1 ? Infinity : i;
+};
+
+export function JourneyFilter({ journeys, destNames, seeMoreLabel }: Props) {
   const [selected, setSelected] = useState("all");
   const [open, setOpen] = useState(false);
   const [showAll, setShowAll] = useState(false);
@@ -98,14 +103,29 @@ export function JourneyFilter({ journeys, destNames, filterPlaceholder, seeMoreL
     const seen = new Set<string>();
     return journeys
       .filter((j) => j.destination && !seen.has(j.destination) && seen.add(j.destination))
-      .map((j) => ({ slug: j.destination, name: destNames[j.destination] || j.destination }));
+      .map((j) => ({ slug: j.destination, name: destNames[j.destination] || j.destination }))
+      .sort((a, b) => {
+        const ra = destRank(a.name), rb = destRank(b.name);
+        if (ra !== rb) return ra - rb;
+        return a.name.localeCompare(b.name);
+      });
   }, [journeys, destNames]);
 
-  const filtered = selected === "all" ? journeys : journeys.filter((j) => j.destination === selected);
+  const filtered = useMemo(() => {
+    const base = selected === "all" ? journeys : journeys.filter((j) => j.destination === selected);
+    return [...base].sort((a, b) => {
+      const an = destNames[a.destination] || a.destination;
+      const bn = destNames[b.destination] || b.destination;
+      const ra = destRank(an), rb = destRank(bn);
+      if (ra !== rb) return ra - rb;
+      if (an !== bn) return an.localeCompare(bn);
+      return a.title.localeCompare(b.title);
+    });
+  }, [journeys, destNames, selected]);
   const visible = showAll ? filtered : filtered.slice(0, 6);
 
   const selectedLabel =
-    selected === "all" ? filterPlaceholder : destNames[selected] || selected;
+    selected === "all" ? "All Destinations" : destNames[selected] || selected;
 
   const select = (slug: string) => {
     setSelected(slug);

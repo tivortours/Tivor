@@ -24,8 +24,8 @@ const linkField = defineField({
 
 const ctaFields = [
   defineField({ name: "ctaEyebrow", title: "CTA Eyebrow", type: "string" }),
-  defineField({ name: "ctaTitle", title: "CTA Title", type: "string" }),
-  defineField({ name: "ctaSubtitle", title: "CTA Subtitle", type: "string" }),
+  defineField({ name: "ctaTitle", title: "CTA Title", type: "text", rows: 2 }),
+  defineField({ name: "ctaSubtitle", title: "CTA Subtitle", type: "text", rows: 2 }),
   defineField({ name: "ctaButtonLabel", title: "CTA Button Label", type: "string" }),
   defineField({ ...linkField, name: "ctaButtonHref", title: "CTA Button Link" }),
 ];
@@ -187,8 +187,8 @@ const destination = defineType({
     defineField({ name: "listingBody1", title: "Listing Paragraph 1", type: "text", rows: 3 }),
     defineField({ name: "listingBody2", title: "Listing Paragraph 2", type: "text", rows: 3 }),
     imageField("detailHeroImage", "Detail Hero Image", "Best ratio: 16:9 or wider. Minimum 2000px wide recommended."),
-    defineField({ name: "detailHeroTitle", title: "Detail Hero Title", type: "string" }),
-    defineField({ name: "detailHeroSubtitle", title: "Detail Hero Subtitle", type: "string" }),
+    defineField({ name: "detailHeroTitle", title: "Detail Hero Title", type: "text", rows: 2 }),
+    defineField({ name: "detailHeroSubtitle", title: "Detail Hero Subtitle", type: "text", rows: 2 }),
     defineField({ name: "detailDescription1", title: "Detail Paragraph 1", type: "text", rows: 5 }),
     defineField({ name: "detailDescription2", title: "Detail Paragraph 2", type: "text", rows: 5 }),
     defineField({
@@ -268,7 +268,7 @@ const inspirationArticle = defineType({
     defineField({ name: "intro", title: "Intro", type: "text", rows: 5, validation: (Rule) => Rule.required() }),
     imageField("cardImage", "Card Image", "Best ratio: 488:394. Use for inspiration cards."),
     imageField("heroImage", "Hero Image", "Best ratio: 16:9 or wider. Minimum 2000px wide recommended."),
-    defineField({ name: "section1Title", title: "Section 1 Title", type: "string" }),
+    defineField({ name: "section1Title", title: "Section 1 Title", type: "text", rows: 2 }),
     defineField({
       name: "section1Body",
       title: "Section 1 Paragraphs",
@@ -276,7 +276,7 @@ const inspirationArticle = defineType({
       of: [defineArrayMember({ type: "text", rows: 4 })],
     }),
     imageField("section1Image", "Section 1 Image", "Best ratio: portrait-friendly landscape crop for the split section."),
-    defineField({ name: "galleryTitle", title: "Gallery Section Title", type: "string" }),
+    defineField({ name: "galleryTitle", title: "Gallery Section Title", type: "text", rows: 2 }),
     defineField({ name: "galleryBody", title: "Gallery Section Body", type: "text", rows: 4 }),
     defineField({
       name: "galleryImages",
@@ -285,7 +285,7 @@ const inspirationArticle = defineType({
       of: [defineArrayMember({ type: "image", options: { hotspot: true } })],
       description: "Best with three landscape images. Keep subjects centered for mobile crops.",
     }),
-    defineField({ name: "section2Title", title: "Section 2 Title", type: "string" }),
+    defineField({ name: "section2Title", title: "Section 2 Title", type: "text", rows: 2 }),
     defineField({
       name: "section2Body",
       title: "Section 2 Paragraphs",
@@ -294,7 +294,7 @@ const inspirationArticle = defineType({
     }),
     imageField("section2Image", "Section 2 Image", "Best ratio: portrait-friendly landscape crop for the split section."),
     defineField({ name: "closingText", title: "Closing Text", type: "text", rows: 4 }),
-    defineField({ name: "ctaTitle", title: "CTA Title", type: "string" }),
+    defineField({ name: "ctaTitle", title: "CTA Title", type: "text", rows: 2 }),
     defineField({ name: "ctaBody", title: "CTA Body", type: "text", rows: 3 }),
     defineField({ name: "ctaButtonLabel", title: "CTA Button Label", type: "string" }),
     defineField({ ...linkField, name: "ctaButtonHref", title: "CTA Button Link" }),
@@ -397,7 +397,7 @@ const homePage = defineType({
   title: "Home Page",
   type: "document",
   fields: [
-    defineField({ name: "heroTitle", title: "Hero Title", type: "string" }),
+    defineField({ name: "heroTitle", title: "Hero Title", type: "text", rows: 2 }),
     defineField({ name: "heroSubtitle", title: "Hero Subtitle", type: "text", rows: 3 }),
     defineField({
       name: "heroVideo",
@@ -408,7 +408,7 @@ const homePage = defineType({
     }),
     imageField("heroPosterImage", "Hero Poster Image", "Shown while the video loads. Use the same crop as the hero image."),
     imageField("heroImage", "Hero Image (Fallback)", "Shown if no video is uploaded. Best ratio: full-bleed landscape. Minimum 1920x1080 recommended."),
-    defineField({ name: "introTitle", title: "Intro Title", type: "string" }),
+    defineField({ name: "introTitle", title: "Intro Title", type: "text", rows: 2 }),
     defineField({
       name: "introParagraphs",
       title: "Intro Paragraphs",
@@ -416,7 +416,7 @@ const homePage = defineType({
       of: [defineArrayMember({ type: "text", rows: 3 })],
     }),
     defineField({ name: "featuredDestinationsLabel", title: "Featured Destinations Label", type: "string" }),
-    defineField({ name: "featuredDestinationsTitle", title: "Featured Destinations Title", type: "string" }),
+    defineField({ name: "featuredDestinationsTitle", title: "Featured Destinations Title", type: "text", rows: 2 }),
     defineField({
       name: "featuredDestinations",
       title: "Featured Destinations",
@@ -424,7 +424,7 @@ const homePage = defineType({
       of: [defineArrayMember({ type: "reference", to: [{ type: "destination" }] })],
     }),
     defineField({ name: "curatedJourneysLabel", title: "Curated Journeys Label", type: "string" }),
-    defineField({ name: "curatedJourneysTitle", title: "Curated Journeys Title", type: "string" }),
+    defineField({ name: "curatedJourneysTitle", title: "Curated Journeys Title", type: "text", rows: 2 }),
     defineField({ name: "curatedJourneysLinkLabel", title: "Curated Journeys Link Label", type: "string" }),
     defineField({ name: "curatedJourneysLinkHref", title: "Curated Journeys Link Href", type: "string" }),
     defineField({
@@ -434,7 +434,7 @@ const homePage = defineType({
       of: [defineArrayMember({ type: "reference", to: [{ type: "journey" }] })],
     }),
     defineField({ name: "experiencesLabel", title: "Experiences Label", type: "string" }),
-    defineField({ name: "experiencesTitle", title: "Experiences Title", type: "string" }),
+    defineField({ name: "experiencesTitle", title: "Experiences Title", type: "text", rows: 2 }),
     defineField({ name: "experiencesButtonLabel", title: "Experiences Button Label", type: "string" }),
     defineField({ name: "experiencesButtonHref", title: "Experiences Button Link", type: "string" }),
     defineField({
@@ -444,8 +444,8 @@ const homePage = defineType({
       of: [defineArrayMember({ type: "experienceCard" })],
     }),
     defineField({ name: "aboutLabel", title: "About Label", type: "string" }),
-    defineField({ name: "aboutTitleLineOne", title: "About Title Line 1", type: "string" }),
-    defineField({ name: "aboutTitleLineTwo", title: "About Title Line 2", type: "string" }),
+    defineField({ name: "aboutTitleLineOne", title: "About Title Line 1", type: "text", rows: 2 }),
+    defineField({ name: "aboutTitleLineTwo", title: "About Title Line 2", type: "text", rows: 2 }),
     imageField("aboutImage", "About Image", "Best ratio: 1280:554. Use a wide editorial crop."),
     defineField({
       name: "aboutBody",
@@ -462,8 +462,8 @@ const homePage = defineType({
     defineField({ name: "aboutLinkLabel", title: "About Link Label", type: "string" }),
     defineField({ name: "aboutLinkHref", title: "About Link Link", type: "string" }),
     defineField({ name: "whyTravelLabel", title: "Why Travel Label", type: "string" }),
-    defineField({ name: "whyTravelTitleLineOne", title: "Why Travel Title Line 1", type: "string" }),
-    defineField({ name: "whyTravelTitleLineTwo", title: "Why Travel Title Line 2", type: "string" }),
+    defineField({ name: "whyTravelTitleLineOne", title: "Why Travel Title Line 1", type: "text", rows: 2 }),
+    defineField({ name: "whyTravelTitleLineTwo", title: "Why Travel Title Line 2", type: "text", rows: 2 }),
     defineField({ name: "whyTravelLinkLabel", title: "Why Travel Link Label", type: "string" }),
     defineField({ name: "whyTravelLinkHref", title: "Why Travel Link", type: "string" }),
     imageField("whyTravelImage", "Why Travel Image", "Best ratio: tall landscape crop for the supporting image."),
@@ -482,8 +482,8 @@ const homePage = defineType({
       ],
     }),
     defineField({ name: "testimonialsLabel", title: "Testimonials Label", type: "string" }),
-    defineField({ name: "testimonialsTitleLineOne", title: "Testimonials Title Line 1", type: "string" }),
-    defineField({ name: "testimonialsTitleLineTwo", title: "Testimonials Title Line 2", type: "string" }),
+    defineField({ name: "testimonialsTitleLineOne", title: "Testimonials Title Line 1", type: "text", rows: 2 }),
+    defineField({ name: "testimonialsTitleLineTwo", title: "Testimonials Title Line 2", type: "text", rows: 2 }),
     defineField({
       name: "testimonials",
       title: "Testimonials",
@@ -491,7 +491,7 @@ const homePage = defineType({
       of: [defineArrayMember({ type: "testimonial" })],
     }),
     defineField({ name: "finalCtaEyebrow", title: "Final CTA Eyebrow", type: "string" }),
-    defineField({ name: "finalCtaTitle", title: "Final CTA Title", type: "string" }),
+    defineField({ name: "finalCtaTitle", title: "Final CTA Title", type: "text", rows: 2 }),
     defineField({ name: "finalCtaButtonLabel", title: "Final CTA Button Label", type: "string" }),
     defineField({ name: "finalCtaButtonHref", title: "Final CTA Button Link", type: "string" }),
   ],
@@ -503,7 +503,7 @@ const destinationsPage = defineType({
   type: "document",
   fields: [
     imageField("heroImage", "Hero Image", "Best ratio: wide cinematic landscape. Minimum 1920px wide recommended."),
-    defineField({ name: "title", title: "Title", type: "string" }),
+    defineField({ name: "title", title: "Title", type: "text", rows: 2 }),
     ...ctaFields,
   ],
 });
@@ -513,12 +513,12 @@ const journeysPage = defineType({
   title: "Journeys Page",
   type: "document",
   fields: [
-    defineField({ name: "title", title: "Title", type: "string" }),
+    defineField({ name: "title", title: "Title", type: "text", rows: 2 }),
     defineField({ name: "body", title: "Body", type: "text", rows: 4 }),
     defineField({ name: "filterPlaceholder", title: "Filter Placeholder", type: "string" }),
     defineField({ name: "seeMoreLabel", title: "See More Label", type: "string" }),
-    defineField({ name: "supportTitle", title: "Support Title", type: "string" }),
-    defineField({ name: "supportHeading", title: "Support Heading", type: "string" }),
+    defineField({ name: "supportTitle", title: "Support Title", type: "text", rows: 2 }),
+    defineField({ name: "supportHeading", title: "Support Heading", type: "text", rows: 2 }),
     defineField({ name: "supportBody", title: "Support Body", type: "text", rows: 3 }),
     defineField({ name: "supportButtonLabel", title: "Support Button Label", type: "string" }),
     defineField({ name: "supportButtonHref", title: "Support Button Link", type: "string" }),
@@ -532,9 +532,10 @@ const inspirationPage = defineType({
   type: "document",
   fields: [
     defineField({ name: "heroQuote", title: "Hero Quote", type: "text", rows: 4 }),
-    defineField({ name: "gridTitle", title: "Grid Title", type: "string" }),
-    defineField({ name: "supportTitle", title: "Support Title", type: "string" }),
-    defineField({ name: "supportHeading", title: "Support Heading", type: "string" }),
+    defineField({ name: "heroSubheading", title: "Hero Subheading", type: "text", rows: 2 }),
+    defineField({ name: "gridTitle", title: "Grid Title", type: "text", rows: 2 }),
+    defineField({ name: "supportTitle", title: "Support Title", type: "text", rows: 2 }),
+    defineField({ name: "supportHeading", title: "Support Heading", type: "text", rows: 2 }),
     defineField({ name: "supportBody", title: "Support Body", type: "text", rows: 3 }),
     defineField({ name: "supportButtonLabel", title: "Support Button Label", type: "string" }),
     defineField({ name: "supportButtonHref", title: "Support Button Link", type: "string" }),
@@ -555,8 +556,8 @@ const aboutPage = defineType({
       options: { accept: "video/*" },
       description: "Upload an MP4 video file. If set, this plays instead of the hero image.",
     }),
-    defineField({ name: "heroTagline", title: "Hero Tagline", type: "string" }),
-    defineField({ name: "introTitle", title: "Intro Title", type: "string" }),
+    defineField({ name: "heroTagline", title: "Hero Tagline", type: "text", rows: 2 }),
+    defineField({ name: "introTitle", title: "Intro Title", type: "text", rows: 2 }),
     defineField({
       name: "introParagraphs",
       title: "Intro Paragraphs",
@@ -579,11 +580,11 @@ const aboutPage = defineType({
       validation: (Rule) => Rule.max(3),
     }),
     imageField("visionImage", "Vision Image", "Best ratio: 795:485. Use a wide editorial crop."),
-    defineField({ name: "visionTitle", title: "Vision Title", type: "string" }),
+    defineField({ name: "visionTitle", title: "Vision Title", type: "text", rows: 2 }),
     defineField({ name: "visionBody", title: "Vision Body", type: "text", rows: 4 }),
-    defineField({ name: "missionTitle", title: "Mission Title", type: "string" }),
+    defineField({ name: "missionTitle", title: "Mission Title", type: "text", rows: 2 }),
     defineField({ name: "missionBody", title: "Mission Body", type: "text", rows: 4 }),
-    defineField({ name: "valuesTitle", title: "Values Title", type: "string" }),
+    defineField({ name: "valuesTitle", title: "Values Title", type: "text", rows: 2 }),
     defineField({
       name: "values",
       title: "Values",
@@ -598,7 +599,7 @@ const aboutPage = defineType({
         }),
       ],
     }),
-    defineField({ name: "foundersTitle", title: "Founders Title", type: "string" }),
+    defineField({ name: "foundersTitle", title: "Founders Title", type: "text", rows: 2 }),
     defineField({
       name: "founders",
       title: "Founders",

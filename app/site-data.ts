@@ -215,6 +215,7 @@ type JourneysPageData = {
 
 type InspirationPageData = {
   heroQuote: string;
+  heroSubheading: string;
   gridTitle: string;
   supportTitle: string;
   supportHeading: string;
@@ -722,6 +723,7 @@ export const getInspirationPageData = cache(async (): Promise<InspirationPageDat
   if (!data) {
     return {
       heroQuote: "",
+      heroSubheading: "",
       gridTitle: "",
       supportTitle: "",
       supportHeading: "",
@@ -734,6 +736,7 @@ export const getInspirationPageData = cache(async (): Promise<InspirationPageDat
 
   return {
     heroQuote: data.heroQuote || "",
+    heroSubheading: data.heroSubheading || "",
     gridTitle: data.gridTitle || "",
     supportTitle: data.supportTitle || "",
     supportHeading: data.supportHeading || "",

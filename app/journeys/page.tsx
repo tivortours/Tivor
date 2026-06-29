@@ -40,39 +40,39 @@ export default async function JourneysPage() {
           <JourneyFilter
             journeys={journeys}
             destNames={destNames}
-            filterPlaceholder={page.filterPlaceholder}
+
             seeMoreLabel={page.seeMoreLabel}
           />
         </div>
       </section>
 
-      {/* ── Can't Find section ────────────────────────────────────────────── */}
+
       <section className="w-full flex justify-center py-[80px]">
         <div className="flex w-full max-w-[1520px] flex-col items-start gap-[60px] px-5 xl:flex-row xl:items-center xl:gap-[72px] xl:px-[80px]">
 
           <div className="flex w-full flex-col gap-[60px] xl:w-auto xl:max-w-[460px] xl:shrink-0">
             <h2
-              className="text-[26px] font-medium leading-tight text-[#151515] sm:text-[32px] lg:text-[52px]"
+              className="whitespace-pre-line text-[26px] font-medium leading-tight text-[#151515] sm:text-[32px] lg:text-[40px]"
               style={{ fontFamily: "var(--font-primary)" }}
             >
               {page.supportTitle}
             </h2>
-             <div className="relative lg:hidden flex-1 overflow-hidden rounded-r-[2px] lg:block" style={{ minHeight: 200 }}>
-            <Image
-              src={page.supportImage}
-              alt="Bespoke journey"
-              fill
-              className="object-cover"
-              sizes="(max-width: 1280px) 0vw, 30vw"
-            />
-          </div>
+            <div className="relative xl:hidden overflow-hidden rounded-r-xs" style={{ minHeight: 200 }}>
+              <Image
+                src={page.supportImage}
+                alt="Bespoke journey"
+                fill
+                className="object-cover"
+                sizes="100vw"
+              />
+            </div>
+            <h3
+              className="text-[20px] lg:text-center lg:text-[28px] font-medium leading-tight text-dark-500"
+              style={{ fontFamily: "var(--font-primary)" }}
+            >
+              {page.supportHeading}
+            </h3>
             <div className="flex flex-col gap-5">
-              <h3
-                className="text-[20px] lg:text-[26px] font-medium leading-tight text-[#151515]"
-                style={{ fontFamily: "var(--font-primary)" }}
-              >
-                {page.supportHeading}
-              </h3>
               <p
                 className="text-[13px] lg:text-[16px] leading-normal text-[#3d3d3d]"
                 style={{ fontFamily: "var(--font-secondary)" }}

@@ -170,6 +170,12 @@ input[type="number"]::-webkit-outer-spin-button {
 }
 input[type="number"] { -moz-appearance: textfield; }
 
+/* ── CMS line-break support ────────────────────────────────────────────── */
+/* Sanity text fields can contain \n — render them as real line breaks      */
+h1, h2, h3, h4, h5, h6 {
+  white-space: pre-line;
+}
+
 /* ── Luxury Motion System ──────────────────────────────────────────────── */
 
 /* Page entrance — every <main> fades + rises on load */

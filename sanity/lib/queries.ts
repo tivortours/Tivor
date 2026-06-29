@@ -280,6 +280,7 @@ export const JOURNEY_QUERY = defineQuery(`
 export const INSPIRATION_PAGE_QUERY = defineQuery(`
   *[_type == "inspirationPage"][0]{
     heroQuote,
+    heroSubheading,
     gridTitle,
     supportTitle,
     supportHeading,

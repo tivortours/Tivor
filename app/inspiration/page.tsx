@@ -56,13 +56,21 @@ export default async function InspirationPage() {
 
       {/* ── Hero Quote ───────────────────────────────────────────────────── */}
       <section className="w-full py-[60px] pb-[100px]">
-        <div className={`${shell} flex justify-center`}>
+        <div className={`${shell} flex flex-col items-center gap-10`}>
           <h1
             className="max-w-[1270px] text-center text-[22px] font-semibold lg:font-medium leading-tight text-[#151515] sm:text-[28px] xl:text-[48px]"
             style={{ fontFamily: "var(--font-primary)" }}
           >
             {page.heroQuote}
           </h1>
+          {page.heroSubheading && (
+            <h4
+              className="mt-4 max-w-200 text-center text-[13px] leading-normal text-dark-400 lg:text-[16px]"
+              style={{ fontFamily: "var(--font-secondary)" }}
+            >
+              {page.heroSubheading}
+            </h4>
+          )}
         </div>
       </section>
 
@@ -133,45 +141,59 @@ export default async function InspirationPage() {
         </div>
       </section>
 
-      {/* ── Can't Find section ───────────────────────────────────────────── */}
       <section className="w-full flex justify-center py-[80px]">
-        <div className="flex w-full max-w-[1520px] flex-col items-start gap-8 px-5 xl:flex-row xl:items-center xl:gap-18 xl:px-20">
-          <div className="flex w-full flex-col gap-8 xl:w-auto xl:max-w-115 xl:shrink-0 xl:gap-15">
-            <h2
-              className="text-[26px] font-medium leading-tight text-[#151515] sm:text-[32px] lg:text-[52px]"
-              style={{ fontFamily: "var(--font-primary)" }}
-            >
-              {page.supportTitle}
-            </h2>
-
-            {/* Mobile-only image — shown between title and body */}
-            <div className="relative aspect-video w-full overflow-hidden rounded-xs xl:hidden">
-              <Image src={page.supportImage} alt="Bespoke journey" fill className="object-cover" sizes="100vw" />
-            </div>
-
-            <div className="flex flex-col gap-5">
-              <h3 className="text-[22px] font-medium leading-tight text-[#151515]" style={{ fontFamily: "var(--font-primary)" }}>
+          <div className="flex w-full max-w-[1520px] flex-col items-start gap-[60px] px-5 xl:flex-row xl:items-center xl:gap-[72px] xl:px-[80px]">
+  
+            <div className="flex w-full flex-col gap-[60px] xl:w-auto xl:max-w-[460px] xl:shrink-0">
+              <h2
+                className="whitespace-pre-line text-[26px] font-medium leading-tight text-[#151515] sm:text-[32px] lg:text-[40px]"
+                style={{ fontFamily: "var(--font-primary)" }}
+              >
+                {page.supportTitle}
+              </h2>
+              <div className="relative xl:hidden overflow-hidden rounded-r-xs" style={{ minHeight: 200 }}>
+                <Image
+                  src={page.supportImage}
+                  alt="Bespoke journey"
+                  fill
+                  className="object-cover"
+                  sizes="100vw"
+                />
+              </div>
+              <h3
+                className="text-[20px] lg:text-center lg:text-[28px] font-medium leading-tight text-dark-500"
+                style={{ fontFamily: "var(--font-primary)" }}
+              >
                 {page.supportHeading}
               </h3>
-              <p className="text-[14px] lg:text-[16px] leading-normal text-dark-400" style={{ fontFamily: "var(--font-secondary)" }}>
-                {page.supportBody}
-              </p>
-              <a
-                href={page.supportButtonHref}
-                className="mt-1 inline-flex h-11.25 w-fit items-center rounded-xs bg-[#824b2e] px-4 text-[14px] text-white xl:text-[18px]"
-                style={{ fontFamily: "var(--font-secondary)" }}
-              >
-                {page.supportButtonLabel}
-              </a>
+              <div className="flex flex-col gap-5">
+                <p
+                  className="text-[13px] lg:text-[16px] leading-normal text-[#3d3d3d]"
+                  style={{ fontFamily: "var(--font-secondary)" }}
+                >
+                  {page.supportBody}
+                </p>
+                <a
+                  href={page.supportButtonHref}
+                  className="mt-1 inline-flex h-[45px] w-fit items-center rounded-[2px] bg-[#824b2e] px-6 text-[14px] lg:text-[18px] text-white"
+                  style={{ fontFamily: "var(--font-secondary)" }}
+                >
+                  {page.supportButtonLabel}
+                </a>
+              </div>
+            </div>
+  
+            <div className="relative hidden flex-1 overflow-hidden rounded-r-[2px] xl:block" style={{ minHeight: 470 }}>
+              <Image
+                src={page.supportImage}
+                alt="Bespoke journey"
+                fill
+                className="object-cover"
+                sizes="(max-width: 1280px) 0vw, 50vw"
+              />
             </div>
           </div>
-
-          {/* Desktop-only image */}
-          <div className="relative hidden flex-1 overflow-hidden rounded-r-xs xl:block" style={{ minHeight: 470 }}>
-            <Image src={page.supportImage} alt="Bespoke journey" fill className="object-cover" sizes="(max-width: 1280px) 0vw, 50vw" />
-          </div>
-        </div>
-      </section>
+        </section>
 
       <SiteFooter />
     </main>
