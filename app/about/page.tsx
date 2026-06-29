@@ -47,7 +47,7 @@ export default async function AboutPage() {
                 {page.introTitle.includes("&") ? (
                   <>
                     <p
-                      className="text-[22px] leading-tight text-dark-500 xl:text-[34px] font-medium"
+                      className="text-[22px] leading-tight text-dark-500 xl:text-[34px] font-semibold"
                       style={{ fontFamily: "var(--font-primary)" }}
                     >
                       {page.introTitle.split("&")[0].trim()}
