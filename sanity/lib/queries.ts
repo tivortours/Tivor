@@ -190,7 +190,11 @@ export const DESTINATION_QUERY = defineQuery(`
     detailDescription1,
     detailDescription2,
     detailGallery,
-    ctaImage
+    ctaImage,
+    ctaTitle,
+    ctaBody,
+    ctaButtonLabel,
+    ctaButtonHref
   }
 `);
 

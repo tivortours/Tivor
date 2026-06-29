@@ -36,10 +36,14 @@ export type Destination = {
     heroImg: string;
     heroTitle: string;
     heroSubtitle: string;
-    desc1: string;
-    desc2: string;
+    desc1: any[];
+    desc2: any[];
     gallery: string[];
     ctaImg: string;
+    ctaTitle: string;
+    ctaBody: string;
+    ctaButtonLabel: string;
+    ctaButtonHref: string;
   };
 };
 
@@ -296,10 +300,14 @@ function mapDestination(item: any): Destination {
       heroImg: imageUrl(item.detailHeroImage, 2000, 1200, ""),
       heroTitle: item.detailHeroTitle,
       heroSubtitle: item.detailHeroSubtitle,
-      desc1: item.detailDescription1,
-      desc2: item.detailDescription2,
+      desc1: item.detailDescription1 || [],
+      desc2: item.detailDescription2 || [],
       gallery: (item.detailGallery || []).map((img: unknown) => imageUrl(img, 1600, 1100, "")).filter(Boolean),
       ctaImg: imageUrl(item.ctaImage, 1200, 1000, imageUrl(item.detailHeroImage, 1600, 900)),
+      ctaTitle: item.ctaTitle || "",
+      ctaBody: item.ctaBody || "",
+      ctaButtonLabel: item.ctaButtonLabel || "",
+      ctaButtonHref: item.ctaButtonHref || "",
     },
   };
 }

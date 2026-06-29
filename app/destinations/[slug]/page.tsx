@@ -1,5 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
+import { PortableText } from "@portabletext/react";
 import { notFound } from "next/navigation";
 import {
   getDestinationBySlug,
@@ -100,12 +101,11 @@ export default async function DestinationDetailPage({
               {dest.name}
             </p>
             <div
-              className="w-full max-w-[957px] text-center text-[13px] lg:text-base leading-normal text-dark-400"
+              className="w-full max-w-[957px] text-center text-[13px] lg:text-base leading-normal text-dark-400 [&_p]:mb-4 [&_p:last-child]:mb-0"
               style={{ fontFamily: "var(--font-secondary)" }}
             >
-              <p>{dest.detail.desc1}</p>
-              <br />
-              <p>{dest.detail.desc2}</p>
+              {dest.detail.desc1.length > 0 && <PortableText value={dest.detail.desc1} />}
+              {dest.detail.desc2.length > 0 && <PortableText value={dest.detail.desc2} />}
             </div>
           </div>
 
@@ -184,10 +184,10 @@ export default async function DestinationDetailPage({
             {/* Text content */}
             <div className="relative z-10 flex flex-col gap-6 p-8 xl:w-[55%] xl:gap-15 xl:px-25 xl:py-7.5">
               <h2
-                className="text-[22px] leading-tight text-white sm:text-[28px] xl:text-[52px] xl:w-[362px]"
+                className="text-[22px] leading-tight text-white sm:text-[28px] xl:text-[52px]"
                 style={{ fontFamily: "var(--font-primary)" }}
               >
-                Craft Your Perfect Escape
+                {dest.detail.ctaTitle || "Craft Your Perfect Escape"}
               </h2>
 
               {/* Mobile-only image — shown between title and body text */}
@@ -206,13 +206,13 @@ export default async function DestinationDetailPage({
                   className="max-w-[460px] text-base leading-normal text-white"
                   style={{ fontFamily: "var(--font-secondary)" }}
                 >
-                  Tell us how you envision your journey, and we&apos;ll shape it into something truly exceptional.
+                  {dest.detail.ctaBody || "Tell us how you envision your journey, and we'll shape it into something truly exceptional."}
                 </p>
                 <button
                   className="h-[45px] cursor-pointer w-fit rounded-[2px] bg-white px-6 text-base text-[#151515] text-[14px]  lg:text-[18px]"
                   style={{ fontFamily: "var(--font-secondary)" }}
                 >
-                  Begin Your Journey
+                  {dest.detail.ctaButtonLabel || "Begin Your Journey"}
                 </button>
               </div>
             </div>

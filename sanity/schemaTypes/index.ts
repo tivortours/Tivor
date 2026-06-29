@@ -189,8 +189,18 @@ const destination = defineType({
     imageField("detailHeroImage", "Detail Hero Image", "Best ratio: 16:9 or wider. Minimum 2000px wide recommended."),
     defineField({ name: "detailHeroTitle", title: "Detail Hero Title", type: "text", rows: 2 }),
     defineField({ name: "detailHeroSubtitle", title: "Detail Hero Subtitle", type: "text", rows: 2 }),
-    defineField({ name: "detailDescription1", title: "Detail Paragraph 1", type: "text", rows: 5 }),
-    defineField({ name: "detailDescription2", title: "Detail Paragraph 2", type: "text", rows: 5 }),
+    defineField({
+      name: "detailDescription1",
+      title: "Detail Paragraph 1",
+      type: "array",
+      of: [defineArrayMember({ type: "block", styles: [{ title: "Normal", value: "normal" }], lists: [] })],
+    }),
+    defineField({
+      name: "detailDescription2",
+      title: "Detail Paragraph 2",
+      type: "array",
+      of: [defineArrayMember({ type: "block", styles: [{ title: "Normal", value: "normal" }], lists: [] })],
+    }),
     defineField({
       name: "detailGallery",
       title: "Detail Gallery",
@@ -199,6 +209,10 @@ const destination = defineType({
       description: "Best with two landscape images. Minimum 1600px wide recommended.",
     }),
     imageField("ctaImage", "CTA Image", "Right-hand image in the 'Craft Your Perfect Escape' banner. Best ratio: tall portrait or landscape crop."),
+    defineField({ name: "ctaTitle", title: "CTA Title", type: "text", rows: 2 }),
+    defineField({ name: "ctaBody", title: "CTA Body", type: "text", rows: 3 }),
+    defineField({ name: "ctaButtonLabel", title: "CTA Button Label", type: "string" }),
+    defineField({ name: "ctaButtonHref", title: "CTA Button Link", type: "string" }),
   ],
 });
 
