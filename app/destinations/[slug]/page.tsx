@@ -125,7 +125,7 @@ export default async function DestinationDetailPage({
             className="text-[24px] font-medium leading-none text-[#151515] xl:text-[36px]"
             style={{ fontFamily: "var(--font-primary)" }}
           >
-            Crafted Journeys, <br className="lg:hidden" />  Creating Lasting Memories
+            Crafted Journeys, <br className="lg:hidden" />  Designed Around You
         
           </h2>
 
