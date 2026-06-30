@@ -139,7 +139,7 @@ export default async function DestinationDetailPage({
       {/* ── Our Curated Journeys Includes ────────────────────────────────── */}
       <section className="bg-[#f7f4f1] py-10">
         <div className={shell}>
-          <div className="flex flex-col items-center gap-[60px] lg:px-10 xl:px-16">
+          <div className="flex flex-col items-center gap-10 lg:gap-17.5 lg:px-10 xl:px-16">
           <h2
             className="text-center text-[24px] lg:text-[28px] leading-none text-[#151515] xl:text-[36px]"
             style={{ fontFamily: "var(--font-primary)" }}
@@ -208,12 +208,13 @@ export default async function DestinationDetailPage({
                 >
                   {dest.detail.ctaBody || "Tell us how you envision your journey, and we'll shape it into something truly exceptional."}
                 </p>
-                <button
-                  className="h-[45px] cursor-pointer w-fit rounded-[2px] bg-white px-6 text-base text-[#151515] text-[14px]  lg:text-[18px]"
+                <Link
+                  href={dest.detail.ctaButtonHref || "/plan"}
+                  className="flex h-11.25 w-fit items-center rounded-xs bg-white px-6 text-base text-dark-500 text-[14px]  lg:text-[18px]"
                   style={{ fontFamily: "var(--font-secondary)" }}
                 >
                   {dest.detail.ctaButtonLabel || "Begin Your Journey"}
-                </button>
+                </Link>
               </div>
             </div>
 
@@ -232,7 +233,7 @@ export default async function DestinationDetailPage({
       </section>
 
       {/* ── Guest Stories / Testimonials ─────────────────────────────────── */}
-      <section className="py-[80px] xl:py-[100px]">
+      <section className="py-17.5 ">
         <div className={shell}>
           <div className="flex flex-col gap-[72px] lg:px-16 xl:px-28">
           <div className="flex flex-col gap-4 ">

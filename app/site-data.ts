@@ -307,7 +307,7 @@ function mapDestination(item: any): Destination {
       ctaTitle: item.ctaTitle || "",
       ctaBody: item.ctaBody || "",
       ctaButtonLabel: item.ctaButtonLabel || "",
-      ctaButtonHref: item.ctaButtonHref || "",
+      ctaButtonHref: item.ctaButtonHref ? toAbsoluteHref(item.ctaButtonHref) : "",
     },
   };
 }
@@ -386,7 +386,7 @@ function mapInspiration(item: any): Inspiration {
     ctaTitle: item.ctaTitle,
     ctaBody: item.ctaBody,
     ctaButtonLabel: item.ctaButtonLabel || "Plan Your Journey",
-    ctaButtonHref: item.ctaButtonHref || "/plan",
+    ctaButtonHref: item.ctaButtonHref ? toAbsoluteHref(item.ctaButtonHref) : "/plan",
     ctaImg: imageUrl(item.ctaImage, 1200, 1000, ""),
   };
 }
@@ -454,7 +454,7 @@ export const getSiteSettings = cache(async (): Promise<SiteSettings> => {
     },
     footer: {
       ctaLabel: data.footer?.ctaLabel || "",
-      ctaHref: data.footer?.ctaHref || "",
+      ctaHref: data.footer?.ctaHref ? toAbsoluteHref(data.footer.ctaHref) : "",
       year: data.footer?.year || new Date().getFullYear(),
       copyrightText: data.footer?.copyrightText || "",
       followLabel: data.footer?.followLabel || "",
@@ -559,14 +559,14 @@ export const getHomePageData = cache(async (): Promise<HomePageData> => {
     curatedJourneysLabel: data.curatedJourneysLabel || "",
     curatedJourneysTitle: data.curatedJourneysTitle || "",
     curatedJourneysLinkLabel: data.curatedJourneysLinkLabel || "",
-    curatedJourneysLinkHref: data.curatedJourneysLinkHref || "",
+    curatedJourneysLinkHref: data.curatedJourneysLinkHref ? toAbsoluteHref(data.curatedJourneysLinkHref) : "",
     featuredJourneys: data.featuredJourneys?.length
       ? data.featuredJourneys.map((item: any) => mapJourney(item))
       : [],
     experiencesLabel: data.experiencesLabel || "",
     experiencesTitle: data.experiencesTitle || "",
     experiencesButtonLabel: data.experiencesButtonLabel || "",
-    experiencesButtonHref: data.experiencesButtonHref || "",
+    experiencesButtonHref: data.experiencesButtonHref ? toAbsoluteHref(data.experiencesButtonHref) : "",
     experiences: data.experiences?.length
       ? data.experiences.map((item: any) => ({
           label: item.label,
@@ -580,12 +580,12 @@ export const getHomePageData = cache(async (): Promise<HomePageData> => {
     aboutBody: Array.isArray(data.aboutBody) && data.aboutBody.length ? data.aboutBody : [],
     aboutTagline: Array.isArray(data.aboutTagline) && data.aboutTagline.length ? data.aboutTagline : undefined,
     aboutLinkLabel: data.aboutLinkLabel || "",
-    aboutLinkHref: data.aboutLinkHref || "",
+    aboutLinkHref: data.aboutLinkHref ? toAbsoluteHref(data.aboutLinkHref) : "",
     whyTravelLabel: data.whyTravelLabel || "",
     whyTravelTitleLineOne: data.whyTravelTitleLineOne || "",
     whyTravelTitleLineTwo: data.whyTravelTitleLineTwo || "",
     whyTravelLinkLabel: data.whyTravelLinkLabel || "",
-    whyTravelLinkHref: data.whyTravelLinkHref || "",
+    whyTravelLinkHref: data.whyTravelLinkHref ? toAbsoluteHref(data.whyTravelLinkHref) : "",
     whyTravelImage: imageUrl(data.whyTravelImage, 1200, 1500, ""),
     reasons: data.reasons?.length ? data.reasons : [],
     testimonialsLabel: data.testimonialsLabel || "",
@@ -595,7 +595,7 @@ export const getHomePageData = cache(async (): Promise<HomePageData> => {
     finalCtaEyebrow: data.finalCtaEyebrow || "",
     finalCtaTitle: data.finalCtaTitle || "",
     finalCtaButtonLabel: data.finalCtaButtonLabel || "",
-    finalCtaButtonHref: data.finalCtaButtonHref || "",
+    finalCtaButtonHref: data.finalCtaButtonHref ? toAbsoluteHref(data.finalCtaButtonHref) : "",
   };
 });
 
@@ -639,7 +639,7 @@ export const getDestinationsPageData = cache(async (): Promise<DestinationsPageD
     ctaTitle: data.ctaTitle || "",
     ctaSubtitle: data.ctaSubtitle || "",
     ctaButtonLabel: data.ctaButtonLabel || "",
-    ctaButtonHref: data.ctaButtonHref || "",
+    ctaButtonHref: data.ctaButtonHref ? toAbsoluteHref(data.ctaButtonHref) : "",
   };
 });
 
@@ -702,7 +702,7 @@ export const getJourneysPageData = cache(async (): Promise<JourneysPageData> => 
     supportHeading: data.supportHeading || "",
     supportBody: data.supportBody || "",
     supportButtonLabel: data.supportButtonLabel || "",
-    supportButtonHref: data.supportButtonHref || "",
+    supportButtonHref: data.supportButtonHref ? toAbsoluteHref(data.supportButtonHref) : "",
     supportImage: imageUrl(data.supportImage, 1400, 940, ""),
   };
 });
@@ -750,7 +750,7 @@ export const getInspirationPageData = cache(async (): Promise<InspirationPageDat
     supportHeading: data.supportHeading || "",
     supportBody: data.supportBody || "",
     supportButtonLabel: data.supportButtonLabel || "",
-    supportButtonHref: data.supportButtonHref || "",
+    supportButtonHref: data.supportButtonHref ? toAbsoluteHref(data.supportButtonHref) : "",
     supportImage: imageUrl(data.supportImage, 1400, 940, ""),
   };
 });
@@ -817,6 +817,6 @@ export const getAboutPageData = cache(async (): Promise<AboutPageData> => {
     ctaTitle: data.ctaTitle || "",
     ctaSubtitle: data.ctaSubtitle || "",
     ctaButtonLabel: data.ctaButtonLabel || "",
-    ctaButtonHref: data.ctaButtonHref || "",
+    ctaButtonHref: data.ctaButtonHref ? toAbsoluteHref(data.ctaButtonHref) : "",
   };
 });

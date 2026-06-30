@@ -3,22 +3,43 @@
 import Image from "next/image";
 import { useCallback, useEffect, useRef, useState } from "react";
 
-function ChevronLeft() {
+function ChevronLeft({ className = "" }: { className?: string }) {
   return (
-    <svg width="38" height="38" viewBox="0 0 28 28" fill="none" aria-hidden="true">
-      <path d="M17 21L10 14L17 7" stroke="#151515" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+    <svg
+      viewBox="0 0 28 28"
+      fill="none"
+      aria-hidden="true"
+      className={className}
+    >
+      <path
+        d="M17 21L10 14L17 7"
+        stroke="#151515"
+        strokeWidth="2"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
     </svg>
   );
 }
 
-function ChevronRight() {
+function ChevronRight({ className = "" }: { className?: string }) {
   return (
-    <svg width="38" height="38" viewBox="0 0 28 28" fill="none" aria-hidden="true">
-      <path d="M11 7L18 14L11 21" stroke="#151515" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+    <svg
+      viewBox="0 0 28 28"
+      fill="none"
+      aria-hidden="true"
+      className={className}
+    >
+      <path
+        d="M11 7L18 14L11 21"
+        stroke="#151515"
+        strokeWidth="2"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
     </svg>
   );
 }
-
 export function GalleryCarousel({ images }: { images: string[] }) {
   const [current, setCurrent] = useState(0);
   const trackRef = useRef<HTMLDivElement>(null);
@@ -83,22 +104,22 @@ export function GalleryCarousel({ images }: { images: string[] }) {
       <button
         onClick={() => goTo(Math.max(0, current - 1))}
         aria-label="Previous image"
-        className={`absolute cursor-pointer left-0 top-1/2 z-10 -translate-x-5 sm:-translate-x-7 lg:-translate-x-10 xl:-translate-x-12 -translate-y-1/2 transition-opacity duration-300 ${
+        className={`absolute cursor-pointer left-0 top-1/2 z-10 -translate-x-6 sm:-translate-x-7 lg:-translate-x-10 xl:-translate-x-12 -translate-y-1/2 transition-opacity duration-300 ${
           current === 0 ? "pointer-events-none opacity-0" : "opacity-100"
         }`}
       >
-        <ChevronLeft />
+      <ChevronLeft className="w-5 h-5 sm:w-6 sm:h-6 lg:w-[38px] lg:h-[38px]" />
       </button>
 
       {/* Right arrow — visible only when not at end */}
       <button
         onClick={() => goTo(Math.min(images.length - 1, current + 1))}
         aria-label="Next image"
-        className={`absolute cursor-pointer right-0 top-1/2 z-10 translate-x-5 sm:translate-x-7 lg:translate-x-10 xl:translate-x-12 -translate-y-1/2 transition-opacity duration-300 ${
+        className={`absolute cursor-pointer right-0 top-1/2 z-10 translate-x-6 sm:translate-x-7 lg:translate-x-10 xl:translate-x-12 -translate-y-1/2 transition-opacity duration-300 ${
           current >= images.length - 1 ? "pointer-events-none opacity-0" : "opacity-100"
         }`}
       >
-        <ChevronRight />
+   <ChevronRight className="w-7 h-7 sm:w-6 sm:h-6 lg:w-[38px] lg:h-[38px]" />
       </button>
     </div>
   );
