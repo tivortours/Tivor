@@ -175,7 +175,7 @@ const destination = defineType({
   type: "document",
   fields: [
     defineField({ name: "sortOrder", title: "Sort Order", type: "number" }),
-    defineField({ name: "name", title: "Name", type: "string", validation: (Rule) => Rule.required() }),
+    defineField({ name: "name", title: "Name", type: "text", rows: 2, validation: (Rule) => Rule.required() }),
     defineField({ name: "slug", title: "Slug", type: "slug", options: { source: "name" }, validation: (Rule) => Rule.required() }),
     defineField({ name: "blurb", title: "Home Card Summary", type: "text", rows: 3, validation: (Rule) => Rule.required() }),
     defineField({ name: "region", title: "Region", type: "string" }),
@@ -222,7 +222,7 @@ const journey = defineType({
   type: "document",
   fields: [
     defineField({ name: "sortOrder", title: "Sort Order", type: "number" }),
-    defineField({ name: "title", title: "Title", type: "string", validation: (Rule) => Rule.required() }),
+    defineField({ name: "title", title: "Title", type: "text", rows: 2, validation: (Rule) => Rule.required() }),
     defineField({ name: "slug", title: "Slug", type: "slug", options: { source: "title" }, validation: (Rule) => Rule.required() }),
     defineField({ name: "alt", title: "Image Alt Text", type: "string" }),
     defineField({ name: "shortDescription", title: "Short Description", type: "text", rows: 3, validation: (Rule) => Rule.required() }),
