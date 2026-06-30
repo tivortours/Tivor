@@ -201,9 +201,9 @@ export async function SiteFooter() {
                 Subscribe For <br className="lg:hidden" />
                 Insider Travel Access
               </p>
-              <p className="text-base opacity-90" style={{ fontFamily: "var(--font-secondary)" }}>
+              <h4 className="text-base opacity-90" style={{ fontFamily: "var(--font-secondary)" }}>
                 {settings.newsletter.body}
-              </p>
+              </h4>
             </div>
 
             <div className="flex w-full max-w-[430px] flex-col gap-3 sm:flex-row sm:gap-0">
