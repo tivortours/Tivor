@@ -230,7 +230,7 @@ export async function SiteFooter() {
           {/* Logo + CTA */}
           <div className="flex flex-col items-center gap-6 border-b border-grey-400 pb-5 lg:flex-row lg:items-center lg:justify-between">
             <div className="flex items-center gap-2">
-              <div className="relative h-[24px] w-[48px] shrink-0">
+              <div className="relative h-[44px] w-[48px] shrink-0">
                 <Image src={settings.logos.footerIcon} alt="" fill className="object-contain" />
               </div>
               <Link href="/" className="relative block h-[22px] w-[165px] shrink-0">
