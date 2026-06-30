@@ -79,7 +79,7 @@ export function DestinationJourneyCarousel({ journeys }: { journeys: Journey[] }
               <div>
                 <div className="flex flex-col gap-2 px-6 py-5">
                   {j.details
-                    .filter(([label]) => /duration|best season|suited for/i.test(label))
+                    .filter(([label]) => /duration|best season/i.test(label))
                     .map(([label, value]) => (
                       <div key={label} className="grid grid-cols-[auto_1fr] items-start gap-4">
                         <span

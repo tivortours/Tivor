@@ -100,7 +100,7 @@ export function JourneysCarousel({ journeys }: { journeys: Journey[] }) {
                 style={{ backgroundColor: journey.accent.replace("bg-[", "").replace("]", "") }}
               >
                 <div className="space-y-3">
-                  {journey.details.filter(([label]) => /duration|best season|suited for/i.test(label)).map(([label, value]) => (
+                  {journey.details.filter(([label]) => /duration|best season/i.test(label)).map(([label, value]) => (
                     <div
                       key={label}
                       className="flex items-start justify-between"
