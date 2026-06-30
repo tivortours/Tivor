@@ -52,7 +52,7 @@ function JourneyCard({ journey }: { journey: Journey }) {
         >
           <div className="flex flex-col gap-2">
             {journey.details
-              .filter(([label]) => /duration|best season|suited for/i.test(label))
+              .filter(([label]) => /duration|best season/i.test(label))
               .map(([label, value]) => (
                 <div key={label} className="flex items-start justify-between">
                   <span className={`text-[13px] lg:text-[16px] ${labelColor}`} style={{ fontFamily: "var(--font-secondary)" }}>
