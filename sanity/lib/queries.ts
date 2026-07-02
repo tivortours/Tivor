@@ -253,6 +253,7 @@ export const JOURNEY_SLUGS_QUERY = defineQuery(`
 export const JOURNEY_QUERY = defineQuery(`
   *[_type == "journey" && slug.current == $slug][0]{
     title,
+    detailTitle,
     alt,
     shortDescription,
     fullDescription,
@@ -269,6 +270,7 @@ export const JOURNEY_QUERY = defineQuery(`
     inclusions,
     cardImage,
     heroImage,
+    priceCurrency,
     priceFrom,
     priceBasis,
     priceCtaTitle,
@@ -361,6 +363,27 @@ export const INSPIRATION_ARTICLE_QUERY = defineQuery(`
       name,
       role,
       avatar
+    }
+  }
+`);
+
+export const CONTENT_PAGE_SLUGS_QUERY = defineQuery(`
+  *[_type == "contentPage" && defined(slug.current)][]{
+    "slug": slug.current
+  }
+`);
+
+export const CONTENT_PAGE_QUERY = defineQuery(`
+  *[_type == "contentPage" && slug.current == $slug][0]{
+    title,
+    heroImage,
+    body[]{
+      ...,
+      _type == "image" => {
+        alt,
+        caption,
+        "url": asset->url
+      }
     }
   }
 `);

@@ -5,6 +5,8 @@ import { readClient } from "../sanity/lib/client";
 import { urlForImage } from "../sanity/lib/image";
 import {
   ABOUT_PAGE_QUERY,
+  CONTENT_PAGE_QUERY,
+  CONTENT_PAGE_SLUGS_QUERY,
   DESTINATIONS_PAGE_QUERY,
   DESTINATIONS_QUERY,
   DESTINATION_QUERY,
@@ -52,6 +54,7 @@ export type Journey = {
   img: string;
   alt: string;
   title: string;
+  detailTitle: any[];
   desc: string;
   fullDesc: string[];
   accent: string;
@@ -60,8 +63,9 @@ export type Journey = {
   destination: string;
   featured: boolean;
   details: [string, string][];
-  inclusions: string[];
+  inclusions: any[];
   highlightsImg: string;
+  priceCurrency: string;
   priceFrom: string;
   priceBasis: string;
   priceCtaTitle: string;
@@ -69,7 +73,7 @@ export type Journey = {
     day: string;
     title: string;
     img: string;
-    activities: string[];
+    activities: any[];
   }[];
 };
 
@@ -253,6 +257,21 @@ type AboutPageData = {
   ctaButtonHref: string;
 };
 
+// `inclusions` and `itinerary[].activities` were plain string arrays before
+// they became Portable Text fields. Older documents still hold that shape —
+// PortableText silently renders nothing for array items without a `_type`,
+// so without this, existing published content just goes blank. Upgrades each
+// legacy string into a minimal Portable Text block; already-rich items pass
+// through untouched.
+function normalizeRichText(value: unknown): any[] {
+  if (!Array.isArray(value)) return [];
+  return value.map((item) =>
+    typeof item === "string"
+      ? { _type: "block", style: "normal", children: [{ _type: "span", text: item }] }
+      : item
+  );
+}
+
 function imageUrl(source: unknown, width: number, height?: number, fallbackUrl = "") {
   const src = source as { asset?: unknown } | null;
   if (!src?.asset) return fallbackUrl;
@@ -318,6 +337,7 @@ function mapJourney(item: any): Journey {
     img: imageUrl(item.cardImage || item.heroImage, 1200, 900, ""),
     alt: item.alt || item.title,
     title: item.title,
+    detailTitle: item.detailTitle || [],
     desc: item.shortDescription,
     fullDesc: item.fullDescription || [],
     accent: `bg-[${item.accentColor || "#ece2d6"}]`,
@@ -329,8 +349,9 @@ function mapJourney(item: any): Journey {
       string,
       string,
     ][],
-    inclusions: item.inclusions || [],
+    inclusions: normalizeRichText(item.inclusions),
     highlightsImg: imageUrl(item.heroImage || item.cardImage, 1600, 1000),
+    priceCurrency: item.priceCurrency || "EUR",
     priceFrom: item.priceFrom || "",
     priceBasis: item.priceBasis || "",
     priceCtaTitle: item.priceCtaTitle || "",
@@ -338,7 +359,7 @@ function mapJourney(item: any): Journey {
       day: stop.day,
       title: stop.title,
       img: imageUrl(stop.image, 1400, 900, ""),
-      activities: stop.activities || [],
+      activities: normalizeRichText(stop.activities),
     })),
   };
 }
@@ -818,5 +839,26 @@ export const getAboutPageData = cache(async (): Promise<AboutPageData> => {
     ctaSubtitle: data.ctaSubtitle || "",
     ctaButtonLabel: data.ctaButtonLabel || "",
     ctaButtonHref: data.ctaButtonHref ? toAbsoluteHref(data.ctaButtonHref) : "",
+  };
+});
+
+export type ContentPage = {
+  title: string;
+  heroImage: string;
+  body: any[];
+};
+
+export const getContentPageSlugs = cache(async (): Promise<string[]> => {
+  const data = await fetchSanity<{ slug: string }[]>(CONTENT_PAGE_SLUGS_QUERY, undefined, ["contentPage"]);
+  return data?.length ? data.map((item) => item.slug) : [];
+});
+
+export const getContentPageBySlug = cache(async (slug: string): Promise<ContentPage | null> => {
+  const data = await fetchSanity<any>(CONTENT_PAGE_QUERY, { slug }, ["contentPage"]);
+  if (!data) return null;
+  return {
+    title: data.title || "",
+    heroImage: imageUrl(data.heroImage, 1520, 760, ""),
+    body: data.body || [],
   };
 });

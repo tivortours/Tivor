@@ -1,12 +1,79 @@
 "use client";
 
 import { useCallback, useEffect, useState } from "react";
+import { PortableText } from "@portabletext/react";
+import { getTextAlign } from "../lib/portableText";
 import { Portal } from "./Portal";
+
+// Inclusions are Portable Text: bullets get the dot marker; size comes from
+// the editor's Normal/Small/Large style dropdown, independent of whether the
+// line is bulleted or plain (e.g. a plain line used as a section divider
+// like "Available on Request", not just a note under one bullet). Alignment
+// comes from the Align Left/Center/Right marks (see lib/portableText) —
+// rendered as inert pass-throughs below since text-align has no effect on
+// inline marks. Plain lines default to left/black; margin keeps them from
+// looking cramped between two bullet lists, which each carry their own
+// internal gap-6 but no outer margin of their own.
+const inclusionSize: Record<string, string> = {
+  small: "text-[14px]",
+  normal: "text-[18px] sm:text-[20px]",
+  large: "text-[22px] sm:text-[24px]",
+};
+
+type RichValue = { style?: string; children?: any[] };
+
+const alignMarks = {
+  alignLeft: ({ children }: { children?: React.ReactNode }) => <>{children}</>,
+  alignCenter: ({ children }: { children?: React.ReactNode }) => <>{children}</>,
+  alignRight: ({ children }: { children?: React.ReactNode }) => <>{children}</>,
+};
+
+function inclusionNoteLine({ children, value }: { children?: React.ReactNode; value: RichValue }) {
+  return (
+    <p
+      className={`my-6 ${inclusionSize[value.style ?? "normal"] ?? inclusionSize.normal} leading-snug text-dark-500`}
+      style={{ fontFamily: "var(--font-secondary)", textAlign: getTextAlign(value) ?? "left" }}
+    >
+      {children}
+    </p>
+  );
+}
+
+const inclusionsComponents = {
+  list: {
+    bullet: ({ children }: { children?: React.ReactNode }) => (
+      <ul className="flex flex-col gap-6">{children}</ul>
+    ),
+  },
+  listItem: {
+    bullet: ({ children, value }: { children?: React.ReactNode; value: RichValue }) => (
+      <li className="flex items-start gap-3">
+        <span className="mt-2.25 shrink-0">
+          <svg width="6" height="6" viewBox="0 0 6 6" fill="none">
+            <circle cx="3" cy="3" r="3" fill="#3d3d3d" />
+          </svg>
+        </span>
+        <p
+          className={`flex-1 ${inclusionSize[value.style ?? "normal"] ?? inclusionSize.normal} leading-snug text-[#3d3d3d]`}
+          style={{ fontFamily: "var(--font-secondary)", textAlign: getTextAlign(value) }}
+        >
+          {children}
+        </p>
+      </li>
+    ),
+  },
+  marks: alignMarks,
+  block: {
+    normal: inclusionNoteLine,
+    small: inclusionNoteLine,
+    large: inclusionNoteLine,
+  },
+};
 
 // ── Modal ─────────────────────────────────────────────────────────────────────
 function Modal({ journeyTitle, inclusions, onClose }: {
   journeyTitle: string;
-  inclusions: string[];
+  inclusions: any[];
   onClose: () => void;
 }) {
   const [visible, setVisible] = useState(false);
@@ -84,24 +151,7 @@ function Modal({ journeyTitle, inclusions, onClose }: {
                 No inclusions listed for this journey.
               </p>
             ) : (
-              <ul className="flex flex-col gap-6">
-                {inclusions.map((item, i) => (
-                  <li key={i} className="flex items-start gap-3">
-                    {/* Bullet dot */}
-                    <span className="mt-[6px] shrink-0">
-                      <svg width="10" height="10" viewBox="0 0 10 10" fill="none">
-                        <circle cx="5" cy="5" r="5" fill="#3d3d3d" />
-                      </svg>
-                    </span>
-                    <p
-                      className="text-[18px] leading-snug text-[#3d3d3d] sm:text-[20px]"
-                      style={{ fontFamily: "var(--font-secondary)" }}
-                    >
-                      {item}
-                    </p>
-                  </li>
-                ))}
-              </ul>
+              <PortableText value={inclusions} components={inclusionsComponents} />
             )}
           </div>
         </div>
@@ -120,7 +170,7 @@ export function InclusionsButton({
   children,
 }: {
   journeyTitle: string;
-  inclusions: string[];
+  inclusions: any[];
   className?: string;
   style?: React.CSSProperties;
   children: React.ReactNode;

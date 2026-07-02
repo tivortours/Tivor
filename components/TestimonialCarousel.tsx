@@ -166,7 +166,7 @@ export function TestimonialCarousel({ testimonials }: { testimonials: Testimonia
           }`}
         >
           <svg width="28" height="28" viewBox="0 0 28 28" fill="none" aria-hidden="true">
-            <path d="M17 21L10 14L17 7" stroke="#151515" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+            <path d="M17 21L10 14L17 7" stroke="#151515" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
           </svg>
         </button>
 
@@ -178,7 +178,7 @@ export function TestimonialCarousel({ testimonials }: { testimonials: Testimonia
           }`}
         >
           <svg width="28" height="28" viewBox="0 0 28 28" fill="none" aria-hidden="true">
-            <path d="M11 7L18 14L11 21" stroke="#151515" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+            <path d="M11 7L18 14L11 21" stroke="#151515" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
           </svg>
         </button>
       </div>

@@ -22,6 +22,46 @@ const linkField = defineField({
   type: "string",
 });
 
+// Size styles shared by every rich-text field below — lets editors pick a
+// text size per line from a dropdown, independent of bullet/list membership.
+const sizeStyles = [
+  { title: "Normal", value: "normal" },
+  { title: "Small", value: "small" },
+  { title: "Large", value: "large" },
+];
+
+// Alignment isn't a real field option on Sanity's block type (no per-block
+// custom `fields` support here) — the standard workaround is a decorator
+// mark, same mechanism as Bold/Italic. Editors select the *whole line* and
+// apply one; the renderer scans the block's spans for these marks and turns
+// the first match into a block-level `text-align`, rather than rendering the
+// mark as an inline wrapper the way Bold/Italic are.
+const alignDecorators = [
+  { title: "Align Left", value: "alignLeft" },
+  { title: "Align Center", value: "alignCenter" },
+  { title: "Align Right", value: "alignRight" },
+];
+
+const richMarks = {
+  decorators: [
+    { title: "Bold", value: "strong" },
+    { title: "Italic", value: "em" },
+    ...alignDecorators,
+  ],
+  annotations: [],
+};
+
+// Rich text: sized paragraphs + bullet lists + bold/italic + alignment, for
+// fields that need editor-controlled formatting (e.g. a bullet with a
+// smaller note under it).
+const richListBlock = () =>
+  defineArrayMember({
+    type: "block",
+    styles: sizeStyles,
+    lists: [{ title: "Bullet", value: "bullet" }],
+    marks: richMarks,
+  });
+
 const ctaFields = [
   defineField({ name: "ctaEyebrow", title: "CTA Eyebrow", type: "string" }),
   defineField({ name: "ctaTitle", title: "CTA Title", type: "text", rows: 2 }),
@@ -152,7 +192,8 @@ const itineraryItem = defineType({
       name: "activities",
       title: "Activities",
       type: "array",
-      of: [defineArrayMember({ type: "string" })],
+      of: [richListBlock()],
+      description: "Use the Small/Large styles to resize a line, and the Align Left/Center/Right marks (select the whole line, then apply) to change its alignment.",
       validation: (Rule) => Rule.required().min(1),
     }),
   ],
@@ -224,6 +265,20 @@ const journey = defineType({
     defineField({ name: "sortOrder", title: "Sort Order", type: "number" }),
     defineField({ name: "title", title: "Title", type: "text", rows: 2, validation: (Rule) => Rule.required() }),
     defineField({ name: "slug", title: "Slug", type: "slug", options: { source: "title" }, validation: (Rule) => Rule.required() }),
+    defineField({
+      name: "detailTitle",
+      title: "Detail Page Title",
+      type: "array",
+      of: [
+        defineArrayMember({
+          type: "block",
+          styles: sizeStyles,
+          lists: [],
+          marks: richMarks,
+        }),
+      ],
+      description: "Optional. Rich-text heading shown on the journey detail page — use Small/Large styles per line for a title + tagline effect, and the Align Left/Center/Right marks (select the whole line, then apply) to change alignment. Falls back to the plain Title above if left empty; Title still powers cards, the breadcrumb, image alt text, emails, and the URL slug, so keep it filled in regardless.",
+    }),
     defineField({ name: "alt", title: "Image Alt Text", type: "string" }),
     defineField({ name: "shortDescription", title: "Short Description", type: "text", rows: 3, validation: (Rule) => Rule.required() }),
     defineField({
@@ -247,6 +302,7 @@ const journey = defineType({
       of: [defineArrayMember({ type: "factItem" })],
       validation: (Rule) => Rule.required().min(1),
     }),
+    defineField({ name: "priceCurrency", title: "Price Currency (e.g. EUR, USD)", type: "string" }),
     defineField({ name: "priceFrom", title: "Price From", type: "string" }),
     defineField({ name: "priceBasis", title: "Price Basis", type: "string" }),
     defineField({ name: "priceCtaTitle", title: "Pricing CTA Title", type: "string" }),
@@ -254,8 +310,8 @@ const journey = defineType({
       name: "inclusions",
       title: "Inclusions",
       type: "array",
-      of: [defineArrayMember({ type: "string" })],
-      description: "List of what is included in this journey package.",
+      of: [richListBlock()],
+      description: "List of what is included in this journey package. Use a bullet for each main item; add a plain (Normal-style) line right after a bullet for a smaller note underneath it. Align Left/Center/Right marks (select the whole line, then apply) control alignment.",
     }),
     defineField({
       name: "itinerary",
@@ -557,6 +613,65 @@ const inspirationPage = defineType({
   ],
 });
 
+const contentPage = defineType({
+  name: "contentPage",
+  title: "Content Page",
+  type: "document",
+  fields: [
+    defineField({ name: "title", title: "Title", type: "string", validation: (Rule) => Rule.required() }),
+    defineField({ name: "slug", title: "Slug", type: "slug", options: { source: "title" }, validation: (Rule) => Rule.required() }),
+    imageField("heroImage", "Hero Image", "Optional wide image shown below the page title. Best ratio: 16:9 or wider."),
+    defineField({
+      name: "body",
+      title: "Body",
+      type: "array",
+      of: [
+        defineArrayMember({
+          type: "block",
+          styles: [
+            { title: "Normal", value: "normal" },
+            { title: "Heading 2", value: "h2" },
+            { title: "Heading 3", value: "h3" },
+            { title: "Heading 4", value: "h4" },
+          ],
+          lists: [
+            { title: "Bullet", value: "bullet" },
+            { title: "Numbered", value: "number" },
+          ],
+          marks: {
+            decorators: [
+              { title: "Bold", value: "strong" },
+              { title: "Italic", value: "em" },
+              { title: "Underline", value: "underline" },
+            ],
+            annotations: [
+              {
+                name: "link",
+                type: "object",
+                title: "Link",
+                fields: [
+                  defineField({ name: "href", title: "URL", type: "url" }),
+                  defineField({ name: "blank", title: "Open in new tab", type: "boolean", initialValue: false }),
+                ],
+              },
+            ],
+          },
+        }),
+        defineArrayMember({
+          type: "image",
+          options: { hotspot: true },
+          fields: [
+            defineField({ name: "alt", title: "Alt text", type: "string" }),
+            defineField({ name: "caption", title: "Caption", type: "string" }),
+          ],
+        }),
+      ],
+      description: "Use Heading 2 / Heading 3 for section titles. Insert images anywhere via the image block.",
+    }),
+  ],
+  preview: { select: { title: "title", subtitle: "slug.current" } },
+});
+
 const aboutPage = defineType({
   name: "aboutPage",
   title: "About Page",
@@ -667,4 +782,5 @@ export const schemaTypes = [
   journeysPage,
   inspirationPage,
   aboutPage,
+  contentPage,
 ];

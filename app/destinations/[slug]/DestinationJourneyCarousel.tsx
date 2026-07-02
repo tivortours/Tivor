@@ -119,7 +119,7 @@ export function DestinationJourneyCarousel({ journeys }: { journeys: Journey[] }
           canPrev ? "opacity-100" : "pointer-events-none opacity-0"
         }`}
       >
-        <svg width="28" height="28" viewBox="0 0 28 28" fill="none" aria-hidden="true">
+        <svg width="32" height="32" viewBox="0 0 28 28" fill="none" aria-hidden="true">
           <path d="M17 21L10 14L17 7" stroke="#151515" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
         </svg>
       </button>
@@ -131,7 +131,7 @@ export function DestinationJourneyCarousel({ journeys }: { journeys: Journey[] }
           canNext ? "opacity-100" : "pointer-events-none opacity-0"
         }`}
       >
-        <svg width="28" height="28" viewBox="0 0 28 28" fill="none" aria-hidden="true">
+        <svg width="32" height="32" viewBox="0 0 28 28" fill="none" aria-hidden="true">
           <path d="M11 7L18 14L11 21" stroke="#151515" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
         </svg>
       </button>
