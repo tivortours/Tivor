@@ -327,7 +327,7 @@ export function JourneyHighlights({
                 min-height (vs. explicit height) flex container. Default
                 align-items:stretch sizes this correctly without that issue. */}
             <div className="relative w-1/2 bg-[#ece2d6]">
-              <div className="absolute inset-12 overflow-hidden">
+              <div className="absolute inset-28 overflow-hidden">
                 <Image
                   src={entry.img}
                   alt={entry.day}
