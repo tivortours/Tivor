@@ -18,6 +18,14 @@ const COUNTRIES = [
   { code: "NO", flag: "🇳🇴", dial: "+47",  name: "Norway" },
 ];
 
+// ── Validators ────────────────────────────────────────────────────────────────
+function isValidEmail(v: string) {
+  return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v.trim());
+}
+function isValidPhone(v: string) {
+  return v.replace(/\D/g, "").length >= 5;
+}
+
 // ── Form data types ───────────────────────────────────────────────────────────
 type Step1 = {
   firstName: string; lastName: string; email: string;
@@ -28,41 +36,53 @@ type Step2 = {
   adults: string; children: string;
 };
 
+type Errors1 = Partial<Record<keyof Omit<Step1, "countryCode">, string>>;
+type Errors2 = Partial<Record<keyof Omit<Step2, "children">, string>>;
+
 const EMPTY1: Step1 = { firstName: "", lastName: "", email: "", countryCode: "AE", phone: "", message: "" };
 const EMPTY2: Step2 = { travelDate: "", countryCity: "", adults: "", children: "" };
 
 // ── Shared primitives ─────────────────────────────────────────────────────────
 function FieldLabel({ children }: { children: React.ReactNode }) {
   return (
-    <p className="text-[13px] text-[#151515]" style={{ fontFamily: "var(--font-secondary)" }}>
+    <p className="text-[13px] text-dark-500" style={{ fontFamily: "var(--font-secondary)" }}>
       {children}
     </p>
   );
 }
 
+function FieldError({ msg }: { msg?: string }) {
+  if (!msg) return null;
+  return (
+    <p className="text-[12px] text-red-500" style={{ fontFamily: "var(--font-secondary)" }}>
+      {msg}
+    </p>
+  );
+}
+
 function TextInput({
-  placeholder, value, onChange, type = "text",
-}: { placeholder: string; value: string; onChange: (v: string) => void; type?: string }) {
+  placeholder, value, onChange, type = "text", hasError,
+}: { placeholder: string; value: string; onChange: (v: string) => void; type?: string; hasError?: boolean }) {
   return (
     <input
       type={type}
       value={value}
       onChange={(e) => onChange(e.target.value)}
       placeholder={placeholder}
-      className="h-10 w-full rounded-[2px] bg-[#f1f1f1] px-4 text-base text-[#151515] placeholder-[#999] outline-none focus:ring-1 focus:ring-[#cfbcad]"
+      className={`h-10 w-full rounded-xs bg-[#f1f1f1] px-4 text-base text-dark-500 placeholder-[#999] outline-none ring-1 ${hasError ? "ring-red-400" : "ring-transparent focus:ring-brown-300"}`}
       style={{ fontFamily: "var(--font-secondary)", fontSize: 16 }}
     />
   );
 }
 
-function Textarea({ placeholder, value, onChange }: { placeholder: string; value: string; onChange: (v: string) => void }) {
+function Textarea({ placeholder, value, onChange, hasError }: { placeholder: string; value: string; onChange: (v: string) => void; hasError?: boolean }) {
   return (
     <textarea
       value={value}
       onChange={(e) => onChange(e.target.value)}
       placeholder={placeholder}
       rows={3}
-      className="w-full resize-none rounded-[2px] bg-[#f1f1f1] px-4 py-3 text-[#151515] placeholder-[#999] outline-none focus:ring-1 focus:ring-[#cfbcad]"
+      className={`w-full resize-none rounded-xs bg-[#f1f1f1] px-4 py-3 text-dark-500 placeholder-[#999] outline-none ring-1 ${hasError ? "ring-red-400" : "ring-transparent focus:ring-brown-300"}`}
       style={{ fontFamily: "var(--font-secondary)", minHeight: 80, fontSize: 16 }}
     />
   );
@@ -78,11 +98,11 @@ function Field({ label, children, className = "" }: { label: string; children: R
 }
 
 function PhoneInput({
-  countryCode, phone, onCountryChange, onPhoneChange,
-}: { countryCode: string; phone: string; onCountryChange: (v: string) => void; onPhoneChange: (v: string) => void }) {
+  countryCode, phone, onCountryChange, onPhoneChange, hasError,
+}: { countryCode: string; phone: string; onCountryChange: (v: string) => void; onPhoneChange: (v: string) => void; hasError?: boolean }) {
   const country = COUNTRIES.find((c) => c.code === countryCode) ?? COUNTRIES[0];
   return (
-    <div className="flex h-10 w-full overflow-hidden rounded-[2px] bg-[#f1f1f1] focus-within:ring-1 focus-within:ring-[#cfbcad]">
+    <div className={`flex h-10 w-full overflow-hidden rounded-xs bg-[#f1f1f1] ring-1 ${hasError ? "ring-red-400" : "ring-transparent focus-within:ring-brown-300"}`}>
       <div className="relative flex shrink-0 items-center px-3">
         <select
           value={countryCode}
@@ -98,7 +118,7 @@ function PhoneInput({
         <svg className="mr-1.5 shrink-0" width="9" height="6" viewBox="0 0 9 6" fill="none">
           <path d="M1 1L4.5 5L8 1" stroke="#555" strokeWidth="1.2" strokeLinecap="round"/>
         </svg>
-        <span className="text-[13px] font-medium text-[#151515]" style={{ fontFamily: "var(--font-secondary)" }}>
+        <span className="text-[13px] font-medium text-dark-500" style={{ fontFamily: "var(--font-secondary)" }}>
           {country.dial}
         </span>
       </div>
@@ -108,7 +128,7 @@ function PhoneInput({
         value={phone}
         onChange={(e) => onPhoneChange(e.target.value)}
         placeholder="Enter your contact number"
-        className="min-w-0 flex-1 bg-transparent px-3 text-[#151515] placeholder-[#999] outline-none"
+        className="min-w-0 flex-1 bg-transparent px-3 text-dark-500 placeholder-[#999] outline-none"
         style={{ fontFamily: "var(--font-secondary)", fontSize: 16 }}
       />
     </div>
@@ -116,14 +136,14 @@ function PhoneInput({
 }
 
 function SelectInput({
-  value, onChange, placeholder, options,
-}: { value: string; onChange: (v: string) => void; placeholder: string; options: string[] }) {
+  value, onChange, placeholder, options, hasError,
+}: { value: string; onChange: (v: string) => void; placeholder: string; options: string[]; hasError?: boolean }) {
   return (
     <div className="relative">
       <select
         value={value}
         onChange={(e) => onChange(e.target.value)}
-        className="h-10 w-full appearance-none rounded-[2px] bg-[#f1f1f1] px-4 outline-none focus:ring-1 focus:ring-[#cfbcad]"
+        className={`h-10 w-full appearance-none rounded-xs bg-[#f1f1f1] px-4 outline-none ring-1 ${hasError ? "ring-red-400" : "ring-transparent focus:ring-brown-300"}`}
         style={{ fontFamily: "var(--font-secondary)", fontSize: 16, color: value ? "#151515" : "#999" }}
       >
         <option value="" disabled>{placeholder}</option>
@@ -140,33 +160,64 @@ function SelectInput({
 function Step1Form({ data, onChange, onNext }: {
   data: Step1; onChange: (d: Partial<Step1>) => void; onNext: () => void;
 }) {
-  const valid = data.firstName && data.lastName && data.email && data.phone && data.message;
+  const [errors, setErrors] = useState<Errors1>({});
+  const [tried, setTried] = useState(false);
+
+  function validate(d: Step1): Errors1 {
+    const e: Errors1 = {};
+    if (!d.firstName.trim())  e.firstName = "First name is required";
+    if (!d.lastName.trim())   e.lastName  = "Last name is required";
+    if (!d.email.trim())      e.email     = "Email address is required";
+    else if (!isValidEmail(d.email)) e.email = "Please enter a valid email address";
+    if (!d.phone.trim())      e.phone     = "Phone number is required";
+    else if (!isValidPhone(d.phone)) e.phone = "Please enter a valid phone number";
+    if (!d.message.trim())    e.message   = "Please tell us about your journey";
+    return e;
+  }
+
+  // Re-validate live after first attempt so errors clear as user corrects them.
+  useEffect(() => {
+    if (tried) setErrors(validate(data));
+  }, [data, tried]);
+
+  function handleNext() {
+    setTried(true);
+    const e = validate(data);
+    setErrors(e);
+    if (Object.keys(e).length === 0) onNext();
+  }
+
   return (
     <div className="flex flex-col gap-4">
       <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
         <Field label="First Name*">
-          <TextInput placeholder="Enter your first name" value={data.firstName} onChange={(v) => onChange({ firstName: v })} />
+          <TextInput placeholder="Enter your first name" value={data.firstName} onChange={(v) => onChange({ firstName: v })} hasError={!!errors.firstName} />
+          <FieldError msg={errors.firstName} />
         </Field>
         <Field label="Last Name*">
-          <TextInput placeholder="Enter your last name" value={data.lastName} onChange={(v) => onChange({ lastName: v })} />
+          <TextInput placeholder="Enter your last name" value={data.lastName} onChange={(v) => onChange({ lastName: v })} hasError={!!errors.lastName} />
+          <FieldError msg={errors.lastName} />
         </Field>
       </div>
       <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
         <Field label="Email*">
-          <TextInput placeholder="Enter your email address" value={data.email} onChange={(v) => onChange({ email: v })} type="email" />
+          <TextInput placeholder="Enter your email address" value={data.email} onChange={(v) => onChange({ email: v })} type="email" hasError={!!errors.email} />
+          <FieldError msg={errors.email} />
         </Field>
         <Field label="Contact Number*">
           <PhoneInput countryCode={data.countryCode} phone={data.phone}
-            onCountryChange={(v) => onChange({ countryCode: v })} onPhoneChange={(v) => onChange({ phone: v })} />
+            onCountryChange={(v) => onChange({ countryCode: v })} onPhoneChange={(v) => onChange({ phone: v })} hasError={!!errors.phone} />
+          <FieldError msg={errors.phone} />
         </Field>
       </div>
       <Field label="Tell us about your journey*">
-        <Textarea placeholder="Share your ideas and initial plans" value={data.message} onChange={(v) => onChange({ message: v })} />
+        <Textarea placeholder="Share your ideas and initial plans" value={data.message} onChange={(v) => onChange({ message: v })} hasError={!!errors.message} />
+        <FieldError msg={errors.message} />
       </Field>
       <div className="h-px bg-[#ddd0c5]" />
       <button
-        onClick={() => valid && onNext()}
-        className={`h-10 w-fit rounded-[2px] px-8 text-[15px] text-white transition-opacity ${valid ? "bg-[#151515]" : "bg-[#151515]/40 cursor-not-allowed"}`}
+        onClick={handleNext}
+        className="h-10 w-fit rounded-xs bg-dark-500 px-8 text-[15px] text-white transition-opacity hover:opacity-80"
         style={{ fontFamily: "var(--font-secondary)" }}
       >
         Next
@@ -178,7 +229,28 @@ function Step1Form({ data, onChange, onNext }: {
 function Step2Form({ data, onChange, onBack, onSubmit }: {
   data: Step2; onChange: (d: Partial<Step2>) => void; onBack: () => void; onSubmit: () => void;
 }) {
-  const valid = data.travelDate && data.countryCity && data.adults;
+  const [errors, setErrors] = useState<Errors2>({});
+  const [tried, setTried] = useState(false);
+
+  function validate(d: Step2): Errors2 {
+    const e: Errors2 = {};
+    if (!d.travelDate.trim())  e.travelDate  = "Please enter an approximate travel date";
+    if (!d.countryCity.trim()) e.countryCity = "Please enter your country and city";
+    if (!d.adults)             e.adults      = "Please select the number of adults";
+    return e;
+  }
+
+  useEffect(() => {
+    if (tried) setErrors(validate(data));
+  }, [data, tried]);
+
+  function handleSubmit() {
+    setTried(true);
+    const e = validate(data);
+    setErrors(e);
+    if (Object.keys(e).length === 0) onSubmit();
+  }
+
   return (
     <div className="flex flex-col gap-5">
       <div className="grid grid-cols-1 gap-5 sm:grid-cols-3">
@@ -187,30 +259,40 @@ function Step2Form({ data, onChange, onBack, onSubmit }: {
             placeholder="Enter approx. date/month"
             value={data.travelDate}
             onChange={(v) => onChange({ travelDate: v })}
+            hasError={!!errors.travelDate}
           />
+          <FieldError msg={errors.travelDate} />
         </Field>
         <Field label="Your Country and City*">
           <TextInput
             placeholder="Enter your country and city"
             value={data.countryCity}
             onChange={(v) => onChange({ countryCity: v })}
+            hasError={!!errors.countryCity}
           />
+          <FieldError msg={errors.countryCity} />
         </Field>
         <Field label="Guest Details*">
           <div className="flex gap-2">
-            <SelectInput
-              value={data.adults}
-              onChange={(v) => onChange({ adults: v })}
-              placeholder="Adults"
-              options={["1","2","3","4","5","6","7","8+"]}
-            />
-            <SelectInput
-              value={data.children}
-              onChange={(v) => onChange({ children: v })}
-              placeholder="Childrens"
-              options={["0","1","2","3","4","5+"]}
-            />
+            <div className="flex-1 flex flex-col gap-1">
+              <SelectInput
+                value={data.adults}
+                onChange={(v) => onChange({ adults: v })}
+                placeholder="Adults"
+                options={["1","2","3","4","5","6","7","8+"]}
+                hasError={!!errors.adults}
+              />
+            </div>
+            <div className="flex-1">
+              <SelectInput
+                value={data.children}
+                onChange={(v) => onChange({ children: v })}
+                placeholder="Children"
+                options={["0","1","2","3","4","5+"]}
+              />
+            </div>
           </div>
+          <FieldError msg={errors.adults} />
         </Field>
       </div>
 
@@ -219,14 +301,14 @@ function Step2Form({ data, onChange, onBack, onSubmit }: {
       <div className="flex items-center gap-3">
         <button
           onClick={onBack}
-          className="h-10 rounded-[2px] border border-[#151515] px-5 text-[15px] text-[#151515] hover:bg-[#f1f1f1]"
+          className="h-10 rounded-xs border border-dark-500 px-5 text-[15px] text-dark-500 hover:bg-[#f1f1f1]"
           style={{ fontFamily: "var(--font-secondary)" }}
         >
           Go Back
         </button>
         <button
-          onClick={() => { if (valid) onSubmit(); }}
-          className={`h-10 rounded-[2px] px-5 text-[15px] text-white transition-opacity ${valid ? "bg-[#151515]" : "bg-[#151515]/40 cursor-not-allowed"}`}
+          onClick={handleSubmit}
+          className="h-10 rounded-xs bg-dark-500 px-5 text-[15px] text-white transition-opacity hover:opacity-80"
           style={{ fontFamily: "var(--font-secondary)" }}
         >
           Submit Enquiry
@@ -245,7 +327,7 @@ function SuccessView({ onClose }: { onClose: () => void }) {
         </svg>
       </div>
       <div className="flex flex-col gap-2">
-        <h3 className="text-[24px] leading-tight text-[#151515]" style={{ fontFamily: "var(--font-primary)" }}>
+        <h3 className="text-[24px] leading-tight text-dark-500" style={{ fontFamily: "var(--font-primary)" }}>
           Enquiry Sent Successfully
         </h3>
         <p className="max-w-[420px] text-[14px] leading-relaxed text-[#3d3d3d]" style={{ fontFamily: "var(--font-secondary)" }}>
@@ -254,7 +336,7 @@ function SuccessView({ onClose }: { onClose: () => void }) {
       </div>
       <button
         onClick={onClose}
-        className="h-10 rounded-[2px] bg-[#151515] px-8 text-[15px] text-white"
+        className="h-10 rounded-xs bg-dark-500 px-8 text-[15px] text-white"
         style={{ fontFamily: "var(--font-secondary)" }}
       >
         Close
@@ -312,7 +394,7 @@ function Modal({ journeyTitle, onClose }: { journeyTitle: string; onClose: () =>
           <div className="px-5 pt-5 sm:px-10 sm:pt-7">
             <div className="flex items-start justify-between gap-4">
               <h2
-                className="text-[18px] leading-snug text-[#151515] sm:text-[24px] xl:text-[30px]"
+                className="text-[18px] leading-snug text-dark-500 sm:text-[24px] xl:text-[30px]"
                 style={{ fontFamily: "var(--font-primary)" }}
               >
                 Send Your Enquiry for<br />
@@ -338,7 +420,7 @@ function Modal({ journeyTitle, onClose }: { journeyTitle: string; onClose: () =>
                 </p>
                 <div className="flex h-1 flex-1 overflow-hidden rounded-full bg-[#ddd0c5]">
                   <div
-                    className="h-full rounded-full bg-[#151515] transition-all duration-500"
+                    className="h-full rounded-full bg-dark-500 transition-all duration-500"
                     style={{ width: step === 1 ? "50%" : "100%" }}
                   />
                 </div>
@@ -346,9 +428,9 @@ function Modal({ journeyTitle, onClose }: { journeyTitle: string; onClose: () =>
             )}
           </div>
 
-          {/* Body — no scroll */}
+          {/* Body */}
           <div className="px-5 pb-5 pt-4 sm:px-10 sm:pb-7 sm:pt-5">
-            <div className="rounded-[2px] bg-white p-4 sm:p-6">
+            <div className="rounded-xs bg-white p-4 sm:p-6">
               {step === 1 && (
                 <Step1Form
                   data={step1}
