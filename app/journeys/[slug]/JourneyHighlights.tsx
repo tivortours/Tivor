@@ -322,34 +322,36 @@ export function JourneyHighlights({
             className="sticky top-0 min-h-screen w-full flex"
             style={{ zIndex: i + 1 }}
           >
-            {/* LEFT — full-height image */}
+            {/* LEFT — full-height image with padding */}
             {/* No h-full: percentage heights don't reliably resolve against a
                 min-height (vs. explicit height) flex container. Default
                 align-items:stretch sizes this correctly without that issue. */}
-            <div className="relative w-1/2 overflow-hidden">
-              <Image
-                src={entry.img}
-                alt={entry.day}
-                fill
-                priority={i === 0}
-                className="object-cover"
-                sizes="50vw"
-              />
-              {/* Progress dots */}
-              <div className="absolute bottom-6 left-1/2 flex -translate-x-1/2 gap-2">
-                {itinerary.map((_, j) => (
-                  <div
-                    key={j}
-                    className="h-1.5 rounded-full"
-                    style={{
-                      width: j === i ? 24 : 6,
-                      backgroundColor:
-                        j === i   ? "white"
-                        : j < i   ? "rgba(255,255,255,0.6)"
-                                  : "rgba(255,255,255,0.3)",
-                    }}
-                  />
-                ))}
+            <div className="relative w-1/2 bg-[#ece2d6]">
+              <div className="absolute inset-12 overflow-hidden">
+                <Image
+                  src={entry.img}
+                  alt={entry.day}
+                  fill
+                  priority={i === 0}
+                  className="object-cover"
+                  sizes="50vw"
+                />
+                {/* Progress dots */}
+                <div className="absolute bottom-6 left-1/2 flex -translate-x-1/2 gap-2">
+                  {itinerary.map((_, j) => (
+                    <div
+                      key={j}
+                      className="h-1.5 rounded-full"
+                      style={{
+                        width: j === i ? 24 : 6,
+                        backgroundColor:
+                          j === i   ? "white"
+                          : j < i   ? "rgba(255,255,255,0.6)"
+                                    : "rgba(255,255,255,0.3)",
+                      }}
+                    />
+                  ))}
+                </div>
               </div>
             </div>
 
