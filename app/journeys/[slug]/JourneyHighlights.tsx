@@ -62,8 +62,10 @@ const activitiesComponents = (sizes: SizeMap) => {
         const align = getTextAlign(value) ?? "center";
         const justify = align === "left" ? "justify-start" : align === "right" ? "justify-end" : "justify-center";
         return (
-          <li className={`${sizeClass} flex ${justify} items-baseline gap-2 leading-relaxed text-dark-400`} style={{ fontFamily: "var(--font-secondary)" }}>
-            <span aria-hidden className="shrink-0">•</span>
+          <li className={`${sizeClass} flex ${justify} items-center gap-2 leading-relaxed text-dark-400`} style={{ fontFamily: "var(--font-secondary)" }}>
+            <svg aria-hidden className="shrink-0" width="7" height="7" viewBox="0 0 7 7" fill="none">
+              <rect x="3.5" y="0.5" width="4.24" height="4.24" rx="0.5" transform="rotate(45 3.5 0.5)" fill="#6A5546" />
+            </svg>
             <span style={{ textAlign: align }}>{children}</span>
           </li>
         );
@@ -189,7 +191,7 @@ export function JourneyHighlights({
          underneath it — visually disconnected from what it's labelling. This
          way the heading leaves together with the last card, not after it. */
       if (headingRef.current) {
-        const headingSlack = (itinerary.length - 1) * winH;
+        const headingSlack = winH / scale;
         const compensation = Math.min(Math.max(-rect.top, 0), headingSlack);
         headingRef.current.style.transform = `translateY(${compensation / scale}px)`;
       }
@@ -296,7 +298,7 @@ export function JourneyHighlights({
         */}
         <div
           className="absolute top-0 left-0 w-full"
-          style={{ height: `calc((${itinerary.length} - 1) * 100vh / var(--desktop-browser-scale, 1))` }}
+          style={{ height: `calc(100vh / var(--desktop-browser-scale, 1))` }}
         >
           <div
             ref={headingRef}
