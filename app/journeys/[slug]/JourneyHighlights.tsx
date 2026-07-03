@@ -217,13 +217,23 @@ export function JourneyHighlights({
     };
   }, [itinerary.length]);
 
+  const touchStartX = useRef<number>(0);
+  const handleTouchStart = (e: React.TouchEvent) => { touchStartX.current = e.touches[0].clientX; };
+  const handleTouchEnd = (e: React.TouchEvent) => {
+    const delta = touchStartX.current - e.changedTouches[0].clientX;
+    if (delta > 50) setMobileActive(d => Math.min(itinerary.length - 1, d + 1));
+    if (delta < -50) setMobileActive(d => Math.max(0, d - 1));
+  };
+
   const mobile = itinerary[mobileActive];
 
   return (
     <>
       {/* ── Mobile / tablet ─────────────────────────────────────────────── */}
-      <div className="flex flex-col gap-6 px-5 sm:px-8 pb-10 xl:hidden">
-        <div className="flex items-center justify-between">
+      <div className="xl:hidden pb-10">
+
+        {/* Nav header — sits outside the slide strip so buttons stay in place */}
+        <div className="flex items-center justify-between px-5 sm:px-8 mb-6">
           <button
             onClick={() => setMobileActive(d => Math.max(0, d - 1))}
             disabled={mobileActive === 0}
@@ -247,22 +257,39 @@ export function JourneyHighlights({
             <ChevronRight />
           </button>
         </div>
-        <div className="flex flex-col gap-4 text-center">
-          <p className="text-[16px] font-semibold leading-snug text-dark-500" style={{ fontFamily: "var(--font-secondary)" }}>
-            {mobile.title}
-          </p>
-          {/* No items-center: it would center each rendered line as a shrink-wrapped
-              block regardless of its own text-align, making per-line alignment marks
-              invisible. Default (stretch) makes each line full-width. */}
-          <div className="flex flex-col gap-1">
-            <PortableText
-              value={mobile.activities}
-              components={activitiesComponents({ small: "text-xs", normal: "text-[14px]", large: "text-lg" })}
-            />
+
+        {/* Slide strip — overflow-hidden clips the off-screen slides */}
+        <div
+          className="overflow-hidden"
+          onTouchStart={handleTouchStart}
+          onTouchEnd={handleTouchEnd}
+        >
+          <div
+            className="flex transition-transform duration-300 ease-in-out"
+            style={{ transform: `translateX(-${mobileActive * 100}%)` }}
+          >
+            {itinerary.map((entry, i) => (
+              <div key={i} className="w-full shrink-0 flex flex-col gap-6 px-5 sm:px-8">
+                <div className="flex flex-col gap-4 text-center">
+                  <p className="text-[16px] font-semibold leading-snug text-dark-500" style={{ fontFamily: "var(--font-secondary)" }}>
+                    {entry.title}
+                  </p>
+                  {/* No items-center: it would center each rendered line as a shrink-wrapped
+                      block regardless of its own text-align, making per-line alignment marks
+                      invisible. Default (stretch) makes each line full-width. */}
+                  <div className="flex flex-col gap-1">
+                    <PortableText
+                      value={entry.activities}
+                      components={activitiesComponents({ small: "text-xs", normal: "text-[14px]", large: "text-lg" })}
+                    />
+                  </div>
+                </div>
+                <div className="relative h-65 w-full overflow-hidden rounded-xs">
+                  <Image src={entry.img} alt={entry.day} fill className="object-cover" sizes="100vw" />
+                </div>
+              </div>
+            ))}
           </div>
-        </div>
-        <div className="relative h-65 w-full overflow-hidden rounded-xs">
-          <Image src={mobile.img} alt={mobile.day} fill className="object-cover" sizes="100vw" />
         </div>
       </div>
 

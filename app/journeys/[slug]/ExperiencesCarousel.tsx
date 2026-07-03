@@ -67,7 +67,7 @@ export function ExperiencesCarousel({ experiences }: { experiences: Experience[]
           <button
             onClick={() => setActive(i => Math.min(experiences.length - 1, i + 1))}
             disabled={active === experiences.length - 1}
-            className="absolute -right-4 top-27.5 -translate-y-1/2 flex items-center justify-center w-8 h-8 rounded-full bg-white/30 text-black shadow-sm disabled:opacity-25"
+            className="absolute -right-4 top-27.5 -translate-y-1/2 flex items-center justify-center w-8 h-8 rounded-full bg-white/80 text-black shadow-sm disabled:opacity-25"
             aria-label="Next experience"
           >
             <ChevronRight />
