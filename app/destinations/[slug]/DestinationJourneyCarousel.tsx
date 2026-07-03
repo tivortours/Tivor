@@ -115,7 +115,7 @@ export function DestinationJourneyCarousel({ journeys }: { journeys: Journey[] }
       <button
         onClick={() => scroll(-1)}
         aria-label="Previous journeys"
-        className={`absolute left-0 top-1/2 z-10 -translate-x-5 -translate-y-1/2 cursor-pointer transition-opacity duration-300 sm:-translate-x-7 lg:-translate-x-10 xl:-translate-x-12 rounded-full bg-white/80 text-black shadow-sm disabled:opacity-2 ${
+        className={`absolute left-0 top-1/2 z-10 -translate-x-5 -translate-y-1/2 cursor-pointer transition-opacity duration-300 sm:-translate-x-7 lg:-translate-x-10 xl:-translate-x-12 rounded-full bg-white/80 text-black shadow-sm disabled:opacity-25 ${
           canPrev ? "opacity-100" : "pointer-events-none opacity-0"
         }`}
       >
@@ -127,7 +127,7 @@ export function DestinationJourneyCarousel({ journeys }: { journeys: Journey[] }
       <button
         onClick={() => scroll(1)}
         aria-label="Next journeys"
-        className={`absolute right-0 top-1/2 z-10 translate-x-5 -translate-y-1/2 cursor-pointer transition-opacity duration-300 sm:translate-x-7 lg:translate-x-10 xl:translate-x-12 rounded-full bg-white/80 text-black shadow-sm disabled:opacity-2 ${
+        className={`absolute right-0 top-1/2 z-10 translate-x-5 -translate-y-1/2 cursor-pointer transition-opacity duration-300 sm:translate-x-7 lg:translate-x-10 xl:translate-x-12 rounded-full bg-white/80 text-black shadow-sm disabled:opacity-25 ${
           canNext ? "opacity-100" : "pointer-events-none opacity-0"
         }`}
       >
