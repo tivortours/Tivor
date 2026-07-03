@@ -365,7 +365,7 @@ export function JourneyHighlights({
                   className="object-cover"
                   sizes="50vw"
                 />
-                {/* Progress dots */}
+                {/* Progress dots
                 <div className="absolute bottom-6 left-1/2 flex -translate-x-1/2 gap-2">
                   {itinerary.map((_, j) => (
                     <div
@@ -380,7 +380,7 @@ export function JourneyHighlights({
                       }}
                     />
                   ))}
-                </div>
+                </div> */}
               </div>
             </div>
 
