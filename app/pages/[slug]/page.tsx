@@ -88,6 +88,41 @@ const bodyComponents: PortableTextComponents = {
           )}
         </figure>
       ) : null,
+    table: ({ value }) => {
+      const rows: { cells?: string[]; isHeader?: boolean }[] = value?.rows || [];
+      const headerRows = rows.filter(r => r.isHeader);
+      const bodyRows = rows.filter(r => !r.isHeader);
+      return (
+        <div className="overflow-x-auto">
+          <table className="w-full border-collapse text-[14px] lg:text-[15px]" style={{ fontFamily: "var(--font-secondary)" }}>
+            {headerRows.length > 0 && (
+              <thead>
+                {headerRows.map((row, i) => (
+                  <tr key={i}>
+                    {(row.cells || []).map((cell, j) => (
+                      <th key={j} className="border border-[#cfbcad] bg-[#ece2d6] px-4 py-3 text-left font-semibold text-[#151515]">
+                        {cell}
+                      </th>
+                    ))}
+                  </tr>
+                ))}
+              </thead>
+            )}
+            <tbody>
+              {bodyRows.map((row, i) => (
+                <tr key={i}>
+                  {(row.cells || []).map((cell, j) => (
+                    <td key={j} className="border border-[#cfbcad] px-4 py-3 text-[#3d3d3d]">
+                      {cell}
+                    </td>
+                  ))}
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+      );
+    },
   },
 };
 

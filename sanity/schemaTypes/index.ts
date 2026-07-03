@@ -665,6 +665,37 @@ const contentPage = defineType({
             defineField({ name: "caption", title: "Caption", type: "string" }),
           ],
         }),
+        defineArrayMember({
+          type: "object",
+          name: "table",
+          title: "Table",
+          fields: [
+            defineField({
+              name: "rows",
+              title: "Rows",
+              type: "array",
+              of: [
+                defineArrayMember({
+                  type: "object",
+                  name: "tableRow",
+                  title: "Row",
+                  fields: [
+                    defineField({ name: "isHeader", title: "Header row", type: "boolean", initialValue: false }),
+                    defineField({ name: "cells", title: "Cells", type: "array", of: [defineArrayMember({ type: "string" })] }),
+                  ],
+                  preview: {
+                    select: { cells: "cells", isHeader: "isHeader" },
+                    prepare: ({ cells, isHeader }: { cells?: string[]; isHeader?: boolean }) => ({
+                      title: (cells || []).join(" | "),
+                      subtitle: isHeader ? "Header row" : undefined,
+                    }),
+                  },
+                }),
+              ],
+            }),
+          ],
+          preview: { prepare: () => ({ title: "Table" }) },
+        }),
       ],
       description: "Use Heading 2 / Heading 3 for section titles. Insert images anywhere via the image block.",
     }),
