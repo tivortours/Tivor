@@ -13,6 +13,7 @@ const TAG_MAP: Record<string, string[]> = {
   journeysPage:      ["journeysPage"],
   inspirationPage:   ["inspirationPage"],
   aboutPage:         ["aboutPage"],
+  contentPage:       ["contentPage"],
 };
 
 export async function POST(req: NextRequest) {
