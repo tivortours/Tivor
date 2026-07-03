@@ -16,6 +16,11 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
   return { title: page?.title ?? "Page" };
 }
 
+// Keep in sync with colorPresets in sanity/schemaTypes/index.ts. An allowlist
+// (not a passthrough of value.color) so a stray/malformed annotation can't
+// inject arbitrary CSS — falls back to inherited color if unrecognized.
+const COLOR_PRESET_VALUES = new Set(["#714128", "#777777", "#b3261e"]);
+
 const bodyComponents: PortableTextComponents = {
   block: {
     normal: ({ children }) => (
@@ -72,6 +77,11 @@ const bodyComponents: PortableTextComponents = {
       >
         {children}
       </a>
+    ),
+    textColor: ({ children, value }) => (
+      <span style={{ color: COLOR_PRESET_VALUES.has(value?.color) ? value.color : undefined }}>
+        {children}
+      </span>
     ),
   },
   types: {

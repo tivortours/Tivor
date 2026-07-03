@@ -30,6 +30,16 @@ const sizeStyles = [
   { title: "Large", value: "large" },
 ];
 
+// Preset palette for the Text Color annotation on contentPage's body field —
+// keep this in sync with COLOR_PRESETS in app/pages/[slug]/page.tsx, which
+// renders these by value. A fixed list (not a free color picker) keeps
+// editor-applied color on-brand instead of drifting arbitrary hex per edit.
+const colorPresets = [
+  { title: "Accent Brown", value: "#714128" },
+  { title: "Muted Gray", value: "#777777" },
+  { title: "Warning Red", value: "#b3261e" },
+];
+
 // Alignment isn't a real field option on Sanity's block type (no per-block
 // custom `fields` support here) — the standard workaround is a decorator
 // mark, same mechanism as Bold/Italic. Editors select the *whole line* and
@@ -652,6 +662,23 @@ const contentPage = defineType({
                 fields: [
                   defineField({ name: "href", title: "URL", type: "url" }),
                   defineField({ name: "blank", title: "Open in new tab", type: "boolean", initialValue: false }),
+                ],
+              },
+              {
+                name: "textColor",
+                type: "object",
+                title: "Text Color",
+                description: "Select a range of text, then apply this from the toolbar to color just that range.",
+                fields: [
+                  defineField({
+                    name: "color",
+                    title: "Color",
+                    type: "string",
+                    options: {
+                      list: colorPresets.map((c) => ({ title: c.title, value: c.value })),
+                    },
+                    validation: (Rule) => Rule.required(),
+                  }),
                 ],
               },
             ],
