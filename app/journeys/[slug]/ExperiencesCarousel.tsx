@@ -57,7 +57,7 @@ export function ExperiencesCarousel({ experiences }: { experiences: Experience[]
           <button
             onClick={() => setActive(i => Math.max(0, i - 1))}
             disabled={active === 0}
-            className="absolute -left-4 top-27.5 -translate-y-1/2 flex items-center justify-center w-8 h-8 rounded-full bg-white/30 text-black shadow-sm disabled:opacity-25"
+            className="absolute -left-4 top-27.5 -translate-y-1/2 flex items-center justify-center w-8 h-8 rounded-full bg-white/80 text-black shadow-sm disabled:opacity-25"
             aria-label="Previous experience"
           >
             <ChevronLeft />
