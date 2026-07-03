@@ -11,6 +11,7 @@ const TAG_MAP: Record<string, string[]> = {
   author:            ["author"],
   destinationsPage:  ["destinationsPage"],
   journeysPage:      ["journeysPage"],
+  experiencesPage:   ["experiencesPage"],
   inspirationPage:   ["inspirationPage"],
   aboutPage:         ["aboutPage"],
   contentPage:       ["contentPage"],

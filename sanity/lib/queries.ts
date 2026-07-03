@@ -213,6 +213,15 @@ export const JOURNEYS_PAGE_QUERY = defineQuery(`
   }
 `);
 
+export const EXPERIENCES_PAGE_QUERY = defineQuery(`
+  *[_type == "experiencesPage"][0]{
+    title,
+    description,
+    heroImage,
+    "heroVideo": heroVideo.asset->{ url }
+  }
+`);
+
 export const JOURNEYS_QUERY = defineQuery(`
   *[_type == "journey" && defined(slug.current)] | order(sortOrder asc, title asc){
     title,

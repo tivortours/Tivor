@@ -11,6 +11,7 @@ import {
   DESTINATIONS_QUERY,
   DESTINATION_QUERY,
   DESTINATION_SLUGS_QUERY,
+  EXPERIENCES_PAGE_QUERY,
   HOME_PAGE_QUERY,
   INSPIRATION_ARTICLES_QUERY,
   INSPIRATION_ARTICLE_QUERY,
@@ -219,6 +220,13 @@ type JourneysPageData = {
   supportButtonLabel: string;
   supportButtonHref: string;
   supportImage: string;
+};
+
+type ExperiencesPageData = {
+  title: any[];
+  description: any[];
+  heroImage: string;
+  heroVideo: string;
 };
 
 type InspirationPageData = {
@@ -725,6 +733,20 @@ export const getJourneysPageData = cache(async (): Promise<JourneysPageData> => 
     supportButtonLabel: data.supportButtonLabel || "",
     supportButtonHref: data.supportButtonHref ? toAbsoluteHref(data.supportButtonHref) : "",
     supportImage: imageUrl(data.supportImage, 1400, 940, ""),
+  };
+});
+
+export const getExperiencesPageData = cache(async (): Promise<ExperiencesPageData> => {
+  const data = await fetchSanity<any>(EXPERIENCES_PAGE_QUERY, undefined, ["experiencesPage"]);
+  if (!data) {
+    return { title: [], description: [], heroImage: "", heroVideo: "" };
+  }
+
+  return {
+    title: data.title || [],
+    description: data.description || [],
+    heroImage: imageUrl(data.heroImage, 1800, 900, ""),
+    heroVideo: data.heroVideo?.url || "",
   };
 });
 

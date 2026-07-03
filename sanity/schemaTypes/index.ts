@@ -606,6 +606,44 @@ const journeysPage = defineType({
   ],
 });
 
+const experiencesPage = defineType({
+  name: "experiencesPage",
+  title: "Experiences Page",
+  type: "document",
+  fields: [
+    defineField({
+      name: "title",
+      title: "Title",
+      type: "array",
+      of: [
+        defineArrayMember({
+          type: "block",
+          styles: sizeStyles,
+          lists: [],
+          marks: richMarks,
+        }),
+      ],
+      description: "Rich-text hero title. Use Small/Large per line for a title + tagline effect, and the Align Left/Center/Right marks (select the whole line, then apply) for alignment.",
+      validation: (Rule) => Rule.required().min(1),
+    }),
+    defineField({
+      name: "description",
+      title: "Description",
+      type: "array",
+      of: [richListBlock()],
+      description: "Rich-text paragraph shown below the hero image/video. Small/Large styles, bullet lists, and the Align Left/Center/Right marks are all available.",
+    }),
+    imageField("heroImage", "Hero Image", "Shown if no video is uploaded, and as the video's poster while it loads. Best ratio: wide landscape. Minimum 1800px wide recommended."),
+    defineField({
+      name: "heroVideo",
+      title: "Hero Video",
+      type: "file",
+      options: { accept: "video/*" },
+      description: "Upload an MP4 video. If set, plays instead of the hero image.",
+    }),
+  ],
+});
+
 const inspirationPage = defineType({
   name: "inspirationPage",
   title: "Inspiration Page",
@@ -838,6 +876,7 @@ export const schemaTypes = [
   homePage,
   destinationsPage,
   journeysPage,
+  experiencesPage,
   inspirationPage,
   aboutPage,
   contentPage,

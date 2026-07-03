@@ -2,10 +2,10 @@ import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { PortableText } from "@portabletext/react";
-import { getJourneyBySlug, getJourneySlugs, getSiteSettings, shell } from "../../site-data";
+import { getJourneyBySlug, getJourneySlugs, getJourneys, shell } from "../../site-data";
 import { SiteHeader, SiteFooter } from "../../site-ui";
 import { JourneyHighlights } from "./JourneyHighlights";
-import { ExperiencesCarousel } from "./ExperiencesCarousel";
+import { DestinationJourneyCarousel } from "../../destinations/[slug]/DestinationJourneyCarousel";
 import { EnquireButton } from "../../../components/BookingModal";
 import { InclusionsButton } from "../../../components/InclusionsModal";
 import { getTextAlign } from "../../../lib/portableText";
@@ -45,8 +45,12 @@ export default async function JourneyDetailPage({
   params: Promise<{ slug: string }>;
 }) {
   const { slug } = await params;
-  const [journey, settings] = await Promise.all([getJourneyBySlug(slug), getSiteSettings()]);
+  const [journey, allJourneys] = await Promise.all([getJourneyBySlug(slug), getJourneys()]);
   if (!journey) notFound();
+
+  const otherDestinationJourneys = allJourneys.filter(
+    (j) => j.destination === journey.destination && j.slug !== journey.slug
+  );
 
 
   return (
@@ -211,21 +215,27 @@ export default async function JourneyDetailPage({
       </div>
 
 
-      {/* ── Highly Recommended Experiences ───────────────────────────────── */}
-      <section className="bg-[#f2ebe2] py-[80px] xl:py-[100px]">
-        <div className={shell}>
-          <div className="flex flex-col gap-[60px] lg:px-10 xl:px-16">
-          <h2
-            className="text-[22px] leading-tight text-[#151515] sm:text-[28px] xl:text-[32px]"
-            style={{ fontFamily: "var(--font-primary)" }}
-          >
-            Highly Recommended Experiences
-          </h2>
+      {/* ── Other journeys in this destination ───────────────────────────── */}
+      {/* Same carousel component as the destination page (DestinationJourneyCarousel) —
+          replaces the old sitewide "Highly Recommended Experiences" list (settings.recommendedExperiences)
+          with journeys that actually share this journey's destination, excluding itself.
+          Hidden entirely if this is the only journey for the destination. */}
+      {otherDestinationJourneys.length > 0 && (
+        <section className="bg-[#f2ebe2] py-[80px] xl:py-[100px]">
+          <div className={shell}>
+            <div className="flex flex-col gap-[60px] lg:px-10 xl:px-16">
+            <h2
+              className="text-[22px] leading-tight text-[#151515] sm:text-[28px] xl:text-[32px]"
+              style={{ fontFamily: "var(--font-primary)" }}
+            >
+              Crafted Journeys, Designed Around You
+            </h2>
 
-          <ExperiencesCarousel experiences={settings.recommendedExperiences} />
+            <DestinationJourneyCarousel journeys={otherDestinationJourneys} />
+            </div>
           </div>
-        </div>
-      </section>
+        </section>
+      )}
 
       <SiteFooter />
     </main>
