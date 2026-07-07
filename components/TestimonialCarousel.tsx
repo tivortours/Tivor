@@ -161,7 +161,7 @@ export function TestimonialCarousel({ testimonials }: { testimonials: Testimonia
         <button
           onClick={() => scrollByCard(-1)}
           aria-label="Previous testimonial"
-          className={`absolute cursor-pointer left-0 top-1/2 z-10 -translate-x-5 -translate-y-1/2 transition-opacity duration-300 sm:-translate-x-7 lg:-translate-x-10 xl:-translate-x-12 ${
+          className={`absolute cursor-pointer left-0 top-1/2 z-10 -translate-x-5 -translate-y-1/2 transition-opacity duration-300 sm:-translate-x-7 lg:-translate-x-10 xl:-translate-x-12 rounded-full bg-white/40 text-black shadow-sm disabled:opacity-25 ${
             !canPrev ? "pointer-events-none opacity-0" : "opacity-100"
           }`}
         >
@@ -173,7 +173,7 @@ export function TestimonialCarousel({ testimonials }: { testimonials: Testimonia
         <button
           onClick={() => scrollByCard(1)}
           aria-label="Next testimonial"
-          className={`absolute cursor-pointer right-0 top-1/2 z-10 translate-x-5 -translate-y-1/2 transition-opacity duration-300 sm:translate-x-7 lg:translate-x-10 xl:translate-x-12 ${
+          className={`absolute cursor-pointer right-0 top-1/2 z-10 translate-x-5 -translate-y-1/2 transition-opacity duration-300 sm:translate-x-7 lg:translate-x-10 xl:translate-x-12 rounded-full bg-white/40 text-black shadow-sm disabled:opacity-25 ${
             !canNext ? "pointer-events-none opacity-0" : "opacity-100"
           }`}
         >

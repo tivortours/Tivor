@@ -30,7 +30,7 @@ export function PricingInfoNote() {
   return (
     <span
       ref={wrapRef}
-      className="relative inline-flex align-middle ml-1.5"
+      className="relative inline-flex items-center ml-1.5"
       onMouseEnter={() => setOpen(true)}
       onMouseLeave={() => setOpen(false)}
     >
