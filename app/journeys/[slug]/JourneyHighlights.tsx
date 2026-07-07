@@ -62,8 +62,8 @@ const activitiesComponents = (sizes: SizeMap) => {
         const align = getTextAlign(value) ?? "center";
         const justify = align === "left" ? "justify-start" : align === "right" ? "justify-end" : "justify-center";
         return (
-          <li className={`${sizeClass} flex ${justify} items-center gap-2 leading-relaxed text-dark-400`} style={{ fontFamily: "var(--font-secondary)" }}>
-            <svg aria-hidden className="shrink-0" width="7" height="7" viewBox="0 0 7 7" fill="none">
+          <li className={`${sizeClass} flex ${justify} items-start gap-2 leading-relaxed text-dark-400`} style={{ fontFamily: "var(--font-secondary)" }}>
+            <svg aria-hidden className="shrink-0 mt-[0.55em]" width="7" height="7" viewBox="0 0 7 7" fill="none">
               <rect x="3.5" y="0.5" width="4.24" height="4.24" rx="0.5" transform="rotate(45 3.5 0.5)" fill="#6A5546" />
             </svg>
             <span style={{ textAlign: align }}>{children}</span>

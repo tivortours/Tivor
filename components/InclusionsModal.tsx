@@ -127,7 +127,7 @@ function Modal({ journeyTitle, inclusions, onClose }: {
               </h2>
               <button
                 onClick={handleClose}
-                className="shrink-0 rounded-full p-1.5 transition-colors hover:bg-[#ddd0c5]"
+                className="cursor-pointer shrink-0 rounded-full p-1.5 transition-colors hover:bg-[#ddd0c5]"
                 aria-label="Close"
               >
                 <svg width="18" height="18" viewBox="0 0 18 18" fill="none">

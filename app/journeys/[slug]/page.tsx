@@ -25,7 +25,7 @@ function detailTitleLine(fontSize: string) {
 const detailTitleComponents = {
   block: {
     normal: detailTitleLine("1em"),
-    small: detailTitleLine("0.5em"),
+    small: detailTitleLine("0.66em"),
     large: detailTitleLine("1.25em"),
   },
   marks: {
