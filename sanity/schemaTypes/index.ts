@@ -1,4 +1,5 @@
 import { defineArrayMember, defineField, defineType } from "sanity";
+import { orderRankField, orderRankOrdering } from "@sanity/orderable-document-list";
 
 const imageField = (name: string, title: string, description: string) =>
   defineField({
@@ -278,8 +279,9 @@ const journey = defineType({
   name: "journey",
   title: "Journey",
   type: "document",
+  orderings: [orderRankOrdering],
   fields: [
-    defineField({ name: "sortOrder", title: "Sort Order", type: "number" }),
+    orderRankField({ type: "journey" }),
     defineField({ name: "title", title: "Title", type: "text", rows: 2, validation: (Rule) => Rule.required() }),
     defineField({ name: "slug", title: "Slug", type: "slug", options: { source: "title" }, validation: (Rule) => Rule.required() }),
     defineField({
@@ -351,6 +353,16 @@ const journey = defineType({
       validation: (Rule) => Rule.required().min(1),
     }),
   ],
+  // Without this, the drag-and-drop Journey list (and any other custom
+  // preview) can't reliably tell which field is the title — `title` here is
+  // a multi-line `text` field, which Studio's auto-detection skips.
+  preview: {
+    select: { title: "title", media: "cardImage" },
+    prepare: ({ title, media }) => ({
+      title: typeof title === "string" ? title.replace(/\n+/g, " ") : title,
+      media,
+    }),
+  },
 });
 
 const inspirationArticle = defineType({

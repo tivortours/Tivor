@@ -110,7 +110,7 @@ export const HOME_PAGE_QUERY = defineQuery(`
     featuredJourneys[]->{
       ${JOURNEY_CARD_FIELDS}
     },
-    "legacyFeaturedJourneys": *[_type == "journey" && featuredOnHome == true] | order(sortOrder asc, title asc){
+    "legacyFeaturedJourneys": *[_type == "journey" && featuredOnHome == true] | order(orderRank asc){
       ${JOURNEY_CARD_FIELDS}
     },
     experiencesLabel,
@@ -251,7 +251,7 @@ export const EXPERIENCES_PAGE_QUERY = defineQuery(`
 `);
 
 export const JOURNEYS_QUERY = defineQuery(`
-  *[_type == "journey" && defined(slug.current)] | order(sortOrder asc, title asc){
+  *[_type == "journey" && defined(slug.current)] | order(orderRank asc){
     ${JOURNEY_CARD_FIELDS}
   }
 `);
