@@ -1,15 +1,42 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
+import { useLayoutEffect, useEffect, useRef, useState } from "react";
 
 // Fixed legal copy — wording is mandated, not editor-controlled. Sanity only
 // toggles whether the icon shows at all per journey (showIndicativePricingNote).
 const NOTE_TEXT =
-  "Prices shown are indicative. Your final price will be confirmed at the time of booking and calculated using the prevailing exchange rate in the destination's pricing currency."
+  "Prices shown are indicative. Your final price will be confirmed at the time of booking and calculated using the prevailing exchange rate in the destination's pricing currency.";
+
+const MOBILE_POPOVER_WIDTH = 256; // matches w-64
+const VIEWPORT_MARGIN = 16;
 
 export function PricingInfoNote() {
   const [open, setOpen] = useState(false);
   const wrapRef = useRef<HTMLSpanElement>(null);
+  const iconRef = useRef<HTMLButtonElement>(null);
+  // Below `sm` the popover is centered under the price text as a whole, not
+  // the icon (which sits wherever "person" ends up, not the line's true
+  // center) — a fixed-width box centered or right-anchored on the icon can
+  // run past the screen edge and get clipped by the page's overflow-x-clip.
+  // Measuring the icon and clamping to the viewport guarantees it stays on
+  // screen regardless of where the icon lands. Desktop (sm+) keeps the
+  // original CSS-only centered-under-icon positioning untouched.
+  const [mobilePos, setMobilePos] = useState<{ top: number; left: number } | null>(null);
+
+  useLayoutEffect(() => {
+    if (!open) {
+      setMobilePos(null);
+      return;
+    }
+    if (window.innerWidth >= 640 || !iconRef.current) return;
+
+    const rect = iconRef.current.getBoundingClientRect();
+    const left = Math.min(
+      Math.max(rect.left + rect.width / 2 - MOBILE_POPOVER_WIDTH / 2, VIEWPORT_MARGIN),
+      window.innerWidth - MOBILE_POPOVER_WIDTH - VIEWPORT_MARGIN
+    );
+    setMobilePos({ top: rect.bottom + 8, left });
+  }, [open]);
 
   useEffect(() => {
     if (!open) return;
@@ -35,6 +62,7 @@ export function PricingInfoNote() {
       onMouseLeave={() => setOpen(false)}
     >
       <button
+        ref={iconRef}
         type="button"
         onClick={() => setOpen((v) => !v)}
         onFocus={() => setOpen(true)}
@@ -53,7 +81,8 @@ export function PricingInfoNote() {
       {open && (
         <div
           role="tooltip"
-          className="absolute right-0 top-full z-50 mt-2 w-64 max-w-[80vw] rounded-[4px] bg-[#2b2420] p-4 text-left shadow-lg sm:left-1/2 sm:right-auto sm:w-96 sm:-translate-x-1/2"
+          className="absolute top-full z-50 mt-2 w-64 rounded-[4px] bg-[#2b2420] p-4 text-left shadow-lg sm:left-1/2 sm:w-96 sm:-translate-x-1/2"
+          style={mobilePos ? { position: "fixed", top: mobilePos.top, left: mobilePos.left } : undefined}
         >
           <p
             className="text-[13px] font-semibold text-white"

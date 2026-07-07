@@ -226,12 +226,12 @@ export default async function JourneyDetailPage({
             <div className="flex flex-col gap-[60px] lg:px-10 xl:px-16">
             <div className="inline-block self-start">
               <h2
-                className="whitespace-nowrap text-[22px] leading-tight text-[#151515] sm:text-[28px] xl:text-[32px]"
+                className="whitespace-nowrap text-[22px] pb-1 leading-tight border-b border-[#714128] text-[#151515] sm:text-[28px] xl:text-[32px]"
                 style={{ fontFamily: "var(--font-primary)" }}
               >
                 Discover more Journeys
               </h2>
-              <div className="mt-3 h-0.5 w-full bg-[#714128]" />
+            
             </div>
 
             <DestinationJourneyCarousel journeys={otherDestinationJourneys} />
