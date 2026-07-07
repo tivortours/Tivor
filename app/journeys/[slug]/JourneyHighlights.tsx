@@ -237,7 +237,7 @@ export function JourneyHighlights({
           <button
             onClick={() => setMobileActive(d => Math.max(0, d - 1))}
             disabled={mobileActive === 0}
-            className="p-1 text-[#999] disabled:opacity-30 rounded-full bg-white/80  shadow-sm "
+            className="p-0.5 text-[#999] disabled:opacity-30 rounded-full bg-white/80  shadow-sm "
             aria-label="Previous day"
           >
             <ChevronLeft />
@@ -251,7 +251,7 @@ export function JourneyHighlights({
           <button
             onClick={() => setMobileActive(d => Math.min(itinerary.length - 1, d + 1))}
             disabled={mobileActive === itinerary.length - 1}
-            className="p-1 text-[#999] disabled:opacity-30 rounded-full bg-white/80  shadow-sm"
+            className="p-0.5 text-[#999] disabled:opacity-30 rounded-full bg-white/80  shadow-sm"
             aria-label="Next day"
           >
             <ChevronRight />

@@ -166,56 +166,56 @@ export default async function JourneyDetailPage({
 
       {/* ── Journey Highlights ───────────────────────────────────────────── */}
       <div className="lg:mx-44 xl:mx-0">
-    <section className="bg-[#ece2d6] lg:px-16 xl:px-0 py-10 lg:py-20 xl:py-0">
-        {/* Heading: mobile & lg only; xl heading lives inside the sticky panel */}
-        <div className={`${shell} xl:hidden flex flex-col gap-15 text-center pb-5`}>
-          <h2
-            className="text-[28px] font-medium leading-tight text-[#151515]"
-            style={{ fontFamily: "var(--font-primary)" }}
-          >
-           Journey Highlights
-          </h2>
-        </div>
-
-        <JourneyHighlights itinerary={journey.itinerary} journeyTitle={journey.title} />
-
-        <div className="hidden h-px w-full bg-[#dfcdb9] my-11 xl:block" />
-
-        {/* ── Pricing CTA bar ─────────────────────────────────────────────── */}
-        <div className={`${shell} xl:pb-10`}>
-          <div className="bg-[#dfcdb9] flex flex-col items-center gap-8 p-8 text-center xl:flex-row xl:items-center xl:justify-between xl:px-16 xl:py-14 xl:text-left">
-
-            {/* Title */}
+        <section className="bg-[#ece2d6] lg:px-16 xl:px-0 py-10 lg:py-20 xl:py-0">
+          {/* Heading: mobile & lg only; xl heading lives inside the sticky panel */}
+          <div className={`${shell} xl:hidden flex flex-col gap-15 text-center pb-5`}>
             <h2
-              className="text-[26px] font-semibold leading-tight text-dark-500 xl:text-[36px] xl:whitespace-nowrap"
+              className="text-[28px] font-medium leading-tight text-[#151515]"
               style={{ fontFamily: "var(--font-primary)" }}
             >
-              {journey.priceCtaTitle}
+              Journey Highlights
             </h2>
-
-            {/* Price */}
-            <div className="flex flex-col items-center">
-              <div className="text-center text-[15px] text-dark-400" style={{ fontFamily: "var(--font-secondary)" }}>
-                <span className="text-[20px] font-semibold text-dark-500">
-                  {journey.priceFrom}
-                </span>
-                {journey.showIndicativePricingNote && <PricingInfoNote />}
-              </div>
-              <p className="text-[13px] text-dark-400 mt-1" style={{ fontFamily: "var(--font-secondary)" }}>
-                ({journey.priceBasis})
-              </p>
-            </div>
-
-            {/* Enquire button */}
-            <EnquireButton
-              journeyTitle={journey.title}
-              label="Enquire Now"
-              className="h-11.25 cursor-pointer w-full rounded-xs bg-[#824b2e] px-8 text-[14px] lg:text-[18px] text-white xl:w-fit"
-              style={{ fontFamily: "var(--font-secondary)" }}
-            />
           </div>
-        </div>
-      </section>
+
+          <JourneyHighlights itinerary={journey.itinerary} journeyTitle={journey.title} />
+
+          <div className="hidden h-px w-full bg-[#dfcdb9] my-11 xl:block" />
+
+          {/* ── Pricing CTA bar ─────────────────────────────────────────────── */}
+          <div className={`${shell} xl:pb-10`}>
+            <div className="bg-[#dfcdb9] flex flex-col items-center gap-8 p-8 text-center xl:flex-row xl:items-center xl:justify-between xl:px-16 xl:py-14 xl:text-left">
+
+              {/* Title */}
+              <h2
+                className="text-[26px] font-semibold leading-tight text-dark-500 xl:text-[36px] xl:whitespace-nowrap"
+                style={{ fontFamily: "var(--font-primary)" }}
+              >
+                {journey.priceCtaTitle}
+              </h2>
+
+              {/* Price */}
+              <div className="flex flex-col items-center">
+                <div className="text-center text-[15px] text-dark-400" style={{ fontFamily: "var(--font-secondary)" }}>
+                  <span className="text-[20px] font-semibold text-dark-500">
+                    {journey.priceFrom}
+                  </span>
+                  {journey.showIndicativePricingNote && <PricingInfoNote />}
+                </div>
+                <p className="text-[13px] text-dark-400 mt-1" style={{ fontFamily: "var(--font-secondary)" }}>
+                  ({journey.priceBasis})
+                </p>
+              </div>
+
+              {/* Enquire button */}
+              <EnquireButton
+                journeyTitle={journey.title}
+                label="Enquire Now"
+                className="h-11.25 cursor-pointer w-full rounded-xs bg-[#824b2e] px-8 text-[14px] lg:text-[18px] text-white xl:w-fit"
+                style={{ fontFamily: "var(--font-secondary)" }}
+              />
+            </div>
+          </div>
+        </section>
       </div>
 
 
@@ -228,18 +228,18 @@ export default async function JourneyDetailPage({
         <section className="bg-[#f2ebe2] py-[80px] xl:py-[100px]">
           <div className={shell}>
             <div className="flex flex-col gap-[60px] lg:px-10 xl:px-16">
-            <div className="inline-block self-start">
-              <h2
-                className="whitespace-nowrap text-[22px] pb-1 leading-tight 
+              <div className="inline-block self-start">
+                <h2
+                  className="whitespace-nowrap text-[22px] pb-1 leading-tight 
                  text-[#151515] sm:text-[28px] xl:text-[32px] font-semibold"
-                style={{ fontFamily: "var(--font-primary)" }}
-              >
-                Discover more Journeys
-              </h2>
-            
-            </div>
+                  style={{ fontFamily: "var(--font-primary)" }}
+                >
+                  Discover more Journeys
+                </h2>
 
-            <DestinationJourneyCarousel journeys={otherDestinationJourneys} />
+              </div>
+
+              <DestinationJourneyCarousel journeys={otherDestinationJourneys} />
             </div>
           </div>
         </section>
