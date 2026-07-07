@@ -5,7 +5,7 @@ import { useEffect, useRef, useState } from "react";
 // Fixed legal copy — wording is mandated, not editor-controlled. Sanity only
 // toggles whether the icon shows at all per journey (showIndicativePricingNote).
 const NOTE_TEXT =
-  "Prices shown are indicative. Your final price will be confirmed at the time of booking and calculated using the prevailing exchange rate in the destination's pricing currency.";
+  "Prices shown are indicative. Your final price will be confirmed at the time of booking and calculated using the prevailing exchange rate in the destination's pricing currency."
 
 export function PricingInfoNote() {
   const [open, setOpen] = useState(false);
