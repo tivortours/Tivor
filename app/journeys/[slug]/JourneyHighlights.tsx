@@ -388,7 +388,7 @@ export function JourneyHighlights({
             <div className="w-1/2 bg-[#ece2d6] flex flex-col">
 
               {/* Day detail — centred in the full right panel height */}
-              <div className="flex-1 flex flex-col items-start justify-center gap-5 px-16 text-center">
+              <div className="flex-1 flex flex-col items-start justify-center gap-7 px-16 text-center">
                 <div className="flex items-center gap-2">
                   <CalendarIcon />
                   <p
