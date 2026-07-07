@@ -30,7 +30,7 @@ export function PricingInfoNote() {
   return (
     <span
       ref={wrapRef}
-      className="relative inline-flex items-center ml-1.5"
+      className="relative inline-flex items-center ml-3"
       onMouseEnter={() => setOpen(true)}
       onMouseLeave={() => setOpen(false)}
     >
@@ -53,7 +53,7 @@ export function PricingInfoNote() {
       {open && (
         <div
           role="tooltip"
-          className="absolute left-1/2 top-full z-50 mt-2 w-64 -translate-x-1/2 rounded-[4px] bg-[#2b2420] p-4 text-left shadow-lg sm:w-72"
+          className="absolute left-1/2 top-full z-50 mt-2 w-72 -translate-x-1/2 rounded-[4px] bg-[#2b2420] p-4 text-left shadow-lg sm:w-96"
         >
           <p
             className="text-[13px] font-semibold text-white"

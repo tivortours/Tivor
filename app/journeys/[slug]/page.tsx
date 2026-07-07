@@ -191,12 +191,12 @@ export default async function JourneyDetailPage({
 
             {/* Price */}
             <div className="flex flex-col items-center">
-              <p className="flex items-center justify-center text-[15px] text-dark-400" style={{ fontFamily: "var(--font-secondary)" }}>
+              <div className="flex items-center justify-center text-[15px] text-dark-400" style={{ fontFamily: "var(--font-secondary)" }}>
                 <span className="text-[20px] font-semibold text-dark-500">
                   {journey.priceFrom}
                 </span>
                 {journey.showIndicativePricingNote && <PricingInfoNote />}
-              </p>
+              </div>
               <p className="text-[13px] text-dark-400 mt-1" style={{ fontFamily: "var(--font-secondary)" }}>
                 ({journey.priceBasis})
               </p>
