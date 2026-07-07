@@ -63,6 +63,7 @@ const inclusionsComponents = {
     ),
   },
   marks: alignMarks,
+  hardBreak: () => <br />,
   block: {
     normal: inclusionNoteLine,
     small: inclusionNoteLine,
