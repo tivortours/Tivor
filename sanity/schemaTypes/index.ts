@@ -317,6 +317,13 @@ const journey = defineType({
     defineField({ name: "priceBasis", title: "Price Basis", type: "string" }),
     defineField({ name: "priceCtaTitle", title: "Pricing CTA Title", type: "string" }),
     defineField({
+      name: "showIndicativePricingNote",
+      title: "Show Indicative Pricing Note",
+      type: "boolean",
+      initialValue: false,
+      description: "Adds an (i) icon next to the price in the pricing bar. Clicking it shows the legally-required indicative-pricing disclaimer. Turn on only for journeys that need it.",
+    }),
+    defineField({
       name: "inclusions",
       title: "Inclusions",
       type: "array",

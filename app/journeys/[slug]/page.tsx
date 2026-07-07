@@ -8,6 +8,7 @@ import { JourneyHighlights } from "./JourneyHighlights";
 import { DestinationJourneyCarousel } from "../../destinations/[slug]/DestinationJourneyCarousel";
 import { EnquireButton } from "../../../components/BookingModal";
 import { InclusionsButton } from "../../../components/InclusionsModal";
+import { PricingInfoNote } from "../../../components/PricingInfoNote";
 import { getTextAlign } from "../../../lib/portableText";
 
 // Each block renders as its own line inside the <h1> (span+block display, not
@@ -191,11 +192,10 @@ export default async function JourneyDetailPage({
             {/* Price */}
             <div className="flex flex-col items-center">
               <p className="text-[15px] text-dark-400" style={{ fontFamily: "var(--font-secondary)" }}>
-             
                 <span className="text-[20px] font-semibold text-dark-500">
-              {journey.priceFrom}
+                  {journey.priceFrom}
                 </span>
-              
+                {journey.showIndicativePricingNote && <PricingInfoNote />}
               </p>
               <p className="text-[13px] text-dark-400 mt-1" style={{ fontFamily: "var(--font-secondary)" }}>
                 ({journey.priceBasis})

@@ -70,6 +70,7 @@ export type Journey = {
   priceFrom: string;
   priceBasis: string;
   priceCtaTitle: string;
+  showIndicativePricingNote: boolean;
   itinerary: {
     day: string;
     title: string;
@@ -363,6 +364,7 @@ function mapJourney(item: any): Journey {
     priceFrom: item.priceFrom || "",
     priceBasis: item.priceBasis || "",
     priceCtaTitle: item.priceCtaTitle || "",
+    showIndicativePricingNote: Boolean(item.showIndicativePricingNote),
     itinerary: (item.itinerary || []).map((stop: any) => ({
       day: stop.day,
       title: stop.title,

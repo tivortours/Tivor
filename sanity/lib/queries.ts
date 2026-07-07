@@ -283,6 +283,7 @@ export const JOURNEY_QUERY = defineQuery(`
     priceFrom,
     priceBasis,
     priceCtaTitle,
+    showIndicativePricingNote,
     itinerary[]{
       day,
       title,
