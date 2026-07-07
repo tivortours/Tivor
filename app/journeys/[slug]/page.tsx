@@ -191,7 +191,7 @@ export default async function JourneyDetailPage({
 
             {/* Price */}
             <div className="flex flex-col items-center">
-              <div className="flex items-center justify-center text-[15px] text-dark-400" style={{ fontFamily: "var(--font-secondary)" }}>
+              <div className="text-center text-[15px] text-dark-400" style={{ fontFamily: "var(--font-secondary)" }}>
                 <span className="text-[20px] font-semibold text-dark-500">
                   {journey.priceFrom}
                 </span>
@@ -224,12 +224,15 @@ export default async function JourneyDetailPage({
         <section className="bg-[#f2ebe2] py-[80px] xl:py-[100px]">
           <div className={shell}>
             <div className="flex flex-col gap-[60px] lg:px-10 xl:px-16">
-            <h2
-              className="text-[22px] leading-tight text-[#151515] sm:text-[28px] xl:text-[32px]"
-              style={{ fontFamily: "var(--font-primary)" }}
-            >
-              Crafted Journeys, Designed Around You
-            </h2>
+            <div className="inline-block self-start">
+              <h2
+                className="whitespace-nowrap text-[22px] leading-tight text-[#151515] sm:text-[28px] xl:text-[32px]"
+                style={{ fontFamily: "var(--font-primary)" }}
+              >
+                Discover more Journeys
+              </h2>
+              <div className="mt-3 h-0.5 w-full bg-[#714128]" />
+            </div>
 
             <DestinationJourneyCarousel journeys={otherDestinationJourneys} />
             </div>

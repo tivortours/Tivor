@@ -53,7 +53,7 @@ export function PricingInfoNote() {
       {open && (
         <div
           role="tooltip"
-          className="absolute left-1/2 top-full z-50 mt-2 w-72 -translate-x-1/2 rounded-[4px] bg-[#2b2420] p-4 text-left shadow-lg sm:w-96"
+          className="absolute right-0 top-full z-50 mt-2 w-64 max-w-[80vw] rounded-[4px] bg-[#2b2420] p-4 text-left shadow-lg sm:left-1/2 sm:right-auto sm:w-96 sm:-translate-x-1/2"
         >
           <p
             className="text-[13px] font-semibold text-white"

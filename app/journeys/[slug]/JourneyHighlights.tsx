@@ -31,7 +31,7 @@ type RichValue = { style?: string; children?: any[] };
 const activitiesComponents = (sizes: SizeMap) => {
   const line = (sizeClass: string, align?: string) => ({ children }: { children?: React.ReactNode }) => (
     <p
-      className={`${sizeClass} leading-relaxed text-dark-400`}
+      className={`${sizeClass} text-pretty leading-relaxed text-dark-400`}
       style={{ fontFamily: "var(--font-secondary)", textAlign: align as React.CSSProperties["textAlign"] }}
     >
       {children}
@@ -66,7 +66,7 @@ const activitiesComponents = (sizes: SizeMap) => {
             <svg aria-hidden className="shrink-0 mt-[0.55em]" width="7" height="7" viewBox="0 0 7 7" fill="none">
               <rect x="3.5" y="0.5" width="4.24" height="4.24" rx="0.5" transform="rotate(45 3.5 0.5)" fill="#6A5546" />
             </svg>
-            <span style={{ textAlign: align }}>{children}</span>
+            <span className="min-w-0 text-pretty" style={{ textAlign: align }}>{children}</span>
           </li>
         );
       },
@@ -82,13 +82,13 @@ const CalendarIcon = () => (
 );
 
 const ChevronLeft = () => (
-  <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#333" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+  <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#333" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
     <polyline points="15 18 9 12 15 6" />
   </svg>
 );
 
 const ChevronRight = () => (
-  <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#333" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+  <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#333" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
     <polyline points="9 18 15 12 9 6" />
   </svg>
 );
@@ -237,7 +237,7 @@ export function JourneyHighlights({
           <button
             onClick={() => setMobileActive(d => Math.max(0, d - 1))}
             disabled={mobileActive === 0}
-            className="p-2 text-[#999] disabled:opacity-30"
+            className="p-1 text-[#999] disabled:opacity-30 rounded-full bg-white/80  shadow-sm "
             aria-label="Previous day"
           >
             <ChevronLeft />
@@ -251,7 +251,7 @@ export function JourneyHighlights({
           <button
             onClick={() => setMobileActive(d => Math.min(itinerary.length - 1, d + 1))}
             disabled={mobileActive === itinerary.length - 1}
-            className="p-2 text-[#999] disabled:opacity-30"
+            className="p-1 text-[#999] disabled:opacity-30 rounded-full bg-white/80  shadow-sm"
             aria-label="Next day"
           >
             <ChevronRight />
@@ -392,7 +392,7 @@ export function JourneyHighlights({
                 <div className="flex items-center gap-2">
                   <CalendarIcon />
                   <p
-                    className="text-[22px] font-semibold text-dark-500"
+                    className="text-[22px] font-medium text-dark-500"
                     style={{ fontFamily: "var(--font-secondary)" }}
                   >
                     {entry.day}
@@ -404,8 +404,11 @@ export function JourneyHighlights({
                 >
                   {entry.title}
                 </p>
-                {/* No items-center — see the mobile activities wrapper above for why. */}
-                <div className="flex flex-col gap-1">
+                {/* No items-center — see the mobile activities wrapper above for why.
+                    max-w caps the line length to the card's original narrower look —
+                    the panel itself is much wider, but letting bullets use the full
+                    width makes each line noticeably longer than the design intent. */}
+                <div className="flex w-full max-w-xl flex-col gap-1">
                   <PortableText
                     value={entry.activities}
                     components={activitiesComponents({ small: "text-sm", normal: "text-base", large: "text-xl" })}

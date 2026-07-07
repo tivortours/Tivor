@@ -36,7 +36,7 @@ export function DestinationJourneyCarousel({ journeys }: { journeys: Journey[] }
   const scroll = (dir: 1 | -1) => {
     const el = trackRef.current;
     if (!el) return;
-    const card = el.querySelector<HTMLElement>("div[data-card]");
+    const card = el.querySelector<HTMLElement>("[data-card]");
     const amount = (card?.offsetWidth ?? 380) + 20;
     el.scrollBy({ left: dir * amount, behavior: "smooth" });
   };
@@ -50,8 +50,9 @@ export function DestinationJourneyCarousel({ journeys }: { journeys: Journey[] }
         {journeys.map((j) => {
 
           return (
-            <div
+            <Link
               key={j.title}
+              href={`/journeys/${j.slug}`}
               data-card=""
               className="w-full shrink-0 snap-start flex flex-col justify-between rounded-xs border border-[#9f9f9f]/50 lg:w-[calc((100%-40px)/3)]"
             >
@@ -98,16 +99,15 @@ export function DestinationJourneyCarousel({ journeys }: { journeys: Journey[] }
                     ))}
                 </div>
                 <div className="border-t border-[#9f9f9f]/50 p-5">
-                  <Link
-                    href={`/journeys/${j.slug}`}
+                  <span
                     className="flex h-[45px] w-full items-center justify-center rounded-xs bg-[#824b2e] text-[15px] text-white lg:text-base xl:text-[18px]"
                     style={{ fontFamily: "var(--font-secondary)" }}
                   >
                     Explore Journey
-                  </Link>
+                  </span>
                 </div>
               </div>
-            </div>
+            </Link>
           );
         })}
       </div>
