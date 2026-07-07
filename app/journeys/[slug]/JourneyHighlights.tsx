@@ -399,7 +399,7 @@ export function JourneyHighlights({
                   </p>
                 </div>
                 <p
-                  className="text-[20px] font-medium text-dark-500"
+                  className="text-[22px] font-semibold text-dark-500"
                   style={{ fontFamily: "var(--font-secondary)" }}
                 >
                   {entry.title}
