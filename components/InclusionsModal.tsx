@@ -63,7 +63,7 @@ const inclusionsComponents = {
     ),
   },
   marks: alignMarks,
-  hardBreak: () => <br />,
+  hardBreak: () => <span className="block h-2" aria-hidden="true" />,
   block: {
     normal: inclusionNoteLine,
     small: inclusionNoteLine,
