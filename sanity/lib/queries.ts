@@ -1,5 +1,36 @@
 import { defineQuery } from "next-sanity";
 
+// Shared journey card projection — reused wherever a full journey list/card
+// is fetched (the journeys list, a single journey, a destination's curated
+// carousel, and the home page's featured list) so all four stay in sync.
+const JOURNEY_CARD_FIELDS = `
+    title,
+    alt,
+    shortDescription,
+    fullDescription,
+    accentColor,
+    lightText,
+    hasDivider,
+    "slug": slug.current,
+    "destination": destination->slug.current,
+    facts[]{
+      label,
+      value
+    },
+    inclusions,
+    cardImage,
+    heroImage,
+    priceFrom,
+    priceBasis,
+    priceCtaTitle,
+    itinerary[]{
+      day,
+      title,
+      image,
+      activities[]
+    }
+`;
+
 export const SITE_SETTINGS_QUERY = defineQuery(`
   *[_type == "siteSettings"][0]{
     navItems[]{
@@ -76,17 +107,11 @@ export const HOME_PAGE_QUERY = defineQuery(`
     curatedJourneysTitle,
     curatedJourneysLinkLabel,
     curatedJourneysLinkHref,
-    "featuredJourneys": *[_type == "journey" && featuredOnHome == true]{
-      "slug": slug.current,
-      title,
-      alt,
-      shortDescription,
-      accentColor,
-      facts[]{
-        label,
-        value
-      },
-      cardImage
+    featuredJourneys[]->{
+      ${JOURNEY_CARD_FIELDS}
+    },
+    "legacyFeaturedJourneys": *[_type == "journey" && featuredOnHome == true] | order(sortOrder asc, title asc){
+      ${JOURNEY_CARD_FIELDS}
     },
     experiencesLabel,
     experiencesTitle,
@@ -190,6 +215,9 @@ export const DESTINATION_QUERY = defineQuery(`
     detailDescription1,
     detailDescription2,
     detailGallery,
+    journeys[]->{
+      ${JOURNEY_CARD_FIELDS}
+    },
     ctaImage,
     ctaTitle,
     ctaBody,
@@ -224,32 +252,7 @@ export const EXPERIENCES_PAGE_QUERY = defineQuery(`
 
 export const JOURNEYS_QUERY = defineQuery(`
   *[_type == "journey" && defined(slug.current)] | order(sortOrder asc, title asc){
-    title,
-    alt,
-    shortDescription,
-    fullDescription,
-    accentColor,
-    lightText,
-    hasDivider,
-    featuredOnHome,
-    "slug": slug.current,
-    "destination": destination->slug.current,
-    facts[]{
-      label,
-      value
-    },
-    inclusions,
-    cardImage,
-    heroImage,
-    priceFrom,
-    priceBasis,
-    priceCtaTitle,
-    itinerary[]{
-      day,
-      title,
-      image,
-      activities[]
-    }
+    ${JOURNEY_CARD_FIELDS}
   }
 `);
 
@@ -261,35 +264,10 @@ export const JOURNEY_SLUGS_QUERY = defineQuery(`
 
 export const JOURNEY_QUERY = defineQuery(`
   *[_type == "journey" && slug.current == $slug][0]{
-    title,
     detailTitle,
-    alt,
-    shortDescription,
-    fullDescription,
-    accentColor,
-    lightText,
-    hasDivider,
-    featuredOnHome,
-    "slug": slug.current,
-    "destination": destination->slug.current,
-    facts[]{
-      label,
-      value
-    },
-    inclusions,
-    cardImage,
-    heroImage,
     priceCurrency,
-    priceFrom,
-    priceBasis,
-    priceCtaTitle,
     showIndicativePricingNote,
-    itinerary[]{
-      day,
-      title,
-      image,
-      activities[]
-    }
+    ${JOURNEY_CARD_FIELDS}
   }
 `);
 

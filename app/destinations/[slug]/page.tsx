@@ -33,8 +33,11 @@ export default async function DestinationDetailPage({
   ]);
   if (!dest) notFound();
 
-  const destJourneys = journeys.filter((j) => j.destination === slug);
-  const shownJourneys = destJourneys.length > 0 ? destJourneys : journeys;
+  // dest.journeys is the curated, drag-orderable list from the Destination
+  // document; fall back to auto-matching by the journey's own Destination
+  // reference (sorted by its Sort Order) until an editor curates it.
+  const matchedJourneys = journeys.filter((j) => j.destination === slug);
+  const shownJourneys = dest.journeys.length > 0 ? dest.journeys : matchedJourneys.length > 0 ? matchedJourneys : journeys;
 
   return (
     <main className="flex w-full flex-col overflow-x-hidden">

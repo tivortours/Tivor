@@ -2,7 +2,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { PortableText } from "@portabletext/react";
-import { getJourneyBySlug, getJourneySlugs, getJourneys, shell } from "../../site-data";
+import { getDestinationBySlug, getJourneyBySlug, getJourneySlugs, getJourneys, shell } from "../../site-data";
 import { SiteHeader, SiteFooter } from "../../site-ui";
 import { JourneyHighlights } from "./JourneyHighlights";
 import { DestinationJourneyCarousel } from "../../destinations/[slug]/DestinationJourneyCarousel";
@@ -49,9 +49,13 @@ export default async function JourneyDetailPage({
   const [journey, allJourneys] = await Promise.all([getJourneyBySlug(slug), getJourneys()]);
   if (!journey) notFound();
 
-  const otherDestinationJourneys = allJourneys.filter(
-    (j) => j.destination === journey.destination && j.slug !== journey.slug
-  );
+  // Reuse the destination's curated, drag-orderable journey list so "Other
+  // Journeys" here matches the order shown on that destination's own page;
+  // fall back to auto-matching by destination until an editor curates it.
+  const dest = journey.destination ? await getDestinationBySlug(journey.destination) : null;
+  const otherDestinationJourneys = dest?.journeys.length
+    ? dest.journeys.filter((j) => j.slug !== journey.slug)
+    : allJourneys.filter((j) => j.destination === journey.destination && j.slug !== journey.slug);
 
 
   return (

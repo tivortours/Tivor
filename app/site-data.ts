@@ -35,6 +35,7 @@ export type Destination = {
   region: string;
   bestSeason: string;
   tone: string;
+  journeys: Journey[];
   detail: {
     heroImg: string;
     heroTitle: string;
@@ -62,7 +63,6 @@ export type Journey = {
   lightText: boolean;
   hasDivider: boolean;
   destination: string;
-  featured: boolean;
   details: [string, string][];
   inclusions: any[];
   highlightsImg: string;
@@ -343,6 +343,7 @@ function mapDestination(item: any): Destination {
     region: item.region,
     bestSeason: item.bestSeason,
     tone: item.tone,
+    journeys: (item.journeys || []).filter(Boolean).map((j: any) => mapJourney(j)),
     detail: {
       heroImg: imageUrl(item.detailHeroImage, 2000, 1200, ""),
       heroTitle: item.detailHeroTitle,
@@ -372,7 +373,6 @@ function mapJourney(item: any): Journey {
     lightText: Boolean(item.lightText),
     hasDivider: Boolean(item.hasDivider),
     destination: item.destination,
-    featured: Boolean(item.featuredOnHome),
     details: (item.facts || []).map((fact: { label: string; value: string }) => [fact.label, fact.value]) as [
       string,
       string,
@@ -610,9 +610,11 @@ export const getHomePageData = cache(async (): Promise<HomePageData> => {
     curatedJourneysTitle: data.curatedJourneysTitle || "",
     curatedJourneysLinkLabel: data.curatedJourneysLinkLabel || "",
     curatedJourneysLinkHref: data.curatedJourneysLinkHref ? toAbsoluteHref(data.curatedJourneysLinkHref) : "",
-    featuredJourneys: data.featuredJourneys?.length
-      ? data.featuredJourneys.map((item: any) => mapJourney(item))
-      : [],
+    // Curated `featuredJourneys` (drag-orderable in Studio) takes priority;
+    // falls back to the `featuredOnHome` checkbox until an editor curates it.
+    featuredJourneys: (data.featuredJourneys?.length ? data.featuredJourneys : data.legacyFeaturedJourneys)
+      ?.filter(Boolean)
+      .map((item: any) => mapJourney(item)) ?? [],
     experiencesLabel: data.experiencesLabel || "",
     experiencesTitle: data.experiencesTitle || "",
     experiencesButtonLabel: data.experiencesButtonLabel || "",
@@ -662,7 +664,7 @@ export const getDestinationSlugs = cache(async (): Promise<string[]> => {
 });
 
 export const getDestinationBySlug = cache(async (slug: string): Promise<Destination | null> => {
-  const data = await fetchSanity<any>(DESTINATION_QUERY, { slug }, ["destination"]);
+  const data = await fetchSanity<any>(DESTINATION_QUERY, { slug }, ["destination", "journey"]);
   if (!data) return null;
 
   return mapDestination(data);
