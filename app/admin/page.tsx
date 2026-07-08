@@ -7,7 +7,7 @@ export default function AdminPage() {
   const [error, setError]       = useState("");
   const [loading, setLoading]   = useState(false);
 
-  async function handleDownload() {
+  async function handleOpen() {
     if (!password) return;
     setLoading(true);
     setError("");
@@ -15,20 +15,19 @@ export default function AdminPage() {
     const res = await fetch(`/api/leads/download?pw=${encodeURIComponent(password)}`);
 
     if (!res.ok) {
-      const body = await res.json().catch(() => ({}));
-      setError(body.error === "No leads file yet" ? "No leads have been submitted yet." : "Incorrect password.");
+      setError("Incorrect password.");
       setLoading(false);
       return;
     }
 
-    // Trigger browser download
-    const blob = await res.blob();
-    const url  = URL.createObjectURL(blob);
-    const a    = document.createElement("a");
-    a.href     = url;
-    a.download = `tivor-leads-${new Date().toISOString().slice(0, 10)}.xlsx`;
-    a.click();
-    URL.revokeObjectURL(url);
+    const body = await res.json().catch(() => ({}));
+    if (!body.url) {
+      setError("Leads sheet is not configured yet.");
+      setLoading(false);
+      return;
+    }
+
+    window.open(body.url, "_blank", "noopener,noreferrer");
     setLoading(false);
   }
 
@@ -39,7 +38,7 @@ export default function AdminPage() {
           className="mb-6 text-[26px] leading-tight text-[#151515]"
           style={{ fontFamily: "var(--font-primary)" }}
         >
-          Download Leads
+          Open Leads Sheet
         </h1>
 
         <div className="flex flex-col gap-4">
@@ -47,7 +46,7 @@ export default function AdminPage() {
             type="password"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
-            onKeyDown={(e) => e.key === "Enter" && handleDownload()}
+            onKeyDown={(e) => e.key === "Enter" && handleOpen()}
             placeholder="Enter admin password"
             className="form-input"
             style={{ fontFamily: "var(--font-secondary)" }}
@@ -60,12 +59,12 @@ export default function AdminPage() {
           )}
 
           <button
-            onClick={handleDownload}
+            onClick={handleOpen}
             disabled={!password || loading}
             className="h-11 rounded-sm bg-[#151515] px-6 text-[16px] text-white disabled:opacity-40"
             style={{ fontFamily: "var(--font-secondary)" }}
           >
-            {loading ? "Preparing…" : "Download Excel"}
+            {loading ? "Opening…" : "Open Leads Sheet"}
           </button>
         </div>
 
@@ -73,7 +72,7 @@ export default function AdminPage() {
           className="mt-5 text-xs text-[#999]"
           style={{ fontFamily: "var(--font-secondary)" }}
         >
-          Downloads all leads — Contact Us, Plan Your Journey, and Package Enquiries — as separate tabs in one Excel file.
+          Opens the live Google Sheet — Contact Us, Plan Your Journey, Package Enquiry, and Newsletter each have their own tab.
         </p>
       </div>
     </main>

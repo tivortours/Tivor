@@ -1,33 +1,14 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { planFormSchema, type PlanFormShape } from "../../lib/validation";
+import { DIAL_COUNTRIES, COUNTRY_NAMES } from "../../lib/countries";
+import { CountrySelect } from "../../components/CountrySelect";
+import { PhoneCountrySelect } from "../../components/PhoneCountrySelect";
 
-// ── Country dial codes ────────────────────────────────────────────────────────
-const DIAL_COUNTRIES = [
-  { code: "AE", flag: "🇦🇪", dial: "+971", name: "UAE" },
-  { code: "US", flag: "🇺🇸", dial: "+1",   name: "United States" },
-  { code: "GB", flag: "🇬🇧", dial: "+44",  name: "United Kingdom" },
-  { code: "AU", flag: "🇦🇺", dial: "+61",  name: "Australia" },
-  { code: "IN", flag: "🇮🇳", dial: "+91",  name: "India" },
-  { code: "DE", flag: "🇩🇪", dial: "+49",  name: "Germany" },
-  { code: "FR", flag: "🇫🇷", dial: "+33",  name: "France" },
-  { code: "IT", flag: "🇮🇹", dial: "+39",  name: "Italy" },
-  { code: "SI", flag: "🇸🇮", dial: "+386", name: "Slovenia" },
-  { code: "IS", flag: "🇮🇸", dial: "+354", name: "Iceland" },
-  { code: "NO", flag: "🇳🇴", dial: "+47",  name: "Norway" },
-  { code: "CA", flag: "🇨🇦", dial: "+1",   name: "Canada" },
-  { code: "SG", flag: "🇸🇬", dial: "+65",  name: "Singapore" },
-  { code: "ZA", flag: "🇿🇦", dial: "+27",  name: "South Africa" },
-];
+type FieldErrors = Partial<Record<keyof PlanFormShape, string>>;
 
-const RESIDENCE_COUNTRIES = [
-  "Australia","Austria","Belgium","Canada","Croatia","Czech Republic",
-  "Denmark","Finland","France","Germany","Greece","Iceland","India",
-  "Ireland","Italy","Japan","Luxembourg","Netherlands","New Zealand",
-  "Norway","Poland","Portugal","Singapore","Slovenia","South Africa",
-  "Spain","Sweden","Switzerland","United Arab Emirates","United Kingdom",
-  "United States","Other",
-];
+const RESIDENCE_COUNTRIES = [...COUNTRY_NAMES, "Other"];
 
 const BUDGETS = ["Under $3,000","$3,000 – $5,000","$5,000 – $8,000","$8,000 – $12,000","$12,000 – $20,000","$20,000+","Flexible"];
 const ADULTS  = ["1","2","3","4","5","6","7","8","9","10+"];
@@ -54,30 +35,42 @@ function Field({ label, children }: { label: React.ReactNode; children: React.Re
   );
 }
 
-function TextInput({ placeholder, value, onChange, type = "text" }: {
-  placeholder: string; value: string; onChange: (v: string) => void; type?: string;
+function FieldError({ msg }: { msg?: string }) {
+  return (
+    <p
+      className="text-[12px] text-red-500"
+      style={{ fontFamily: "var(--font-secondary)", visibility: msg ? "visible" : "hidden" }}
+    >
+      {msg || "placeholder"}
+    </p>
+  );
+}
+
+function TextInput({ placeholder, value, onChange, type = "text", inputMode, hasError }: {
+  placeholder: string; value: string; onChange: (v: string) => void; type?: string; inputMode?: React.HTMLAttributes<HTMLInputElement>["inputMode"]; hasError?: boolean;
 }) {
   return (
     <input
       type={type}
+      inputMode={inputMode}
       value={value}
       onChange={(e) => onChange(e.target.value)}
       placeholder={placeholder}
-      className="form-input"
+      className={`form-input ring-1 ${hasError ? "ring-red-400" : "ring-transparent"}`}
       style={{ fontFamily: "var(--font-secondary)" }}
     />
   );
 }
 
-function SelectInput({ value, onChange, placeholder, options }: {
-  value: string; onChange: (v: string) => void; placeholder: string; options: string[];
+function SelectInput({ value, onChange, placeholder, options, hasError }: {
+  value: string; onChange: (v: string) => void; placeholder: string; options: string[]; hasError?: boolean;
 }) {
   return (
     <div className="relative">
       <select
         value={value}
         onChange={(e) => onChange(e.target.value)}
-        className="form-select"
+        className={`form-select ring-1 ${hasError ? "ring-red-400" : "ring-transparent"}`}
         style={{ fontFamily: "var(--font-secondary)", color: value ? "#151515" : "#999" }}
       >
         <option value="" disabled style={{ color: "#999" }}>{placeholder}</option>
@@ -90,36 +83,17 @@ function SelectInput({ value, onChange, placeholder, options }: {
   );
 }
 
-function PhoneInput({ countryCode, phone, onCountryChange, onPhoneChange }: {
-  countryCode: string; phone: string; onCountryChange: (v: string) => void; onPhoneChange: (v: string) => void;
+function PhoneInput({ countryCode, phone, onCountryChange, onPhoneChange, hasError }: {
+  countryCode: string; phone: string; onCountryChange: (v: string) => void; onPhoneChange: (v: string) => void; hasError?: boolean;
 }) {
-  const country = DIAL_COUNTRIES.find((c) => c.code === countryCode) ?? DIAL_COUNTRIES[0];
   return (
-    <div className="form-phone-wrap">
-      <div className="relative flex shrink-0 items-center px-3">
-        <select
-          value={countryCode}
-          onChange={(e) => onCountryChange(e.target.value)}
-          className="absolute inset-0 cursor-pointer opacity-0"
-          aria-label="Country code"
-        >
-          {DIAL_COUNTRIES.map((c) => (
-            <option key={c.code} value={c.code}>{c.flag} {c.name} ({c.dial})</option>
-          ))}
-        </select>
-        <span className="mr-1 text-xl leading-none" aria-hidden>{country.flag}</span>
-        <svg className="mr-1.5 shrink-0" width="9" height="6" viewBox="0 0 9 6" fill="none">
-          <path d="M1 1L4.5 5L8 1" stroke="#555" strokeWidth="1.2" strokeLinecap="round"/>
-        </svg>
-        <span className="text-[13px] font-medium text-dark-500" style={{ fontFamily: "var(--font-secondary)" }}>
-          {country.dial}
-        </span>
-      </div>
+    <div className={`form-phone-wrap ring-1 ${hasError ? "ring-red-400" : "ring-transparent"}`}>
+      <PhoneCountrySelect value={countryCode} onChange={onCountryChange} />
       <div className="my-3.5 w-px bg-brown-300" />
       <input
         type="tel"
         value={phone}
-        onChange={(e) => onPhoneChange(e.target.value)}
+        onChange={(e) => onPhoneChange(e.target.value.replace(/[^\d]/g, ""))}
         placeholder="Enter your contact number"
         className="min-w-0 flex-1 bg-transparent px-4 text-[14px] text-dark-500 placeholder-[#999] outline-none"
         style={{ fontFamily: "var(--font-secondary)" }}
@@ -128,8 +102,8 @@ function PhoneInput({ countryCode, phone, onCountryChange, onPhoneChange }: {
   );
 }
 
-function Textarea({ value, onChange, placeholder, maxLength = 1000 }: {
-  value: string; onChange: (v: string) => void; placeholder: string; maxLength?: number;
+function Textarea({ value, onChange, placeholder, maxLength = 1000, hasError }: {
+  value: string; onChange: (v: string) => void; placeholder: string; maxLength?: number; hasError?: boolean;
 }) {
   return (
     <div className="flex flex-col gap-1">
@@ -138,7 +112,7 @@ function Textarea({ value, onChange, placeholder, maxLength = 1000 }: {
         onChange={(e) => onChange(e.target.value.slice(0, maxLength))}
         placeholder={placeholder}
         rows={6}
-        className="form-textarea"
+        className={`form-textarea ring-1 ${hasError ? "ring-red-400" : "ring-transparent"}`}
         style={{ fontFamily: "var(--font-secondary)" }}
       />
       <p className="self-end text-[12px] text-[#999]" style={{ fontFamily: "var(--font-secondary)" }}>
@@ -243,33 +217,70 @@ export default function PlanForm({ destinations }: { destinations: string[] }) {
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
   const [email, setEmail] = useState("");
-  const [countryCode, setCountryCode] = useState("AE");
+  const [countryCode, setCountryCode] = useState("US");
   const [phone, setPhone] = useState("");
   const [countryResidence, setCountryResidence] = useState("");
   const [city, setCity] = useState("");
   const [message, setMessage] = useState("");
 
-  const valid = firstName && lastName && email && phone && message && destination && adults;
+  const [submitting, setSubmitting] = useState(false);
+  const [submitError, setSubmitError] = useState("");
+  const [errors, setErrors] = useState<FieldErrors>({});
+  const [tried, setTried] = useState(false);
 
-  function handleSubmit() {
-    if (!valid) return;
-    setDone(true);
-    const dialCode = DIAL_COUNTRIES.find((c) => c.code === countryCode)?.dial ?? "";
-    fetch("/api/leads", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({
-        type: "plan",
-        firstName, lastName, email,
-        phone: `${dialCode} ${phone}`.trim(),
-        countryResidence, city,
-        destination, travelDays, adults, children,
-        travelDate, budget,
-        travelStyles: travelStyles.join(", "),
-        accommodation: accommodation.join(", "),
-        message,
-      }),
+  function validate(): FieldErrors {
+    const result = planFormSchema.safeParse({
+      destination, travelDays, adults, children, travelDate, budget,
+      travelStyles, accommodation,
+      firstName, lastName, email, phoneCountry: countryCode, phone, countryResidence, city, message,
     });
+    if (result.success) return {};
+    const e: FieldErrors = {};
+    for (const issue of result.error.issues) {
+      const key = issue.path[0] as keyof FieldErrors;
+      if (!e[key]) e[key] = issue.message;
+    }
+    return e;
+  }
+
+  // Re-validate live after first submit attempt so errors clear as the user fixes them.
+  useEffect(() => {
+    if (tried) setErrors(validate());
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [destination, travelDays, adults, children, travelDate, budget, travelStyles, accommodation, firstName, lastName, email, countryCode, phone, countryResidence, city, message, tried]);
+
+  async function handleSubmit() {
+    setTried(true);
+    const e = validate();
+    setErrors(e);
+    if (Object.keys(e).length > 0) return;
+
+    setSubmitting(true);
+    setSubmitError("");
+    const dialCode = DIAL_COUNTRIES.find((c) => c.code === countryCode)?.dial ?? "";
+    try {
+      const res = await fetch("/api/leads", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          type: "plan",
+          firstName, lastName, email,
+          phone: `${dialCode} ${phone}`.trim(),
+          countryResidence, city,
+          destination, travelDays, adults, children,
+          travelDate, budget,
+          travelStyles: travelStyles.join(", "),
+          accommodation: accommodation.join(", "),
+          message,
+        }),
+      });
+      if (!res.ok) throw new Error("Request failed");
+      setDone(true);
+    } catch {
+      setSubmitError("Something went wrong. Please try again.");
+    } finally {
+      setSubmitting(false);
+    }
   }
 
   if (done) return <SuccessView />;
@@ -290,14 +301,17 @@ export default function PlanForm({ destinations }: { destinations: string[] }) {
                 onChange={setDestination}
                 placeholder="Select destinations"
                 options={destinations}
+                hasError={!!errors.destination}
               />
+              <FieldError msg={errors.destination} />
             </Field>
             <Field label="Number of Travel Days*">
               <TextInput
                 placeholder="Enter number of days"
                 value={travelDays}
-                onChange={setTravelDays}
-                type="number"
+                onChange={(v) => setTravelDays(v.replace(/\D/g, ""))}
+                type="text"
+                inputMode="numeric"
               />
             </Field>
           </div>
@@ -309,7 +323,9 @@ export default function PlanForm({ destinations }: { destinations: string[] }) {
                 onChange={setAdults}
                 placeholder="Pick a number"
                 options={ADULTS}
+                hasError={!!errors.adults}
               />
+              <FieldError msg={errors.adults} />
             </Field>
             <Field label="Number of Children">
               <SelectInput
@@ -367,16 +383,19 @@ export default function PlanForm({ destinations }: { destinations: string[] }) {
 
           <div className="grid grid-cols-1 gap-6 sm:grid-cols-2">
             <Field label="First Name*">
-              <TextInput placeholder="Enter your first name" value={firstName} onChange={setFirstName} />
+              <TextInput placeholder="Enter your first name" value={firstName} onChange={setFirstName} hasError={!!errors.firstName} />
+              <FieldError msg={errors.firstName} />
             </Field>
             <Field label="Last Name*">
-              <TextInput placeholder="Enter your last name" value={lastName} onChange={setLastName} />
+              <TextInput placeholder="Enter your last name" value={lastName} onChange={setLastName} hasError={!!errors.lastName} />
+              <FieldError msg={errors.lastName} />
             </Field>
           </div>
 
           <div className="grid grid-cols-1 gap-6 sm:grid-cols-2">
             <Field label="Email*">
-              <TextInput placeholder="Enter your email address" value={email} onChange={setEmail} type="email" />
+              <TextInput placeholder="Enter your email address" value={email} onChange={setEmail} type="email" hasError={!!errors.email} />
+              <FieldError msg={errors.email} />
             </Field>
             <Field label="Contact Number*">
               <PhoneInput
@@ -384,13 +403,15 @@ export default function PlanForm({ destinations }: { destinations: string[] }) {
                 phone={phone}
                 onCountryChange={setCountryCode}
                 onPhoneChange={setPhone}
+                hasError={!!errors.phone}
               />
+              <FieldError msg={errors.phone} />
             </Field>
           </div>
 
           <div className="grid grid-cols-1 gap-6 sm:grid-cols-2">
             <Field label="Country of Residence*">
-              <SelectInput
+              <CountrySelect
                 value={countryResidence}
                 onChange={setCountryResidence}
                 placeholder="Select country"
@@ -407,7 +428,9 @@ export default function PlanForm({ destinations }: { destinations: string[] }) {
               placeholder="Share your ideas and initial plans"
               value={message}
               onChange={setMessage}
+              hasError={!!errors.message}
             />
+            <FieldError msg={errors.message} />
           </Field>
         </div>
       </div>
@@ -415,14 +438,16 @@ export default function PlanForm({ destinations }: { destinations: string[] }) {
       {/* Divider + submit */}
       <div className="mt-8 flex flex-col items-center gap-6">
         <div className="h-px w-full bg-[#ddd0c5]" />
+        <FieldError msg={submitError} />
         <button
           onClick={handleSubmit}
+          disabled={submitting}
           className={`h-11.25 w-fit rounded-xs px-8 text-[18px] text-white transition-opacity ${
-            valid ? "bg-dark-500" : "bg-dark-500/40 cursor-not-allowed"
+            submitting ? "bg-dark-500/40 cursor-not-allowed" : "bg-dark-500"
           }`}
           style={{ fontFamily: "var(--font-secondary)" }}
         >
-          Submit Enquiry
+          {submitting ? "Submitting…" : "Submit Enquiry"}
         </button>
       </div>
     </div>

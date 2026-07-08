@@ -2,29 +2,9 @@
 
 import { useCallback, useEffect, useRef, useState } from "react";
 import { Portal } from "./Portal";
-
-// ── Country list ──────────────────────────────────────────────────────────────
-const COUNTRIES = [
-  { code: "AE", flag: "🇦🇪", dial: "+971", name: "UAE" },
-  { code: "US", flag: "🇺🇸", dial: "+1",   name: "United States" },
-  { code: "GB", flag: "🇬🇧", dial: "+44",  name: "United Kingdom" },
-  { code: "AU", flag: "🇦🇺", dial: "+61",  name: "Australia" },
-  { code: "IN", flag: "🇮🇳", dial: "+91",  name: "India" },
-  { code: "DE", flag: "🇩🇪", dial: "+49",  name: "Germany" },
-  { code: "FR", flag: "🇫🇷", dial: "+33",  name: "France" },
-  { code: "IT", flag: "🇮🇹", dial: "+39",  name: "Italy" },
-  { code: "SI", flag: "🇸🇮", dial: "+386", name: "Slovenia" },
-  { code: "IS", flag: "🇮🇸", dial: "+354", name: "Iceland" },
-  { code: "NO", flag: "🇳🇴", dial: "+47",  name: "Norway" },
-];
-
-// ── Validators ────────────────────────────────────────────────────────────────
-function isValidEmail(v: string) {
-  return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v.trim());
-}
-function isValidPhone(v: string) {
-  return v.replace(/\D/g, "").length >= 5;
-}
+import { bookingStep1Schema, bookingStep2Schema } from "../lib/validation";
+import { DIAL_COUNTRIES as COUNTRIES } from "../lib/countries";
+import { PhoneCountrySelect } from "./PhoneCountrySelect";
 
 // ── Form data types ───────────────────────────────────────────────────────────
 type Step1 = {
@@ -39,7 +19,7 @@ type Step2 = {
 type Errors1 = Partial<Record<keyof Omit<Step1, "countryCode">, string>>;
 type Errors2 = Partial<Record<keyof Omit<Step2, "children">, string>>;
 
-const EMPTY1: Step1 = { firstName: "", lastName: "", email: "", countryCode: "AE", phone: "", message: "" };
+const EMPTY1: Step1 = { firstName: "", lastName: "", email: "", countryCode: "US", phone: "", message: "" };
 const EMPTY2: Step2 = { travelDate: "", countryCity: "", adults: "", children: "" };
 
 // ── Shared primitives ─────────────────────────────────────────────────────────
@@ -52,10 +32,12 @@ function FieldLabel({ children }: { children: React.ReactNode }) {
 }
 
 function FieldError({ msg }: { msg?: string }) {
-  if (!msg) return null;
   return (
-    <p className="text-[12px] text-red-500" style={{ fontFamily: "var(--font-secondary)" }}>
-      {msg}
+    <p
+      className="text-[12px] text-red-500"
+      style={{ fontFamily: "var(--font-secondary)", visibility: msg ? "visible" : "hidden" }}
+    >
+      {msg || "placeholder"}
     </p>
   );
 }
@@ -100,33 +82,14 @@ function Field({ label, children, className = "" }: { label: string; children: R
 function PhoneInput({
   countryCode, phone, onCountryChange, onPhoneChange, hasError,
 }: { countryCode: string; phone: string; onCountryChange: (v: string) => void; onPhoneChange: (v: string) => void; hasError?: boolean }) {
-  const country = COUNTRIES.find((c) => c.code === countryCode) ?? COUNTRIES[0];
   return (
     <div className={`flex h-10 w-full overflow-hidden rounded-xs bg-[#f1f1f1] ring-1 ${hasError ? "ring-red-400" : "ring-transparent focus-within:ring-brown-300"}`}>
-      <div className="relative flex shrink-0 items-center px-3">
-        <select
-          value={countryCode}
-          onChange={(e) => onCountryChange(e.target.value)}
-          className="absolute inset-0 cursor-pointer opacity-0"
-          aria-label="Country code"
-        >
-          {COUNTRIES.map((c) => (
-            <option key={c.code} value={c.code}>{c.flag} {c.name} ({c.dial})</option>
-          ))}
-        </select>
-        <span className="mr-1 text-base leading-none" aria-hidden>{country.flag}</span>
-        <svg className="mr-1.5 shrink-0" width="9" height="6" viewBox="0 0 9 6" fill="none">
-          <path d="M1 1L4.5 5L8 1" stroke="#555" strokeWidth="1.2" strokeLinecap="round"/>
-        </svg>
-        <span className="text-[13px] font-medium text-dark-500" style={{ fontFamily: "var(--font-secondary)" }}>
-          {country.dial}
-        </span>
-      </div>
+      <PhoneCountrySelect value={countryCode} onChange={onCountryChange} />
       <div className="my-3 w-px bg-[#cfbcad]" />
       <input
         type="tel"
         value={phone}
-        onChange={(e) => onPhoneChange(e.target.value)}
+        onChange={(e) => onPhoneChange(e.target.value.replace(/[^\d]/g, ""))}
         placeholder="Enter your contact number"
         className="min-w-0 flex-1 bg-transparent px-3 text-dark-500 placeholder-[#999] outline-none"
         style={{ fontFamily: "var(--font-secondary)", fontSize: 16 }}
@@ -164,14 +127,13 @@ function Step1Form({ data, onChange, onNext }: {
   const [tried, setTried] = useState(false);
 
   function validate(d: Step1): Errors1 {
+    const result = bookingStep1Schema.safeParse({ ...d, phoneCountry: d.countryCode });
+    if (result.success) return {};
     const e: Errors1 = {};
-    if (!d.firstName.trim())  e.firstName = "First name is required";
-    if (!d.lastName.trim())   e.lastName  = "Last name is required";
-    if (!d.email.trim())      e.email     = "Email address is required";
-    else if (!isValidEmail(d.email)) e.email = "Please enter a valid email address";
-    if (!d.phone.trim())      e.phone     = "Phone number is required";
-    else if (!isValidPhone(d.phone)) e.phone = "Please enter a valid phone number";
-    if (!d.message.trim())    e.message   = "Please tell us about your journey";
+    for (const issue of result.error.issues) {
+      const key = issue.path[0] as keyof Errors1;
+      if (!e[key]) e[key] = issue.message;
+    }
     return e;
   }
 
@@ -226,17 +188,21 @@ function Step1Form({ data, onChange, onNext }: {
   );
 }
 
-function Step2Form({ data, onChange, onBack, onSubmit }: {
+function Step2Form({ data, onChange, onBack, onSubmit, submitting, submitError }: {
   data: Step2; onChange: (d: Partial<Step2>) => void; onBack: () => void; onSubmit: () => void;
+  submitting: boolean; submitError: string;
 }) {
   const [errors, setErrors] = useState<Errors2>({});
   const [tried, setTried] = useState(false);
 
   function validate(d: Step2): Errors2 {
+    const result = bookingStep2Schema.safeParse(d);
+    if (result.success) return {};
     const e: Errors2 = {};
-    if (!d.travelDate.trim())  e.travelDate  = "Please enter an approximate travel date";
-    if (!d.countryCity.trim()) e.countryCity = "Please enter your country and city";
-    if (!d.adults)             e.adults      = "Please select the number of adults";
+    for (const issue of result.error.issues) {
+      const key = issue.path[0] as keyof Errors2;
+      if (!e[key]) e[key] = issue.message;
+    }
     return e;
   }
 
@@ -298,6 +264,8 @@ function Step2Form({ data, onChange, onBack, onSubmit }: {
 
       <div className="h-px bg-[#ddd0c5]" />
 
+      <FieldError msg={submitError} />
+
       <div className="flex items-center gap-3">
         <button
           onClick={onBack}
@@ -308,10 +276,11 @@ function Step2Form({ data, onChange, onBack, onSubmit }: {
         </button>
         <button
           onClick={handleSubmit}
-          className="h-10 rounded-xs bg-dark-500 px-5 text-[15px] text-white transition-opacity hover:opacity-80"
+          disabled={submitting}
+          className="h-10 rounded-xs bg-dark-500 px-5 text-[15px] text-white transition-opacity hover:opacity-80 disabled:cursor-not-allowed disabled:opacity-40"
           style={{ fontFamily: "var(--font-secondary)" }}
         >
-          Submit Enquiry
+          {submitting ? "Submitting…" : "Submit Enquiry"}
         </button>
       </div>
     </div>
@@ -352,6 +321,8 @@ function Modal({ journeyTitle, onClose }: { journeyTitle: string; onClose: () =>
   const [step1, setStep1] = useState<Step1>(EMPTY1);
   const [step2, setStep2] = useState<Step2>(EMPTY2);
   const [exiting, setExiting] = useState(false);
+  const [submitting, setSubmitting] = useState(false);
+  const [submitError, setSubmitError] = useState("");
 
   useEffect(() => {
     const id = requestAnimationFrame(() => setVisible(true));
@@ -443,26 +414,37 @@ function Modal({ journeyTitle, onClose }: { journeyTitle: string; onClose: () =>
                   data={step2}
                   onChange={(d) => setStep2((p) => ({ ...p, ...d }))}
                   onBack={() => setStep(1)}
-                  onSubmit={() => {
+                  submitting={submitting}
+                  submitError={submitError}
+                  onSubmit={async () => {
+                    setSubmitting(true);
+                    setSubmitError("");
                     const dialCode = COUNTRIES.find((c) => c.code === step1.countryCode)?.dial ?? "";
-                    fetch("/api/leads", {
-                      method: "POST",
-                      headers: { "Content-Type": "application/json" },
-                      body: JSON.stringify({
-                        type: "enquiry",
-                        journeyTitle,
-                        firstName: step1.firstName,
-                        lastName: step1.lastName,
-                        email: step1.email,
-                        phone: `${dialCode} ${step1.phone}`.trim(),
-                        message: step1.message,
-                        travelDate: step2.travelDate,
-                        countryCity: step2.countryCity,
-                        adults: step2.adults,
-                        children: step2.children,
-                      }),
-                    });
-                    setStep("done");
+                    try {
+                      const res = await fetch("/api/leads", {
+                        method: "POST",
+                        headers: { "Content-Type": "application/json" },
+                        body: JSON.stringify({
+                          type: "enquiry",
+                          journeyTitle,
+                          firstName: step1.firstName,
+                          lastName: step1.lastName,
+                          email: step1.email,
+                          phone: `${dialCode} ${step1.phone}`.trim(),
+                          message: step1.message,
+                          travelDate: step2.travelDate,
+                          countryCity: step2.countryCity,
+                          adults: step2.adults,
+                          children: step2.children,
+                        }),
+                      });
+                      if (!res.ok) throw new Error("Request failed");
+                      setStep("done");
+                    } catch {
+                      setSubmitError("Something went wrong. Please try again.");
+                    } finally {
+                      setSubmitting(false);
+                    }
                   }}
                 />
               )}

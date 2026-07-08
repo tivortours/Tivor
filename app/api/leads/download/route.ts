@@ -1,8 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
-import fs from "fs";
-import path from "path";
+import { getSheetUrl } from "../../../../lib/googleSheets";
 
-const FILE = path.join(process.cwd(), "data", "leads.xlsx");
 const PASSWORD = process.env.LEADS_ADMIN_PASSWORD ?? "";
 
 export async function GET(req: NextRequest) {
@@ -12,17 +10,10 @@ export async function GET(req: NextRequest) {
     return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
   }
 
-  if (!fs.existsSync(FILE)) {
-    return NextResponse.json({ error: "No leads file yet" }, { status: 404 });
+  try {
+    return NextResponse.json({ url: getSheetUrl() });
+  } catch (err) {
+    console.error("leads sheet-link error:", err);
+    return NextResponse.json({ error: "Sheet not configured" }, { status: 500 });
   }
-
-  const buffer = fs.readFileSync(FILE);
-  const filename = `tivor-leads-${new Date().toISOString().slice(0, 10)}.xlsx`;
-
-  return new NextResponse(buffer, {
-    headers: {
-      "Content-Type": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
-      "Content-Disposition": `attachment; filename="${filename}"`,
-    },
-  });
 }

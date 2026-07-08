@@ -1,33 +1,15 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Image from "next/image";
+import { contactFormSchema, type ContactFormShape } from "../../lib/validation";
+import { DIAL_COUNTRIES, COUNTRY_NAMES } from "../../lib/countries";
+import { CountrySelect } from "../../components/CountrySelect";
+import { PhoneCountrySelect } from "../../components/PhoneCountrySelect";
 
-const DIAL_COUNTRIES = [
-  { code: "AE", flag: "🇦🇪", dial: "+971", name: "UAE" },
-  { code: "US", flag: "🇺🇸", dial: "+1",   name: "United States" },
-  { code: "GB", flag: "🇬🇧", dial: "+44",  name: "United Kingdom" },
-  { code: "AU", flag: "🇦🇺", dial: "+61",  name: "Australia" },
-  { code: "IN", flag: "🇮🇳", dial: "+91",  name: "India" },
-  { code: "DE", flag: "🇩🇪", dial: "+49",  name: "Germany" },
-  { code: "FR", flag: "🇫🇷", dial: "+33",  name: "France" },
-  { code: "IT", flag: "🇮🇹", dial: "+39",  name: "Italy" },
-  { code: "SI", flag: "🇸🇮", dial: "+386", name: "Slovenia" },
-  { code: "IS", flag: "🇮🇸", dial: "+354", name: "Iceland" },
-  { code: "NO", flag: "🇳🇴", dial: "+47",  name: "Norway" },
-  { code: "CA", flag: "🇨🇦", dial: "+1",   name: "Canada" },
-  { code: "SG", flag: "🇸🇬", dial: "+65",  name: "Singapore" },
-  { code: "ZA", flag: "🇿🇦", dial: "+27",  name: "South Africa" },
-];
+type FieldErrors = Partial<Record<keyof ContactFormShape, string>>;
 
-const COUNTRIES = [
-  "Australia","Austria","Belgium","Canada","Croatia","Czech Republic",
-  "Denmark","Finland","France","Germany","Greece","Iceland","India",
-  "Ireland","Italy","Japan","Luxembourg","Netherlands","New Zealand",
-  "Norway","Poland","Portugal","Singapore","Slovenia","South Africa",
-  "Spain","Sweden","Switzerland","United Arab Emirates","United Kingdom",
-  "United States","Other",
-];
+const COUNTRIES = [...COUNTRY_NAMES, "Other"];
 
 // ── Primitives ────────────────────────────────────────────────────────────────
 
@@ -48,8 +30,19 @@ function Field({ label, children }: { label: React.ReactNode; children: React.Re
   );
 }
 
-function TextInput({ placeholder, value, onChange, type = "text" }: {
-  placeholder: string; value: string; onChange: (v: string) => void; type?: string;
+function FieldError({ msg }: { msg?: string }) {
+  return (
+    <p
+      className="text-[12px] text-red-500"
+      style={{ fontFamily: "var(--font-secondary)", visibility: msg ? "visible" : "hidden" }}
+    >
+      {msg || "placeholder"}
+    </p>
+  );
+}
+
+function TextInput({ placeholder, value, onChange, type = "text", hasError }: {
+  placeholder: string; value: string; onChange: (v: string) => void; type?: string; hasError?: boolean;
 }) {
   return (
     <input
@@ -57,63 +50,23 @@ function TextInput({ placeholder, value, onChange, type = "text" }: {
       value={value}
       onChange={(e) => onChange(e.target.value)}
       placeholder={placeholder}
-      className="form-input"
+      className={`form-input ring-1 ${hasError ? "ring-red-400" : "ring-transparent"}`}
       style={{ fontFamily: "var(--font-secondary)" }}
     />
   );
 }
 
-function SelectInput({ value, onChange, placeholder, options }: {
-  value: string; onChange: (v: string) => void; placeholder: string; options: string[];
+function PhoneInput({ countryCode, phone, onCountryChange, onPhoneChange, hasError }: {
+  countryCode: string; phone: string; onCountryChange: (v: string) => void; onPhoneChange: (v: string) => void; hasError?: boolean;
 }) {
   return (
-    <div className="relative">
-      <select
-        value={value}
-        onChange={(e) => onChange(e.target.value)}
-        className="form-select"
-        style={{ fontFamily: "var(--font-secondary)", color: value ? "#151515" : "#999" }}
-      >
-        <option value="" disabled style={{ color: "#999" }}>{placeholder}</option>
-        {options.map((o) => <option key={o} value={o} style={{ color: "#151515" }}>{o}</option>)}
-      </select>
-      <svg className="pointer-events-none absolute right-4 top-1/2 -translate-y-1/2" width="12" height="7" viewBox="0 0 12 7" fill="none">
-        <path d="M1 1L6 6L11 1" stroke="#555" strokeWidth="1.3" strokeLinecap="round"/>
-      </svg>
-    </div>
-  );
-}
-
-function PhoneInput({ countryCode, phone, onCountryChange, onPhoneChange }: {
-  countryCode: string; phone: string; onCountryChange: (v: string) => void; onPhoneChange: (v: string) => void;
-}) {
-  const country = DIAL_COUNTRIES.find((c) => c.code === countryCode) ?? DIAL_COUNTRIES[0];
-  return (
-    <div className="form-phone-wrap">
-      <div className="relative flex shrink-0 items-center px-3">
-        <select
-          value={countryCode}
-          onChange={(e) => onCountryChange(e.target.value)}
-          className="absolute inset-0 cursor-pointer opacity-0"
-          aria-label="Country code"
-        >
-          {DIAL_COUNTRIES.map((c) => (
-            <option key={c.code} value={c.code}>{c.flag} {c.name} ({c.dial})</option>
-          ))}
-        </select>
-        <span className="mr-1 text-xl leading-none" aria-hidden>{country.flag}</span>
-        <svg className="mr-1.5 shrink-0" width="9" height="6" viewBox="0 0 9 6" fill="none">
-          <path d="M1 1L4.5 5L8 1" stroke="#555" strokeWidth="1.2" strokeLinecap="round"/>
-        </svg>
-        <span className="text-[13px] font-medium text-dark-500" style={{ fontFamily: "var(--font-secondary)" }}>
-          {country.dial}
-        </span>
-      </div>
+    <div className={`form-phone-wrap ring-1 ${hasError ? "ring-red-400" : "ring-transparent"}`}>
+      <PhoneCountrySelect value={countryCode} onChange={onCountryChange} />
       <div className="my-3.5 w-px bg-brown-300" />
       <input
         type="tel"
         value={phone}
-        onChange={(e) => onPhoneChange(e.target.value)}
+        onChange={(e) => onPhoneChange(e.target.value.replace(/[^\d]/g, ""))}
         placeholder="Enter your contact number"
         className="min-w-0 flex-1 bg-transparent px-4 text-[14px] text-dark-500 placeholder-[#999] outline-none"
         style={{ fontFamily: "var(--font-secondary)" }}
@@ -122,8 +75,8 @@ function PhoneInput({ countryCode, phone, onCountryChange, onPhoneChange }: {
   );
 }
 
-function Textarea({ value, onChange, placeholder, maxLength = 1000 }: {
-  value: string; onChange: (v: string) => void; placeholder: string; maxLength?: number;
+function Textarea({ value, onChange, placeholder, maxLength = 1000, hasError }: {
+  value: string; onChange: (v: string) => void; placeholder: string; maxLength?: number; hasError?: boolean;
 }) {
   return (
     <div className="flex flex-col gap-1">
@@ -131,7 +84,7 @@ function Textarea({ value, onChange, placeholder, maxLength = 1000 }: {
         value={value}
         onChange={(e) => onChange(e.target.value.slice(0, maxLength))}
         placeholder={placeholder}
-        className="form-textarea"
+        className={`form-textarea ring-1 ${hasError ? "ring-red-400" : "ring-transparent"}`}
         style={{ fontFamily: "var(--font-secondary)" }}
       />
       <p className="self-end text-[12px] text-[#999]" style={{ fontFamily: "var(--font-secondary)" }}>
@@ -167,29 +120,61 @@ export default function ContactForm({ contactImage }: { contactImage: string }) 
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName]   = useState("");
   const [email, setEmail]         = useState("");
-  const [countryCode, setCountryCode] = useState("AE");
+  const [countryCode, setCountryCode] = useState("US");
   const [phone, setPhone]         = useState("");
   const [country, setCountry]     = useState("");
   const [city, setCity]           = useState("");
   const [message, setMessage]     = useState("");
   const [submitted, setSubmitted] = useState(false);
+  const [submitting, setSubmitting] = useState(false);
+  const [submitError, setSubmitError] = useState("");
+  const [errors, setErrors] = useState<FieldErrors>({});
+  const [tried, setTried] = useState(false);
 
-  const valid = !!(firstName && lastName && email && phone && country && message);
+  function validate(): FieldErrors {
+    const result = contactFormSchema.safeParse({ firstName, lastName, email, phoneCountry: countryCode, phone, country, city, message });
+    if (result.success) return {};
+    const e: FieldErrors = {};
+    for (const issue of result.error.issues) {
+      const key = issue.path[0] as keyof FieldErrors;
+      if (!e[key]) e[key] = issue.message;
+    }
+    return e;
+  }
 
-  function handleSubmit() {
-    if (!valid) return;
-    setSubmitted(true);
+  // Re-validate live after first submit attempt so errors clear as the user fixes them.
+  useEffect(() => {
+    if (tried) setErrors(validate());
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [firstName, lastName, email, countryCode, phone, country, city, message, tried]);
+
+  async function handleSubmit() {
+    setTried(true);
+    const e = validate();
+    setErrors(e);
+    if (Object.keys(e).length > 0) return;
+
+    setSubmitting(true);
+    setSubmitError("");
     const dialCode = DIAL_COUNTRIES.find((c) => c.code === countryCode)?.dial ?? "";
-    fetch("/api/leads", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({
-        type: "contact",
-        firstName, lastName, email,
-        phone: `${dialCode} ${phone}`.trim(),
-        country, city, message,
-      }),
-    });
+    try {
+      const res = await fetch("/api/leads", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          type: "contact",
+          firstName, lastName, email,
+          phone: `${dialCode} ${phone}`.trim(),
+          country, city, message,
+        }),
+      });
+      if (!res.ok) throw new Error("Request failed");
+      setSubmitted(true);
+    } catch {
+      setSubmitError("Something went wrong. Please try again.");
+    } finally {
+      setSubmitting(false);
+    }
   }
 
   if (submitted) return <SuccessView />;
@@ -203,17 +188,20 @@ export default function ContactForm({ contactImage }: { contactImage: string }) 
         {/* Row 1: First Name + Last Name */}
         <div className="grid grid-cols-1 gap-6 sm:grid-cols-2">
           <Field label="First Name*">
-            <TextInput placeholder="Enter your first name" value={firstName} onChange={setFirstName} />
+            <TextInput placeholder="Enter your first name" value={firstName} onChange={setFirstName} hasError={!!errors.firstName} />
+            <FieldError msg={errors.firstName} />
           </Field>
           <Field label="Last Name*">
-            <TextInput placeholder="Enter your last name" value={lastName} onChange={setLastName} />
+            <TextInput placeholder="Enter your last name" value={lastName} onChange={setLastName} hasError={!!errors.lastName} />
+            <FieldError msg={errors.lastName} />
           </Field>
         </div>
 
         {/* Row 2: Email + Contact Number */}
         <div className="grid grid-cols-1 gap-6 sm:grid-cols-2">
           <Field label="Email*">
-            <TextInput placeholder="Enter your email address" value={email} onChange={setEmail} type="email" />
+            <TextInput placeholder="Enter your email address" value={email} onChange={setEmail} type="email" hasError={!!errors.email} />
+            <FieldError msg={errors.email} />
           </Field>
           <Field label="Contact Number*">
             <PhoneInput
@@ -221,19 +209,23 @@ export default function ContactForm({ contactImage }: { contactImage: string }) 
               phone={phone}
               onCountryChange={setCountryCode}
               onPhoneChange={setPhone}
+              hasError={!!errors.phone}
             />
+            <FieldError msg={errors.phone} />
           </Field>
         </div>
 
         {/* Row 3: Country + City */}
         <div className="grid grid-cols-1 gap-6 sm:grid-cols-2">
           <Field label="Country of Residence*">
-            <SelectInput
+            <CountrySelect
               value={country}
               onChange={setCountry}
               placeholder="Select country"
               options={COUNTRIES}
+              hasError={!!errors.country}
             />
+            <FieldError msg={errors.country} />
           </Field>
           <Field label="City">
             <TextInput placeholder="Enter your city" value={city} onChange={setCity} />
@@ -246,20 +238,23 @@ export default function ContactForm({ contactImage }: { contactImage: string }) 
             value={message}
             onChange={setMessage}
             placeholder="Share your ideas and initial plans"
+            hasError={!!errors.message}
           />
+          <FieldError msg={errors.message} />
         </Field>
 
         {/* Divider + Submit */}
         <div className="h-px w-full bg-[#ddd0c5]" />
+        <FieldError msg={submitError} />
         <button
           onClick={handleSubmit}
-          disabled={!valid}
+          disabled={submitting}
           className={`h-11.25 w-fit rounded-xs px-8 text-[18px] text-white transition-opacity ${
-            valid ? "bg-dark-500" : "cursor-not-allowed bg-dark-500/40"
+            submitting ? "cursor-not-allowed bg-dark-500/40" : "bg-dark-500"
           }`}
           style={{ fontFamily: "var(--font-secondary)" }}
         >
-          Submit Enquiry
+          {submitting ? "Submitting…" : "Submit Enquiry"}
         </button>
       </div>
 

@@ -119,6 +119,15 @@ function planAdminEmail(f: Record<string, string>) {
   };
 }
 
+function newsletterAdminEmail(f: Record<string, string>) {
+  return {
+    subject: `New Newsletter Signup — ${f.email}`,
+    html: adminLayout("New Newsletter Signup", [
+      row("Email", f.email),
+    ].join("")),
+  };
+}
+
 function enquiryAdminEmail(f: Record<string, string>) {
   return {
     subject: `New Package Enquiry — ${f.journeyTitle}`,
@@ -160,6 +169,18 @@ export async function sendLeadEmails(
   type: string,
   fields: Record<string, string>,
 ) {
+  // Newsletter signups have no name to personalize a client acknowledgment,
+  // so only notify the admin.
+  if (type === "newsletter") {
+    const { subject, html } = newsletterAdminEmail(fields);
+    try {
+      await resend.emails.send({ from: FROM, to: [ADMIN_TO], subject, html });
+    } catch (err) {
+      console.error("Newsletter admin email failed:", err);
+    }
+    return;
+  }
+
   const adminContent =
     type === "plan"    ? planAdminEmail(fields)
     : type === "enquiry" ? enquiryAdminEmail(fields)

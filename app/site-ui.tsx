@@ -2,6 +2,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { getSiteSettings, shell } from "./site-data";
 import { MobileMenu } from "../components/MobileMenu";
+import { NewsletterForm } from "../components/NewsletterForm";
 
 export function Label({ text, light = false }: { text: string; light?: boolean }) {
   return (
@@ -206,20 +207,10 @@ export async function SiteFooter() {
               </h4>
             </div>
 
-            <div className="flex w-full max-w-[430px] flex-col gap-3 sm:flex-row sm:gap-0">
-              <input
-                type="email"
-                placeholder={settings.newsletter.inputPlaceholder}
-                className="h-11.25 w-full shrink-0 rounded-xs bg-[#f1f1f1] px-5 text-sm text-grey-300 outline-none sm:w-auto sm:flex-1 sm:rounded-r-none"
-                style={{ fontFamily: "var(--font-secondary)" }}
-              />
-              <button
-                className="h-11.25 cursor-pointer shrink-0 rounded-xs bg-grey-500 px-6 text-base text-white sm:rounded-l-none sm:text-lg"
-                style={{ fontFamily: "var(--font-secondary)" }}
-              >
-                {settings.newsletter.buttonLabel}
-              </button>
-            </div>
+            <NewsletterForm
+              placeholder={settings.newsletter.inputPlaceholder}
+              buttonLabel={settings.newsletter.buttonLabel}
+            />
           </div>
         </div>
 
