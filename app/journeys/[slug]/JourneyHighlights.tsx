@@ -70,7 +70,7 @@ const activitiesComponents = (sizes: SizeMap) => {
             <svg aria-hidden className="shrink-0 mt-[0.55em]" width="7" height="7" viewBox="0 0 7 7" fill="none">
               <rect x="3.5" y="0.5" width="4.24" height="4.24" rx="0.5" transform="rotate(45 3.5 0.5)" fill="#6A5546" />
             </svg>
-            <span className="min-w-0 text-pretty" style={{ textAlign: align }}>{children}</span>
+            <span className="min-w-0 text-pretty" style={{ textAlign: align, whiteSpace: "pre-line" }}>{children}</span>
           </li>
         );
       },

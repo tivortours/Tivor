@@ -283,17 +283,22 @@ function normalizeRichText(value: unknown): any[] {
 
 // Sanity's editor lets an author hit Enter mid-line while composing (e.g. to
 // keep lines short in the Studio's narrow textarea), which stores a literal
-// "\n" inside a span's text. Left in, that forces a hard line break at
-// whatever column the editor happened to be at, regardless of the rendered
-// container's actual width — so collapse it to a space and let the browser
-// wrap the sentence naturally.
+// "\n" inside a span's text. A lone "\n" is just that — a wrap artifact at
+// whatever column the editor happened to be at — so collapse it to a space
+// and let the browser wrap the sentence naturally. A run of 2+ newlines is a
+// deliberate paragraph/line break (e.g. an editor separating "Terrain: ...",
+// "Duration: ...", "Elevation Gain: ..." within one bullet), so that's
+// preserved — the itinerary renderer applies white-space: pre-line to turn
+// it into an actual break.
 function stripSoftBreaks(blocks: any[]): any[] {
   return blocks.map((block) =>
     block?._type === "block" && Array.isArray(block.children)
       ? {
           ...block,
           children: block.children.map((child: any) =>
-            typeof child?.text === "string" ? { ...child, text: child.text.replace(/\n+/g, " ") } : child
+            typeof child?.text === "string"
+              ? { ...child, text: child.text.replace(/\n+/g, (m: string) => (m.length === 1 ? " " : m)) }
+              : child
           ),
         }
       : block
