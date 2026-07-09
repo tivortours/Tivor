@@ -29,10 +29,14 @@ const alignMarks = {
 type SizeMap = { small: string; normal: string; large: string };
 type RichValue = { style?: string; children?: any[] };
 const activitiesComponents = (sizes: SizeMap) => {
+  // Some pasted content (e.g. "Terrain: X\n\nDuration: Y") embeds literal "\n"
+  // characters in a single block instead of using separate blocks for each
+  // line. Browsers collapse raw "\n" to a space by default — pre-line makes
+  // them render as real line breaks while still wrapping long lines normally.
   const line = (sizeClass: string, align?: string) => ({ children }: { children?: React.ReactNode }) => (
     <p
       className={`${sizeClass} text-pretty leading-relaxed text-dark-400`}
-      style={{ fontFamily: "var(--font-secondary)", textAlign: align as React.CSSProperties["textAlign"] }}
+      style={{ fontFamily: "var(--font-secondary)", textAlign: align as React.CSSProperties["textAlign"], whiteSpace: "pre-line" }}
     >
       {children}
     </p>
@@ -86,6 +90,16 @@ const ChevronLeft = () => (
     <polyline points="15 18 9 12 15 6" />
   </svg>
 );
+
+// Day Label is free text ("Day 1", "3 Hours", "Half-Day Excursion", ...) — the
+// calendar icon only makes sense for actual day-based labels, so hide it
+// whenever the label reads as an hours-based duration instead.
+const isHourBased = (day: string) => /hour/i.test(day);
+
+// Some entries only have a space in Day Label (typed just to satisfy the
+// schema's required validation) — skip the whole icon+label row rather than
+// show an icon next to nothing.
+const hasDayLabel = (day: string) => day.trim() !== "";
 
 const ChevronRight = () => (
   <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#333" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
@@ -243,10 +257,14 @@ export function JourneyHighlights({
             <ChevronLeft />
           </button>
           <div className="flex items-center gap-2">
-            <CalendarIcon />
-            <p className="text-[18px] font-semibold text-dark-500" style={{ fontFamily: "var(--font-secondary)" }}>
-              {mobile.day}
-            </p>
+            {hasDayLabel(mobile.day) && (
+              <>
+                {!isHourBased(mobile.day) && <CalendarIcon />}
+                <p className="text-[18px] font-semibold text-dark-500" style={{ fontFamily: "var(--font-secondary)" }}>
+                  {mobile.day}
+                </p>
+              </>
+            )}
           </div>
           <button
             onClick={() => setMobileActive(d => Math.min(itinerary.length - 1, d + 1))}
@@ -276,8 +294,12 @@ export function JourneyHighlights({
                   </p>
                   {/* No items-center: it would center each rendered line as a shrink-wrapped
                       block regardless of its own text-align, making per-line alignment marks
-                      invisible. Default (stretch) makes each line full-width. */}
-                  <div className="flex flex-col gap-1">
+                      invisible. Default (stretch) makes each line full-width.
+                      gap-3 (not gap-1): this gap sits between top-level blocks — a bullet
+                      list renders as a single child here, so it separates the list as a
+                      whole from a paragraph before/after it. Tighter line-to-line spacing
+                      within the list itself is controlled separately by the <ul>'s own gap. */}
+                  <div className="flex flex-col gap-3">
                     <PortableText
                       value={entry.activities}
                       components={activitiesComponents({ small: "text-xs", normal: "text-[14px]", large: "text-lg" })}
@@ -389,15 +411,17 @@ export function JourneyHighlights({
 
               {/* Day detail — centred in the full right panel height */}
               <div className="flex-1 flex flex-col items-start justify-center gap-7 px-16 text-center">
-                <div className="flex items-center gap-2">
-                  <CalendarIcon />
-                  <p
-                    className="text-[22px] font-medium text-dark-500"
-                    style={{ fontFamily: "var(--font-secondary)" }}
-                  >
-                    {entry.day}
-                  </p>
-                </div>
+                {hasDayLabel(entry.day) && (
+                  <div className="flex items-center gap-2">
+                    {!isHourBased(entry.day) && <CalendarIcon />}
+                    <p
+                      className="text-[22px] font-medium text-dark-500"
+                      style={{ fontFamily: "var(--font-secondary)" }}
+                    >
+                      {entry.day}
+                    </p>
+                  </div>
+                )}
                 <p
                   className="text-[20px] font-medium text-dark-500"
                   style={{ fontFamily: "var(--font-secondary)" }}
@@ -407,8 +431,9 @@ export function JourneyHighlights({
                 {/* No items-center — see the mobile activities wrapper above for why.
                     max-w caps the line length to the card's original narrower look —
                     the panel itself is much wider, but letting bullets use the full
-                    width makes each line noticeably longer than the design intent. */}
-                <div className="flex w-full max-w-xl flex-col gap-1">
+                    width makes each line noticeably longer than the design intent.
+                    gap-3 (not gap-1) — see the mobile wrapper's comment above. */}
+                <div className="flex w-full max-w-xl flex-col gap-3">
                   <PortableText
                     value={entry.activities}
                     components={activitiesComponents({ small: "text-sm", normal: "text-base", large: "text-xl" })}
