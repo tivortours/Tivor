@@ -18,6 +18,13 @@ import { getTextAlign } from "../../../lib/portableText";
 // powers cards/breadcrumb/alt/slug/emails elsewhere — this is
 // detail-page-only.
 type RichValue = { children?: any[] };
+
+// Full Description is plain text paragraphs (no rich-text formatting), but
+// editors sometimes drop in a short heading-like line (e.g. "Your Days, Your
+// Rhythm") between paragraphs. A real sentence always ends in . ! or ? — a
+// line that doesn't is treated as a sub-heading and rendered bold.
+const isHeadingLine = (text: string) => !/[.!?]['"”’]?\s*$/.test(text.trim());
+
 function detailTitleLine(fontSize: string) {
   return ({ children, value }: { children?: React.ReactNode; value: RichValue }) => (
     <span className="block" style={{ fontSize, textAlign: getTextAlign(value) }}>{children}</span>
@@ -150,7 +157,9 @@ export default async function JourneyDetailPage({
                 style={{ fontFamily: "var(--font-secondary)" }}
               >
                 {journey.fullDesc.map((para, i) => (
-                  <p key={i}>{para}</p>
+                  <p key={i} className={isHeadingLine(para) ? "font-semibold text-dark-500" : undefined}>
+                    {para}
+                  </p>
                 ))}
               </div>
               <EnquireButton
