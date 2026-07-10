@@ -1,4 +1,5 @@
 import Image from "next/image";
+import { Suspense } from "react";
 import { SiteFooter, SiteHeader } from "../site-ui";
 import { getDestinations, getJourneys, getJourneysPageData } from "../site-data";
 import { JourneyFilter } from "../../components/JourneyFilter";
@@ -43,12 +44,13 @@ export default async function JourneysPage() {
             </p>
           </div>
 
-          <JourneyFilter
-            journeys={journeys}
-            destNames={destNames}
-
-            seeMoreLabel={page.seeMoreLabel}
-          />
+          <Suspense fallback={null}>
+            <JourneyFilter
+              journeys={journeys}
+              destNames={destNames}
+              seeMoreLabel={page.seeMoreLabel}
+            />
+          </Suspense>
         </div>
       </section>
 

@@ -107,6 +107,68 @@ const ChevronRight = () => (
   </svg>
 );
 
+// The image + content panel shared by both the single-day (plain flow) and
+// multi-day (stacking cards) desktop layouts.
+function DayCardContent({ entry, priority }: { entry: ItineraryDay; priority?: boolean }) {
+  return (
+    <>
+      {/* LEFT — full-height image with padding */}
+      {/* No h-full: percentage heights don't reliably resolve against a
+          min-height (vs. explicit height) flex container. Default
+          align-items:stretch sizes this correctly without that issue. */}
+      <div className="relative w-1/2 bg-[#ece2d6]">
+        <div className="absolute inset-28 overflow-hidden">
+          <Image
+            src={entry.img}
+            alt={entry.day}
+            fill
+            priority={priority}
+            className="object-cover"
+            sizes="50vw"
+          />
+        </div>
+      </div>
+
+      {/* RIGHT — content panel */}
+      <div className="w-1/2 bg-[#ece2d6] flex flex-col">
+
+        {/* Day detail — centred in the full right panel height */}
+        <div className="flex-1 flex flex-col items-start justify-center gap-7 px-16 text-center">
+          {hasDayLabel(entry.day) && (
+            <div className="flex items-center gap-2">
+              {!isHourBased(entry.day) && <CalendarIcon />}
+              <p
+                className="text-[22px] font-medium text-dark-500"
+                style={{ fontFamily: "var(--font-secondary)" }}
+              >
+                {entry.day}
+              </p>
+            </div>
+          )}
+          <p
+            className="text-[20px] font-medium text-dark-500"
+            style={{ fontFamily: "var(--font-secondary)" }}
+          >
+            {entry.title}
+          </p>
+          {/* No items-center — see the mobile activities wrapper above for why.
+              max-w caps the line length to the card's original narrower look —
+              the panel itself is much wider, but letting bullets use the full
+              width makes each line noticeably longer than the design intent.
+              gap-3 (not gap-1) — see the mobile wrapper's comment above. */}
+          <div className="flex w-full max-w-xl flex-col gap-3">
+            <PortableText
+              value={entry.activities}
+              components={activitiesComponents({ small: "text-sm", normal: "text-base", large: "text-xl" })}
+            />
+          </div>
+        </div>
+
+      </div>
+    </>
+  );
+}
+
 export function JourneyHighlights({
   itinerary,
 }: {
@@ -155,6 +217,11 @@ export function JourneyHighlights({
        point). Without this cap, the last card would freeze at y:0 and then
        hard-snap away the instant the section-exit guard below fires — which
        was the original reported bug, in both scroll directions. */
+    // A single day has nothing to stack against — render it in plain flow
+    // instead (see the desktop JSX below), so there's no scroll-driven
+    // positioning to simulate here either.
+    if (itinerary.length <= 1) return;
+
     const ua = window.navigator.userAgent;
     const isSafari =
       window.innerWidth >= 1280 &&
@@ -315,6 +382,29 @@ export function JourneyHighlights({
         </div>
       </div>
 
+      {/* ── Desktop — single day: plain flow, nothing to stack ────────────── */}
+      {/* One card has no other cards to animate against, so it just scrolls
+          with the page like any other section — no sticky/pinning needed.
+          The heading still overlays the top of the card (not stacked above
+          it as a separate block) so the card's vertically-centred content
+          sits at the same gap as the multi-day version, instead of that
+          centering offset plus the heading's own height on top of it. */}
+      {itinerary.length === 1 && (
+        <div className="hidden xl:block relative z-10">
+          <div className="min-h-screen w-full flex">
+            <DayCardContent entry={itinerary[0]} priority />
+          </div>
+          <div className="pointer-events-none absolute top-0 right-0 flex h-40 w-1/2 items-end bg-[#ece2d6] px-16 pb-4">
+            <h2
+              className="text-[24px] font-medium leading-tight text-dark-500 xl:text-[36px]"
+              style={{ fontFamily: "var(--font-primary)" }}
+            >
+              Journey Highlights
+            </h2>
+          </div>
+        </div>
+      )}
+
       {/* ── Desktop — stacking cards ─────────────────────────────────────── */}
       {/*
         Outer div provides the scroll budget: N×100vh (scale-compensated, see effect above).
@@ -325,126 +415,60 @@ export function JourneyHighlights({
                 A rect.bottom guard resets cards once the section fully exits the viewport,
                 preventing the last card from bleeding over the next section.
       */}
-      <div
-        ref={sectionRef}
-        className="hidden xl:block relative z-10"
-        style={{ height: `calc(${itinerary.length} * 100vh / var(--desktop-browser-scale, 1))` }}
-      >
-
-        {/* Persistent heading — above all cards (z-200 > max card z-index) */}
-        {/*
-          height:0 so it doesn't push cards down; the h-40 heading is absolute-positioned
-          into the right half. Each card reserves an identical h-40 spacer so content
-          is centred in the space below the heading.
-
-          Chrome's native sticky is constrained by its containing block, which by default
-          would be the full N-card sectionRef — one viewport more slack than the last card
-          gets (its own height eats into its share), so the heading stayed pinned a full
-          extra screen after the last card had already scrolled away. This absolutely
-          positioned wrapper (out of flow, so it doesn't push the cards down) gives the
-          heading its own (N-1)-viewport containing block instead, matching the last card's
-          slack so both release together — same fix as the Safari JS path's headingSlack.
-        */}
+      {itinerary.length > 1 && (
         <div
-          className="absolute top-0 left-0 w-full"
-          style={{ height: `calc(100vh / var(--desktop-browser-scale, 1))` }}
+          ref={sectionRef}
+          className="hidden xl:block relative z-10"
+          style={{ height: `calc(${itinerary.length} * 100vh / var(--desktop-browser-scale, 1))` }}
         >
+
+          {/* Persistent heading — above all cards (z-200 > max card z-index) */}
+          {/*
+            height:0 so it doesn't push cards down; the h-40 heading is absolute-positioned
+            into the right half. Each card reserves an identical h-40 spacer so content
+            is centred in the space below the heading.
+
+            Chrome's native sticky is constrained by its containing block, which by default
+            would be the full N-card sectionRef — one viewport more slack than the last card
+            gets (its own height eats into its share), so the heading stayed pinned a full
+            extra screen after the last card had already scrolled away. This absolutely
+            positioned wrapper (out of flow, so it doesn't push the cards down) gives the
+            heading its own (N-1)-viewport containing block instead, matching the last card's
+            slack so both release together — same fix as the Safari JS path's headingSlack.
+          */}
           <div
-            ref={headingRef}
-            className="sticky top-0 z-200 pointer-events-none"
-            style={{ height: 0 }}
+            className="absolute top-0 left-0 w-full"
+            style={{ height: `calc(100vh / var(--desktop-browser-scale, 1))` }}
           >
-            <div className="absolute top-0 right-0 w-1/2 h-40 flex items-end px-16 pb-4 bg-[#ece2d6]">
-              <h2
-                className="text-[24px] font-medium leading-tight text-dark-500 xl:text-[36px]"
-                style={{ fontFamily: "var(--font-primary)" }}
-              >
-                Journey Highlights
-              </h2>
-            </div>
-          </div>
-        </div>
-
-        {/* Day cards */}
-        {itinerary.map((entry, i) => (
-          <div
-            key={i}
-            ref={el => { cardRefs.current[i] = el; }}
-            className="sticky top-0 min-h-screen w-full flex"
-            style={{ zIndex: i + 1 }}
-          >
-            {/* LEFT — full-height image with padding */}
-            {/* No h-full: percentage heights don't reliably resolve against a
-                min-height (vs. explicit height) flex container. Default
-                align-items:stretch sizes this correctly without that issue. */}
-            <div className="relative w-1/2 bg-[#ece2d6]">
-              <div className="absolute inset-28 overflow-hidden">
-                <Image
-                  src={entry.img}
-                  alt={entry.day}
-                  fill
-                  priority={i === 0}
-                  className="object-cover"
-                  sizes="50vw"
-                />
-                {/* Progress dots
-                <div className="absolute bottom-6 left-1/2 flex -translate-x-1/2 gap-2">
-                  {itinerary.map((_, j) => (
-                    <div
-                      key={j}
-                      className="h-1.5 rounded-full"
-                      style={{
-                        width: j === i ? 24 : 6,
-                        backgroundColor:
-                          j === i   ? "white"
-                          : j < i   ? "rgba(255,255,255,0.6)"
-                                    : "rgba(255,255,255,0.3)",
-                      }}
-                    />
-                  ))}
-                </div> */}
-              </div>
-            </div>
-
-            {/* RIGHT — content panel */}
-            <div className="w-1/2 bg-[#ece2d6] flex flex-col">
-
-              {/* Day detail — centred in the full right panel height */}
-              <div className="flex-1 flex flex-col items-start justify-center gap-7 px-16 text-center">
-                {hasDayLabel(entry.day) && (
-                  <div className="flex items-center gap-2">
-                    {!isHourBased(entry.day) && <CalendarIcon />}
-                    <p
-                      className="text-[22px] font-medium text-dark-500"
-                      style={{ fontFamily: "var(--font-secondary)" }}
-                    >
-                      {entry.day}
-                    </p>
-                  </div>
-                )}
-                <p
-                  className="text-[20px] font-medium text-dark-500"
-                  style={{ fontFamily: "var(--font-secondary)" }}
+            <div
+              ref={headingRef}
+              className="sticky top-0 z-200 pointer-events-none"
+              style={{ height: 0 }}
+            >
+              <div className="absolute top-0 right-0 w-1/2 h-40 flex items-end px-16 pb-4 bg-[#ece2d6]">
+                <h2
+                  className="text-[24px] font-medium leading-tight text-dark-500 xl:text-[36px]"
+                  style={{ fontFamily: "var(--font-primary)" }}
                 >
-                  {entry.title}
-                </p>
-                {/* No items-center — see the mobile activities wrapper above for why.
-                    max-w caps the line length to the card's original narrower look —
-                    the panel itself is much wider, but letting bullets use the full
-                    width makes each line noticeably longer than the design intent.
-                    gap-3 (not gap-1) — see the mobile wrapper's comment above. */}
-                <div className="flex w-full max-w-xl flex-col gap-3">
-                  <PortableText
-                    value={entry.activities}
-                    components={activitiesComponents({ small: "text-sm", normal: "text-base", large: "text-xl" })}
-                  />
-                </div>
+                  Journey Highlights
+                </h2>
               </div>
-
             </div>
           </div>
-        ))}
-      </div>
+
+          {/* Day cards */}
+          {itinerary.map((entry, i) => (
+            <div
+              key={i}
+              ref={el => { cardRefs.current[i] = el; }}
+              className="sticky top-0 min-h-screen w-full flex"
+              style={{ zIndex: i + 1 }}
+            >
+              <DayCardContent entry={entry} priority={i === 0} />
+            </div>
+          ))}
+        </div>
+      )}
     </>
   );
 }

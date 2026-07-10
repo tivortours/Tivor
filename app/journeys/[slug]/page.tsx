@@ -130,7 +130,7 @@ export default async function JourneyDetailPage({
                   <p className="text-[13px] lg:text-base font-medium text-[#151515]" style={{ fontFamily: "var(--font-secondary)" }}>
                     {label}:
                   </p>
-                  <p className="text-[13px] lg:text-base leading-normal text-[#3d3d3d]" style={{ fontFamily: "var(--font-secondary)" }}>
+                  <p className="text-[13px] lg:text-base leading-normal text-[#3d3d3d]" style={{ fontFamily: "var(--font-secondary)", whiteSpace: "pre-line" }}>
                     {value}
                   </p>
                 </div>
@@ -156,11 +156,27 @@ export default async function JourneyDetailPage({
                 className="flex flex-col gap-5 text-[13px] lg:text-base leading-relaxed text-[#3d3d3d]"
                 style={{ fontFamily: "var(--font-secondary)" }}
               >
-                {journey.fullDesc.map((para, i) => (
-                  <p key={i} className={isHeadingLine(para) ? "font-semibold text-dark-500" : undefined}>
-                    {para}
-                  </p>
-                ))}
+                {journey.fullDesc.map((para, i) => {
+                  // Only the first line of a paragraph can read as a heading —
+                  // a merged block like "Your Days, Your Rhythm\nEvery day
+                  // unfolds..." ends in a period overall, so checking the
+                  // whole string would miss it. Bold just that first line,
+                  // not the rest of the paragraph.
+                  const lines = para.split("\n");
+                  const firstLineIsHeading = isHeadingLine(lines[0]);
+                  return (
+                    <p key={i} style={{ whiteSpace: "pre-line" }}>
+                      {firstLineIsHeading ? (
+                        <>
+                          <span className="font-semibold text-dark-500">{lines[0]}</span>
+                          {lines.length > 1 && "\n" + lines.slice(1).join("\n")}
+                        </>
+                      ) : (
+                        para
+                      )}
+                    </p>
+                  );
+                })}
               </div>
               <EnquireButton
                 journeyTitle={journey.title}

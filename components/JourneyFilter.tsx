@@ -2,6 +2,7 @@
 
 import Image from "next/image";
 import Link from "next/link";
+import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import { useEffect, useMemo, useRef, useState } from "react";
 import { shell, type Journey } from "../app/site-data";
 
@@ -83,10 +84,31 @@ const destRank = (name: string) => {
 };
 
 export function JourneyFilter({ journeys, destNames, seeMoreLabel }: Props) {
-  const [selected, setSelected] = useState("all");
+  // Filter + "see more" state lives in the URL, not local state — so the
+  // browser back/forward button (e.g. after opening a journey's detail page)
+  // restores exactly where the user left off, instead of resetting.
+  const router = useRouter();
+  const pathname = usePathname();
+  const searchParams = useSearchParams();
+  const selected = searchParams.get("destination") || "all";
+  const showAll = searchParams.get("view") === "all";
+
   const [open, setOpen] = useState(false);
-  const [showAll, setShowAll] = useState(false);
   const dropdownRef = useRef<HTMLDivElement>(null);
+
+  function updateParams(next: { destination?: string; view?: string }) {
+    const params = new URLSearchParams(searchParams.toString());
+    if (next.destination !== undefined) {
+      if (next.destination === "all") params.delete("destination");
+      else params.set("destination", next.destination);
+    }
+    if (next.view !== undefined) {
+      if (next.view === "all") params.set("view", "all");
+      else params.delete("view");
+    }
+    const qs = params.toString();
+    router.replace(qs ? `${pathname}?${qs}` : pathname, { scroll: false });
+  }
 
   // Close on outside click
   useEffect(() => {
@@ -128,9 +150,8 @@ export function JourneyFilter({ journeys, destNames, seeMoreLabel }: Props) {
     selected === "all" ? "All Destinations" : destNames[selected] || selected;
 
   const select = (slug: string) => {
-    setSelected(slug);
     setOpen(false);
-    setShowAll(false);
+    updateParams({ destination: slug, view: "" });
   };
 
   return (
@@ -207,8 +228,8 @@ export function JourneyFilter({ journeys, destNames, seeMoreLabel }: Props) {
       {filtered.length > 6 && !showAll && (
         <div className="flex justify-center">
           <button
-            onClick={() => setShowAll(true)}
-            className="h-[45px] rounded-[2px] bg-[#151515] px-6 text-[14px] lg:text-[18px] text-white"
+            onClick={() => updateParams({ view: "all" })}
+            className="cursor-pointer h-[45px] rounded-[2px] bg-[#151515] px-6 text-[14px] lg:text-[18px] text-white"
             style={{ fontFamily: "var(--font-secondary)" }}
           >
             {seeMoreLabel}
