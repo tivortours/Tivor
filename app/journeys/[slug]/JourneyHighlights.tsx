@@ -28,27 +28,81 @@ const alignMarks = {
 // for either from a { small, normal, large } size map.
 type SizeMap = { small: string; normal: string; large: string };
 type RichValue = { style?: string; children?: any[] };
+type SpanValue = { text?: string; marks?: string[] };
+
+const countStrongSpans = (spans: SpanValue[]) => spans.filter((s) => s.marks?.includes("strong")).length;
+
+// A block/bullet with 2+ bold "Label:" runs (e.g. "Terrain: ... Duration: ...
+// Elevation Gain: ...") is a compact facts list, not flowing prose — each
+// Label+value belongs on its own tight line. white-space:pre-line can't do
+// that on its own: a single embedded "\n" between facts collapses to a space
+// (indistinguishable from an ordinary line-wrap elsewhere), while 2+ renders
+// as a full blank-line gap — there's no newline count that means "next line,
+// no gap". So this walks the raw spans directly (not the pre-rendered
+// `children`) and groups by label, ignoring however many newlines separate
+// them in the source, and renders each as its own block-display line.
+function renderFactSegments(spans: SpanValue[]): React.ReactNode {
+  const segments: { label?: string; text: string }[] = [];
+  let current: { label?: string; text: string } | null = null;
+
+  for (const span of spans) {
+    const raw = span.text || "";
+    if (span.marks?.includes("strong")) {
+      if (current) segments.push(current);
+      current = { label: raw, text: "" };
+    } else {
+      const cleaned = raw.replace(/\n+/g, " ").trim();
+      if (!cleaned) continue;
+      if (current) current.text += cleaned;
+      else segments.push({ text: cleaned });
+    }
+  }
+  if (current) segments.push(current);
+
+  return segments.map((seg, i) => {
+    // Keep facts tight against each other, but still separate the facts
+    // list as a whole from any leading prose (e.g. the bullet's own
+    // sentences before "Terrain:") — margin only on the first labeled
+    // segment, and only when something unlabeled came before it.
+    const isFirstFact = seg.label && !segments[i - 1]?.label;
+    return (
+      <span key={i} className={`block ${isFirstFact && i > 0 ? "mt-3" : ""}`}>
+        {seg.label && <strong>{seg.label}</strong>}
+        {seg.text}
+      </span>
+    );
+  });
+}
+
 const activitiesComponents = (sizes: SizeMap) => {
   // Some pasted content (e.g. "Terrain: X\n\nDuration: Y") embeds literal "\n"
   // characters in a single block instead of using separate blocks for each
   // line. Browsers collapse raw "\n" to a space by default — pre-line makes
   // them render as real line breaks while still wrapping long lines normally.
-  const line = (sizeClass: string, align?: string) => ({ children }: { children?: React.ReactNode }) => (
-    <p
-      className={`${sizeClass} text-pretty leading-relaxed text-dark-400`}
-      style={{ fontFamily: "var(--font-secondary)", textAlign: align as React.CSSProperties["textAlign"], whiteSpace: "pre-line" }}
-    >
-      {children}
-    </p>
-  );
+  const line = (sizeClass: string, align?: string) => ({ children, value }: { children?: React.ReactNode; value?: RichValue }) => {
+    const spans = (value?.children ?? []) as SpanValue[];
+    const isFactsList = countStrongSpans(spans) >= 2;
+    return (
+      <p
+        className={`${sizeClass} text-pretty leading-relaxed text-dark-400`}
+        style={{
+          fontFamily: "var(--font-secondary)",
+          textAlign: align as React.CSSProperties["textAlign"],
+          whiteSpace: isFactsList ? undefined : "pre-line",
+        }}
+      >
+        {isFactsList ? renderFactSegments(spans) : children}
+      </p>
+    );
+  };
   return {
     block: {
       normal: ({ children, value }: { children?: React.ReactNode; value: RichValue }) =>
-        line(sizes.normal, getTextAlign(value))({ children }),
+        line(sizes.normal, getTextAlign(value))({ children, value }),
       small: ({ children, value }: { children?: React.ReactNode; value: RichValue }) =>
-        line(sizes.small, getTextAlign(value))({ children }),
+        line(sizes.small, getTextAlign(value))({ children, value }),
       large: ({ children, value }: { children?: React.ReactNode; value: RichValue }) =>
-        line(sizes.large, getTextAlign(value))({ children }),
+        line(sizes.large, getTextAlign(value))({ children, value }),
     },
     list: {
       // No items-center: that would center each <li> as a shrink-wrapped
@@ -65,12 +119,16 @@ const activitiesComponents = (sizes: SizeMap) => {
         const sizeClass = sizes[(value.style as keyof SizeMap) ?? "normal"] ?? sizes.normal;
         const align = getTextAlign(value) ?? "center";
         const justify = align === "left" ? "justify-start" : align === "right" ? "justify-end" : "justify-center";
+        const spans = (value.children ?? []) as SpanValue[];
+        const isFactsList = countStrongSpans(spans) >= 2;
         return (
           <li className={`${sizeClass} flex ${justify} items-start gap-3.5 leading-relaxed text-dark-400`} style={{ fontFamily: "var(--font-secondary)" }}>
             <svg aria-hidden className="shrink-0 mt-[0.55em]" width="7" height="7" viewBox="0 0 7 7" fill="none">
               <rect x="3.5" y="0.5" width="4.24" height="4.24" rx="0.5" transform="rotate(45 3.5 0.5)" fill="#6A5546" />
             </svg>
-            <span className="min-w-0 text-pretty" style={{ textAlign: align, whiteSpace: "pre-line" }}>{children}</span>
+            <span className="min-w-0 text-pretty" style={{ textAlign: align, whiteSpace: isFactsList ? undefined : "pre-line" }}>
+              {isFactsList ? renderFactSegments(spans) : children}
+            </span>
           </li>
         );
       },
