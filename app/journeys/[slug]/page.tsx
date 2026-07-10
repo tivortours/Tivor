@@ -135,19 +135,21 @@ export default async function JourneyDetailPage({
                   </p>
                 </div>
               ))}
-              <div className="flex flex-col gap-1 lg:py-3">
-                <p className="text-[13px] lg:text-base font-medium text-[#151515]" style={{ fontFamily: "var(--font-secondary)" }}>
-                  Inclusions:
-                </p>
-                <InclusionsButton
-                  journeyTitle={journey.title}
-                  inclusions={journey.inclusions}
-                  className="w-fit border-b cursor-pointer border-[#714128] pb-[2px] text-base text-[#714128] text-left"
-                  style={{ fontFamily: "var(--font-secondary)" }}
-                >
-                  View List of Inclusions
-                </InclusionsButton>
-              </div>
+              {journey.inclusions.length > 0 && (
+                <div className="flex flex-col gap-1 lg:py-3">
+                  <p className="text-[13px] lg:text-base font-medium text-[#151515]" style={{ fontFamily: "var(--font-secondary)" }}>
+                    Inclusions:
+                  </p>
+                  <InclusionsButton
+                    journeyTitle={journey.title}
+                    inclusions={journey.inclusions}
+                    className="w-fit border-b cursor-pointer border-[#714128] pb-[2px] text-base text-[#714128] text-left"
+                    style={{ fontFamily: "var(--font-secondary)" }}
+                  >
+                    View List of Inclusions
+                  </InclusionsButton>
+                </div>
+              )}
             </div>
 
             {/* Right — full description + CTA */}

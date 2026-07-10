@@ -313,35 +313,43 @@ export function JourneyHighlights({
       {/* ── Mobile / tablet ─────────────────────────────────────────────── */}
       <div className="xl:hidden pb-10">
 
-        {/* Nav header — sits outside the slide strip so buttons stay in place */}
-        <div className="flex items-center justify-between px-5 sm:px-8 mb-6">
-          <button
-            onClick={() => setMobileActive(d => Math.max(0, d - 1))}
-            disabled={mobileActive === 0}
-            className="p-0.5 text-[#999] disabled:opacity-30 rounded-full bg-white/30 shadow-sm "
-            aria-label="Previous day"
-          >
-            <ChevronLeft />
-          </button>
-          <div className="flex items-center gap-2">
-            {hasDayLabel(mobile.day) && (
-              <>
-                {!isHourBased(mobile.day) && <CalendarIcon />}
-                <p className="text-[18px] font-semibold text-dark-500" style={{ fontFamily: "var(--font-secondary)" }}>
-                  {mobile.day}
-                </p>
-              </>
-            )}
+        {/* Nav header — sits outside the slide strip so buttons stay in place.
+            Only one day means nothing to navigate between, so skip the
+            arrows; skip the whole row if there's no day label either. */}
+        {(itinerary.length > 1 || hasDayLabel(mobile.day)) && (
+          <div className="flex items-center justify-between px-5 sm:px-8 mb-6">
+            {itinerary.length > 1 ? (
+              <button
+                onClick={() => setMobileActive(d => Math.max(0, d - 1))}
+                disabled={mobileActive === 0}
+                className="p-0.5 text-[#999] disabled:opacity-30 rounded-full bg-white/30 shadow-sm "
+                aria-label="Previous day"
+              >
+                <ChevronLeft />
+              </button>
+            ) : <div />}
+            <div className="flex items-center gap-2">
+              {hasDayLabel(mobile.day) && (
+                <>
+                  {!isHourBased(mobile.day) && <CalendarIcon />}
+                  <p className="text-[18px] font-semibold text-dark-500" style={{ fontFamily: "var(--font-secondary)" }}>
+                    {mobile.day}
+                  </p>
+                </>
+              )}
+            </div>
+            {itinerary.length > 1 ? (
+              <button
+                onClick={() => setMobileActive(d => Math.min(itinerary.length - 1, d + 1))}
+                disabled={mobileActive === itinerary.length - 1}
+                className="p-0.5 text-[#999] disabled:opacity-30 rounded-full bg-white/30  shadow-sm"
+                aria-label="Next day"
+              >
+                <ChevronRight />
+              </button>
+            ) : <div />}
           </div>
-          <button
-            onClick={() => setMobileActive(d => Math.min(itinerary.length - 1, d + 1))}
-            disabled={mobileActive === itinerary.length - 1}
-            className="p-0.5 text-[#999] disabled:opacity-30 rounded-full bg-white/30  shadow-sm"
-            aria-label="Next day"
-          >
-            <ChevronRight />
-          </button>
-        </div>
+        )}
 
         {/* Slide strip — overflow-hidden clips the off-screen slides */}
         <div
