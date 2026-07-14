@@ -11,17 +11,28 @@ export default defineConfig({
   name: "default",
   plugins: [
     structureTool({
-      // Swap the auto-generated "Journey" list for a drag-and-drop orderable
-      // one; every other document type keeps its default list item/position.
+      // Swap the auto-generated "Journey"/"Inspiration Article" lists for
+      // drag-and-drop orderable ones; every other document type keeps its
+      // default list item/position.
       structure: (S, context) =>
         S.list()
           .title("Content")
           .items(
-            S.documentTypeListItems().map((item) =>
-              item.getId() === "journey"
-                ? orderableDocumentListDeskItem({ type: "journey", title: "Journey", S, context })
-                : item
-            )
+            S.documentTypeListItems().map((item) => {
+              const id = item.getId();
+              if (id === "journey") {
+                return orderableDocumentListDeskItem({ type: "journey", title: "Journey", S, context });
+              }
+              if (id === "inspirationArticle") {
+                return orderableDocumentListDeskItem({
+                  type: "inspirationArticle",
+                  title: "Inspiration Article",
+                  S,
+                  context,
+                });
+              }
+              return item;
+            })
           ),
     }),
   ],

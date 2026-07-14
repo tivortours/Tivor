@@ -276,6 +276,7 @@ export const INSPIRATION_PAGE_QUERY = defineQuery(`
     heroQuote,
     heroSubheading,
     gridTitle,
+    seeMoreLabel,
     supportTitle,
     supportHeading,
     supportBody,
@@ -286,7 +287,7 @@ export const INSPIRATION_PAGE_QUERY = defineQuery(`
 `);
 
 export const INSPIRATION_ARTICLES_QUERY = defineQuery(`
-  *[_type == "inspirationArticle" && defined(slug.current)] | order(sortOrder asc, publishDate desc){
+  *[_type == "inspirationArticle" && defined(slug.current) && active != false] | order(orderRank asc){
     title,
     intro,
     publishDate,

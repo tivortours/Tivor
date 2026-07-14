@@ -234,6 +234,7 @@ type InspirationPageData = {
   heroQuote: string;
   heroSubheading: string;
   gridTitle: string;
+  seeMoreLabel: string;
   supportTitle: string;
   supportHeading: string;
   supportBody: string;
@@ -804,6 +805,7 @@ export const getInspirationPageData = cache(async (): Promise<InspirationPageDat
       heroQuote: "",
       heroSubheading: "",
       gridTitle: "",
+      seeMoreLabel: "",
       supportTitle: "",
       supportHeading: "",
       supportBody: "",
@@ -817,6 +819,7 @@ export const getInspirationPageData = cache(async (): Promise<InspirationPageDat
     heroQuote: data.heroQuote || "",
     heroSubheading: data.heroSubheading || "",
     gridTitle: data.gridTitle || "",
+    seeMoreLabel: data.seeMoreLabel || "",
     supportTitle: data.supportTitle || "",
     supportHeading: data.supportHeading || "",
     supportBody: data.supportBody || "",
