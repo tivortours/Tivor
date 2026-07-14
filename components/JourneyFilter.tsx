@@ -133,17 +133,11 @@ export function JourneyFilter({ journeys, destNames, seeMoreLabel }: Props) {
       });
   }, [journeys, destNames]);
 
+  // `journeys` already arrives sorted by orderRank (the Studio's
+  // drag-and-drop order) — just filter by destination, don't re-sort it.
   const filtered = useMemo(() => {
-    const base = selected === "all" ? journeys : journeys.filter((j) => j.destination === selected);
-    return [...base].sort((a, b) => {
-      const an = destNames[a.destination] || a.destination;
-      const bn = destNames[b.destination] || b.destination;
-      const ra = destRank(an), rb = destRank(bn);
-      if (ra !== rb) return ra - rb;
-      if (an !== bn) return an.localeCompare(bn);
-      return a.title.localeCompare(b.title);
-    });
-  }, [journeys, destNames, selected]);
+    return selected === "all" ? journeys : journeys.filter((j) => j.destination === selected);
+  }, [journeys, selected]);
   const visible = showAll ? filtered : filtered.slice(0, 6);
 
   const selectedLabel =
