@@ -5,6 +5,7 @@ import { getDestinations, getExperiencesPageData, shell } from "../site-data";
 import { SiteHeader, SiteFooter } from "../site-ui";
 import PlanForm from "../plan/PlanForm";
 import { getTextAlign } from "../../lib/portableText";
+import { ExperiencesHeroVideo } from "./ExperiencesHeroVideo";
 
 export const metadata = {
   title: "Experiences | Tivor",
@@ -122,16 +123,11 @@ export default async function ExperiencesPage() {
           {(page.heroVideo || page.heroImage) && (
             <div className="relative aspect-video w-full overflow-hidden rounded-xs">
               {page.heroVideo ? (
-                <video
-                  autoPlay
-                  muted
-                  loop
-                  playsInline
-                  poster={page.heroImage || undefined}
+                <ExperiencesHeroVideo
+                  src={page.heroVideo}
+                  poster={page.heroImage}
                   className="absolute inset-0 h-full w-full object-cover"
-                >
-                  <source src={page.heroVideo} type="video/mp4" />
-                </video>
+                />
               ) : (
                 <Image src={page.heroImage} alt="" fill priority className="object-cover" sizes="(max-width: 1280px) 100vw, 1520px" />
               )}
