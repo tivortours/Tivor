@@ -8,6 +8,15 @@ import { isSupportedCountry, isValidPhoneNumber, type CountryCode } from "libpho
 export const requiredText = (label: string) =>
   z.string().trim().min(1, `${label} is required`);
 
+// A person's name — required, and no digits (letters, spaces, hyphens,
+// apostrophes are all fine, e.g. "Mary-Jane" or "O'Brien").
+export const nameField = (label: string) =>
+  z
+    .string()
+    .trim()
+    .min(1, `${label} is required`)
+    .regex(/^[^0-9]*$/, { message: `${label} cannot contain numbers` });
+
 export const emailField = z
   .string()
   .trim()
@@ -52,8 +61,8 @@ export const internationalPhoneField = z
 // ── Contact Us form ───────────────────────────────────────────────────────────
 
 const contactFormFields = z.object({
-  firstName: requiredText("First name"),
-  lastName: requiredText("Last name"),
+  firstName: nameField("First name"),
+  lastName: nameField("Last name"),
   email: emailField,
   phoneCountry: z.string(),
   phone: z.string(),
@@ -79,8 +88,8 @@ const planFormFields = z.object({
   budget: optionalText,
   travelStyles: z.array(z.string()).optional().default([]),
   accommodation: z.array(z.string()).optional().default([]),
-  firstName: requiredText("First name"),
-  lastName: requiredText("Last name"),
+  firstName: nameField("First name"),
+  lastName: nameField("Last name"),
   email: emailField,
   phoneCountry: z.string(),
   phone: z.string(),
@@ -98,8 +107,8 @@ export type PlanFormShape = typeof planFormFields.shape;
 // ── Package Enquiry modal (2-step) ────────────────────────────────────────────
 
 const bookingStep1Fields = z.object({
-  firstName: requiredText("First name"),
-  lastName: requiredText("Last name"),
+  firstName: nameField("First name"),
+  lastName: nameField("Last name"),
   email: emailField,
   phoneCountry: z.string(),
   phone: z.string(),
@@ -114,7 +123,7 @@ export type BookingStep1Shape = typeof bookingStep1Fields.shape;
 
 export const bookingStep2Schema = z.object({
   travelDate: requiredText("Travel date"),
-  countryCity: requiredText("Country and city"),
+  country: requiredText("Country"),
   adults: requiredText("Number of adults"),
   children: optionalText,
 });
@@ -134,8 +143,8 @@ export const newsletterSchema = z.object({
 
 export const contactLeadSchema = z.object({
   type: z.literal("contact"),
-  firstName: requiredText("First name"),
-  lastName: requiredText("Last name"),
+  firstName: nameField("First name"),
+  lastName: nameField("Last name"),
   email: emailField,
   phone: internationalPhoneField,
   country: requiredText("Country of residence"),
@@ -145,8 +154,8 @@ export const contactLeadSchema = z.object({
 
 export const planLeadSchema = z.object({
   type: z.literal("plan"),
-  firstName: requiredText("First name"),
-  lastName: requiredText("Last name"),
+  firstName: nameField("First name"),
+  lastName: nameField("Last name"),
   email: emailField,
   phone: internationalPhoneField,
   countryResidence: optionalText,
@@ -165,12 +174,12 @@ export const planLeadSchema = z.object({
 export const enquiryLeadSchema = z.object({
   type: z.literal("enquiry"),
   journeyTitle: requiredText("Journey title"),
-  firstName: requiredText("First name"),
-  lastName: requiredText("Last name"),
+  firstName: nameField("First name"),
+  lastName: nameField("Last name"),
   email: emailField,
   phone: internationalPhoneField,
   travelDate: requiredText("Travel date"),
-  countryCity: requiredText("Country and city"),
+  country: requiredText("Country"),
   adults: requiredText("Number of adults"),
   children: optionalText,
   message: requiredText("Message"),

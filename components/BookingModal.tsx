@@ -3,8 +3,11 @@
 import { useCallback, useEffect, useRef, useState } from "react";
 import { Portal } from "./Portal";
 import { bookingStep1Schema, bookingStep2Schema } from "../lib/validation";
-import { DIAL_COUNTRIES as COUNTRIES } from "../lib/countries";
+import { DIAL_COUNTRIES as COUNTRIES, COUNTRY_NAMES } from "../lib/countries";
 import { PhoneCountrySelect } from "./PhoneCountrySelect";
+import { CountrySelect } from "./CountrySelect";
+
+const RESIDENCE_COUNTRIES = [...COUNTRY_NAMES, "Other"];
 
 // ── Form data types ───────────────────────────────────────────────────────────
 type Step1 = {
@@ -12,7 +15,7 @@ type Step1 = {
   countryCode: string; phone: string; message: string;
 };
 type Step2 = {
-  travelDate: string; countryCity: string;
+  travelDate: string; country: string;
   adults: string; children: string;
 };
 
@@ -20,7 +23,7 @@ type Errors1 = Partial<Record<keyof Omit<Step1, "countryCode">, string>>;
 type Errors2 = Partial<Record<keyof Omit<Step2, "children">, string>>;
 
 const EMPTY1: Step1 = { firstName: "", lastName: "", email: "", countryCode: "US", phone: "", message: "" };
-const EMPTY2: Step2 = { travelDate: "", countryCity: "", adults: "", children: "" };
+const EMPTY2: Step2 = { travelDate: "", country: "", adults: "", children: "" };
 
 // ── Shared primitives ─────────────────────────────────────────────────────────
 function FieldLabel({ children }: { children: React.ReactNode }) {
@@ -153,11 +156,11 @@ function Step1Form({ data, onChange, onNext }: {
     <div className="flex flex-col gap-4">
       <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
         <Field label="First Name*">
-          <TextInput placeholder="Enter your first name" value={data.firstName} onChange={(v) => onChange({ firstName: v })} hasError={!!errors.firstName} />
+          <TextInput placeholder="Enter your first name" value={data.firstName} onChange={(v) => onChange({ firstName: v.replace(/[0-9]/g, "") })} hasError={!!errors.firstName} />
           <FieldError msg={errors.firstName} />
         </Field>
         <Field label="Last Name*">
-          <TextInput placeholder="Enter your last name" value={data.lastName} onChange={(v) => onChange({ lastName: v })} hasError={!!errors.lastName} />
+          <TextInput placeholder="Enter your last name" value={data.lastName} onChange={(v) => onChange({ lastName: v.replace(/[0-9]/g, "") })} hasError={!!errors.lastName} />
           <FieldError msg={errors.lastName} />
         </Field>
       </div>
@@ -222,21 +225,24 @@ function Step2Form({ data, onChange, onBack, onSubmit, submitting, submitError }
       <div className="grid grid-cols-1 gap-5 sm:grid-cols-3">
         <Field label="Approx. Date of Traveling*">
           <TextInput
-            placeholder="Enter approx. date/month"
+            placeholder="Select a date"
             value={data.travelDate}
             onChange={(v) => onChange({ travelDate: v })}
+            type="date"
             hasError={!!errors.travelDate}
           />
           <FieldError msg={errors.travelDate} />
         </Field>
-        <Field label="Your Country and City*">
-          <TextInput
-            placeholder="Enter your country and city"
-            value={data.countryCity}
-            onChange={(v) => onChange({ countryCity: v })}
-            hasError={!!errors.countryCity}
+        <Field label="Your Country*">
+          <CountrySelect
+            value={data.country}
+            onChange={(v) => onChange({ country: v })}
+            placeholder="Select country"
+            options={RESIDENCE_COUNTRIES}
+            hasError={!!errors.country}
+            className="h-10 w-full rounded-xs bg-[#f1f1f1] px-4 text-base outline-none"
           />
-          <FieldError msg={errors.countryCity} />
+          <FieldError msg={errors.country} />
         </Field>
         <Field label="Guest Details*">
           <div className="flex gap-2">
@@ -253,8 +259,8 @@ function Step2Form({ data, onChange, onBack, onSubmit, submitting, submitError }
               <SelectInput
                 value={data.children}
                 onChange={(v) => onChange({ children: v })}
-                placeholder="Children"
-                options={["0","1","2","3","4","5+"]}
+                placeholder="Child"
+                options={["0","1","2","3","4+"]}
               />
             </div>
           </div>
@@ -433,7 +439,7 @@ function Modal({ journeyTitle, onClose }: { journeyTitle: string; onClose: () =>
                           phone: `${dialCode} ${step1.phone}`.trim(),
                           message: step1.message,
                           travelDate: step2.travelDate,
-                          countryCity: step2.countryCity,
+                          country: step2.country,
                           adults: step2.adults,
                           children: step2.children,
                         }),

@@ -2,19 +2,33 @@
 
 import { useEffect, useState } from "react";
 
-// This site's BrowserScaleShell scales the whole page down (via CSS `zoom` on
-// <html> at desktop widths) to fit a fixed reference canvas. `zoom` cascades to
-// every descendant of <html> — including portal targets like #modal-root — so
-// a value read from getBoundingClientRect() (already in final zoomed pixels)
-// gets zoomed a second time when reapplied as inline top/left on a portaled
-// fixed-position element. Dividing by the live zoom factor cancels that out.
-// Safari's transform-based fallback doesn't have this problem (the transform
-// is scoped to .browser-scale-shell, which #modal-root sits outside of), and
-// there `zoom` reads back as unset/1, so the division is a no-op.
-function currentZoom(): number {
-  const raw = getComputedStyle(document.documentElement).zoom;
-  const n = parseFloat(raw);
-  return Number.isFinite(n) && n > 0 ? n : 1;
+// This site's BrowserScaleShell scales the whole page down to fit a fixed
+// reference canvas — via CSS `zoom` on <html> in Chrome, or `transform` on
+// .browser-scale-shell in Safari (with a separate `zoom` re-applied to
+// .modal-panel so modal content still visually matches the scaled-down page).
+// Portal targets like #modal-root sit outside .browser-scale-shell, so a
+// value read from getBoundingClientRect() (already in final on-screen pixels,
+// whatever scale produced them) gets scaled a second time if reapplied
+// verbatim as inline top/left on a portaled fixed-position element — unless
+// that portaled element is rendered at the same scale #modal-root itself
+// renders at, in which case no compensation is needed at all.
+//
+// Rather than track which of those two mechanisms (html zoom vs modal-panel
+// zoom) applies to any given trigger — they need *opposite* handling, since
+// html-zoom cascades into #modal-root's portaled content while modal-panel's
+// scoped zoom does not — this measures #modal-root's actual rendering scale
+// directly with a probe element. That's the one number that matters: it's
+// the same scale the dropdown itself will render at once portaled there, in
+// every mode, without needing to reason about which CSS mechanism produced it.
+function modalRootScale(): number {
+  const root = document.getElementById("modal-root");
+  if (!root) return 1;
+  const probe = document.createElement("div");
+  probe.style.cssText = "position:absolute;top:0;left:0;width:1000px;height:0;visibility:hidden;pointer-events:none;";
+  root.appendChild(probe);
+  const measured = probe.getBoundingClientRect().width;
+  root.removeChild(probe);
+  return measured > 0 ? measured / 1000 : 1;
 }
 
 export function useFloatingRect(
@@ -29,8 +43,8 @@ export function useFloatingRect(
       const el = triggerRef.current;
       if (!el) return;
       const r = el.getBoundingClientRect();
-      const zoom = currentZoom();
-      setRect({ top: (r.bottom + 4) / zoom, left: r.left / zoom, width: r.width / zoom });
+      const scale = modalRootScale();
+      setRect({ top: (r.bottom + 4) / scale, left: r.left / scale, width: r.width / scale });
     }
     update();
     window.addEventListener("scroll", update, true);

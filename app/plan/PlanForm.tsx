@@ -10,12 +10,12 @@ type FieldErrors = Partial<Record<keyof PlanFormShape, string>>;
 
 const RESIDENCE_COUNTRIES = [...COUNTRY_NAMES, "Other"];
 
-const BUDGETS = ["Under $3,000","$3,000 – $5,000","$5,000 – $8,000","$8,000 – $12,000","$12,000 – $20,000","$20,000+","Flexible"];
-const ADULTS  = ["1","2","3","4","5","6","7","8","9","10+"];
-const CHILDREN = ["0","1","2","3","4","5","6+"];
+const BUDGETS = [ "$ 2000 – 4000", "$ 4000 – 8000", "$ 8000 – 10,000", "$ 10,000 – 15,000", "$ 15,000 +"];
+const ADULTS = ["1", "2", "3", "4", "5", "6", "7", "8+"];
+const CHILDREN = ["0", "1", "2", "3", "4+"];
 
-const TRAVEL_STYLES = ["Adventure","Family Vacation","Romantic Escape","Wellness and Health","Cultural Immersion","Others"];
-const ACCOMMODATIONS = ["Luxury Hotels","Boutique Hotels","Villas or Chalets","Glamping","Tivor Best Fit"];
+const TRAVEL_STYLES = ["Adventure", "Family Vacation", "Romantic Escape", "Wellness and Health", "Cultural Immersion", "Others"];
+const ACCOMMODATIONS = ["Luxury Hotels", "Boutique Hotels", "Villas or Chalets", "Glamping", "Tivor Best Fit"];
 
 // ── Primitives ────────────────────────────────────────────────────────────────
 function Label({ children }: { children: React.ReactNode }) {
@@ -77,7 +77,7 @@ function SelectInput({ value, onChange, placeholder, options, hasError }: {
         {options.map((o) => <option key={o} value={o} style={{ color: "#151515" }}>{o}</option>)}
       </select>
       <svg className="pointer-events-none absolute right-4 top-1/2 -translate-y-1/2" width="12" height="7" viewBox="0 0 12 7" fill="none">
-        <path d="M1 1L6 6L11 1" stroke="#555" strokeWidth="1.3" strokeLinecap="round"/>
+        <path d="M1 1L6 6L11 1" stroke="#555" strokeWidth="1.3" strokeLinecap="round" />
       </svg>
     </div>
   );
@@ -135,14 +135,13 @@ function CheckboxGroup({ options, selected, onChange }: {
         return (
           <label key={opt} className="flex cursor-pointer items-center gap-1.5">
             <div
-              className={`flex h-5 w-5 shrink-0 items-center justify-center rounded-xs border transition-colors ${
-                checked ? "border-dark-500 bg-dark-500" : "border-[#aaa] bg-transparent"
-              }`}
+              className={`flex h-5 w-5 shrink-0 items-center justify-center rounded-xs border transition-colors ${checked ? "border-dark-500 bg-dark-500" : "border-[#aaa] bg-transparent"
+                }`}
               onClick={() => toggle(opt)}
             >
               {checked && (
                 <svg width="11" height="9" viewBox="0 0 11 9" fill="none">
-                  <path d="M1 4L4 7.5L10 1" stroke="white" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+                  <path d="M1 4L4 7.5L10 1" stroke="white" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
                 </svg>
               )}
             </div>
@@ -178,7 +177,7 @@ function SuccessView() {
     <div className="flex flex-col items-center gap-8 py-16 text-center">
       <div className="flex h-16 w-16 items-center justify-center rounded-full bg-fern-600">
         <svg width="28" height="28" viewBox="0 0 28 28" fill="none">
-          <path d="M6 14L11.5 19.5L22 9" stroke="white" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round"/>
+          <path d="M6 14L11.5 19.5L22 9" stroke="white" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round" />
         </svg>
       </div>
       <div className="flex flex-col gap-3">
@@ -309,7 +308,7 @@ export default function PlanForm({ destinations }: { destinations: string[] }) {
               <TextInput
                 placeholder="Enter number of days"
                 value={travelDays}
-                onChange={(v) => setTravelDays(v.replace(/\D/g, ""))}
+                onChange={(v) => setTravelDays(v.replace(/\D/g, "").slice(0, 2))}
                 type="text"
                 inputMode="numeric"
               />
@@ -321,7 +320,7 @@ export default function PlanForm({ destinations }: { destinations: string[] }) {
               <SelectInput
                 value={adults}
                 onChange={setAdults}
-                placeholder="Pick a number"
+                placeholder="Please Select"
                 options={ADULTS}
                 hasError={!!errors.adults}
               />
@@ -331,25 +330,26 @@ export default function PlanForm({ destinations }: { destinations: string[] }) {
               <SelectInput
                 value={children}
                 onChange={setChildren}
-                placeholder="Pick a number"
+                placeholder="Please Select"
                 options={CHILDREN}
               />
             </Field>
           </div>
 
           <div className="grid grid-cols-1 gap-6 sm:grid-cols-2">
-            <Field label="Date / Period of Trip">
+            <Field label="Date / Month of Travel">
               <TextInput
-                placeholder="Enter approx. date/month"
+                placeholder="Select a date"
                 value={travelDate}
                 onChange={setTravelDate}
+                type="date"
               />
             </Field>
-            <Field label={<>Your Budget* <span className="text-[#777]">(per person)</span></>}>
+            <Field label={<>Budget per Person (USD) </>}>
               <SelectInput
                 value={budget}
                 onChange={setBudget}
-                placeholder="Pick a range"
+                placeholder="Please Select"
                 options={BUDGETS}
               />
             </Field>
@@ -383,11 +383,11 @@ export default function PlanForm({ destinations }: { destinations: string[] }) {
 
           <div className="grid grid-cols-1 gap-6 sm:grid-cols-2">
             <Field label="First Name*">
-              <TextInput placeholder="Enter your first name" value={firstName} onChange={setFirstName} hasError={!!errors.firstName} />
+              <TextInput placeholder="Enter your first name" value={firstName} onChange={(v) => setFirstName(v.replace(/[0-9]/g, ""))} hasError={!!errors.firstName} />
               <FieldError msg={errors.firstName} />
             </Field>
             <Field label="Last Name*">
-              <TextInput placeholder="Enter your last name" value={lastName} onChange={setLastName} hasError={!!errors.lastName} />
+              <TextInput placeholder="Enter your last name" value={lastName} onChange={(v) => setLastName(v.replace(/[0-9]/g, ""))} hasError={!!errors.lastName} />
               <FieldError msg={errors.lastName} />
             </Field>
           </div>
@@ -425,7 +425,9 @@ export default function PlanForm({ destinations }: { destinations: string[] }) {
 
           <Field label="Tell us about your journey*">
             <Textarea
-              placeholder="Share your ideas and initial plans"
+              placeholder="Share with us your travel ideas, preferred travel dates, travel companions,and
+any special requests. Our Travel Designers will thoughtfully personalise every
+detail."
               value={message}
               onChange={setMessage}
               hasError={!!errors.message}
@@ -442,9 +444,8 @@ export default function PlanForm({ destinations }: { destinations: string[] }) {
         <button
           onClick={handleSubmit}
           disabled={submitting}
-          className={`h-11.25 w-fit rounded-xs px-8 text-[18px] text-white transition-opacity ${
-            submitting ? "bg-dark-500/40 cursor-not-allowed" : "bg-dark-500"
-          }`}
+          className={`h-11.25 w-fit rounded-xs px-8 text-[18px] text-white transition-opacity ${submitting ? "bg-dark-500/40 cursor-not-allowed" : "bg-dark-500"
+            }`}
           style={{ fontFamily: "var(--font-secondary)" }}
         >
           {submitting ? "Submitting…" : "Submit Enquiry"}

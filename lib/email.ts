@@ -137,7 +137,7 @@ function enquiryAdminEmail(f: Record<string, string>) {
       row("Email",          f.email),
       row("Phone",          f.phone),
       row("Travel Date",    f.travelDate),
-      row("Country & City", f.countryCity),
+      row("Country",        f.country),
       row("Adults",         f.adults),
       row("Children",       f.children),
       row("Message",        f.message),

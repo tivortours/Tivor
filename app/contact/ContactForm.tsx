@@ -101,7 +101,7 @@ function SuccessView() {
     <div className="flex min-h-100 flex-col items-center justify-center gap-6 rounded-xs bg-white p-10 text-center">
       <div className="flex h-14 w-14 items-center justify-center rounded-full bg-beige-200">
         <svg width="28" height="28" viewBox="0 0 28 28" fill="none">
-          <path d="M5 14L11 20L23 8" stroke="#714128" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+          <path d="M5 14L11 20L23 8" stroke="#714128" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
         </svg>
       </div>
       <h2 className="text-[28px] leading-tight text-dark-500" style={{ fontFamily: "var(--font-primary)" }}>
@@ -118,13 +118,13 @@ function SuccessView() {
 
 export default function ContactForm({ contactImage }: { contactImage: string }) {
   const [firstName, setFirstName] = useState("");
-  const [lastName, setLastName]   = useState("");
-  const [email, setEmail]         = useState("");
+  const [lastName, setLastName] = useState("");
+  const [email, setEmail] = useState("");
   const [countryCode, setCountryCode] = useState("US");
-  const [phone, setPhone]         = useState("");
-  const [country, setCountry]     = useState("");
-  const [city, setCity]           = useState("");
-  const [message, setMessage]     = useState("");
+  const [phone, setPhone] = useState("");
+  const [country, setCountry] = useState("");
+  const [city, setCity] = useState("");
+  const [message, setMessage] = useState("");
   const [submitted, setSubmitted] = useState(false);
   const [submitting, setSubmitting] = useState(false);
   const [submitError, setSubmitError] = useState("");
@@ -188,11 +188,11 @@ export default function ContactForm({ contactImage }: { contactImage: string }) 
         {/* Row 1: First Name + Last Name */}
         <div className="grid grid-cols-1 gap-6 sm:grid-cols-2">
           <Field label="First Name*">
-            <TextInput placeholder="Enter your first name" value={firstName} onChange={setFirstName} hasError={!!errors.firstName} />
+            <TextInput placeholder="Enter your first name" value={firstName} onChange={(v) => setFirstName(v.replace(/[0-9]/g, ""))} hasError={!!errors.firstName} />
             <FieldError msg={errors.firstName} />
           </Field>
           <Field label="Last Name*">
-            <TextInput placeholder="Enter your last name" value={lastName} onChange={setLastName} hasError={!!errors.lastName} />
+            <TextInput placeholder="Enter your last name" value={lastName} onChange={(v) => setLastName(v.replace(/[0-9]/g, ""))} hasError={!!errors.lastName} />
             <FieldError msg={errors.lastName} />
           </Field>
         </div>
@@ -237,7 +237,9 @@ export default function ContactForm({ contactImage }: { contactImage: string }) 
           <Textarea
             value={message}
             onChange={setMessage}
-            placeholder="Share your ideas and initial plans"
+            placeholder="Share your travel plans, preferred dates, travel companions, and any
+                         experiences you'd love to include. Our Travel Designers will create a bespoke
+                         journey, curated around you."
             hasError={!!errors.message}
           />
           <FieldError msg={errors.message} />
@@ -249,9 +251,8 @@ export default function ContactForm({ contactImage }: { contactImage: string }) 
         <button
           onClick={handleSubmit}
           disabled={submitting}
-          className={`h-11.25 w-fit rounded-xs px-8 text-[18px] text-white transition-opacity ${
-            submitting ? "cursor-not-allowed bg-dark-500/40" : "bg-dark-500"
-          }`}
+          className={`h-11.25 w-fit rounded-xs px-8 text-[18px] text-white transition-opacity ${submitting ? "cursor-not-allowed bg-dark-500/40" : "bg-dark-500"
+            }`}
           style={{ fontFamily: "var(--font-secondary)" }}
         >
           {submitting ? "Submitting…" : "Submit Enquiry"}

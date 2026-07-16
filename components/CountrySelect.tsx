@@ -10,12 +10,17 @@ export function CountrySelect({
   placeholder,
   options,
   hasError,
+  className = "form-select",
 }: {
   value: string;
   onChange: (name: string) => void;
   placeholder: string;
   options: string[];
   hasError?: boolean;
+  // Defaults to the large-form `.form-select` look (Contact/Plan pages).
+  // Callers embedding this in a differently-sized form (e.g. the compact
+  // BookingModal) pass their own trigger classes to match.
+  className?: string;
 }) {
   const [open, setOpen] = useState(false);
   const [query, setQuery] = useState("");
@@ -76,7 +81,7 @@ export function CountrySelect({
         ref={triggerRef}
         type="button"
         onClick={() => setOpen((v) => !v)}
-        className={`form-select flex items-center justify-between text-left ring-1 ${
+        className={`${className} flex items-center justify-between text-left ring-1 ${
           hasError ? "ring-red-400" : "ring-transparent"
         }`}
         style={{ fontFamily: "var(--font-secondary)", color: value ? "#151515" : "#999" }}

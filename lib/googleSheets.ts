@@ -49,7 +49,7 @@ const SHEETS = {
       { header: "Email", key: "email" },
       { header: "Phone", key: "phone" },
       { header: "Travel Date", key: "travelDate" },
-      { header: "Country & City", key: "countryCity" },
+      { header: "Country", key: "country" },
       { header: "Adults", key: "adults" },
       { header: "Children", key: "children" },
       { header: "Message", key: "message" },

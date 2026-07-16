@@ -27,17 +27,15 @@ export default async function PlanPage() {
             className="max-w-[766px] text-[26px] leading-tight text-[#151515] sm:text-[32px] xl:text-[48px]"
             style={{ fontFamily: "var(--font-primary)" }}
           >
-            Every great journey starts with a single step—yours
+            Let's Start Planning Your Journey
           </h1>
           <p
             className="max-w-[700px] text-[16px] leading-relaxed text-[#3d3d3d]"
             style={{ fontFamily: "var(--font-secondary)" }}
           >
-            Share your dreams, preferences, and the way you love to travel, and
-            we&apos;ll transform them into a thoughtfully curated experience
-            designed just for you. From the first idea to the final detail, we
-            craft journeys that feel effortless, personal, and truly
-            unforgettable.
+            Share your travel preferences, and we'll transform them into a thoughtfully
+            curated journey. From the first idea to the final detail, we craft journeys that
+            feel personal and truly unforgettable.
           </p>
         </div>
       </section>
