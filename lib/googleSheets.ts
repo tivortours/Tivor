@@ -70,9 +70,27 @@ const SCOPES = ["https://www.googleapis.com/auth/spreadsheets"];
 
 // ── Auth ──────────────────────────────────────────────────────────────────────
 
+// .env files unescape a double-quoted "\n" into a real newline while parsing,
+// so a key copied from .env.local into a host's dashboard (Vercel, etc.) as a
+// single-line value verbatim — quotes included — arrives with literal "\n"
+// sequences AND a stray leading/trailing " character, since most env var UIs
+// store whatever you paste with no .env-style unescaping. A leading/trailing
+// quote breaks PEM parsing outright (OpenSSL expects the string to start
+// exactly at "-----BEGIN..."), which is exactly the failure mode of an
+// "unsupported" decoder error — normalize both cases here rather than assume
+// the value already arrived in the right shape.
+function normalizePrivateKey(raw: string | undefined): string | undefined {
+  if (!raw) return raw;
+  let key = raw.trim();
+  if ((key.startsWith('"') && key.endsWith('"')) || (key.startsWith("'") && key.endsWith("'"))) {
+    key = key.slice(1, -1);
+  }
+  return key.replace(/\\n/g, "\n");
+}
+
 function getAuth() {
   const email = process.env.GOOGLE_SERVICE_ACCOUNT_EMAIL;
-  const key = process.env.GOOGLE_PRIVATE_KEY?.replace(/\\n/g, "\n");
+  const key = normalizePrivateKey(process.env.GOOGLE_PRIVATE_KEY);
 
   if (!email || !key) {
     throw new Error(
