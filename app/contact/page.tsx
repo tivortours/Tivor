@@ -32,9 +32,9 @@ export default async function ContactPage() {
             className="max-w-[918px] text-[16px] leading-relaxed text-[#3d3d3d]"
             style={{ fontFamily: "var(--font-secondary)" }}
           >
-            Every unforgettable experience starts with a simple conversation. Whether you&apos;re
-            dreaming of a bespoke escape, seeking expert guidance, or ready to craft a journey
-            tailored just for you, our team is here to bring your vision to life.
+            Every extraordinary journey begins with a simple conversation. Whether
+            you are seeking inspiration, refining an idea, or ready to create your next
+            bespoke escape, our Travel Designers are here to bring your vision to life.
           </p>
         </div>
       </section>

@@ -4,7 +4,7 @@ import Image from "next/image";
 import Link from "next/link";
 import type { Journey } from "../app/site-data";
 
-export function JourneysCarousel({ journeys }: { journeys: Journey[] }) {
+export function JourneysCarousel({ journeys, viewAllHref = "/journeys" }: { journeys: Journey[]; viewAllHref?: string }) {
   const scrollRef = useRef<HTMLDivElement>(null);
   const [canScrollLeft, setCanScrollLeft] = useState(false);
   const [canScrollRight, setCanScrollRight] = useState(false);
@@ -140,17 +140,33 @@ export function JourneysCarousel({ journeys }: { journeys: Journey[] }) {
         </button>
       )}
 
-      {canScrollRight && arrowTop > 0 && (
-        <button
-          onClick={() => scroll("right")}
-          aria-label="Next journeys"
-          className="absolute cursor-pointer right-0 z-10 translate-x-5 sm:translate-x-7 lg:translate-x-10 xl:translate-x-12 -translate-y-1/2 rounded-full bg-white/80 text-black shadow-sm disabled:opacity-25"
-          style={{ top: arrowTop }}
-        >
-          <svg width="28" height="28" viewBox="0 0 28 28" fill="none" aria-hidden="true">
-            <path d="M11 7L18 14L11 21" stroke="#151515" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
-          </svg>
-        </button>
+      {/* Once there's nothing left to scroll to, this same arrow becomes a
+          link to the full journeys list instead of disappearing — same
+          position/style, so it reads as "keep going" rather than a dead end. */}
+      {arrowTop > 0 && (
+        canScrollRight ? (
+          <button
+            onClick={() => scroll("right")}
+            aria-label="Next journeys"
+            className="absolute cursor-pointer right-0 z-10 translate-x-5 sm:translate-x-7 lg:translate-x-10 xl:translate-x-12 -translate-y-1/2 rounded-full bg-white/80 text-black shadow-sm"
+            style={{ top: arrowTop }}
+          >
+            <svg width="28" height="28" viewBox="0 0 28 28" fill="none" aria-hidden="true">
+              <path d="M11 7L18 14L11 21" stroke="#151515" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+            </svg>
+          </button>
+        ) : (
+          <Link
+            href={viewAllHref}
+            aria-label="View all journeys"
+            className="absolute cursor-pointer right-0 z-10 translate-x-5 sm:translate-x-7 lg:translate-x-10 xl:translate-x-12 -translate-y-1/2 rounded-full bg-white/80 text-black shadow-sm"
+            style={{ top: arrowTop }}
+          >
+            <svg width="28" height="28" viewBox="0 0 28 28" fill="none" aria-hidden="true">
+              <path d="M11 7L18 14L11 21" stroke="#151515" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+            </svg>
+          </Link>
+        )
       )}
     </div>
   );

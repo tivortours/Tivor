@@ -120,7 +120,7 @@ export default async function HomePage() {
             </div>
           </div>
 
-          <JourneysCarousel journeys={home.featuredJourneys} />
+          <JourneysCarousel journeys={home.featuredJourneys} viewAllHref={home.curatedJourneysLinkHref || "/journeys"} />
 
           <div className="lg:hidden">
             <LinkBtn label={home.curatedJourneysLinkLabel} href={home.curatedJourneysLinkHref} />
