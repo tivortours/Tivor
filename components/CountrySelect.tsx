@@ -81,7 +81,7 @@ export function CountrySelect({
         ref={triggerRef}
         type="button"
         onClick={() => setOpen((v) => !v)}
-        className={`${className} flex items-center justify-between text-left ring-1 ${
+        className={`${className} flex cursor-pointer items-center justify-between text-left ring-1 ${
           hasError ? "ring-red-400" : "ring-transparent"
         }`}
         style={{ fontFamily: "var(--font-secondary)", color: value ? "#151515" : "#999" }}
@@ -123,7 +123,7 @@ export function CountrySelect({
                   type="button"
                   onClick={() => select(o)}
                   onMouseEnter={() => setActiveIndex(i)}
-                  className={`block w-full px-4 py-2 text-left text-sm text-dark-500 ${
+                  className={`block w-full cursor-pointer px-4 py-2 text-left text-sm text-dark-500 ${
                     i === activeIndex ? "bg-[#f7f4f1]" : ""
                   } ${o === value ? "font-medium" : ""}`}
                   style={{ fontFamily: "var(--font-secondary)" }}

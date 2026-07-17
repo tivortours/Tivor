@@ -182,7 +182,7 @@ function Step1Form({ data, onChange, onNext }: {
       <div className="h-px bg-[#ddd0c5]" />
       <button
         onClick={handleNext}
-        className="h-10 w-fit rounded-xs bg-dark-500 px-8 text-[15px] text-white transition-opacity hover:opacity-80"
+        className="h-10 w-fit cursor-pointer rounded-xs bg-dark-500 px-8 text-[15px] text-white transition-opacity hover:opacity-80"
         style={{ fontFamily: "var(--font-secondary)" }}
       >
         Next
@@ -275,7 +275,7 @@ function Step2Form({ data, onChange, onBack, onSubmit, submitting, submitError }
       <div className="flex items-center gap-3">
         <button
           onClick={onBack}
-          className="h-10 rounded-xs border border-dark-500 px-5 text-[15px] text-dark-500 hover:bg-[#f1f1f1]"
+          className="h-10 cursor-pointer rounded-xs border border-dark-500 px-5 text-[15px] text-dark-500 hover:bg-[#f1f1f1]"
           style={{ fontFamily: "var(--font-secondary)" }}
         >
           Go Back
@@ -283,7 +283,7 @@ function Step2Form({ data, onChange, onBack, onSubmit, submitting, submitError }
         <button
           onClick={handleSubmit}
           disabled={submitting}
-          className="h-10 rounded-xs bg-dark-500 px-5 text-[15px] text-white transition-opacity hover:opacity-80 disabled:cursor-not-allowed disabled:opacity-40"
+          className="h-10 cursor-pointer rounded-xs bg-dark-500 px-5 text-[15px] text-white transition-opacity hover:opacity-80 disabled:cursor-not-allowed disabled:opacity-40"
           style={{ fontFamily: "var(--font-secondary)" }}
         >
           {submitting ? "Submitting…" : "Submit Enquiry"}
@@ -311,7 +311,7 @@ function SuccessView({ onClose }: { onClose: () => void }) {
       </div>
       <button
         onClick={onClose}
-        className="h-10 rounded-xs bg-dark-500 px-8 text-[15px] text-white"
+        className="h-10 cursor-pointer rounded-xs bg-dark-500 px-8 text-[15px] text-white"
         style={{ fontFamily: "var(--font-secondary)" }}
       >
         Close
@@ -379,7 +379,7 @@ function Modal({ journeyTitle, onClose }: { journeyTitle: string; onClose: () =>
               </h2>
               <button
                 onClick={handleClose}
-                className="mt-1 shrink-0 rounded-full p-1.5 transition-colors hover:bg-[#ddd0c5]"
+                className="mt-1 shrink-0 cursor-pointer rounded-full p-1.5 transition-colors hover:bg-[#ddd0c5]"
                 aria-label="Close"
               >
                 <svg width="16" height="16" viewBox="0 0 18 18" fill="none">

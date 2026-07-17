@@ -251,7 +251,7 @@ export default function ContactForm({ contactImage }: { contactImage: string }) 
         <button
           onClick={handleSubmit}
           disabled={submitting}
-          className={`h-11.25 w-fit rounded-xs px-8 text-[18px] text-white transition-opacity ${submitting ? "cursor-not-allowed bg-dark-500/40" : "bg-dark-500"
+          className={`h-11.25 w-fit rounded-xs px-8 text-[18px] text-white transition-opacity ${submitting ? "cursor-not-allowed bg-dark-500/40" : "cursor-pointer bg-dark-500"
             }`}
           style={{ fontFamily: "var(--font-secondary)" }}
         >

@@ -61,7 +61,7 @@ export default function AdminPage() {
           <button
             onClick={handleOpen}
             disabled={!password || loading}
-            className="h-11 rounded-sm bg-[#151515] px-6 text-[16px] text-white disabled:opacity-40"
+            className="h-11 cursor-pointer rounded-sm bg-[#151515] px-6 text-[16px] text-white disabled:cursor-not-allowed disabled:opacity-40"
             style={{ fontFamily: "var(--font-secondary)" }}
           >
             {loading ? "Opening…" : "Open Leads Sheet"}

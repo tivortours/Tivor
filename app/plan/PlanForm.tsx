@@ -444,7 +444,7 @@ detail."
         <button
           onClick={handleSubmit}
           disabled={submitting}
-          className={`h-11.25 w-fit rounded-xs px-8 text-[18px] text-white transition-opacity ${submitting ? "bg-dark-500/40 cursor-not-allowed" : "bg-dark-500"
+          className={`h-11.25 w-fit rounded-xs px-8 text-[18px] text-white transition-opacity ${submitting ? "bg-dark-500/40 cursor-not-allowed" : "cursor-pointer bg-dark-500"
             }`}
           style={{ fontFamily: "var(--font-secondary)" }}
         >

@@ -80,7 +80,7 @@ export function PhoneCountrySelect({
         ref={triggerRef}
         type="button"
         onClick={() => setOpen((v) => !v)}
-        className="flex h-full items-center px-3"
+        className="flex h-full cursor-pointer items-center px-3"
       >
         <span className="mr-1 text-xl leading-none" aria-hidden>{current.flag}</span>
         <svg className="mr-1.5 shrink-0" width="9" height="6" viewBox="0 0 9 6" fill="none">
@@ -122,7 +122,7 @@ export function PhoneCountrySelect({
                   type="button"
                   onClick={() => select(c.code)}
                   onMouseEnter={() => setActiveIndex(i)}
-                  className={`flex w-full items-center gap-2 px-4 py-2 text-left text-sm text-dark-500 ${
+                  className={`flex w-full cursor-pointer items-center gap-2 px-4 py-2 text-left text-sm text-dark-500 ${
                     i === activeIndex ? "bg-[#f7f4f1]" : ""
                   } ${c.code === value ? "font-medium" : ""}`}
                   style={{ fontFamily: "var(--font-secondary)" }}
