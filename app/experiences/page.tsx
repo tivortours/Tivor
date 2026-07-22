@@ -153,7 +153,7 @@ export default async function ExperiencesPage() {
       {page.gallery.length > 0 && (
         <section className="bg-[#f2ebe2] pb-[60px] xl:pb-[80px]">
           <h2
-            className="mb-8 text-center text-[22px] lg:text-[28px] leading-tight text-[#151515] sm:text-[28px]"
+            className="mb-8 text-center text-[28px] lg:text-2xl leading-tight text-[#151515] sm:text-[28px]"
             style={{ fontFamily: "var(--font-primary)" }}
           >
            A Glimpse of What Awaits
