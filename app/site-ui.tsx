@@ -199,8 +199,8 @@ export async function SiteFooter() {
                 className="max-w-full text-[28px] leading-tight sm:text-[32px]"
                 style={{ fontFamily: "var(--font-primary)" }}
               >
-                Subscribe For <br className="lg:hidden" />
-                Insider Travel Access
+               Join the TIVOR Journal
+              
               </p>
               <h4 className="text-base opacity-90" style={{ fontFamily: "var(--font-secondary)" }}>
                 {settings.newsletter.body}
