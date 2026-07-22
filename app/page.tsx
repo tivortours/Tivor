@@ -8,6 +8,7 @@ import { Diamond, LinkBtn, SectionHeading, SiteFooter, SiteHeader } from "./site
 import { TestimonialCarousel } from "../components/TestimonialCarousel";
 import { DestinationsCarousel } from "../components/DestinationsCarousel";
 import { JourneysCarousel } from "../components/JourneysCarousel";
+import { StickyPlanCTA } from "../components/StickyPlanCTA";
 
 export default async function HomePage() {
   const home = await getHomePageData();
@@ -337,7 +338,7 @@ export default async function HomePage() {
       </section>
 
       {/* ── Final CTA ─────────────────────────────────────────────────────── */}
-      <section className="bg-[#f2ebe2]">
+      <section id="final-cta" className="bg-[#f2ebe2]">
         <div className={`${shell} pb-20`}>
 
           <div
@@ -371,6 +372,7 @@ export default async function HomePage() {
       </section>
 
       <SiteFooter />
+      <StickyPlanCTA />
     </main>
   );
 }

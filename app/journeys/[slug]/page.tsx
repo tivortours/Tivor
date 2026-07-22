@@ -228,9 +228,11 @@ export default async function JourneyDetailPage({
                   </span>
                   {journey.showIndicativePricingNote && <PricingInfoNote />}
                 </div>
-                <p className="text-[13px] text-dark-400 mt-1" style={{ fontFamily: "var(--font-secondary)" }}>
-                  ({journey.priceBasis})
-                </p>
+                {journey.priceBasis && (
+                  <p className="text-[13px] text-dark-400 mt-1" style={{ fontFamily: "var(--font-secondary)" }}>
+                    ({journey.priceBasis})
+                  </p>
+                )}
               </div>
 
               {/* Enquire button */}

@@ -219,7 +219,7 @@ export async function SiteFooter() {
       <div className="bg-[#20282d]">
         <div className={`${shell} flex flex-col gap-10 py-12 sm:py-[60px]`}>
           {/* Logo + CTA */}
-          <div className="flex flex-col items-center gap-6 border-b border-grey-400 pb-5 lg:flex-row lg:items-center lg:justify-between">
+          <div className="flex flex-col items-center gap-6 border-b-0 lg:border-b lg:border-grey-400 pb-5 lg:flex-row lg:items-center lg:justify-between">
             <div className="flex items-center gap-2">
               <div className="relative h-[44px] w-[48px] shrink-0">
                 <Image src={settings.logos.footerIcon} alt="" fill className="object-contain" />
@@ -311,7 +311,7 @@ export async function SiteFooter() {
           </div>
 
           {/* Bottom bar */}
-          <div className="flex flex-col items-center gap-4 border-t border-grey-400 pt-5 lg:flex-row lg:items-center lg:justify-between">
+          <div className="flex flex-col items-center gap-4  border-t-0 lg:border-t lg:border-grey-400 pt-5 lg:flex-row lg:items-center lg:justify-between">
 
             {/* Copyright — left on desktop */}
             <span className="text-[12px] text-white lg:order-1 lg:text-sm" style={{ fontFamily: "var(--font-secondary)" }}>
