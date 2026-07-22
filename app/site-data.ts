@@ -778,7 +778,7 @@ export const getExperiencesPageData = cache(async (): Promise<ExperiencesPageDat
     heroImage: imageUrl(data.heroImage, 1800, 900, ""),
     heroVideo: data.heroVideo?.url || "",
     gallery: (data.gallery || [])
-      .map((img: unknown) => imageUrl(img, 900, 1100, ""))
+      .map((img: unknown) => imageUrl(img, 1200, undefined, ""))
       .filter(Boolean),
   };
 });
