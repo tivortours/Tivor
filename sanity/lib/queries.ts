@@ -246,7 +246,8 @@ export const EXPERIENCES_PAGE_QUERY = defineQuery(`
     title,
     description,
     heroImage,
-    "heroVideo": heroVideo.asset->{ url }
+    "heroVideo": heroVideo.asset->{ url },
+    gallery
   }
 `);
 

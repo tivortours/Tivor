@@ -228,6 +228,7 @@ type ExperiencesPageData = {
   description: any[];
   heroImage: string;
   heroVideo: string;
+  gallery: string[];
 };
 
 type InspirationPageData = {
@@ -768,7 +769,7 @@ export const getJourneysPageData = cache(async (): Promise<JourneysPageData> => 
 export const getExperiencesPageData = cache(async (): Promise<ExperiencesPageData> => {
   const data = await fetchSanity<any>(EXPERIENCES_PAGE_QUERY, undefined, ["experiencesPage"]);
   if (!data) {
-    return { title: [], description: [], heroImage: "", heroVideo: "" };
+    return { title: [], description: [], heroImage: "", heroVideo: "", gallery: [] };
   }
 
   return {
@@ -776,6 +777,9 @@ export const getExperiencesPageData = cache(async (): Promise<ExperiencesPageDat
     description: data.description || [],
     heroImage: imageUrl(data.heroImage, 1800, 900, ""),
     heroVideo: data.heroVideo?.url || "",
+    gallery: (data.gallery || [])
+      .map((img: unknown) => imageUrl(img, 900, 1100, ""))
+      .filter(Boolean),
   };
 });
 

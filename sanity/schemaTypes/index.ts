@@ -682,6 +682,13 @@ const experiencesPage = defineType({
       options: { accept: "video/*" },
       description: "Upload an MP4 video. If set, plays instead of the hero image.",
     }),
+    defineField({
+      name: "gallery",
+      title: "Gallery",
+      type: "array",
+      of: [defineArrayMember({ type: "image", options: { hotspot: true } })],
+      description: "Scrolling marquee of experience photos shown below the enquiry form. Best as portrait or square crops.",
+    }),
   ],
 });
 

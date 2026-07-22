@@ -1,9 +1,10 @@
 import Image from "next/image";
 import Link from "next/link";
 import { PortableText, type PortableTextComponents } from "@portabletext/react";
-import { getDestinations, getExperiencesPageData, shell } from "../site-data";
+import { getExperiencesPageData, getSiteSettings, shell } from "../site-data";
 import { SiteHeader, SiteFooter } from "../site-ui";
-import PlanForm from "../plan/PlanForm";
+import ContactForm from "../contact/ContactForm";
+import { GalleryMarquee } from "../../components/GalleryMarquee";
 import { getTextAlign } from "../../lib/portableText";
 import { ExperiencesHeroVideo } from "./ExperiencesHeroVideo";
 
@@ -82,8 +83,7 @@ const descriptionComponents: PortableTextComponents = {
 };
 
 export default async function ExperiencesPage() {
-  const [page, destinations] = await Promise.all([getExperiencesPageData(), getDestinations()]);
-  const destinationNames = destinations.map((d) => d.name);
+  const [page, settings] = await Promise.all([getExperiencesPageData(), getSiteSettings()]);
 
   return (
     <main className="flex w-full flex-col overflow-x-hidden bg-[#f2ebe2]">
@@ -142,12 +142,25 @@ export default async function ExperiencesPage() {
         </div>
       </section>
 
-      {/* Form section — same form as /plan */}
+      {/* Form section */}
       <section className="bg-[#f2ebe2] py-[60px] xl:py-[80px]">
         <div className={shell}>
-          <PlanForm destinations={destinationNames} />
+          <ContactForm contactImage={settings.contactImage} />
         </div>
       </section>
+
+      {/* Gallery marquee */}
+      {page.gallery.length > 0 && (
+        <section className="bg-[#f2ebe2] pb-[60px] xl:pb-[80px]">
+          <h2
+            className="mb-8 text-center text-[22px] leading-tight text-[#151515] sm:text-[28px]"
+            style={{ fontFamily: "var(--font-primary)" }}
+          >
+           A Glimpse of What Awaits
+          </h2>
+          <GalleryMarquee images={page.gallery} />
+        </section>
+      )}
 
       <SiteFooter />
     </main>

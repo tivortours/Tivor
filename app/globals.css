@@ -176,6 +176,21 @@ h1, h2, h3, h4, h5, h6 {
   white-space: pre-line;
 }
 
+/* ── Gallery Marquee ────────────────────────────────────────────────────── */
+
+@keyframes gallery-marquee {
+  from { transform: translateX(0); }
+  to   { transform: translateX(-50%); }
+}
+.animate-gallery-marquee {
+  animation: gallery-marquee linear infinite;
+}
+@media (prefers-reduced-motion: reduce) {
+  .animate-gallery-marquee {
+    animation: none;
+  }
+}
+
 /* ── Luxury Motion System ──────────────────────────────────────────────── */
 
 /* Page entrance — every <main> fades + rises on load */
