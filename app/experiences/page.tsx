@@ -135,7 +135,7 @@ export default async function ExperiencesPage() {
           )}
 
           {page.description.length > 0 && (
-            <div className="flex max-w-full flex-col gap-3 text-center">
+            <div className="flex max-w-full flex-col gap-3 text-center px-12">
               <PortableText value={page.description} components={descriptionComponents} />
             </div>
           )}
