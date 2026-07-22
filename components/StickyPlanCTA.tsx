@@ -15,8 +15,8 @@ import { useEffect, useState } from "react";
 // the way down instead of flipping back on once the section scrolls fully
 // past the top of the viewport.
 export function StickyPlanCTA({
-  label = "Plan Your Journey",
-  href = "/plan",
+  label = "Contact Us",
+  href = "/contact",
 }: {
   label?: string;
   href?: string;
