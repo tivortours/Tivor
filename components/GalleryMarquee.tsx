@@ -24,7 +24,7 @@ export function GalleryMarquee({ images }: { images: string[] }) {
         {track.map((src, i) => (
           <div
             key={i}
-            className="relative aspect-5/3 h-56 flex-none overflow-hidden rounded-xs sm:h-64 lg:h-72"
+            className="relative aspect-[61/33] h-56 flex-none overflow-hidden rounded-xs sm:h-64 lg:h-72"
           >
             <Image
               src={src}
