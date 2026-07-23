@@ -141,7 +141,7 @@ export default async function ExperiencesPage() {
       {/* Form section */}
       <section className="bg-[#f2ebe2] py-[60px] xl:py-[80px]">
          {page.description.length > 0 && (
-            <div className="flex max-w-full flex-col gap-3 text-center px-12 py-6">
+            <div className="flex max-w-full flex-col gap-3 text-center px-12 mb-8">
               <PortableText value={page.description} components={descriptionComponents} />
             </div>
           )}
