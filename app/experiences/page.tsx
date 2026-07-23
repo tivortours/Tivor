@@ -134,16 +134,17 @@ export default async function ExperiencesPage() {
             </div>
           )}
 
-          {page.description.length > 0 && (
-            <div className="flex max-w-full flex-col gap-3 text-center px-12">
-              <PortableText value={page.description} components={descriptionComponents} />
-            </div>
-          )}
+         
         </div>
       </section>
 
       {/* Form section */}
       <section className="bg-[#f2ebe2] py-[60px] xl:py-[80px]">
+         {page.description.length > 0 && (
+            <div className="flex max-w-full flex-col gap-3 text-center px-12">
+              <PortableText value={page.description} components={descriptionComponents} />
+            </div>
+          )}
         <div className={shell}>
           <ContactForm contactImage={settings.contactImage} />
         </div>
