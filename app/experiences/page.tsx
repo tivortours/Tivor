@@ -42,9 +42,9 @@ const titleComponents: PortableTextComponents = {
 // (app/journeys/[slug]/JourneyHighlights.tsx) — same schema shape
 // (richListBlock: Normal/Small/Large + Bullet + Align marks).
 const descSizes = {
-  small: "text-sm",
-  normal: "text-xl",
-  large: "text-2xl",
+  small: "text-sm sm:text-base",
+  normal: "text-base sm:text-lg xl:text-xl",
+  large: "text-xl sm:text-2xl xl:text-3xl",
 };
 const descriptionComponents: PortableTextComponents = {
   block: {
