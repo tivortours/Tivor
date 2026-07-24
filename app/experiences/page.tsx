@@ -41,11 +41,7 @@ const titleComponents: PortableTextComponents = {
 // Description sizes/bullets mirror the itinerary "activities" renderer
 // (app/journeys/[slug]/JourneyHighlights.tsx) — same schema shape
 // (richListBlock: Normal/Small/Large + Bullet + Align marks).
-const descSizes = {
-  small: "text-sm sm:text-base",
-  normal: "text-base sm:text-lg xl:text-xl",
-  large: "text-xl sm:text-2xl xl:text-3xl",
-};
+const descSizes = { small: "text-sm", normal: "text-[16px]", large: "text-2xl" };
 const descriptionComponents: PortableTextComponents = {
   block: {
     normal: ({ children, value }) => (
