@@ -55,7 +55,7 @@ const descriptionComponents: PortableTextComponents = {
       </p>
     ),
     large: ({ children, value }) => (
-      <p className={`${descSizes.large} leading-relaxed text-[#3d3d3d]`} style={{ fontFamily: "var(--font-secondary)", textAlign: getTextAlign(value as RichValue) }}>
+      <p className={`${descSizes.large} leading-relaxed text-[#3d3d3d]`} style={{ fontFamily: "var(--font-primary)", textAlign: getTextAlign(value as RichValue) }}>
         {children}
       </p>
     ),
