@@ -42,7 +42,7 @@ const titleComponents: PortableTextComponents = {
 // Description sizes/bullets mirror the itinerary "activities" renderer
 // (app/journeys/[slug]/JourneyHighlights.tsx) — same schema shape
 // (richListBlock: Normal/Small/Large + Bullet + Align marks).
-const descSizes = { small: "text-sm", normal: "text-[16px]", large: "text-[16px] sm:text-[32px]" };
+const descSizes = { small: "text-sm", normal: "text-[16px]", large: "text-[26px] sm:text-[32px]" };
 const descriptionComponents: PortableTextComponents = {
   block: {
     normal: ({ children, value }) => (
@@ -161,7 +161,7 @@ export default async function ExperiencesPage() {
       {page.gallery.length > 0 && (
         <section className="bg-[#f2ebe2] pb-[60px] xl:pb-[80px]">
           <h2
-            className="mb-8 text-center text-[16px] lg:text-[32px] leading-tight text-[#151515] "
+            className="mb-8 text-center text-[26px] lg:text-[32px] leading-tight text-[#151515] "
             style={{ fontFamily: "var(--font-primary)" }}
           >
            A Glimpse of What Awaits
