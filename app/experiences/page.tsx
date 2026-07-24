@@ -142,7 +142,13 @@ export default async function ExperiencesPage() {
       <section className="bg-[#f2ebe2] py-[60px] xl:py-[80px]">
          {page.description.length > 0 && (
             <div className="flex max-w-full flex-col gap-3 text-center px-12 mb-8">
+                <h1
+            className="max-w-[766px] text-center text-[26px] leading-tight text-[#151515] sm:text-[32px] xl:text-[48px]"
+            style={{ fontFamily: "var(--font-primary)" }}
+          >
+
               <PortableText value={page.description} components={descriptionComponents} />
+          </h1>
             </div>
           )}
         <div className={shell}>
