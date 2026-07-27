@@ -14,6 +14,17 @@ const nextConfig: NextConfig = {
         protocol: "https",
         hostname: "cdn.sanity.io",
       },
+      // Cloudflare-proxied cache subdomain in front of cdn.sanity.io (see
+      // NEXT_PUBLIC_SANITY_IMAGE_CDN_HOST in sanity/lib/image.ts). Only
+      // added once that env var is actually set.
+      ...(process.env.NEXT_PUBLIC_SANITY_IMAGE_CDN_HOST
+        ? [
+            {
+              protocol: "https" as const,
+              hostname: process.env.NEXT_PUBLIC_SANITY_IMAGE_CDN_HOST.trim(),
+            },
+          ]
+        : []),
       // Remove the figma.com entry below once all images are uploaded to Sanity
       {
         protocol: "https",

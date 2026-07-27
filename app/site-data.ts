@@ -2,7 +2,7 @@ import { cache } from "react";
 
 import { isSanityConfigured } from "../sanity/env";
 import { readClient } from "../sanity/lib/client";
-import { urlForImage } from "../sanity/lib/image";
+import { toImageCdnUrl, urlForImage } from "../sanity/lib/image";
 import {
   ABOUT_PAGE_QUERY,
   CONTENT_PAGE_QUERY,
@@ -314,7 +314,7 @@ function imageUrl(source: unknown, width: number, height?: number, fallbackUrl =
   if (!builder) return fallbackUrl;
   const sized = height ? builder.width(width).height(height).fit("crop") : builder.width(width).fit("max");
   try {
-    return sized.url();
+    return toImageCdnUrl(sized.url());
   } catch {
     return fallbackUrl;
   }
