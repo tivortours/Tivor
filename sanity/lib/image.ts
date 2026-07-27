@@ -6,13 +6,14 @@ const builder = imageUrlBuilder(client);
 
 // Optional custom subdomain (e.g. images.tivortours.com) that Cloudflare
 // proxies in front of cdn.sanity.io with its own cache rules, so repeat
-// image requests are served from Cloudflare's edge instead of billing
+// requests — images and video/file assets alike, both served from
+// cdn.sanity.io — are served from Cloudflare's edge instead of billing
 // against Sanity's own CDN bandwidth. Unset in dev/until DNS is live, in
 // which case URLs point straight at cdn.sanity.io as before.
-const imageCdnHost = process.env.NEXT_PUBLIC_SANITY_IMAGE_CDN_HOST?.trim();
+const sanityCdnHost = process.env.NEXT_PUBLIC_SANITY_IMAGE_CDN_HOST?.trim();
 
-export function toImageCdnUrl(url: string) {
-  return imageCdnHost ? url.replace("cdn.sanity.io", imageCdnHost) : url;
+export function toSanityCdnUrl(url: string) {
+  return sanityCdnHost ? url.replace("cdn.sanity.io", sanityCdnHost) : url;
 }
 
 type SanityImageLike = {

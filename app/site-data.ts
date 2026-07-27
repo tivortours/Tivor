@@ -2,7 +2,7 @@ import { cache } from "react";
 
 import { isSanityConfigured } from "../sanity/env";
 import { readClient } from "../sanity/lib/client";
-import { toImageCdnUrl, urlForImage } from "../sanity/lib/image";
+import { toSanityCdnUrl, urlForImage } from "../sanity/lib/image";
 import {
   ABOUT_PAGE_QUERY,
   CONTENT_PAGE_QUERY,
@@ -314,7 +314,7 @@ function imageUrl(source: unknown, width: number, height?: number, fallbackUrl =
   if (!builder) return fallbackUrl;
   const sized = height ? builder.width(width).height(height).fit("crop") : builder.width(width).fit("max");
   try {
-    return toImageCdnUrl(sized.url());
+    return toSanityCdnUrl(sized.url());
   } catch {
     return fallbackUrl;
   }
@@ -601,7 +601,7 @@ export const getHomePageData = cache(async (): Promise<HomePageData> => {
   }
 
   return {
-    heroVideo: data.heroVideo?.url || "",
+    heroVideo: data.heroVideo?.url ? toSanityCdnUrl(data.heroVideo.url) : "",
     heroPosterImage: imageUrl(data.heroPosterImage, 2200, 1300, ""),
     heroImage: imageUrl(data.heroImage, 2200, 1300, ""),
     heroTitle: data.heroTitle || "",
@@ -776,7 +776,7 @@ export const getExperiencesPageData = cache(async (): Promise<ExperiencesPageDat
     title: data.title || [],
     description: data.description || [],
     heroImage: imageUrl(data.heroImage, 1800, 900, ""),
-    heroVideo: data.heroVideo?.url || "",
+    heroVideo: data.heroVideo?.url ? toSanityCdnUrl(data.heroVideo.url) : "",
     gallery: (data.gallery || [])
       .map((img: unknown) => imageUrl(img, 1200, undefined, ""))
       .filter(Boolean),
@@ -862,7 +862,7 @@ export const getAboutPageData = cache(async (): Promise<AboutPageData> => {
 
   return {
     heroImage: imageUrl(data.heroImage, 2200, 1600, ""),
-    heroVideo: data.heroVideo || "",
+    heroVideo: data.heroVideo ? toSanityCdnUrl(data.heroVideo) : "",
     heroTagline: data.heroTagline || "",
     introTitle: data.introTitle || "",
     introParagraphs: data.introParagraphs?.length ? data.introParagraphs : [],
