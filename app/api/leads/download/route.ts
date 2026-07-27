@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
-import { getSheetUrl } from "../../../../lib/googleSheets";
+import { getSheetUrl } from "../../../../lib/microsoftExcel";
 
 const PASSWORD = process.env.LEADS_ADMIN_PASSWORD ?? "";
 

@@ -2,7 +2,7 @@ import { NextRequest, NextResponse } from "next/server";
 import { z } from "zod";
 import { sendLeadEmails } from "../../../lib/email";
 import { leadRequestSchema } from "../../../lib/validation";
-import { appendLead } from "../../../lib/googleSheets";
+import { appendLead } from "../../../lib/microsoftExcel";
 
 // ── POST handler ──────────────────────────────────────────────────────────────
 
