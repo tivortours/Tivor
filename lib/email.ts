@@ -89,9 +89,17 @@ function clientLayout(firstName: string) {
 
 // ── Admin email builders ──────────────────────────────────────────────────────
 
+// Resend rejects any subject containing a raw newline (header-injection
+// protection) — values from CMS content (e.g. a journey title) or pasted
+// text can carry an embedded "\n", which would otherwise hard-fail the
+// send outright rather than just looking odd.
+function sanitizeSubject(s: string) {
+  return s.replace(/[\r\n]+/g, " ").trim();
+}
+
 function contactAdminEmail(f: Record<string, string>) {
   return {
-    subject: `New Contact Us — ${f.firstName} ${f.lastName}`,
+    subject: sanitizeSubject(`New Contact Us — ${f.firstName} ${f.lastName}`),
     html: adminLayout("New Contact Us Submission", [
       row("Name",    `${f.firstName} ${f.lastName}`),
       row("Email",   f.email),
@@ -105,7 +113,7 @@ function contactAdminEmail(f: Record<string, string>) {
 
 function planAdminEmail(f: Record<string, string>) {
   return {
-    subject: `New Journey Plan — ${f.firstName} ${f.lastName}`,
+    subject: sanitizeSubject(`New Journey Plan — ${f.firstName} ${f.lastName}`),
     html: adminLayout("New Plan Your Journey Submission", [
       row("Name",               `${f.firstName} ${f.lastName}`),
       row("Email",              f.email),
@@ -127,7 +135,7 @@ function planAdminEmail(f: Record<string, string>) {
 
 function newsletterAdminEmail(f: Record<string, string>) {
   return {
-    subject: `New Newsletter Signup — ${f.email}`,
+    subject: sanitizeSubject(`New Newsletter Signup — ${f.email}`),
     html: adminLayout("New Newsletter Signup", [
       row("Email", f.email),
     ].join("")),
@@ -136,7 +144,7 @@ function newsletterAdminEmail(f: Record<string, string>) {
 
 function enquiryAdminEmail(f: Record<string, string>) {
   return {
-    subject: `New Package Enquiry — ${f.journeyTitle}`,
+    subject: sanitizeSubject(`New Package Enquiry — ${f.journeyTitle}`),
     html: adminLayout("New Package Enquiry", [
       row("Journey",        f.journeyTitle),
       row("Name",           `${f.firstName} ${f.lastName}`),
