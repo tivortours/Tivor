@@ -70,14 +70,14 @@ function clientLayout(firstName: string) {
       </p>
       <p style="margin:0;color:#3d3d3d;font-size:16px;line-height:1.7;font-family:sans-serif;">
         For destination ideas and travel inspiration, subscribe to the
-        <a href="https://tivortours.com/#newsletter" style="color:#714128;text-decoration:none;">TIVOR newsletter</a>.
+        <a href="https://tivortours.com/#newsletter" style="color:#714128;text-decoration:none;white-space:nowrap;">TIVOR&nbsp;newsletter</a>.
       </p>
     </div>
     <div style="background:#f7f4f1;padding:22px 32px;">
-      <p style="margin:0 0 8px;color:#151515;font-size:14px;font-weight:600;font-family:sans-serif;">
-        Warm regards,<br>The TIVOR Team
+      <p style="margin:0 0 8px;color:#151515;font-size:14px;font-family:sans-serif;">
+        Warm regards,<br><span style="font-weight:600;">The TIVOR Team</span>
       </p>
-      <p style="margin:0;color:#3d3d3d;font-size:13px;line-height:1.9;font-family:sans-serif;">
+      <p style="margin:0;color:#3d3d3d;font-size:13px;line-height:1.4;font-family:sans-serif;">
         <a href="mailto:hello@tivortours.com" style="color:#3d3d3d;text-decoration:none;">hello@tivortours.com</a><br>
         <a href="tel:+971504506643" style="color:#3d3d3d;text-decoration:none;">+971 50 450 6643</a><br>
         <a href="https://tivortours.com" style="color:#3d3d3d;text-decoration:none;">tivortours.com</a>
