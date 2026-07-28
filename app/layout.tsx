@@ -19,10 +19,9 @@ const prozaLibre = Proza_Libre({
 const siteTitle = "TIVOR — Luxury Tour Company";
 const siteDescription =
   "Discover extraordinary journeys crafted exclusively for you. From hidden cultural treasures to breathtaking natural wonders.";
-// Homepage hero image, cropped to the 1200x630 size link-preview crawlers
-// (WhatsApp, Facebook, Twitter/X, etc.) expect for og:image.
-const ogImage =
-  "https://cdn.sanity.io/images/gu0rp0dy/production/cec85d7c134d3427653e49671f16155001b7369e-4096x2730.jpg?w=1200&h=630&fit=crop&auto=format";
+// TIVOR mark, used as the link-preview image for crawlers (WhatsApp,
+// Facebook, Twitter/X, etc.) that read og:image.
+const ogImage = "/icon.png";
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://tivortours.com"),
@@ -33,7 +32,7 @@ export const metadata: Metadata = {
     description: siteDescription,
     url: "https://tivortours.com",
     siteName: "TIVOR",
-    images: [{ url: ogImage, width: 1200, height: 630 }],
+    images: [{ url: ogImage, width: 512, height: 512 }],
     locale: "en_US",
     type: "website",
   },
