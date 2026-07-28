@@ -1,4 +1,4 @@
-import { NextRequest, NextResponse } from "next/server";
+import { NextRequest, NextResponse, after } from "next/server";
 import { z } from "zod";
 import { sendLeadEmails } from "../../../lib/email";
 import { leadRequestSchema } from "../../../lib/validation";
@@ -22,9 +22,16 @@ export async function POST(req: NextRequest) {
 
     await appendLead(type, fields);
 
-    // Send emails non-blocking — lead is already saved even if email fails
-    sendLeadEmails(type, fields).catch((err) =>
-      console.error("Email send error:", err)
+    // Send emails after the response is sent, but keep this serverless
+    // invocation alive until they finish — a plain unawaited call here let
+    // Vercel freeze the instance mid-flight, silently dropping whichever of
+    // the two parallel admin/client sends hadn't completed yet (the client
+    // send starts microseconds after the admin one, so it lost that race
+    // more often — that's why acknowledgments were failing intermittently).
+    after(() =>
+      sendLeadEmails(type, fields).catch((err) =>
+        console.error("Email send error:", err)
+      )
     );
 
     return NextResponse.json({ ok: true });
