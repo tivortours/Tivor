@@ -50,7 +50,7 @@ function adminLayout(title: string, rows: string) {
 </body></html>`;
 }
 
-function clientLayout(firstName: string, body: string) {
+function clientLayout(firstName: string) {
   return `<!DOCTYPE html><html><head><meta charset="utf-8"></head>
 <body style="margin:0;padding:0;background:#f2ebe2;">
   <div style="max-width:620px;margin:40px auto;background:#fff;border-radius:4px;overflow:hidden;">
@@ -61,20 +61,28 @@ function clientLayout(firstName: string, body: string) {
       <h2 style="margin:0 0 16px;color:#151515;font-size:22px;font-family:sans-serif;">
         Thank you, ${esc(firstName)}.
       </h2>
-      <p style="margin:0 0 28px;color:#3d3d3d;font-size:16px;line-height:1.7;font-family:sans-serif;">
-        ${body}
+      <p style="margin:0 0 24px;color:#3d3d3d;font-size:16px;line-height:1.7;font-family:sans-serif;">
+        We've received your message. A member of the TIVOR team will be in touch shortly to begin crafting your journey.
+      </p>
+      <p style="margin:0 0 24px;color:#3d3d3d;font-size:16px;line-height:1.7;font-family:sans-serif;">
+        In the meantime, we invite you to discover our destinations and journeys at
+        <a href="https://tivortours.com" style="color:#714128;text-decoration:none;">tivortours.com</a>.
       </p>
       <p style="margin:0;color:#3d3d3d;font-size:16px;line-height:1.7;font-family:sans-serif;">
-        In the meantime, feel free to explore our destinations and journeys at
-        <a href="https://tivor.ae" style="color:#714128;text-decoration:none;">tivor.ae</a>.
+        For destination ideas and travel inspiration, subscribe to the
+        <a href="https://tivortours.com/#newsletter" style="color:#714128;text-decoration:none;">TIVOR newsletter</a>.
       </p>
     </div>
     <div style="background:#f7f4f1;padding:22px 32px;">
-      <p style="margin:0 0 4px;color:#151515;font-size:14px;font-weight:600;font-family:sans-serif;">
-        The Tivor Team
+      <p style="margin:0 0 8px;color:#151515;font-size:14px;font-weight:600;font-family:sans-serif;">
+        Warm regards,<br>The TIVOR Team
       </p>
       <p style="margin:0;color:#3d3d3d;font-size:13px;font-family:sans-serif;">
-        travel@tivor.ae &nbsp;·&nbsp; +971 4 555 7842
+        <a href="mailto:hello@tivortours.com" style="color:#3d3d3d;text-decoration:none;">hello@tivortours.com</a>
+        &nbsp;·&nbsp;
+        <a href="tel:+971504506643" style="color:#3d3d3d;text-decoration:none;">+971 50 450 6643</a>
+        &nbsp;·&nbsp;
+        <a href="https://tivortours.com" style="color:#3d3d3d;text-decoration:none;">tivortours.com</a>
       </p>
     </div>
   </div>
@@ -147,19 +155,10 @@ function enquiryAdminEmail(f: Record<string, string>) {
 
 // ── Client acknowledgment builders ────────────────────────────────────────────
 
-const ACK_BODY: Record<string, string> = {
-  contact:
-    "We've received your message and our team will be in touch with you shortly to begin crafting your journey.",
-  plan:
-    "We've received your journey plan request. One of our journey designers will review your preferences and be in touch within 24 hours.",
-  enquiry:
-    "We've received your package enquiry. One of our journey designers will review it and be in touch within 24 hours.",
-};
-
-function clientAckEmail(firstName: string, type: string) {
+function clientAckEmail(firstName: string) {
   return {
-    subject: "We've received your enquiry — Tivor",
-    html: clientLayout(firstName, ACK_BODY[type] ?? ACK_BODY.contact),
+    subject: "Thank You for Contacting TIVOR",
+    html: clientLayout(firstName),
   };
 }
 
@@ -186,7 +185,7 @@ export async function sendLeadEmails(
     : type === "enquiry" ? enquiryAdminEmail(fields)
     : contactAdminEmail(fields);
 
-  const clientContent = clientAckEmail(fields.firstName, type);
+  const clientContent = clientAckEmail(fields.firstName);
 
   // Send independently so one failure never blocks the other
   const results = await Promise.allSettled([

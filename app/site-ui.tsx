@@ -188,7 +188,7 @@ export async function SiteFooter() {
 
   return (
     <footer className="w-full">
-      <div className="relative overflow-hidden">
+      <div id="newsletter" className="relative overflow-hidden">
 
         <Image src={settings.newsletter.backgroundImage} alt="" fill className="object-cover" sizes="100vw" />
         <div className="absolute inset-0 bg-[#20282d]/30" />
