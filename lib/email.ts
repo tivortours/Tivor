@@ -77,11 +77,9 @@ function clientLayout(firstName: string) {
       <p style="margin:0 0 8px;color:#151515;font-size:14px;font-weight:600;font-family:sans-serif;">
         Warm regards,<br>The TIVOR Team
       </p>
-      <p style="margin:0;color:#3d3d3d;font-size:13px;font-family:sans-serif;">
-        <a href="mailto:hello@tivortours.com" style="color:#3d3d3d;text-decoration:none;">hello@tivortours.com</a>
-        &nbsp;·&nbsp;
-        <a href="tel:+971504506643" style="color:#3d3d3d;text-decoration:none;">+971 50 450 6643</a>
-        &nbsp;·&nbsp;
+      <p style="margin:0;color:#3d3d3d;font-size:13px;line-height:1.9;font-family:sans-serif;">
+        <a href="mailto:hello@tivortours.com" style="color:#3d3d3d;text-decoration:none;">hello@tivortours.com</a><br>
+        <a href="tel:+971504506643" style="color:#3d3d3d;text-decoration:none;">+971 50 450 6643</a><br>
         <a href="https://tivortours.com" style="color:#3d3d3d;text-decoration:none;">tivortours.com</a>
       </p>
     </div>
