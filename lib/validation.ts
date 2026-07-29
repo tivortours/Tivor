@@ -150,6 +150,10 @@ export const contactLeadSchema = z.object({
   country: requiredText("Country of residence"),
   city: optionalText,
   message: requiredText("Message"),
+  // Which page rendered the shared ContactForm (Contact page vs. Experiences
+  // page) — not user input, just context the form passes along so the admin
+  // notification can say where the enquiry actually came from.
+  source: optionalText,
 });
 
 export const planLeadSchema = z.object({

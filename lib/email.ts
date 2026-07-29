@@ -101,6 +101,7 @@ function contactAdminEmail(f: Record<string, string>) {
   return {
     subject: sanitizeSubject(`New Contact Us — ${f.firstName} ${f.lastName}`),
     html: adminLayout("New Contact Us Submission", [
+      row("Source",  f.source),
       row("Name",    `${f.firstName} ${f.lastName}`),
       row("Email",   f.email),
       row("Phone",   f.phone),

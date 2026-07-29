@@ -116,7 +116,7 @@ function SuccessView() {
 
 // ── Main component ────────────────────────────────────────────────────────────
 
-export default function ContactForm({ contactImage }: { contactImage: string }) {
+export default function ContactForm({ contactImage, source = "Contact Page" }: { contactImage: string; source?: string }) {
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
   const [email, setEmail] = useState("");
@@ -166,6 +166,7 @@ export default function ContactForm({ contactImage }: { contactImage: string }) 
           firstName, lastName, email,
           phone: `${dialCode} ${phone}`.trim(),
           country, city, message,
+          source,
         }),
       });
       if (!res.ok) throw new Error("Request failed");
