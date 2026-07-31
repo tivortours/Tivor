@@ -9,6 +9,7 @@ import { TestimonialCarousel } from "../components/TestimonialCarousel";
 import { DestinationsCarousel } from "../components/DestinationsCarousel";
 import { JourneysCarousel } from "../components/JourneysCarousel";
 import { StickyPlanCTA } from "../components/StickyPlanCTA";
+import Link from "next/link";
 
 export default async function HomePage() {
   const home = await getHomePageData();
@@ -142,7 +143,9 @@ export default async function HomePage() {
 
           <div className="grid w-full max-w-[1038px] grid-cols-1 gap-5 sm:grid-cols-2 sm:gap-7 xl:grid-cols-1">
             {home.experiences.map((experience, index) => (
-              <div
+
+              <Link
+              href={home.experiencesButtonHref}
                 key={experience.label}
                 className="group relative h-[150px] overflow-hidden rounded-[2px] sm:h-[260px] xl:h-auto xl:aspect-[1038/249]"
                 data-reveal="scale"
@@ -162,7 +165,7 @@ export default async function HomePage() {
                 >
                   {experience.label}
                 </span>
-              </div>
+              </Link>
             ))}
           </div>
 
