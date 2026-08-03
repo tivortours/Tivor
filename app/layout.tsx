@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { Cormorant_Garamond, Proza_Libre } from "next/font/google";
+import { GoogleTagManager } from "@next/third-parties/google";
 import "./globals.css";
 import { LuxuryAnimations } from "../components/LuxuryAnimations";
 import { BrowserScaleShell } from "../components/BrowserScaleShell";
@@ -54,7 +55,20 @@ export default function RootLayout({
       lang="en"
       className={`${cormorant.variable} ${prozaLibre.variable} antialiased`}
     >
+      <GoogleTagManager gtmId="GTM-MCZCQWPT" />
       <body className="overflow-x-hidden">
+        {/* @next/third-parties' GoogleTagManager only injects the <head>
+            script — GTM's noscript <body> fallback isn't part of that
+            package, so it's added directly here to match Google's full
+            installation snippet. */}
+        <noscript>
+          <iframe
+            src="https://www.googletagmanager.com/ns.html?id=GTM-MCZCQWPT"
+            height="0"
+            width="0"
+            style={{ display: "none", visibility: "hidden" }}
+          />
+        </noscript>
         <BrowserScaleShell>
           <LuxuryAnimations />
           {children}
