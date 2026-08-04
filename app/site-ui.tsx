@@ -333,10 +333,10 @@ export async function SiteFooter() {
             </div>
 
             {/* Designed & Developed — right on desktop */}
-            <p className="text-[12px] lg:order-3 lg:text-sm" style={{ fontFamily: "var(--font-secondary)" }}>
+            <Link href={'https://mantrainfotechs.com/'} className="text-[12px] lg:order-3 lg:text-sm" style={{ fontFamily: "var(--font-secondary)" }}>
               <span className="text-grey-300">Designed &amp; Developed By</span>
               <span className="text-white"> mits</span>
-            </p>
+            </Link>
 
           </div>
         </div>
