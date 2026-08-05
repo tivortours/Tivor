@@ -15,7 +15,7 @@ const ADULTS = ["1", "2", "3", "4", "5", "6", "7", "8+"];
 const CHILDREN = ["0", "1", "2", "3", "4+"];
 
 const TRAVEL_STYLES = ["Adventure", "Family Vacation", "Romantic Escape", "Wellness and Health", "Cultural Immersion", "Others"];
-const ACCOMMODATIONS = ["Luxury Hotels", "Boutique Hotels", "Villas or Chalets", "Glamping", "Tivor Best Fit"];
+const ACCOMMODATIONS = ["Luxury Hotels", "Boutique Hotels", "Villas or Chalets", "Glamping"];
 
 // ── Primitives ────────────────────────────────────────────────────────────────
 function Label({ children }: { children: React.ReactNode }) {
@@ -356,7 +356,7 @@ export default function PlanForm({ destinations }: { destinations: string[] }) {
           </div>
 
           <div className="flex flex-col gap-3">
-            <Label>Your Aspired Travel Style</Label>
+            <Label>Your Preferred Travel Experience</Label>
             <CheckboxGroup
               options={TRAVEL_STYLES}
               selected={travelStyles}
@@ -365,7 +365,7 @@ export default function PlanForm({ destinations }: { destinations: string[] }) {
           </div>
 
           <div className="flex flex-col gap-3">
-            <Label>Preferred Accommodation That You Would Like to Stay in?</Label>
+            <Label>Your Preferred Accommodation</Label>
             <CheckboxGroup
               options={ACCOMMODATIONS}
               selected={accommodation}
