@@ -530,7 +530,14 @@ export function JourneyHighlights({
               className="sticky top-0 min-h-screen w-full flex"
               style={{ zIndex: i + 1 }}
             >
-              <DayCardContent entry={entry} priority={i === 0} />
+              {/* All day cards are already stacked in the DOM at once (not
+                  mounted as the user scrolls), but native lazy-loading's
+                  "near viewport" heuristic doesn't track correctly against
+                  this zoom-scaled sticky layout — the image only starts
+                  fetching right as it snaps into place, showing a visible
+                  blank gap. A bounded, small set of itinerary images is
+                  cheap enough to just load eagerly instead. */}
+              <DayCardContent entry={entry} priority />
             </div>
           ))}
         </div>
