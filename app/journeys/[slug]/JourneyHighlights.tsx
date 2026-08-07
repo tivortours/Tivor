@@ -440,7 +440,13 @@ export function JourneyHighlights({
                   </div>
                 </div>
                 <div className="relative h-65 w-full overflow-hidden rounded-xs">
-                  <Image src={entry.img} alt={entry.day} fill className="object-cover" sizes="100vw" />
+                  {/* All day cards sit in one flex strip and switching days
+                      just shifts it via translateX (swipe/tap), not real
+                      scrolling — an off-screen card gets no advance
+                      "approaching viewport" signal, so a lazy image only
+                      starts fetching the instant it's swiped into view.
+                      Small bounded set of days, so load them all eagerly. */}
+                  <Image src={entry.img} alt={entry.day} fill priority className="object-cover" sizes="100vw" />
                 </div>
               </div>
             ))}
