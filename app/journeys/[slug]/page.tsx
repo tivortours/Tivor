@@ -1,3 +1,4 @@
+import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
@@ -45,6 +46,37 @@ const detailTitleComponents = {
 
 export async function generateStaticParams() {
   return (await getJourneySlugs()).map((slug) => ({ slug }));
+}
+
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ slug: string }>;
+}): Promise<Metadata> {
+  const { slug } = await params;
+  const journey = await getJourneyBySlug(slug);
+  if (!journey) return {};
+
+  const title = `${journey.title} | TIVOR`;
+  const url = `https://tivortours.com/journeys/${journey.slug}`;
+
+  return {
+    title,
+    description: journey.desc,
+    openGraph: {
+      title,
+      description: journey.desc,
+      url,
+      images: journey.img ? [{ url: journey.img, width: 1200, height: 900 }] : undefined,
+      type: "website",
+    },
+    twitter: {
+      card: "summary_large_image",
+      title,
+      description: journey.desc,
+      images: journey.img ? [journey.img] : undefined,
+    },
+  };
 }
 
 export default async function JourneyDetailPage({

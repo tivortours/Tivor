@@ -1,3 +1,4 @@
+import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
@@ -6,6 +7,38 @@ import { SiteHeader, SiteFooter } from "../../site-ui";
 
 export async function generateStaticParams() {
   return (await getInspirationSlugs()).map((slug) => ({ slug }));
+}
+
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ slug: string }>;
+}): Promise<Metadata> {
+  const { slug } = await params;
+  const art = await getInspirationBySlug(slug);
+  if (!art) return {};
+
+  const title = `${art.title} | TIVOR`;
+  const image = art.heroImg || art.img;
+  const url = `https://tivortours.com/inspiration/${art.slug}`;
+
+  return {
+    title,
+    description: art.intro,
+    openGraph: {
+      title,
+      description: art.intro,
+      url,
+      images: image ? [{ url: image, width: 2000, height: 1200 }] : undefined,
+      type: "article",
+    },
+    twitter: {
+      card: "summary_large_image",
+      title,
+      description: art.intro,
+      images: image ? [image] : undefined,
+    },
+  };
 }
 
 export default async function InspirationDetailPage({
