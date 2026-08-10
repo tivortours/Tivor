@@ -48,6 +48,14 @@ export async function generateStaticParams() {
   return (await getJourneySlugs()).map((slug) => ({ slug }));
 }
 
+// CMS title/description fields can carry an embedded line break (e.g. a
+// title styled across two visual lines in Sanity) — fine for on-page
+// rendering, but a raw newline inside a <meta> attribute can render oddly
+// in link-preview crawlers, so metadata gets the single-line version.
+function toSingleLine(s: string) {
+  return s.replace(/[\r\n]+/g, " ").trim();
+}
+
 export async function generateMetadata({
   params,
 }: {
@@ -57,15 +65,16 @@ export async function generateMetadata({
   const journey = await getJourneyBySlug(slug);
   if (!journey) return {};
 
-  const title = `${journey.title} | TIVOR`;
+  const title = toSingleLine(`${journey.title} | TIVOR`);
+  const description = toSingleLine(journey.desc);
   const url = `https://tivortours.com/journeys/${journey.slug}`;
 
   return {
     title,
-    description: journey.desc,
+    description,
     openGraph: {
       title,
-      description: journey.desc,
+      description,
       url,
       images: journey.img ? [{ url: journey.img, width: 1200, height: 900 }] : undefined,
       type: "website",
@@ -73,7 +82,7 @@ export async function generateMetadata({
     twitter: {
       card: "summary_large_image",
       title,
-      description: journey.desc,
+      description,
       images: journey.img ? [journey.img] : undefined,
     },
   };

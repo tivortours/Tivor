@@ -9,6 +9,13 @@ export async function generateStaticParams() {
   return (await getInspirationSlugs()).map((slug) => ({ slug }));
 }
 
+// CMS title/intro fields can carry an embedded line break — fine for
+// on-page rendering, but a raw newline inside a <meta> attribute can render
+// oddly in link-preview crawlers, so metadata gets the single-line version.
+function toSingleLine(s: string) {
+  return s.replace(/[\r\n]+/g, " ").trim();
+}
+
 export async function generateMetadata({
   params,
 }: {
@@ -18,16 +25,17 @@ export async function generateMetadata({
   const art = await getInspirationBySlug(slug);
   if (!art) return {};
 
-  const title = `${art.title} | TIVOR`;
+  const title = toSingleLine(`${art.title} | TIVOR`);
+  const description = toSingleLine(art.intro);
   const image = art.heroImg || art.img;
   const url = `https://tivortours.com/inspiration/${art.slug}`;
 
   return {
     title,
-    description: art.intro,
+    description,
     openGraph: {
       title,
-      description: art.intro,
+      description,
       url,
       images: image ? [{ url: image, width: 2000, height: 1200 }] : undefined,
       type: "article",
@@ -35,7 +43,7 @@ export async function generateMetadata({
     twitter: {
       card: "summary_large_image",
       title,
-      description: art.intro,
+      description,
       images: image ? [image] : undefined,
     },
   };
