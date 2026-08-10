@@ -88,14 +88,7 @@ export default async function HomePage() {
 
       {/* ── Featured Destinations ─────────────────────────────────────────── */}
       <section className="relative overflow-hidden bg-[#f2ebe2]">
-        {/* Mobile heart */}
-        <div className="pointer-events-none absolute left-0 top-0 block sm:hidden">
-          <Image src="/heartvector.png" alt="" width={400} height={100} className="select-none" />
-        </div>
-        {/* Desktop heart */}
-        <div className="pointer-events-none absolute left-0 top-0 hidden sm:block">
-          <Image src="/heart.png" alt="" width={1050} height={400} className="select-none" />
-        </div>
+     
         <div className={`${shell} ${section} flex flex-col gap-12 pt-28 lg:pt-0 lg:gap-[72px]`}>
           <div data-reveal="up">
             <SectionHeading
