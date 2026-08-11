@@ -5,6 +5,7 @@ import { notFound } from "next/navigation";
 import { PortableText } from "@portabletext/react";
 import { getDestinationBySlug, getJourneyBySlug, getJourneySlugs, getJourneys, shell } from "../../site-data";
 import { SiteHeader, SiteFooter } from "../../site-ui";
+import { toOgImageUrl } from "../../../sanity/lib/image";
 import { JourneyHighlights } from "./JourneyHighlights";
 import { DestinationJourneyCarousel } from "../../destinations/[slug]/DestinationJourneyCarousel";
 import { EnquireButton } from "../../../components/BookingModal";
@@ -68,6 +69,7 @@ export async function generateMetadata({
   const title = toSingleLine(`${journey.title} | TIVOR`);
   const description = toSingleLine(journey.desc);
   const url = `https://tivortours.com/journeys/${journey.slug}`;
+  const image = journey.img ? toOgImageUrl(journey.img) : undefined;
 
   return {
     title,
@@ -76,14 +78,14 @@ export async function generateMetadata({
       title,
       description,
       url,
-      images: journey.img ? [{ url: journey.img, width: 1200, height: 900 }] : undefined,
+      images: image ? [{ url: image, width: 1200, height: 900 }] : undefined,
       type: "website",
     },
     twitter: {
       card: "summary_large_image",
       title,
       description,
-      images: journey.img ? [journey.img] : undefined,
+      images: image ? [image] : undefined,
     },
   };
 }

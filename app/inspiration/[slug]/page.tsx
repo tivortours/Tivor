@@ -4,6 +4,7 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import { getInspirationBySlug, getInspirationSlugs, shell } from "../../site-data";
 import { SiteHeader, SiteFooter } from "../../site-ui";
+import { toOgImageUrl } from "../../../sanity/lib/image";
 
 export async function generateStaticParams() {
   return (await getInspirationSlugs()).map((slug) => ({ slug }));
@@ -27,7 +28,7 @@ export async function generateMetadata({
 
   const title = toSingleLine(`${art.title} | TIVOR`);
   const description = toSingleLine(art.intro);
-  const image = art.heroImg || art.img;
+  const image = art.heroImg || art.img ? toOgImageUrl(art.heroImg || art.img) : undefined;
   const url = `https://tivortours.com/inspiration/${art.slug}`;
 
   return {
