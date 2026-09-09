@@ -99,8 +99,8 @@ export default async function InspirationDetailPage({
             {art.title}
           </h1>
           <p
-            className="max-w-[918px] text-center text-[14px] lg:text-base leading-relaxed text-[#3d3d3d]"
-            style={{ fontFamily: "var(--font-secondary)" }}
+            className="max-w-full text-center text-[14px] lg:text-base leading-relaxed text-[#3d3d3d]"
+            style={{ fontFamily: "var(--font-secondary)", whiteSpace: "pre-line" }}
           >
             {art.intro}
           </p>
@@ -133,7 +133,7 @@ export default async function InspirationDetailPage({
                 {art.section1.title}
               </h2>
               {art.section1.body[0] && (
-                <p className="text-[13px] lg:text-base leading-relaxed text-dark-400" style={{ fontFamily: "var(--font-secondary)" }}>
+                <p className="text-[13px] lg:text-base leading-relaxed text-dark-400" style={{ fontFamily: "var(--font-secondary)", whiteSpace: "pre-line" }}>
                   {art.section1.body[0]}
                 </p>
               )}
@@ -174,7 +174,7 @@ export default async function InspirationDetailPage({
             </h2>
             <p
               className="max-w-[1067px] text-center text-[13px] lg:text-base leading-relaxed text-[#3d3d3d]"
-              style={{ fontFamily: "var(--font-secondary)" }}
+              style={{ fontFamily: "var(--font-secondary)", whiteSpace: "pre-line" }}
             >
               {art.gallerySection.body}
             </p>
@@ -225,7 +225,7 @@ export default async function InspirationDetailPage({
                 {art.section2.title}
               </h2>
               {art.section2.body[0] && (
-                <p className="text-[13px] lg:text-base leading-relaxed text-dark-400" style={{ fontFamily: "var(--font-secondary)" }}>
+                <p className="text-[13px] lg:text-base leading-relaxed text-dark-400" style={{ fontFamily: "var(--font-secondary)", whiteSpace: "pre-line" }}>
                   {art.section2.body[0]}
                 </p>
               )}
@@ -248,7 +248,7 @@ export default async function InspirationDetailPage({
         <div className={`${shell} flex justify-center`}>
           <p
             className="max-w-[1067px] text-center text-[13px] lg:text-base leading-relaxed text-[#3d3d3d]"
-            style={{ fontFamily: "var(--font-secondary)" }}
+            style={{ fontFamily: "var(--font-secondary)", whiteSpace: "pre-line" }}
           >
             {art.closingText}
           </p>
