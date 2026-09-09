@@ -99,7 +99,7 @@ export default async function InspirationDetailPage({
             {art.title}
           </h1>
           <p
-            className="max-w-full lg:mx-20 text-center text-[14px] lg:text-base leading-relaxed text-[#3d3d3d]"
+            className="max-w-full lg:mx-44 text-center text-[14px] lg:text-base leading-relaxed text-[#3d3d3d]"
             style={{ fontFamily: "var(--font-secondary)", whiteSpace: "pre-line" }}
           >
             {art.intro}
