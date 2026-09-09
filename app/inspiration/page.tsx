@@ -82,19 +82,24 @@ export default async function InspirationPage() {
       </section>
 
       {/* ── Article Grid ─────────────────────────────────────────────────── */}
-      <section className="w-full py-[80px]">
-        <div className={`${shell} flex flex-col gap-[72px]`}>
-          <h2
-            className="text-[22px] font-medium leading-tight text-[#151515]  sm:text-[28px] xl:text-[36px]"
-            style={{ fontFamily: "var(--font-primary)" }}
-          >
-            {page.gridTitle}
-          </h2>
-          <Suspense fallback={null}>
-            <InspirationGrid articles={grid} seeMoreLabel={page.seeMoreLabel} />
-          </Suspense>
-        </div>
-      </section>
+      {/* The first article is pulled out as "Featured" above, so with 2 or
+          fewer articles total there's nothing (or just one item) left to
+          justify a whole grid section and its heading. */}
+      {inspirations.length > 1 && (
+        <section className="w-full py-[80px]">
+          <div className={`${shell} flex flex-col gap-[72px]`}>
+            <h2
+              className="text-[22px] font-medium leading-tight text-[#151515]  sm:text-[28px] xl:text-[36px]"
+              style={{ fontFamily: "var(--font-primary)" }}
+            >
+              {page.gridTitle}
+            </h2>
+            <Suspense fallback={null}>
+              <InspirationGrid articles={grid} seeMoreLabel={page.seeMoreLabel} />
+            </Suspense>
+          </div>
+        </section>
+      )}
 
       <section className="w-full flex justify-center py-[80px]">
           <div className="flex w-full max-w-[1520px] flex-col items-start gap-[60px] px-5 xl:flex-row xl:items-center xl:gap-[72px] xl:px-[80px]">
