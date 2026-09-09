@@ -320,13 +320,13 @@ export const INSPIRATION_ARTICLES_QUERY = defineQuery(`
 `);
 
 export const INSPIRATION_SLUGS_QUERY = defineQuery(`
-  *[_type == "inspirationArticle" && defined(slug.current)][]{
+  *[_type == "inspirationArticle" && defined(slug.current) && active != false][]{
     "slug": slug.current
   }
 `);
 
 export const INSPIRATION_ARTICLE_QUERY = defineQuery(`
-  *[_type == "inspirationArticle" && slug.current == $slug][0]{
+  *[_type == "inspirationArticle" && slug.current == $slug && active != false][0]{
     title,
     intro,
     publishDate,
